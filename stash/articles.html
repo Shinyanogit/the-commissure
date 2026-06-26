@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Commissure</title>
+    <style>
+      /* Initial Style */
+        @font-face {
+            font-family: 'maven';
+            src: url('/MavenPro-Regular.woff');
+        }
+        body {
+            position: relative;
+            margin: 0%;
+            padding: 0%;
+            width: 100vw;
+            overflow-x: hidden;
+            font-family: 'maven', Arial, Helvetica, sans-serif;
+            color: white;
+            text-shadow: 
+            0 0 2px rgba(0, 0, 0, 1),
+            0 0 6px rgba(0, 0, 0, 1),
+            0 0 12px rgba(0, 0, 0, 0.9),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        canvas {   
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: white;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            transform-origin: center;
+        }
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 2.5%;
+            padding-right: 2.5%;
+            background: rgba(0, 0, 0, 0.8);
+            box-sizing: border-box;
+            z-index: 100;
+        }
+        .logo {
+            display: block;
+            width: 20vw;
+            margin-top: 2%;
+            margin-bottom: 2%;
+            object-fit: contain;
+        }
+        .nav-list {
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 1rem;
+        }
+        .nav-list a {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+            color: inherit;
+        }
+        .nav-list a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 0;
+            height: 1px;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        .nav-list a:hover::after {
+            width: 100%;
+        }
+        .content {
+            position: relative;
+            width: 100%;
+            left: 0;
+            z-index: 10;
+        }
+        .article {
+            height: auto;
+            overflow: hidden;
+        }
+        .article-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .article-card:hover {
+            transform: translateY(-10px);
+        }
+        .article a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .article .title {
+            position: relative;
+            margin: 1rem 0 1rem 0;
+            width: fit-content;
+            height: auto;
+            top: 0;
+            left: 5%;
+            display: block;
+            align-items: center;
+            text-align: left;
+            font-size: 2rem;
+        }
+        .article .title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.5rem;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(
+                to right,
+                cyan 20%,
+                black 90%,
+                transparent
+            );
+        }
+        .article-list {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            width: 90%;
+            height: auto;
+            left: 5%;
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+        }
+        .article-list li {
+            position: relative;
+            flex: 1;
+            margin: 0;
+        }
+        .article img {
+            position: relative;
+            margin: 1rem 0 0.5rem 0;
+            width: 100%;
+            height: 30vh;
+            object-fit: cover;
+            display: block;
+        }
+        .article .header {
+            position: relative;
+            margin: 0.5rem 0 0.5rem 0;
+            height: auto;
+            align-items: center;
+            text-align: left;
+            font-size: 1.5rem;
+        }
+        .article .header:hover {
+            text-decoration: underline;
+        }
+        .article .date {
+            position: relative;
+            margin: 0.5rem 0 0.5rem 0;
+            align-items: center;
+            text-align: left;
+            font-size: 1rem;
+            opacity: 0.6;
+        }
+        .article .paragraph {
+            position: relative;
+            margin: 0.5rem 0 1rem 0;
+            align-items: center;
+            text-align: left;
+            font-size: 1rem;
+        }
+        footer {
+            position: relative;
+            width: 100%;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 2.5%;
+            padding-right: 2.5%;
+            background: rgba(0, 0, 0, 0.8);
+            box-sizing: border-box;
+            z-index: 10;
+        }
+        .icon {
+            position: relative;
+            display: block;
+            width: 6vw;
+            margin-top: 1.5%;
+            margin-bottom: 1.5%;
+            object-fit: contain;
+        }
+        .copyright {
+            position: absolute;
+            left: 50%;
+            bottom: 20%;
+            transform: translateX(-50%);
+            opacity: 0.5;
+            font-size: 1rem;
+        }
+        .footer-list {
+            position: relative;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 1rem;
+        }
+        .footer-list a {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+            color: inherit;
+        }
+        .footer-list a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 0;
+            height: 1px;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        .footer-list a:hover::after {
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            .logo {
+                width: 70vw;
+            }
+            .nav-list {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100vw;
+                height: 100vh;
+                padding: 1rem 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                background: rgba(0, 0, 0, 0.8);
+                transform: translateX(100%);
+                transition: transform 0.5s ease;
+            }
+            .nav-list.active {
+                transform: translateX(0);
+            }
+            .article-card {
+                transition: none;
+            }
+            .article-card:hover {
+                transform: none;
+            }
+            .article a {
+                text-decoration: none;
+                color: inherit;
+            }
+            .article-list {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .article img {
+                height: 20vh;
+            }
+            footer {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .icon {
+                width: 100%;
+                height: 8vh;
+                margin-top: 1rem;
+                margin-bottom: 0.5rem;
+            }
+            .footer-list {
+                margin-bottom: 0.5rem;
+            }
+            .footer-list a:hover::after {
+                width: 0;
+            }
+            .copyright {
+                position: relative;
+                width: 100%;
+                margin-bottom: 1rem;
+                left: 0;
+                transform: translateX(0%);
+                text-align: center;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/articles.js"></script>
+    <nav>
+        <a href=""><img src="/logo.png" class="logo"></a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-list">
+            <li><a href="">Articles</a></li>
+            <li><a href="">About us</a></li>
+            <li><a href="">Authors</a></li>
+        </ul>
+    </nav>
+    <div class="content article posterior">
+        <div class="title">Posterior Surgeries</div>
+        <ul class="article-list">
+            <li class="article-card article1">
+                <a href="pcdf.html">
+                    <img src="/pcdfsnap.jpeg">
+                    <div class="header">Posterior Cervical Decompression and Fusion (PCDF)</div>
+                    <div class="date">May 17, 2026</div>
+                    <div class="paragraph">
+                        PCDF is a spinal procedure performed to relieve pressure within the spinal canal. 
+                        It consists of two components: <span class="highlight-red">posterior cervical laminectomy</span> and <span class="highlight-red">posterior cervical instrumentation</span>. 
+                        Owing to its ability to decompress the spinal cord and provide immediate stabilization, PCDF is a powerful surgical technique that allows surgeons to treat some of the most complex spinal disorders and improve patients’ quality of life.
+                    </div>
+                </a>
+            </li>
+            <li class="article-card ariticle2">
+                <a href="acdf.html">
+                    <img src="/acdfsnap.jpeg">
+                    <div class="header">Anterior Cervical Discectomy and Fusion (PCDF)</div>
+                    <div class="date">May 24, 2026</div>
+                    <div class="paragraph">
+                        Anterior cervical discectomy and fusion (ACDF) is a spinal surgical procedure that aims to relieve neural compression and stabilize the cervical spine. 
+                        ACDF consists of three main components: <span class="highlight-red">intervertebral disc removal (discectomy)</span>, <span class="highlight-red">interbody cage implantation</span>, and <span class="highlight-red"></span>anterior plate fixation</span>. 
+                        Compared with posterior cervical decompression and fusion (PCDF), ACDF is performed through an <span class="highlight-red">anterior approach</span>, utilizing a small incision in the front of the neck to access the cervical vertebrae. 
+                        Owing to this surgical approach, ACDF is particularly effective for treating pathologies involving the anterior structures of the cervical spine.
+                    </div>
+                </a>
+            </li>
+            <li class="article-card article3">
+                <a href="">
+                    <img src="/pcdfsnap.jpeg">
+                    <div class="header">Posterior Cervical Foraminotomy (PCF)</div>
+                    <div class="date">June 3, 2026</div>
+                    <div class="paragraph">
+                        PCDF is a spinal procedure performed to relieve pressure within the spinal canal. 
+                        It consists of two components: <span class="highlight-red">posterior cervical laminectomy</span> and <span class="highlight-red">posterior cervical instrumentation</span>. 
+                        Owing to its ability to decompress the spinal cord and provide immediate stabilization, PCDF is a powerful surgical technique that allows surgeons to treat some of the most complex spinal disorders and improve patients’ quality of life.
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="content article anterior">
+        <div class="title">Anterior Surgeries</div>
+        <ul class="article-list">
+            <li class="article-card article1">
+                <a href="pcdf.html">
+                    <img src="/pcdfsnap.jpeg">
+                    <div class="header">Posterior Cervical Decompression and Fusion (PCDF)</div>
+                    <div class="date">May 17, 2026</div>
+                    <div class="paragraph">
+                        PCDF is a spinal procedure performed to relieve pressure within the spinal canal. 
+                        It consists of two components: <span class="highlight-red">posterior cervical laminectomy</span> and <span class="highlight-red">posterior cervical instrumentation</span>. 
+                        Owing to its ability to decompress the spinal cord and provide immediate stabilization, PCDF is a powerful surgical technique that allows surgeons to treat some of the most complex spinal disorders and improve patients’ quality of life.
+                    </div>
+                </a>
+            </li>
+            <li class="article-card ariticle2">
+                <a href="acdf.html">
+                    <img src="/acdfsnap.jpeg">
+                    <div class="header">Anterior Cervical Discectomy and Fusion (PCDF)</div>
+                    <div class="date">May 24, 2026</div>
+                    <div class="paragraph">
+                        Anterior cervical discectomy and fusion (ACDF) is a spinal surgical procedure that aims to relieve neural compression and stabilize the cervical spine. 
+                        ACDF consists of three main components: <span class="highlight-red">intervertebral disc removal (discectomy)</span>, <span class="highlight-red">interbody cage implantation</span>, and <span class="highlight-red"></span>anterior plate fixation</span>. 
+                        Compared with posterior cervical decompression and fusion (PCDF), ACDF is performed through an <span class="highlight-red">anterior approach</span>, utilizing a small incision in the front of the neck to access the cervical vertebrae. 
+                        Owing to this surgical approach, ACDF is particularly effective for treating pathologies involving the anterior structures of the cervical spine.
+                    </div>
+                </a>
+            </li>
+            <li class="article-card article3">
+                <a href="">
+                    <img src="/pcdfsnap.jpeg">
+                    <div class="header">Posterior Cervical Foraminotomy (PCF)</div>
+                    <div class="date">June 3, 2026</div>
+                    <div class="paragraph">
+                        PCDF is a spinal procedure performed to relieve pressure within the spinal canal. 
+                        It consists of two components: <span class="highlight-red">posterior cervical laminectomy</span> and <span class="highlight-red">posterior cervical instrumentation</span>. 
+                        Owing to its ability to decompress the spinal cord and provide immediate stabilization, PCDF is a powerful surgical technique that allows surgeons to treat some of the most complex spinal disorders and improve patients’ quality of life.
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="content article other-surgery">
+        <div class="title">Others</div>
+        <ul class="article-list">
+            <li class="article-card article1">
+                <a href="pcdf.html">
+                    <img src="/pcdfsnap.jpeg">
+                    <div class="header">Posterior Cervical Decompression and Fusion (PCDF)</div>
+                    <div class="date">May 17, 2026</div>
+                    <div class="paragraph">
+                        PCDF is a spinal procedure performed to relieve pressure within the spinal canal. 
+                        It consists of two components: <span class="highlight-red">posterior cervical laminectomy</span> and <span class="highlight-red">posterior cervical instrumentation</span>. 
+                        Owing to its ability to decompress the spinal cord and provide immediate stabilization, PCDF is a powerful surgical technique that allows surgeons to treat some of the most complex spinal disorders and improve patients’ quality of life.
+                    </div>
+                </a>
+            </li>
+            <li class="article-card ariticle2">
+                <a href="acdf.html">
+                    <img src="/acdfsnap.jpeg">
+                    <div class="header">Anterior Cervical Discectomy and Fusion (PCDF)</div>
+                    <div class="date">May 24, 2026</div>
+                    <div class="paragraph">
+                        Anterior cervical discectomy and fusion (ACDF) is a spinal surgical procedure that aims to relieve neural compression and stabilize the cervical spine. 
+                        ACDF consists of three main components: <span class="highlight-red">intervertebral disc removal (discectomy)</span>, <span class="highlight-red">interbody cage implantation</span>, and <span class="highlight-red"></span>anterior plate fixation</span>. 
+                        Compared with posterior cervical decompression and fusion (PCDF), ACDF is performed through an <span class="highlight-red">anterior approach</span>, utilizing a small incision in the front of the neck to access the cervical vertebrae. 
+                        Owing to this surgical approach, ACDF is particularly effective for treating pathologies involving the anterior structures of the cervical spine.
+                    </div>
+                </a>
+            </li>
+            <li class="article-card article3">
+                <a href="">
+                    <img src="/pcdfsnap.jpeg">
+                    <div class="header">Posterior Cervical Foraminotomy (PCF)</div>
+                    <div class="date">June 3, 2026</div>
+                    <div class="paragraph">
+                        PCDF is a spinal procedure performed to relieve pressure within the spinal canal. 
+                        It consists of two components: <span class="highlight-red">posterior cervical laminectomy</span> and <span class="highlight-red">posterior cervical instrumentation</span>. 
+                        Owing to its ability to decompress the spinal cord and provide immediate stabilization, PCDF is a powerful surgical technique that allows surgeons to treat some of the most complex spinal disorders and improve patients’ quality of life.
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <footer>
+        <a href=""><img src="/icon.png" class="icon"></a>
+        <ul class="footer-list">
+            <li><a href="">Articles</a></li>
+            <li><a href="">User Guidelines</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+        <div class="copyright">© 2026 The Commissure</div>
+    </footer>
+  </body>
+</html>

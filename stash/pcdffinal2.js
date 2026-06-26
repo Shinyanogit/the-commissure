@@ -1,0 +1,797 @@
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import gsap from 'gsap';
+
+// Camera
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100 );
+camera.up.set(0, 1, 0);
+camera.position.set( 0.2, 0.2, 0 );
+const cameraTarget = new THREE.Vector3(0, 0.2, 0);
+
+// Renderer
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+document.body.appendChild( renderer.domElement );
+renderer.setAnimationLoop( animate );
+
+// Light
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+scene.add(ambientLight);
+const pointLight1 = new THREE.PointLight(0xffffff, 5);
+pointLight1.position.set(1, 1, -1);
+scene.add(pointLight1);
+const pointLight2 = new THREE.PointLight(0xffffff, 5);
+pointLight2.position.set(-1, 1, 1);
+scene.add(pointLight2);
+
+// Background
+const loader = new THREE.TextureLoader();
+loader.load('/background.jpg', ( texture ) => {
+    texture.colorSpace = THREE.SRGBColorSpace;
+    scene.background = texture;
+} );
+
+// Text
+const scene0 = document.querySelectorAll('.scene0');
+const scene1 = document.querySelectorAll('.scene1');
+const scene2 = document.querySelectorAll('.scene2');
+const scene3 = document.querySelectorAll('.scene3');
+const scene4 = document.querySelectorAll('.scene4');
+const scene5 = document.querySelectorAll('.scene5');
+scene0.forEach(text => {
+    text.style.opacity = 1;
+    text.style.display = 'block';
+});
+
+// Geometry
+let cranium = null;
+let c1Bone = null;
+let c2Bone = null;
+let c3Bone = null;
+let c4Bone = null;
+let c5Structure = [];
+let c6Bone = null;
+let c7Bone = null;
+let disk = [];
+let ligament = [];
+let nerve = [];
+let removedStructure = [];
+let screwShaft = [];
+let screwSaddle = [];
+let screwCap = [];
+let rod = [];
+const gltfLoader = new GLTFLoader();
+gltfLoader.load('/posterior cervical decompression and fusion (PCDF).glb', ( gltf ) => {
+    const pcdf = gltf.scene;
+    pcdf.traverse((child) => {
+        if (child.isMesh) {
+            if (child.name.includes('bone')) {
+                child.material = new THREE.MeshStandardMaterial({ 
+                    color: 0xF0E6D4, 
+                    transparent: false,
+                    opacity: 1
+                });
+                if (child.name.includes('cranium')) {
+                    cranium = child;
+                } else if (child.name.includes('c1')) {
+                    c1Bone = child;
+                } else if (child.name.includes('c2')) {
+                    c2Bone = child;
+                } else if (child.name.includes('c3')) {
+                    c3Bone = child;
+                } else if (child.name.includes('c4')) {
+                    c4Bone = child;
+                } else if (child.name.includes('c5') && !child.name.includes('removed')) {
+                    c5Structure.push(child);
+                } else if (child.name.includes('c5') && child.name.includes('removed')) {
+                    c5Structure.push(child);
+                } else if (child.name.includes('c6')) {
+                    c6Bone = child;
+                } else if (child.name.includes('c7')) {
+                    c7Bone = child;
+                }
+                if (child.name.includes('removed')) {
+                    removedStructure.push(child);
+                }
+            } else if (child.name.includes('disk')) {
+                child.material = new THREE.MeshStandardMaterial({
+                    color: 0xF2E9E4,
+                    transparent: false,
+                    opacity: 1
+                });
+                disk.push(child);
+            } else if (child.name.includes('ligament')) {
+                child.material = new THREE.MeshStandardMaterial({
+                    color: 0xF5F2EB,
+                    transparent: false,
+                    opacity: 1
+                });
+                ligament.push(child);
+                if (child.name.includes('removed')) {
+                    removedStructure.push(child);
+                }
+            } else if (child.name.includes('nerve')) {
+                child.material = new THREE.MeshStandardMaterial({
+                    color: 0xFFDB58,
+                    transparent: false,
+                    opacity: 1
+                });
+                nerve.push(child);
+                if (child.name.includes('c5')) {
+                    c5Structure.push(child);
+                }
+            } else if (child.name.includes('screw')) {
+                if (child.name.includes('shaft')) {
+                    child.material = new THREE.MeshStandardMaterial({ 
+                        color: 0xAAA9AD,
+                        metalness: 0.5,
+                        roughness: 0.5,
+                        transparent: true,
+                        opacity: 0
+                    });
+                    child.position.z -= 0.2;
+                    screwShaft.push(child);
+                } else if (child.name.includes('saddle')) {
+                    child.material = new THREE.MeshStandardMaterial({ 
+                        color: 0x009DC4,
+                        metalness: 0.5,
+                        roughness: 0.5,
+                        transparent: true,
+                        opacity: 0
+                    });
+                    child.position.z -= 0.2;
+                    screwSaddle.push(child);
+                } else if (child.name.includes('cap')) {
+                    child.material = new THREE.MeshStandardMaterial({ 
+                        color: 0xE5E4E2,
+                        metalness: 0.5,
+                        roughness: 0.5,
+                        transparent: true,
+                        opacity: 0
+                    });
+                    child.position.z -= 0.2;
+                    screwCap.push(child);
+                }
+            } else if (child.name.includes('rod')) {
+                child.material = new THREE.MeshStandardMaterial({ 
+                    color: 0xAAA9AD ,
+                    metalness: 0.5,
+                    roughness: 0.5,
+                    transparent: true,
+                    opacity: 0
+                });
+                child.position.y -= 0.2;
+                rod.push(child);
+            }
+        }
+    });
+    screwShaft.sort((a, b) => {
+        const numA = parseInt(a.name.match(/\d+/)[0]);
+        const numB = parseInt(b.name.match(/\d+/)[0]);
+        return numA - numB;
+    });
+    screwSaddle.sort((a, b) => {
+        const numA = parseInt(a.name.match(/\d+/)[0]);
+        const numB = parseInt(b.name.match(/\d+/)[0]);
+        return numA - numB;
+    });
+    screwCap.sort((a, b) => {
+        const numA = parseInt(a.name.match(/\d+/)[0]);
+        const numB = parseInt(b.name.match(/\d+/)[0]);
+        return numA - numB;
+    });
+    rod.sort((a, b) => {
+        const numA = parseInt(a.name.match(/\d+/)[0]);
+        const numB = parseInt(b.name.match(/\d+/)[0]);
+        return numA - numB;
+    });
+    pcdf.position.set(0, 0, 0);
+    scene.add( pcdf );
+});
+
+
+// Click
+let clickCount = 0;
+window.addEventListener( 'click', () => {
+    clickCount++;
+    const tl = gsap.timeline();
+    if (clickCount === 1) {
+        tl.to(scene0, {
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.inOut',
+            onComplete:() => {
+                scene0.forEach(text => {
+                    text.style.display = 'none';
+                });
+                scene1.forEach(text => {
+                    text.style.display = 'block'
+                })
+            }
+        }, 0);
+        tl.to(scene1, {
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.inOut'
+        });
+        tl.to(camera.position, {
+            x: 0,
+            y: 0.4,
+            z: -1,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+        tl.to(cameraTarget, {
+            x: 0,
+            y: 0.2,
+            z: -1,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+        tl.to(camera.up, {
+            x: 0,
+            y: 0,
+            z: -1,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+        tl.to(camera, {
+            fov: 25,
+            duration: 1,
+            ease: 'power2.inOut',
+            onUpdate: () => {
+                camera.updateProjectionMatrix();
+            }
+        }, 0);
+        c5Structure.forEach((c5structure) => {
+            tl.to(c5structure.position, {
+                z: '-=1',
+                duration: 1,
+                ease: 'power2.inOut'
+            }, 0);
+        });
+    } else if (clickCount === 2) {
+        tl.to(scene1, {
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.inOut',
+            onComplete:() => {
+                scene1.forEach(text => {
+                    text.style.display = 'none';
+                });
+                scene2.forEach(text => {
+                    text.style.display = 'block'
+                })
+            }
+        }, 0);
+        tl.to(scene2, {
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.inOut'
+        });
+        c5Structure.forEach((c5structure) => {
+            tl.to(c5structure.position, {
+                z: '+=1',
+                duration: 1,
+                ease: 'power2.inOut'
+            }, 0);
+        });
+        tl.to(camera.position, {
+            x: -0.2,
+            y: 0.2,
+            z: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+        tl.to(cameraTarget, {
+            x: 0,
+            y: 0.2,
+            z: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+        tl.to(camera.up, {
+            x: 0,
+            y: 1,
+            z: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+        tl.to(camera, {
+            fov: 75,
+            duration: 1,
+            ease: 'power2.inOut',
+            onUpdate: () => {
+                camera.updateProjectionMatrix();
+            }
+        }, 0);
+        let cameraStartTime = tl.duration();
+        tl.to(camera.position, {
+            x: 0,
+            y: 0.2,
+            z: -0.2,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, cameraStartTime);
+        tl.to(cameraTarget, {
+            x: 0,
+            y: 0.2,
+            z: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, cameraStartTime);
+        let laminectomyStartTime = tl.duration();
+        removedStructure.forEach(removedstructure => {
+            removedstructure.material.transparent = true;
+            removedstructure.material.needsUpdate = true;
+            tl.to(removedstructure.material, {
+                opacity: 0,
+                duration: 1,
+                ease: 'power2.inOut',
+                onComplete: () => {
+                    removedstructure.visible = false;
+                }
+            }, laminectomyStartTime);
+        });
+    } else if (clickCount === 3) {
+        tl.to(scene2, {
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.inOut',
+            onComplete:() => {
+                scene2.forEach(text => {
+                    text.style.display = 'none';
+                });
+                scene3.forEach(text => {
+                    text.style.display = 'block'
+                })
+            }
+        }, 0);
+        tl.to(scene3, {
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.inOut'
+        });
+        tl.to(camera.position, {
+            x: 0.2,
+            y: 0.2,
+            z: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+        tl.to(cameraTarget, {
+            x: 0,
+            y: 0.2,
+            z: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+        if (disk.length > 0) {
+            disk.forEach(disk => {
+                disk.material.transparent = true;
+                disk.material.needsUpdate = true;
+                tl.to(disk.material, {
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                 }, 0);
+            });
+        }
+        if (ligament.length > 0) {
+            ligament.forEach(ligament => {
+                ligament.material.transparent = true;
+                ligament.material.needsUpdate = true;
+                tl.to(ligament.material, {
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                }, 0);
+            });
+        }
+        if (nerve.length > 0) {
+            nerve.forEach(nerve => {
+                nerve.material.transparent = true;
+                nerve.material.needsUpdate = true;
+                tl.to(nerve.material, {
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                }, 0);
+            });
+        }
+        let kyphosisStartTime = tl.duration();
+        if (cranium) {
+            tl.to(cranium.rotation, {
+                x: '+=' + Math.PI / 5,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+            tl.to(cranium.position, {
+                z: '+=0.05',
+                y: '-=0.05',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+        }
+        if (c1Bone) {
+            tl.to(c1Bone.rotation, {
+                x: '+=' + Math.PI / 5,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+            tl.to(c1Bone.position, {
+                z: '+=0.045',
+                y: '-=0.01',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+        }
+        if (c2Bone) {
+            tl.to(c2Bone.rotation, {
+                x: '+=' + Math.PI / 5,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+            tl.to(c2Bone.position, {
+                z: '+=0.04',
+                y: '-=0.005',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+        }
+        if (c3Bone) {
+            tl.to(c3Bone.rotation, {
+                x: '+=' + Math.PI / 5,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+            tl.to(c3Bone.position, {
+                z: '+=0.023',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+        }
+        if (c4Bone) {
+            tl.to(c4Bone.rotation, {
+                x: '+=' + Math.PI / 10,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+            tl.to(c4Bone.position, {
+                z: '+=0.013',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+        }
+        if (c5Structure.length > 0) {
+            tl.to(c5Structure[0].rotation, {
+                x: '+=' + Math.PI / 20,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+            tl.to(c5Structure[0].position, {
+                z: '+=0.007',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+        }
+        if (c6Bone) {
+            tl.to(c6Bone.rotation, {
+                x: '+=' + Math.PI / 40,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+            tl.to(c6Bone.position, {
+                z: '+=0.004',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+        }
+        if (c7Bone) {
+            tl.to(c7Bone.rotation, {
+                x: '+=' + Math.PI / 80,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+            tl.to(c7Bone.position, {
+                z: '+=0.001',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, kyphosisStartTime);
+        }
+    } else if (clickCount === 4) {
+        tl.to(scene3, {
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.inOut',
+            onComplete:() => {
+                scene3.forEach(text => {
+                    text.style.display = 'none';
+                });
+                scene4.forEach(text => {
+                    text.style.display = 'block'
+                })
+            }
+        }, 0);
+        tl.to(scene4, {
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.inOut'
+        });
+        tl.to(camera.position, {
+            x: 0,
+            y: 0.2,
+            z: -0.2,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+        tl.to(cameraTarget, {
+            x: 0,
+            y: 0.2,
+            z: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+        if (cranium) {
+            tl.to(cranium.rotation, {
+                x: '-=' + Math.PI / 5,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+            tl.to(cranium.position, {
+                z: '-=0.05',
+                y: '+=0.05',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+        }
+        if (c1Bone) {
+            tl.to(c1Bone.rotation, {
+                x: '-=' + Math.PI / 5,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+            tl.to(c1Bone.position, {
+                z: '-=0.045',
+                y: '+=0.01',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+        }
+        if (c2Bone) {
+            tl.to(c2Bone.rotation, {
+                x: '-=' + Math.PI / 5,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+            tl.to(c2Bone.position, {
+                z: '-=0.04',
+                y: '+=0.005',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+        }
+        if (c3Bone) {
+            tl.to(c3Bone.rotation, {
+                x: '-=' + Math.PI / 5,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+            tl.to(c3Bone.position, {
+                z: '-=0.023',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+        }
+        if (c4Bone) {
+            tl.to(c4Bone.rotation, {
+                x: '-=' + Math.PI / 10,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+            tl.to(c4Bone.position, {
+                z: '-=0.013',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+        }
+        if (c5Structure.length > 0) {
+            tl.to(c5Structure[0].rotation, {
+                x: '-=' + Math.PI / 20,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+            tl.to(c5Structure[0].position, {
+                z: '-=0.007',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+        }
+        if (c6Bone) {
+            tl.to(c6Bone.rotation, {
+                x: '-=' + Math.PI / 40,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+            tl.to(c6Bone.position, {
+                z: '-=0.004',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+        }
+        if (c7Bone) {
+            tl.to(c7Bone.rotation, {
+                x: '-=' + Math.PI / 80,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+            tl.to(c7Bone.position, {
+                z: '-=0.001',
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 0);
+        }
+        let visibleStartTime = tl.duration();
+        if (disk.length > 0) {
+            disk.forEach(disk => {
+                tl.to(disk.material, {
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                    onComplete: () => {       
+                        disk.material.transparent = false;
+                        disk.material.needsUpdate = true;
+                    }
+                 }, visibleStartTime);
+            });
+        }
+        if (ligament.length > 0) {
+            ligament.forEach(ligament => {
+                tl.to(ligament.material, {
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        ligament.material.transparent = false;
+                        ligament.material.needsUpdate = true;
+                    }
+                }, visibleStartTime);
+            });
+        }
+        if (nerve.length > 0) {
+            nerve.forEach(nerve => {
+                tl.to(nerve.material, {
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        nerve.material.transparent = false;
+                        nerve.material.needsUpdate = true;
+                    }
+                }, visibleStartTime);
+            });
+        }
+        let screwStartTime = tl.duration();
+        if (screwShaft && screwSaddle) {
+            screwShaft.forEach((shaft, index) => {
+                const saddle = screwSaddle[index];
+                shaft.material.needsUpdate = true;
+                tl.to(shaft.material, {
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                    onComplete: () => {    
+                        shaft.material.transparent = false;
+                        shaft.material.needsUpdate = true;
+                    }
+                }, screwStartTime + index * 0.1);
+                saddle.material.needsUpdate = true;
+                tl.to(saddle.material, {
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        saddle.material.transparent = false;
+                        saddle.material.needsUpdate = true;
+                    }
+                }, screwStartTime + index * 0.1);
+                tl.to(
+                    [shaft.position, saddle.position], 
+                    {
+                        z: '+=0.2',
+                        duration: 1,
+                        ease: 'power2.inOut'
+                    },
+                    screwStartTime + index * 0.1
+                );
+            });
+        }
+        let rodStartTime = tl.duration();
+        if (rod) {
+            rod.forEach((rod, index) => {
+                tl.to(rod.material, {
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        rod.material.transparent = false;
+                        rod.material.needsUpdate = true;
+                    }
+                }, rodStartTime + index * 0.1);
+                tl.to(
+                    rod.position, 
+                    {
+                        y: '+=0.2',
+                        duration: 1,
+                        ease: 'power2.inOut'
+                    }, 
+                    rodStartTime + index * 0.1
+                );
+            });
+        }
+        let capStartTime = tl.duration();
+        if (screwCap) {
+            screwCap.forEach((cap, index) => {
+                tl.to(cap.material, {
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        cap.material.transparent = false;
+                        cap.material.needsUpdate = true;
+                    }
+                }, capStartTime + index * 0.1);
+                tl.to(
+                    cap.position, 
+                    {
+                        z: '+=0.2',
+                        duration: 1,
+                        ease: 'power2.inOut'
+                    },
+                    capStartTime + index * 0.1
+                );
+            });
+        }
+    } else if (clickCount === 5) {
+        tl.to(scene4, {
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.inOut',
+            onComplete:() => {
+                scene4.forEach(text => {
+                    text.style.display = 'none';
+                });
+                scene5.forEach(text => {
+                    text.style.display = 'block'
+                })
+            }
+        }, 0);
+        tl.to(scene5, {
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.inOut'
+        });
+        tl.to(camera.position, {
+            x: -0.2,
+            y: 0.2,
+            z: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+        tl.to(cameraTarget, {
+            x: 0,
+            y: 0.2,
+            z: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+        }, 0);
+    }
+});
+
+// Animate
+function animate() {
+    camera.lookAt(cameraTarget);
+    renderer.render( scene, camera );
+}

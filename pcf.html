@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Posterior Cervical Foraminotomy (PCF)</title>
+        <style>
+            /* Initial Style */
+            @font-face {
+                font-family: 'maven';
+                src: url('/MavenPro-Regular.woff');
+            }
+            body {
+                position: relative;
+                margin: 0%;
+                padding: 0%;
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+                font-family: 'maven', Arial, Helvetica, sans-serif;
+                color: white;
+                text-shadow: 
+                0 0 2px rgba(0, 0, 0, 1),
+                0 0 6px rgba(0, 0, 0, 1),
+                0 0 12px rgba(0, 0, 0, 0.9),
+                2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+            canvas {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 0;
+            }
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                cursor: pointer;
+                z-index: 200;
+            }
+            .hamburger span {
+                width: 30px;
+                height: 3px;
+                background: white;
+                transition: transform 0.5s ease, opacity 0.5s ease;
+                transform-origin: center;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            nav {
+                position: fixed;
+                width: 100%;
+                top: 0;
+                left: 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-left: 2.5%;
+                padding-right: 2.5%;
+                box-sizing: border-box;
+                z-index: 100;
+            }
+            .logo {
+                display: block;
+                width: 20vw;
+                margin-top: 2%;
+                margin-bottom: 2%;
+                object-fit: contain;
+            }
+            .nav-list {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 30vw;
+                height: 100vh;
+                box-sizing: border-box;
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding-top: 5rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
+                padding-bottom: 2rem;
+                background: rgba(0, 0, 0, 0.8);
+                transform: translateX(100%);
+                transition: transform 0.5s ease;
+            }
+            .nav-list.active {
+                transform: translateX(0);
+            }
+            .subtitle {
+                position: relative;
+                margin-bottom: 0.5rem;
+                font-size: 1.5rem;
+            }
+            .subtitle::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: -8px;
+                width: 120%;
+                height: 2px;
+                background: linear-gradient(
+                    to right,
+                    cyan 20%,
+                    cyan 50%,
+                    transparent
+                );
+            }
+            .nav-list a {
+                position: relative;
+                text-decoration: none;
+                color: inherit;
+            }
+            .nav-list a::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 0;
+                height: 1px;
+                background-color: currentColor;
+                transition: width 0.3s ease;
+            }
+            .nav-list a:hover::after {
+                width: 100%;
+            }
+            .text {
+                position: absolute;
+                width: 30%;
+                height: auto;
+                left: 10%;
+                bottom: 10%;
+                z-index: 10;
+                display: flex;
+                flex-direction: column;
+            }
+            .title {
+                padding: 2%;
+                position: relative;
+                display: block;
+                align-items: center;
+                text-align: left;
+                font-size: 1.5rem;
+            }
+            .title::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 1px;
+                background: linear-gradient(
+                to right,
+                transparent,
+                white 20%,
+                white 80%,
+                transparent
+                );
+            }
+            .paragraph {
+                padding: 1%;
+                display: block;
+                align-items: center;
+                text-align: justify;
+                font-size: 1rem;
+            }
+            .paragraph a {
+                color: white;
+            }
+            .highlight-red {
+                color: red;
+            }
+            ul {
+                margin-top: 0;
+                margin-bottom: 0;
+                text-align:left;
+                padding-left: 1rem;
+            }
+            .scene0, .scene1, .scene2, .scene3, .scene4, .scene5, .scene6 {
+                display: none;
+                opacity: 0;
+            }
+            @media (max-width: 768px) {
+                .nav-list {
+                    width: 100vw;
+                    padding-left: 2rem;
+                    padding-right: 2rem;
+                }
+                .subtitle {
+                    position: relative;
+                    font-size: 1.5rem;
+                }
+                .logo {
+                    width: 70vw;
+                }
+                .text {
+                width: 90%;
+                left: 5%;
+                bottom: 5%;
+                }
+                .title {
+                font-size: 1.2rem;
+                }
+                .paragraph {
+                font-size: 0.8rem;
+                }
+                ul {
+                padding-left: 0.8rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="module" src="/src/pcf.js"></script>
+        <nav>
+            <a href="index.html"><img src="/logo.png" class="logo"></a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-list">
+                <li class="subtitle">Posterior Surgery</li>
+                <li><a href="pcdf.html">Posterior Cervical Discectomy and Fusion (PCDF)</a></li>
+                <li><a href="pcf.html">Posterior Cervical Foraminotomy (PCF)</a></li>
+                <li class="subtitle">Anterior Surgery</li>
+                <li><a href="acdf.html">Anterior Cervical Discectomy and Fusion (ACDF)</a></li>
+            </ul>
+        </nav>
+        <div class="text">
+            <div class="scene0 title">Posterior Cervical Foraminotomy (PCF)</div>
+            <div class="scene1 title">Indication for PCF</div>
+            <div class="scene2 title">Laminoforaminotomy</div>
+            <div class="scene3 title">Microdiscectomy</div>
+            <div class="scene4 title">Preserved Motion after PCF</div>
+            <div class="scene5 title">Overview</div>
+            <div class="scene0 paragraph">
+                Posterior cervical foraminotomy (PCF) is a spinal surgical technique that relieves pressure on nerves of the neck by removing a small amount of bone from the spine. 
+                Compared with some other neck surgeries, a major advantage of PCF is that it allows patients to <span class="highlight-red">maintain normal neck motion</span> even after the surgery. 
+                Surgeons may additionally perform surgeries to remove parts of the herniated spinal discs to achieve adequate neural decompression and symptom relief.
+            </div>
+            <div class="scene1 paragraph">
+                PCF is commonly performed to treat conditions that affect the nerves as they exit the spine of the neck. 
+                Examples of conditions that may be treated with PCF are as follows:
+                <ul>
+                <li><span class="highlight-red">Cervical spondylotic radiculopathy</span></li>
+                <li><span class="highlight-red">Lateral cervical disc herniation</span></li>
+                <li><span class="highlight-red">Foraminal stenosis</span></li>
+                </ul>
+                Here, a lateral cervical <span class="highlight-red">disc herniation</span> at the C5 level is depicted. 
+                In this case, the herniated disc is compressing the part of the spinal nerve as it exits the spine. 
+                Such a condition can cause a variety of symptoms, such as a <span class="highlight-red">tingling sensation</span> or <span class="highlight-red">pain</span> in the arm, <span class="highlight-red">weakness</span> of the arm and hand. 
+                In severe cases, if the disc is compressing the spinal cord, patients may have trouble with balance, walking, or hand coordination.
+            </div>
+            <div class="scene2 paragraph">
+                During PCF, surgeons first identify the precise location where a small portion of bone will be removed, using medical imaging and anatomical landmarks. 
+                The surgeons then carefully remove parts of the bone near the area where the nerve exits the spine, a procedure known as <span class="highlight-red">laminoforaminotomy</span>. 
+                This creates more space around the nerve to shift outwards and escape from the pressing disc. 
+                In some cases, creating this opening allows surgeons to directly observe the  <span class="highlight-red">herniated disc</span> that is pressing the nerve.
+            </div>
+            <div class="scene3 paragraph">
+                When necessary, surgeons may further perform a <span class="highlight-red">discectomy</span>, which involves the removal of the herniated disc, to ensure that the nerve is fully decompressed. 
+                To perform this step safely and accurately, surgeons may use special types of microscopes during disc removal, a procedure known as <span class="highlight-red">microdiscectomy</span>.
+            </div>
+            <div class="scene4 paragraph">
+                One of the advantages of performing PCF is that it allows patients to  <span class="highlight-red">maintain normal neck motion</span> even after the surgery. 
+                Unlike some other types of neck surgeries, such as <a href="pcdf.html">posterior cervical discectomy (PCDF)</a> and <a href="acdf.html">anterior cervical discectomy (ACDF)</a>, PCF does not require the spine to be permanently fused. 
+                However, PCF may not be suitable for conditions that require surgical interventions on <span class="highlight-red">multiple spine levels</span>. 
+                Performing PCF on multiple levels may lead to spinal instability, which could in turn lead to worsening of symptoms.
+            </div>
+            <div class="scene5 paragraph">
+                Some of the key features of PCF are as follows:
+                <ul>
+                <li>It is a procedure where a small portion of bone is removed from the spine to create more space around the affected nerve.</li>
+                <li>It is effective in treating conditions that cause compression of the nerve as it exits the spine.</li>
+                <li>Surgeons may additionally perform <span class="highlight-red">discectomy</span> to ensure adequate pressure relief.</li>
+                <li>It  <span class="highlight-red">preserves the neck motion</span> of the patients but may not be suitable for patients with extensive spinal disease.</li>
+                </ul>
+                Due to its ability to maintain motion, PCF may be considered an alternative to fusion surgeries for selected patients with cervical compression. 
+            </div>
+        </div>
+    </body>
+</html>
