@@ -1,0 +1,11 @@
+# Keep CLI deploys lean. (Vercel's GitHub-integration deploys build from the
+# repo and already exclude these via .gitignore — this only matters for a
+# manual `vercel` CLI upload, which would otherwise include blender/ + dist/.)
+blender/
+dist/
+docs/
+stash/
+script/
+node_modules
+.git
+.claude

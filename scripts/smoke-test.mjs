@@ -2,9 +2,10 @@
 // Verifies the multi-page build produced every page and copied the 3D assets,
 // so a broken vite.config or missing entry fails CI before any deploy.
 import { existsSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { basename, join } from 'node:path';
 
 const DIST = 'dist';
+const PUBLIC = 'public';
 const REQUIRED_PAGES = ['index.html', 'accf.html', 'acdf.html', 'pcdf.html', 'pcf.html'];
 
 let failed = false;
@@ -17,8 +18,17 @@ if (!existsSync(DIST)) {
   for (const page of REQUIRED_PAGES) {
     existsSync(join(DIST, page)) ? pass(page) : fail(`missing page: ${page}`);
   }
-  const glb = readdirSync(DIST).filter((f) => f.toLowerCase().endsWith('.glb'));
-  glb.length > 0 ? pass(`${glb.length} .glb model(s) copied`) : fail('no .glb assets in dist/');
+  const requiredGlb = readdirSync(PUBLIC)
+    .filter((f) => f.toLowerCase().endsWith('.glb'))
+    .map((f) => basename(f));
+
+  if (requiredGlb.length === 0) {
+    fail(`no .glb assets found in ${PUBLIC}/`);
+  } else {
+    for (const asset of requiredGlb) {
+      existsSync(join(DIST, asset)) ? pass(asset) : fail(`missing .glb asset: ${asset}`);
+    }
+  }
 }
 
 if (failed) {

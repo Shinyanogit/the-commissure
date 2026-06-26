@@ -36,3 +36,4 @@ docs/
 
 # Claude Code personal/local settings — never shared
 .claude/settings.local.json
+.env*
