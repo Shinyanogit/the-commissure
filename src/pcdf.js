@@ -13,6 +13,7 @@ hamburger.addEventListener('click', () => {
 
 // Camera
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0e2841);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100 );
 camera.up.set(0, 1, 0);
 camera.position.set( 0.2, 0.2, 0 );
