@@ -27,3 +27,6 @@ dist-ssr
 blender/
 *.blend
 *.blend1
+
+# Internal working docs (project spec / TODO) — kept local, not shared on GitHub
+docs/
