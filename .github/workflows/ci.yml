@@ -1,0 +1,30 @@
+name: CI — Tests
+
+# Test signal for every push to main and every PR.
+# Deployment is handled by Vercel's GitHub integration (push to main -> production,
+# PR -> preview). Vercel builds from this repo, so the ~345MB of .glb assets are
+# pulled from GitHub instead of uploaded — which is why we don't deploy from CI.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (multi-page)
+        run: npm run build
+
+      - name: Smoke test
+        run: npm test
