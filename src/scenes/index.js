@@ -58,12 +58,13 @@ export function initHomeScene(mount) {
     dracoLoader.setDecoderPath('/draco/');
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
-    console.time("fetch");
-    fetch("/Spine Disection.glb")
-        .then(r => r.arrayBuffer())
-        .then(() => {
-            console.timeEnd("fetch");
-        });
+    console.time("response");
+    fetch("/Spine Disection.glb").then(async (r) => {
+        console.timeEnd("response");   // サーバーから応答が返るまで
+        console.time("arrayBuffer");
+        await r.arrayBuffer();
+        console.timeEnd("arrayBuffer"); // バイナリ化にかかった時間
+    });
     // gltfLoader.load('/Spine Disection.glb', ( gltf ) => {
     //     if (disposed) return;
     //     const spine = gltf.scene;
