@@ -113,7 +113,7 @@ export function Home() {
                 <div className="title">Featured Authors</div>
                 <ul className="author-list">
                     <AuthorCard
-                        image=""
+                        image="/rintaroimada.jpg"
                         name="Rintaro Imada"
                         university="Kyoto Prefectural University of Medicine, Kyoto, Japan"
                     >
