@@ -118,7 +118,8 @@ export function Home() {
                         university="Kyoto Prefectural University of Medicine, Kyoto, Japan"
                     >
                         Hello, my name is Rintaro Imada, and I am a fifth-year medical student from Japan.
-                        At The Commissure, I am responsible for designing 3D anatomical models and writing articles on spinal disorders and their surgical treatments.
+                        I am dedicated to eradicating preventable trauma deaths from the modern trauma care system.
+                        At The Commissure, I am responsible for designing 3D anatomical models and writing articles on spinal disorders and their surgical treatments. 
                         I hope that my work helps readers gain a deeper understanding of spine surgery.
                     </AuthorCard>
                     <AuthorCard
