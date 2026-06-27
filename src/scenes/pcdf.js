@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import gsap from 'gsap';
 import { texture } from 'three/tsl';
 
@@ -106,8 +107,11 @@ export function initPcdfScene(mount, root) {
     let screwSaddle = [];
     let screwCap = [];
     let rod = [];
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('/draco/');
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load('/Posterior Cervical Decompression and Fusion (PCDF).glb', ( gltf ) => {
+    gltfLoader.setDRACOLoader(dracoLoader);
+    gltfLoader.load('/Posterior Cervical Decompression and Fusion (PCDF) Light.glb', ( gltf ) => {
         if (disposed) return;
         const pcdf = gltf.scene;
         pcdf.traverse((child) => {
