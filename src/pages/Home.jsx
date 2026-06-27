@@ -34,7 +34,7 @@ export function Home() {
                     <ArticleCard
                         className="article1"
                         to="/pcdf"
-                        image="/pcdfsnap.jpeg"
+                        image="/pcdfsnap.webp"
                         header="Posterior Cervical Decompression and Fusion (PCDF)"
                         date="May 17, 2026"
                     >
@@ -45,7 +45,7 @@ export function Home() {
                     <ArticleCard
                         className="ariticle2"
                         to="/acdf"
-                        image="/acdfsnap.jpeg"
+                        image="/acdfsnap.webp"
                         header="Anterior Cervical Discectomy and Fusion (PCDF)"
                         date="May 24, 2026"
                     >
@@ -57,7 +57,7 @@ export function Home() {
                     <ArticleCard
                         className="article3"
                         to="/pcf"
-                        image="/pcfsnap.jpeg"
+                        image="/pcfsnap.webp"
                         header="Posterior Cervical Foraminotomy (PCF)"
                         date="Jun 18, 2026"
                     >
@@ -126,7 +126,7 @@ export function Home() {
                 <div className="title">Featured Authors</div>
                 <ul className="author-list">
                     <AuthorCard
-                        image="/rintaroimada.jpg"
+                        image="/rintaroimada.webp"
                         name="Rintaro Imada"
                         university="Kyoto Prefectural University of Medicine, Kyoto, Japan"
                     >
@@ -136,7 +136,7 @@ export function Home() {
                         I hope that my work helps readers gain a deeper understanding of spine surgery.
                     </AuthorCard>
                     <AuthorCard
-                        image="/shinyayamaguchi.jpg"
+                        image="/shinyayamaguchi.webp"
                         name="Shinya Yamaguchi"
                         university="The University of Tokyo, Tokyo, Japan"
                     >
