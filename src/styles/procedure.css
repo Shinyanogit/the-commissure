@@ -1,0 +1,177 @@
+.procedurePage .canvas-mount canvas {
+    position: absolute;
+}
+
+.procedurePage .hamburger {
+    display: flex;
+    z-index: 200;
+}
+
+.procedurePage nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.procedurePage .logo {
+    display: block;
+    width: 20vw;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    object-fit: contain;
+}
+
+.procedurePage .nav-list {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30vw;
+    height: 100vh;
+    box-sizing: border-box;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-top: 5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateX(100%);
+    transition: transform 0.5s ease;
+}
+
+.procedurePage .nav-list.active {
+    transform: translateX(0);
+}
+
+.procedurePage .subtitle {
+    position: relative;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.procedurePage .subtitle::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 120%;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        cyan 20%,
+        cyan 50%,
+        transparent
+    );
+}
+
+.procedurePage .text {
+    position: absolute;
+    width: 30%;
+    height: auto;
+    left: 10%;
+    bottom: 10%;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
+
+.procedurePage .title {
+    padding: 2%;
+    position: relative;
+    display: block;
+    align-items: center;
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+.procedurePage .title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+    to right,
+    transparent,
+    white 20%,
+    white 80%,
+    transparent
+    );
+}
+
+.procedurePage .paragraph {
+    padding: 1%;
+    display: block;
+    align-items: center;
+    text-align: justify;
+    font-size: 1rem;
+}
+
+.procedurePage .paragraph a {
+    color: white;
+}
+
+.procedurePage ul {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align:left;
+    padding-left: 1rem;
+}
+
+.procedurePage .scene0,
+.procedurePage .scene1,
+.procedurePage .scene2,
+.procedurePage .scene3,
+.procedurePage .scene4,
+.procedurePage .scene5,
+.procedurePage .scene6 {
+    display: none;
+    opacity: 0;
+}
+
+@media (max-width: 768px) {
+    .procedurePage .nav-list {
+        width: 100vw;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .procedurePage .subtitle {
+        position: relative;
+        font-size: 1.5rem;
+    }
+
+    .procedurePage .logo {
+        width: 70vw;
+    }
+
+    .procedurePage .text {
+    width: 90%;
+    left: 5%;
+    bottom: 5%;
+    }
+
+    .procedurePage .title {
+    font-size: 1.2rem;
+    }
+
+    .procedurePage .paragraph {
+    font-size: 0.8rem;
+    }
+
+    .procedurePage ul {
+    padding-left: 0.8rem;
+    }
+}

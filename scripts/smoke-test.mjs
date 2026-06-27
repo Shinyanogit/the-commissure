@@ -1,12 +1,11 @@
 // Build smoke test: run after `npm run build` (CI does this).
-// Verifies the multi-page build produced every page and copied the 3D assets,
-// so a broken vite.config or missing entry fails CI before any deploy.
+// Verifies the SPA shell, JS bundle, and copied 3D assets exist, so a broken
+// Vite build or missing public asset fails CI before any deploy.
 import { existsSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 const DIST = 'dist';
 const PUBLIC = 'public';
-const REQUIRED_PAGES = ['index.html', 'accf.html', 'acdf.html', 'pcdf.html', 'pcf.html'];
 
 let failed = false;
 const fail = (msg) => { console.error(`FAIL  ${msg}`); failed = true; };
@@ -15,9 +14,16 @@ const pass = (msg) => console.log(`PASS  ${msg}`);
 if (!existsSync(DIST)) {
   fail(`"${DIST}/" not found — run \`npm run build\` first`);
 } else {
-  for (const page of REQUIRED_PAGES) {
-    existsSync(join(DIST, page)) ? pass(page) : fail(`missing page: ${page}`);
+  existsSync(join(DIST, 'index.html')) ? pass('index.html') : fail('missing SPA shell: index.html');
+
+  const assetsDir = join(DIST, 'assets');
+  if (!existsSync(assetsDir)) {
+    fail('missing assets directory');
+  } else {
+    const builtJs = readdirSync(assetsDir).filter((f) => f.endsWith('.js'));
+    builtJs.length > 0 ? pass(`built JS bundle (${builtJs.length})`) : fail('missing built JS bundle');
   }
+
   const requiredGlb = readdirSync(PUBLIC)
     .filter((f) => f.toLowerCase().endsWith('.glb'))
     .map((f) => basename(f));
