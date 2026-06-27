@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import gsap from 'gsap';
 import { texture } from 'three/tsl';
 
@@ -105,8 +106,11 @@ export function initPcfScene(mount, root) {
     let ligament = [];
     let nerve = [];
     let removedStructure = [];
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('/draco/');
     const gltfLoader = new GLTFLoader();
-    gltfLoader.load('/Posterior Cervical Foraminotomy (PCF).glb', ( gltf ) => {
+    gltfLoader.setDRACOLoader(dracoLoader);
+    gltfLoader.load('/Posterior Cervical Foraminotomy (PCF) Light.glb', ( gltf ) => {
         if (disposed) return;
         const acdf = gltf.scene;
         acdf.traverse((child) => {
