@@ -95,14 +95,6 @@ export function Home() {
                         <span className="date">May 17, 2026</span>
                     </li>
                     <li>
-                        <span className="header"><a href="">User guideline for The Commissure is now available</a></span>
-                        <span className="date">May 10, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><a href="">Renewed the website for The Commissure</a></span>
-                        <span className="date">May 10, 2026</span>
-                    </li>
-                    <li>
                         <span className="header"><a href="">Rintaro Imada joined the editorial board</a></span>
                         <span className="date">May 10, 2026</span>
                     </li>
