@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import gsap from 'gsap';
 
 export function initHomeScene(mount) {
@@ -53,7 +54,10 @@ export function initHomeScene(mount) {
         transparent: false,
         wireframe: true
     });
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('/draco/');
     const gltfLoader = new GLTFLoader();
+    gltfLoader.setDRACOLoader(dracoLoader);
     gltfLoader.load('/Spine Disection.glb', ( gltf ) => {
         if (disposed) return;
         const spine = gltf.scene;
