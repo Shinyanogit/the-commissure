@@ -58,23 +58,27 @@ export function initHomeScene(mount) {
     dracoLoader.setDecoderPath('/draco/');
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
-    console.log("Start loading GLB", performance.now());
-    gltfLoader.load('/Spine Disection.glb', ( gltf ) => {
-        console.log("Finished loading GLB", performance.now());
-        if (disposed) return;
-        const spine = gltf.scene;
-        spine.traverse((child) => {
-            if (child.isMesh) {
-                if (child.name.includes('bone')) {
-                    child.material = blueGlassMaterial;
-                } else if (child.name.includes('nerve')) {
-                    child.material = nerveMaterial;
-                }
-            }
-        })
-        spine.position.set(0, 0, 0);
-        scene.add( spine );
-    });
+    console.time("fetch");
+    fetch("/Spine Disection.glb")
+        .then(r => r.arrayBuffer())
+        .then(() => {
+            console.timeEnd("fetch");
+        });
+    // gltfLoader.load('/Spine Disection.glb', ( gltf ) => {
+    //     if (disposed) return;
+    //     const spine = gltf.scene;
+    //     spine.traverse((child) => {
+    //         if (child.isMesh) {
+    //             if (child.name.includes('bone')) {
+    //                 child.material = blueGlassMaterial;
+    //             } else if (child.name.includes('nerve')) {
+    //                 child.material = nerveMaterial;
+    //             }
+    //         }
+    //     })
+    //     spine.position.set(0, 0, 0);
+    //     scene.add( spine );
+    // });
 
     // Scroll
     let progress = 0;
