@@ -145,14 +145,15 @@ export function Home() {
                         At The Commissure, I help bring the project online and share its mission of making accurate, accessible information about spine surgery available to everyone.
                     </AuthorCard>
                     <AuthorCard
-                        image=""
-                        name="Koki Tokita"
+                        image="/kokitokida.webp"
+                        name="Koki Tokida"
                         university="Tohoku University, Sendai, Japan"
                     >
-                        Hello, my name is Koki Tokita, and I am a sixth-year medical student from Japan.
-                        I am interested in the field of neurosurgery, and I have been involved in research on spinal cord injury and its surgical treatments.
-                        I role here at The Commissure is to proofread and edit articles to ensure that they are accurate and easy to understand.
-                        I hope to contribute to the dissemination of knowledge about spine surgery and help readers gain a deeper understanding of this field.
+                        Hello, my name is Koki Tokida, and I am a sixth-year medical student at Tohoku University in Japan. 
+                        I aspire to become a neurosurgeon-scientist with a special focus on skull base surgery, neurosurgical oncology, and translational research. 
+                        I have several years of research experience in brain tumor biology and have observed neurosurgical practice, including a wide range of spinal surgeries, both in Japan and overseas. 
+                        At The Commissure, I contribute to developing educational content on spine surgery and anatomy. 
+                        Through this work, I hope to help readers gain a deeper understanding of neuro-spinal diseases and the sophisticated surgical approaches used to treat them.
                     </AuthorCard>
                 </ul>
             </div>
