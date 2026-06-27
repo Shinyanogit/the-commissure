@@ -43,7 +43,7 @@ export function initPcdfScene(mount, root) {
     // Background
     const loader = new THREE.TextureLoader();
     let backgroundTexture;
-    loader.load('/background.jpg', ( texture ) => {
+    loader.load('/background.webp', ( texture ) => {
         if (disposed) return;
         backgroundTexture = texture;
         texture.colorSpace = THREE.SRGBColorSpace;
