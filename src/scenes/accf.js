@@ -107,7 +107,7 @@ export function initAccfScene(mount, root) {
     dracoLoader.setDecoderPath('/draco/');
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
-    gltfLoader.load('/Anterior Cervical Corpectomy and Fusion (ACCF).glb', ( gltf ) => {
+    gltfLoader.load('/Anterior Cervical Corpectomy and Fusion (ACCF) Light.glb', ( gltf ) => {
         if (disposed) return;
         const accf = gltf.scene;
         accf.traverse((child) => {
