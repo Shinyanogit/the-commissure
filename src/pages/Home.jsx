@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { ArticleCard } from '../components/ArticleCard.jsx';
 import { AuthorCard } from '../components/AuthorCard.jsx';
 import { Footer } from '../components/Footer.jsx';
@@ -70,15 +71,27 @@ export function Home() {
                 <div className="title">Latest News</div>
                 <ul className="news-list">
                     <li>
-                        <span className="header"><a href="">Article on Posterior Cervical Foraminotomy (PCF) is now available</a></span>
+                        <span className="header"><a href="">Koki Tokita joined the editorial board</a></span>
+                        <span className="date">Jun 27, 2026</span>
+                    </li>
+                    <li>
+                        <span className="header"><Link to="/accf">Article on Anterior Cervical Corpectomy and Fusion (ACCF) is now available</Link></span>
+                        <span className="date">Jun 27, 2026</span>
+                    </li>
+                    <li>
+                        <span className="header"><a href="">Shinya Yamaguchi joined the editorial board</a></span>
+                        <span className="date">Jun 26, 2026</span>
+                    </li>
+                    <li>
+                        <span className="header"><Link to="/pcf">Article on Posterior Cervical Foraminotomy (PCF) is now available</Link></span>
                         <span className="date">Jun 18, 2026</span>
                     </li>
                     <li>
-                        <span className="header"><a href="">Article on Anterior Cervical Discectomy and Fusion (ACDF) is now available</a></span>
+                        <span className="header"><Link to="/acdf">Article on Anterior Cervical Discectomy and Fusion (ACDF) is now available</Link></span>
                         <span className="date">May 24, 2026</span>
                     </li>
                     <li>
-                        <span className="header"><a href="">Article on Posterior Cervical Decompression and Fusion (ACDF) is now available</a></span>
+                        <span className="header"><Link to="/pcdf">Article on Posterior Cervical Decompression and Fusion (PCDF) is now available</Link></span>
                         <span className="date">May 17, 2026</span>
                     </li>
                     <li>
@@ -133,21 +146,13 @@ export function Home() {
                     </AuthorCard>
                     <AuthorCard
                         image=""
-                        name="Seteve Johns"
-                        university="Tohoku University, Miyagi, Japan"
+                        name="Koki Tokita"
+                        university="Tohoku University, Sendai, Japan"
                     >
-                        Hello, my name is Rintaro Imada, and I am a fifth-year medical student from Japan.
-                        At The Commissure, I am responsible for designing 3D anatomical models and writing articles on spinal disorders and their surgical treatments.
-                        I hope that my work helps readers gain a deeper understanding of spine surgery.
-                    </AuthorCard>
-                    <AuthorCard
-                        image=""
-                        name="Marvin Kojima"
-                        university="University of Pennsylvania, PA, USA"
-                    >
-                        Hello, my name is Rintaro Imada, and I am a fifth-year medical student from Japan.
-                        At The Commissure, I am responsible for designing 3D anatomical models and writing articles on spinal disorders and their surgical treatments.
-                        I hope that my work helps readers gain a deeper understanding of spine surgery.
+                        Hello, my name is Koki Tokita, and I am a sixth-year medical student from Japan.
+                        I am interested in the field of neurosurgery, and I have been involved in research on spinal cord injury and its surgical treatments.
+                        I role here at The Commissure is to proofread and edit articles to ensure that they are accurate and easy to understand.
+                        I hope to contribute to the dissemination of knowledge about spine surgery and help readers gain a deeper understanding of this field.
                     </AuthorCard>
                 </ul>
             </div>
