@@ -6,7 +6,7 @@ export function HomeNav() {
 
     return (
         <nav>
-            <Link to="/"><img src="/logo.png" className="logo" /></Link>
+            <Link to="/"><img src="" className="logo" /></Link>
             <div
                 className={`hamburger${open ? ' active' : ''}`}
                 onClick={() => setOpen((value) => !value)}
