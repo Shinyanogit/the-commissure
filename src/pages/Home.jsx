@@ -102,7 +102,7 @@ export function Home() {
             </div>
             <div className="content about">
                 <ul className="about-list">
-                    <li><img src="" /></li>
+                    <li><img src="/about.webp" /></li>
                     <li>
                         <div className="title">What we owe to the society</div>
                         <div className="paragraph">
