@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import gsap from 'gsap';
 import { or, rotate, texture } from 'three/tsl';
 
@@ -102,7 +103,10 @@ export function initAccfScene(mount, root) {
     let shaft = null;
     let plate = null;
     let screw = [];
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('/draco/');
     const gltfLoader = new GLTFLoader();
+    gltfLoader.setDRACOLoader(dracoLoader);
     gltfLoader.load('/Anterior Cervical Corpectomy and Fusion (ACCF).glb', ( gltf ) => {
         if (disposed) return;
         const accf = gltf.scene;
