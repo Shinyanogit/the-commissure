@@ -71,7 +71,7 @@ export function Home() {
                 <div className="title">Latest News</div>
                 <ul className="news-list">
                     <li>
-                        <span className="header"><a href="">Koki Tokita joined the editorial board</a></span>
+                        <span className="header"><a href="">Koki Tokida joined the editorial board</a></span>
                         <span className="date">Jun 27, 2026</span>
                     </li>
                     <li>
@@ -102,7 +102,7 @@ export function Home() {
             </div>
             <div className="content about">
                 <ul className="about-list">
-                    <li><img src="" /></li>
+                    <li><img src="/about.webp" /></li>
                     <li>
                         <div className="title">What we owe to the society</div>
                         <div className="paragraph">

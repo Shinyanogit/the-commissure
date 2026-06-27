@@ -268,7 +268,7 @@
 .homePage .about img {
     position: relative;
     width: 100%;
-    height: auto;
+    height: 50vh;
     object-fit: cover;
     display: block;
 }
