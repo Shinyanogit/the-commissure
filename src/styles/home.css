@@ -1,0 +1,488 @@
+.homePage .canvas-mount canvas {
+    position: fixed;
+}
+
+.homePage .hamburger {
+    display: none;
+}
+
+.homePage nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    background: rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.homePage .logo {
+    display: block;
+    width: 20vw;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    object-fit: contain;
+}
+
+.homePage .nav-list {
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1rem;
+}
+
+.homePage .nav-list a {
+    display: inline-block;
+}
+
+.homePage .nav-list a::after {
+    bottom: -3px;
+}
+
+.homePage .content {
+    position: relative;
+    width: 100%;
+    left: 0;
+    z-index: 10;
+}
+
+.homePage .hero {
+    height: 90vh;
+}
+
+.homePage .hero .text {
+    position: relative;
+    width: 50%;
+    height: auto;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+}
+
+.homePage .hero .title {
+    margin: 0 0 30px 0;
+    position: relative;
+    width: auto;
+    height: auto;
+    width: 100%;
+    align-items: center;
+    text-align: left;
+    font-size: 5rem;
+}
+
+.homePage .hero .title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+        to right,
+        cyan 20%,
+        cyan 50%,
+        transparent
+    );
+}
+
+.homePage .hero .subtitle {
+    position: relative;
+    width: auto;
+    height: auto;
+    width: 100%;
+    align-items: center;
+    text-align: left;
+    font-size: 2rem;
+}
+
+.homePage .article {
+    height: auto;
+    overflow: hidden;
+}
+
+.homePage .article-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.homePage .article-card:hover {
+    transform: translateY(-10px);
+}
+
+.homePage .article a,
+.homePage .news a,
+.homePage .authors a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.homePage .article .title,
+.homePage .news .title,
+.homePage .authors .title {
+    position: relative;
+    margin: 1rem 0 1rem 0;
+    width: fit-content;
+    height: auto;
+    top: 0;
+    left: 5%;
+    display: block;
+    align-items: center;
+    text-align: left;
+    font-size: 2rem;
+}
+
+.homePage .news .title,
+.homePage .authors .title {
+    margin: 1rem 0 1em 0;
+}
+
+.homePage .article .title::after,
+.homePage .news .title::after,
+.homePage .about .title::after,
+.homePage .authors .title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.5rem;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+        to right,
+        cyan 20%,
+        black 90%,
+        transparent
+    );
+}
+
+.homePage .article-list,
+.homePage .about-list,
+.homePage .author-list {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 90%;
+    height: auto;
+    left: 5%;
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+}
+
+.homePage .about-list,
+.homePage .author-list {
+    margin: 1rem 0 1rem 0;
+}
+
+.homePage .article-list li,
+.homePage .about-list li,
+.homePage .author-list li {
+    position: relative;
+    flex: 1;
+    margin: 0;
+}
+
+.homePage .article img {
+    position: relative;
+    margin: 1rem 0 0.5rem 0;
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+    display: block;
+}
+
+.homePage .article .header {
+    position: relative;
+    margin: 0.5rem 0 0.5rem 0;
+    height: auto;
+    align-items: center;
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+.homePage .article .header:hover,
+.homePage .news a:hover,
+.homePage .author-list .name:hover {
+    text-decoration: underline;
+}
+
+.homePage .article .date,
+.homePage .article .paragraph,
+.homePage .news-list .date,
+.homePage .about .paragraph,
+.homePage .author-list .university,
+.homePage .author-list .biography {
+    position: relative;
+    align-items: center;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.homePage .article .date,
+.homePage .article .paragraph {
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.homePage .article .paragraph {
+    margin: 0.5rem 0 1rem 0;
+}
+
+.homePage .article .date,
+.homePage .news-list .date,
+.homePage .author-list .university {
+    opacity: 0.6;
+}
+
+.homePage .news,
+.homePage .about,
+.homePage .authors {
+    height: auto;
+    overflow: hidden;
+}
+
+.homePage .news-list {
+    position: relative;
+    list-style: none;
+    margin: 1rem 0 1rem 0;
+    padding: 0;
+    width: 90%;
+    height: auto;
+    left: 5%;
+}
+
+.homePage .news-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    font-size: 1rem;
+}
+
+.homePage .about img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.homePage .about .title {
+    position: relative;
+    margin: 0 0 1.5rem 0;
+    align-items: center;
+    text-align: left;
+    font-size: 2rem;
+}
+
+.homePage .author-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.homePage .author-card:hover {
+    transform: translateY(-10px);
+}
+
+.homePage .author-list img {
+    position: relative;
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+    display: block;
+}
+
+.homePage .author-list .name {
+    position: relative;
+    margin: 0.5rem 0 0 0;
+    font-size: 2rem;
+}
+
+.homePage .author-list .university,
+.homePage .author-list .biography {
+    margin: 0.5rem 0 0 0;
+}
+
+.homePage .display {
+    height: 100vh;
+}
+
+.homePage footer {
+    position: relative;
+    width: 100%;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    background: rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.homePage .icon {
+    position: relative;
+    display: block;
+    width: 6vw;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+    object-fit: contain;
+}
+
+.homePage .copyright {
+    position: absolute;
+    left: 50%;
+    bottom: 20%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+    font-size: 1rem;
+}
+
+.homePage .footer-list {
+    position: relative;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1rem;
+}
+
+.homePage .footer-list a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.homePage .footer-list a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 1px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+.homePage .footer-list a:hover::after {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .homePage .hamburger {
+        display: flex;
+    }
+
+    .homePage .logo {
+        width: 70vw;
+    }
+
+    .homePage .nav-list {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        padding: 1rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        background: rgba(0, 0, 0, 0.8);
+        transform: translateX(100%);
+        transition: transform 0.5s ease;
+    }
+
+    .homePage .nav-list.active {
+        transform: translateX(0);
+    }
+
+    .homePage .hero {
+        height: 80vh;
+    }
+
+    .homePage .hero .text {
+        width: 90%;
+    }
+
+    .homePage .hero .title {
+        font-size: 3rem;
+    }
+
+    .homePage .hero .subtitle {
+        font-size: 1.5rem;
+    }
+
+    .homePage .article-card,
+    .homePage .author-card {
+        transition: none;
+    }
+
+    .homePage .article-card:hover,
+    .homePage .author-card:hover {
+        transform: none;
+    }
+
+    .homePage .article-list,
+    .homePage .about-list,
+    .homePage .author-list {
+        flex-direction: column;
+    }
+
+    .homePage .article-list,
+    .homePage .news-list li {
+        gap: 0.5rem;
+    }
+
+    .homePage .author-list {
+        gap: 2rem;
+    }
+
+    .homePage .article img,
+    .homePage .about img,
+    .homePage .author-list img {
+        height: 20vh;
+    }
+
+    .homePage .author-list .name {
+        font-size: 1.5rem;
+    }
+
+    .homePage footer {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .homePage .icon {
+        width: 100%;
+        height: 8vh;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .homePage .footer-list {
+        margin-bottom: 0.5rem;
+    }
+
+    .homePage .footer-list a:hover::after {
+        width: 0;
+    }
+
+    .homePage .copyright {
+        position: relative;
+        width: 100%;
+        margin-bottom: 1rem;
+        left: 0;
+        transform: translateX(0%);
+        text-align: center;
+    }
+}

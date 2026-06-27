@@ -10,6 +10,7 @@
     "test": "node scripts/smoke-test.mjs"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.3",
     "vite": "^8.0.0-beta.13"
   },
   "overrides": {
@@ -17,6 +18,9 @@
   },
   "dependencies": {
     "gsap": "^3.15.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.0",
     "three": "^0.183.1"
   }
 }

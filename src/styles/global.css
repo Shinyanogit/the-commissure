@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'maven';
+    src: url('/MavenPro-Regular.woff');
+}
+
+body {
+    position: relative;
+    margin: 0%;
+    padding: 0%;
+    width: 100vw;
+    font-family: 'maven', Arial, Helvetica, sans-serif;
+    color: white;
+    text-shadow:
+    0 0 2px rgba(0, 0, 0, 1),
+    0 0 6px rgba(0, 0, 0, 1),
+    0 0 12px rgba(0, 0, 0, 0.9),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+body.home-page {
+    overflow-x: hidden;
+}
+
+body.procedure-page {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.canvas-mount {
+    width: 100%;
+    height: 100%;
+}
+
+.canvas-mount canvas {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.hamburger {
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 30px;
+    height: 3px;
+    background: white;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.nav-list a {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-list a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+.nav-list a:hover::after {
+    width: 100%;
+}
+
+.highlight-red {
+    color: red;
+}
