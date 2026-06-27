@@ -58,7 +58,9 @@ export function initHomeScene(mount) {
     dracoLoader.setDecoderPath('/draco/');
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
+    console.log("Start loading GLB", performance.now());
     gltfLoader.load('/Spine Disection.glb', ( gltf ) => {
+        console.log("Finished loading GLB", performance.now());
         if (disposed) return;
         const spine = gltf.scene;
         spine.traverse((child) => {
