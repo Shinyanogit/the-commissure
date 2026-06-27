@@ -43,7 +43,7 @@ export function initAccfScene(mount, root) {
     // Background
     const loader = new THREE.TextureLoader();
     let backgroundTexture;
-    loader.load('/background.jpg', ( texture ) => {
+    loader.load('/background.webp', ( texture ) => {
         if (disposed) {
             texture.dispose();
             return;
