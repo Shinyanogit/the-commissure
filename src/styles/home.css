@@ -8,7 +8,7 @@
     position: fixed;
     inset: 0;
     width: 100%;
-    height: var(--page-height);
+    height: var(--app-height);
     min-height: 100svh;
     overflow: hidden;
     z-index: 0;
@@ -79,8 +79,8 @@
 }
 
 .homePage .hero {
-    height: var(--viewport-height);
-    min-height: var(--viewport-height);
+    height: var(--app-height);
+    min-height: var(--app-height);
 }
 
 .homePage .hero .text {
