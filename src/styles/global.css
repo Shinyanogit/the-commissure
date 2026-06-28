@@ -18,6 +18,8 @@ body {
     margin: 0%;
     padding: 0%;
     width: 100vw;
+    min-height: var(--app-height);
+    height: var(--app-height);
     overflow-x: hidden;
     font-family: 'maven', Arial, Helvetica, sans-serif;
     color: white;
