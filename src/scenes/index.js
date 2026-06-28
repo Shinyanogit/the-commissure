@@ -24,6 +24,9 @@ export function initHomeScene(mount) {
 
     // Renderer
     const renderer = new THREE.WebGLRenderer();
+    renderer.domElement.style.position = "fixed";
+    renderer.domElement.style.inset = "0";
+    renderer.domElement.style.display = "block";
     renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mount.appendChild( renderer.domElement );
