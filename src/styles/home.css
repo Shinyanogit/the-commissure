@@ -14,7 +14,6 @@
 } */
 .homePage .canvas-mount canvas {
     position: fixed;
-    height: 200vh;
 }
 
 .homePage .hamburger {
