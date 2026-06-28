@@ -7,10 +7,18 @@ export function initHomeScene(mount) {
     let disposed = false;
     const activeTimelines = new Set();
     const timeoutIds = new Set();
-    const getViewportSize = () => ({
-        width: window.visualViewport?.width ?? window.innerWidth,
-        height: window.visualViewport?.height ?? window.innerHeight,
-    });
+    const getViewportSize = () => {
+        const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+        const pageHeight = Math.max(
+            viewportHeight,
+            document.documentElement.scrollHeight,
+            document.body.scrollHeight
+        );
+        return {
+            width: window.visualViewport?.width ?? window.innerWidth,
+            height: pageHeight,
+        };
+    };
     const delay = (callback, ms) => {
         const id = window.setTimeout(() => {
             timeoutIds.delete(id);
@@ -101,6 +109,7 @@ export function initHomeScene(mount) {
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     };
     window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleResize, { passive: true });
     window.visualViewport?.addEventListener('resize', handleResize);
 
     // Animate
@@ -112,6 +121,7 @@ export function initHomeScene(mount) {
         disposed = true;
         window.removeEventListener('scroll', handleScroll);
         window.removeEventListener('resize', handleResize);
+        window.removeEventListener('scroll', handleResize);
         window.visualViewport?.removeEventListener('resize', handleResize);
         timeoutIds.forEach((id) => window.clearTimeout(id));
         timeoutIds.clear();

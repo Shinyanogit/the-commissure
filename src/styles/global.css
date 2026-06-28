@@ -4,7 +4,8 @@
 }
 
 :root {
-    --app-height: 100vh;
+    --viewport-height: 100vh;
+    --page-height: 100vh;
 }
 
 html,
@@ -41,12 +42,12 @@ body.procedure-page {
 
 .canvas-mount {
     width: 100%;
-    height: var(--app-height);
+    height: var(--page-height);
 }
 
 .canvas-mount canvas {
     width: 100%;
-    height: var(--app-height);
+    height: var(--page-height);
     min-height: 100svh;
     top: 0;
     left: 0;
