@@ -149,7 +149,7 @@ export function Home() {
                     </AuthorCard>
                 </ul>
             </div>
-            <div className="content display"></div>
+            {/* <div className="content display"></div> */}
             <Footer />
         </div>
     );
