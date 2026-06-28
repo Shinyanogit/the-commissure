@@ -14,6 +14,7 @@
 } */
 .homePage .canvas-mount canvas {
     position: fixed;
+    height: 100vh;
 }
 
 .homePage .hamburger {
@@ -328,7 +329,7 @@
 }
 
 .homePage .display {
-    height: 100svh;
+    height: 100vh;
 }
 
 .homePage footer {
@@ -409,7 +410,7 @@
         top: 100%;
         right: 0;
         width: 100vw;
-        height: 100svh;
+        height: 100vh;
         padding: 1rem 0;
         display: flex;
         flex-direction: column;
