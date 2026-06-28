@@ -23,7 +23,7 @@ body.home-page {
 }
 
 body.procedure-page {
-    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
 }
 
