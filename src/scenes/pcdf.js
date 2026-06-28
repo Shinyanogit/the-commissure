@@ -248,11 +248,13 @@ export function initPcdfScene(mount, root) {
         scene.add( pcdf );
     });
 
-    // Wheel
+    // Wheel + touch swipe support
     let isAnimating = false;
     let sceneCount = 0;
+    let touchStartY = null;
+    const TOUCH_SWIPE_THRESHOLD = 40;
     const handleWheel = (event) => {
-        if (isAnimating) return
+        if (isAnimating) return;
         isAnimating = true;
         if (event.deltaY > 0) {
             sceneCount++;
@@ -263,7 +265,31 @@ export function initPcdfScene(mount, root) {
             }, 2000);
         }
     };
+    const handleTouchStart = (event) => {
+        if (event.touches.length !== 1) return;
+        touchStartY = event.touches[0].clientY;
+    };
+    const handleTouchEnd = (event) => {
+        if (isAnimating || touchStartY === null) {
+            touchStartY = null;
+            return;
+        }
+        const touchEndY = event.changedTouches[0].clientY;
+        const deltaY = touchStartY - touchEndY;
+        touchStartY = null;
+        if (deltaY > TOUCH_SWIPE_THRESHOLD) {
+            isAnimating = true;
+            sceneCount++;
+            transferScene(sceneCount);
+        } else {
+            delay(() => {
+                isAnimating = false;
+            }, 2000);
+        }
+    };
     window.addEventListener('wheel', handleWheel);
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
     function transferScene(sceneCount) {
         const sceneStartTime = Date.now();
         const tl = gsap.timeline({
@@ -890,6 +916,8 @@ export function initPcdfScene(mount, root) {
     return () => {
         disposed = true;
         window.removeEventListener('wheel', handleWheel);
+        window.removeEventListener('touchstart', handleTouchStart, { passive: true });
+        window.removeEventListener('touchend', handleTouchEnd, { passive: true });
         window.removeEventListener('resize', handleResize);
         timeoutIds.forEach((id) => window.clearTimeout(id));
         timeoutIds.clear();
