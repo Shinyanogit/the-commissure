@@ -26,11 +26,12 @@ body {
     0 0 6px rgba(0, 0, 0, 1),
     0 0 12px rgba(0, 0, 0, 0.9),
     2px 2px 4px rgba(0, 0, 0, 0.8);
-    background-color: red;
+    background-color: #000000;
 }
 
 body.home-page {
     overflow-x: hidden;
+    background-color: #000000;
 }
 
 body.procedure-page {

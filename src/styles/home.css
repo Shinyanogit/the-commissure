@@ -1,10 +1,18 @@
+.homePage {
+    position: relative;
+    min-height: 100%;
+    background: transparent;
+}
+
 .homePage .canvas-mount {
     position: fixed;
     inset: 0;
     width: 100%;
     height: var(--app-height);
+    min-height: 100svh;
     overflow: hidden;
     z-index: 0;
+    background: transparent;
 }
 
 .homePage .canvas-mount canvas {
