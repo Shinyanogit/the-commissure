@@ -7,6 +7,10 @@ export function initHomeScene(mount) {
     let disposed = false;
     const activeTimelines = new Set();
     const timeoutIds = new Set();
+    const getViewportSize = () => ({
+        width: window.visualViewport?.width ?? window.innerWidth,
+        height: window.visualViewport?.height ?? window.innerHeight,
+    });
     const delay = (callback, ms) => {
         const id = window.setTimeout(() => {
             timeoutIds.delete(id);
@@ -18,7 +22,8 @@ export function initHomeScene(mount) {
 
     // Camera
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera( 15, window.innerWidth / window.innerHeight, 0.01, 100 );
+    const { width, height } = getViewportSize();
+    const camera = new THREE.PerspectiveCamera( 15, width / height, 0.01, 100 );
     camera.up.set(0, 1, 0);
     camera.position.set( 0, 0, -0.7 );
 
@@ -27,7 +32,7 @@ export function initHomeScene(mount) {
     renderer.domElement.style.position = "fixed";
     renderer.domElement.style.inset = "0";
     renderer.domElement.style.display = "block";
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize( width, height );
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mount.appendChild( renderer.domElement );
     renderer.setAnimationLoop( animate );
@@ -89,12 +94,14 @@ export function initHomeScene(mount) {
 
     // Resize
     const handleResize = () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
+        const { width: viewportWidth, height: viewportHeight } = getViewportSize();
+        camera.aspect = viewportWidth / viewportHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(viewportWidth, viewportHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     };
     window.addEventListener('resize', handleResize);
+    window.visualViewport?.addEventListener('resize', handleResize);
 
     // Animate
     function animate() {
@@ -105,6 +112,7 @@ export function initHomeScene(mount) {
         disposed = true;
         window.removeEventListener('scroll', handleScroll);
         window.removeEventListener('resize', handleResize);
+        window.visualViewport?.removeEventListener('resize', handleResize);
         timeoutIds.forEach((id) => window.clearTimeout(id));
         timeoutIds.clear();
         activeTimelines.forEach((tl) => tl.kill());

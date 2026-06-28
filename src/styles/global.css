@@ -3,6 +3,16 @@
     src: url('/MavenPro-Regular.woff');
 }
 
+:root {
+    --app-height: 100vh;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
 body {
     position: relative;
     margin: 0%;
@@ -30,12 +40,13 @@ body.procedure-page {
 
 .canvas-mount {
     width: 100%;
-    height: 100%;
+    height: var(--app-height);
 }
 
 .canvas-mount canvas {
     width: 100%;
-    height: 100vh;
+    height: var(--app-height);
+    min-height: 100svh;
     top: 0;
     left: 0;
     z-index: 0;
