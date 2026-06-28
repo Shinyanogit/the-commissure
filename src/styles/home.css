@@ -28,10 +28,6 @@
     display: none;
 }
 
-.homePage .hamburger {
-    display: none;
-}
-
 .homePage nav {
     position: fixed;
     width: 100%;
@@ -96,9 +92,8 @@
 .homePage .hero .title {
     margin: 0 0 30px 0;
     position: relative;
-    width: auto;
-    height: auto;
     width: 100%;
+    height: auto;
     align-items: center;
     text-align: left;
     font-size: 5rem;
@@ -121,9 +116,8 @@
 
 .homePage .hero .subtitle {
     position: relative;
-    width: auto;
-    height: auto;
     width: 100%;
+    height: auto;
     align-items: center;
     text-align: left;
     font-size: 2rem;
