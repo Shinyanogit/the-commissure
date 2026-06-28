@@ -7,7 +7,7 @@ body {
     position: relative;
     margin: 0%;
     padding: 0%;
-    width: 100%;
+    width: 100vw;
     overflow-x: hidden;
     font-family: 'maven', Arial, Helvetica, sans-serif;
     color: white;
@@ -16,7 +16,6 @@ body {
     0 0 6px rgba(0, 0, 0, 1),
     0 0 12px rgba(0, 0, 0, 0.9),
     2px 2px 4px rgba(0, 0, 0, 0.8);
-    background: red !important;
 }
 
 body.home-page {
