@@ -30,10 +30,6 @@ body {
         2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* body.home-page {
-    background-color: #000000;
-} */
-
 body.procedure-page {
     height: 100vh;
     overflow: hidden;
