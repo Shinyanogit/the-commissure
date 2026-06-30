@@ -1,27 +1,42 @@
 .homePage {
-    position: relative;
-    min-height: var(--app-height);
-    height: var(--app-height);
-    background: transparent;
+    margin: 0;
+    padding: 0;
+    width: 100dvw;
+    height: auto;
+    overflow: hidden;
 }
-
 .homePage .canvas-mount {
     position: fixed;
-    inset: 0;
     width: 100%;
-    height: var(--app-height);
-    min-height: 100svh;
-    overflow: hidden;
-    z-index: 0;
-    background: transparent;
+    height: 100%;
 }
-
 .homePage .canvas-mount canvas {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
+    transform: translateY(10%) scale(1.2);
+    transform-origin: center;
     display: block;
+}
+
+.homePage .hamburger {
+    display: none;
+}
+
+.homePage nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    background: rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    z-index: 100;
 }
 
 .homePage .hamburger {
@@ -76,8 +91,8 @@
 }
 
 .homePage .hero {
-    height: var(--app-height);
-    min-height: var(--app-height);
+    width: 100%;
+    height: 100dvh;
 }
 
 .homePage .hero .text {
@@ -507,3 +522,5 @@
         text-align: center;
     }
 }
+
+

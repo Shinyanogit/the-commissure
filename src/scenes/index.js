@@ -28,10 +28,7 @@ export function initHomeScene(mount) {
     camera.position.set( 0, 0, -0.7 );
 
     // Renderer
-    const renderer = new THREE.WebGLRenderer();
-    renderer.domElement.style.position = "fixed";
-    renderer.domElement.style.inset = "0";
-    renderer.domElement.style.display = "block";
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize( width, height );
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mount.appendChild( renderer.domElement );
@@ -87,7 +84,7 @@ export function initHomeScene(mount) {
     const handleScroll = (event) => {
         const scrollTop = window.scrollY;
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = THREE.MathUtils.clamp(scrollTop / maxScroll, 0, 1);
+        progress = THREE.MathUtils.clamp(scrollTop / maxScroll, 0, 1);
         camera.position.y = - 0.3 * progress;
     };
     window.addEventListener('scroll', handleScroll);
