@@ -1,26 +1,21 @@
 .homePage {
-    position: relative;
-    min-height: var(--app-height);
-    height: var(--app-height);
-    background: transparent;
+    margin: 0;
+    padding: 0;
+    width: 100dvw;
+    height: auto;
 }
-
 .homePage .canvas-mount {
     position: fixed;
-    inset: 0;
     width: 100%;
-    height: var(--app-height);
-    min-height: 100svh;
-    overflow: hidden;
-    z-index: 0;
-    background: transparent;
+    height: 100%;
 }
-
 .homePage .canvas-mount canvas {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
+    transform: translateY(10%) scale(1.2);
+    transform-origin: center;
     display: block;
 }
 
@@ -31,6 +26,7 @@
 .homePage nav {
     position: fixed;
     width: 100%;
+    height: 10vh;
     top: 0;
     left: 0;
     display: flex;
@@ -45,9 +41,8 @@
 
 .homePage .logo {
     display: block;
-    width: 20vw;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    height: 10dvh;
+    padding-top: 5%;
     object-fit: contain;
 }
 
@@ -76,8 +71,10 @@
 }
 
 .homePage .hero {
-    height: var(--app-height);
-    min-height: var(--app-height);
+    position: sticky;
+    top: 10dvh;
+    width: 100%;
+    height: 90dvh;
 }
 
 .homePage .hero .text {
@@ -124,8 +121,11 @@
 }
 
 .homePage .article {
+    position: sticky;
+    top: 10dvh;
     height: auto;
     overflow: hidden;
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .homePage .article-card {
@@ -263,8 +263,11 @@
 .homePage .news,
 .homePage .about,
 .homePage .authors {
+    position: sticky;
+    top: 10dvh;
     height: auto;
     overflow: hidden;
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .homePage .news-list {
@@ -331,7 +334,9 @@
 }
 
 .homePage .display {
-    height: 100vh;
+    position: sticky;
+    top: 10dvh;
+    height: 90dvh;
 }
 
 .homePage footer {
@@ -507,3 +512,5 @@
         text-align: center;
     }
 }
+
+

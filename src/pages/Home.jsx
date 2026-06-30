@@ -9,17 +9,15 @@ import { initHomeScene } from '../scenes/index.js';
 import '../styles/home.css';
 
 export function Home() {
+    const canvasContainer = useRef(null);
     const mountRef = useRef(null);
-
     useBodyClass('home-page');
-
     useEffect(() => {
         if (!mountRef.current) return undefined;
         return initHomeScene(mountRef.current);
     }, []);
-
     return (
-        <div className="homePage">
+        <div className='homePage'>
             <div ref={mountRef} className="canvas-mount"></div>
             <HomeNav />
             <div className="content hero">
