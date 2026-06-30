@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
 export function initHomeScene(mount) {
     let disposed = false;
@@ -88,6 +89,28 @@ export function initHomeScene(mount) {
         camera.position.y = - 0.3 * progress;
     };
     window.addEventListener('scroll', handleScroll);
+
+    gsap.registerPlugin(ScrollTrigger);
+    const sections = [
+        '.hero',
+        '.article',
+        '.news',
+        '.about',
+        '.authors',
+        '.display'
+    ];
+    sections.forEach((section) => {
+        gsap.to(section, {
+            opacity: 0,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: section,
+                start: 'bottom bottom',
+                end: 'bottom top',
+                scrub: true,
+            },
+        });
+    });
 
     // Resize
     const handleResize = () => {
