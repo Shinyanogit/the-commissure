@@ -99,17 +99,19 @@ export function initHomeScene(mount) {
         '.authors',
         '.display'
     ];
-    sections.forEach((section) => {
-        gsap.to(section, {
-            opacity: 0,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: section,
-                start: 'bottom bottom',
-                end: 'bottom top',
-                scrub: true,
-            },
-        });
+    sections.forEach((section, index) => {
+        if (index > 0) {
+            gsap.to(sections[index - 1], {
+                opacity: 0,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top center',
+                    end: 'top top',
+                    scrub: true,
+                },
+            });
+        }
     });
 
     // Resize

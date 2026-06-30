@@ -70,12 +70,25 @@
     z-index: 10;
 }
 
-.homePage .hero {
+.homePage .hero,
+.homePage .article,
+.homePage .news,
+.homePage .about,
+.homePage .authors,
+.homePage .display {
     position: sticky;
     top: 10dvh;
-    width: 100%;
+    margin-top: 10dvh;
     height: 90dvh;
 }
+
+.homePage .article,
+.homePage .news,
+.homePage .about,
+.homePage .authors {
+    background: rgba(0, 0, 0, 0.8);
+}
+
 
 .homePage .hero .text {
     position: relative;
@@ -118,14 +131,6 @@
     align-items: center;
     text-align: left;
     font-size: 2rem;
-}
-
-.homePage .article {
-    position: sticky;
-    top: 10dvh;
-    height: auto;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.8);
 }
 
 .homePage .article-card {
@@ -260,16 +265,6 @@
     opacity: 0.6;
 }
 
-.homePage .news,
-.homePage .about,
-.homePage .authors {
-    position: sticky;
-    top: 10dvh;
-    height: auto;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.8);
-}
-
 .homePage .news-list {
     position: relative;
     list-style: none;
@@ -331,12 +326,6 @@
 .homePage .author-list .university,
 .homePage .author-list .biography {
     margin: 0.5rem 0 0 0;
-}
-
-.homePage .display {
-    position: sticky;
-    top: 10dvh;
-    height: 90dvh;
 }
 
 .homePage footer {
