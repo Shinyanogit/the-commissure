@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProcedureNav } from '../components/ProcedureNav.jsx';
+import { ProcedureFooter } from '../components/ProcedureFooter.jsx';
 import { useBodyClass } from '../components/useBodyClass.js';
 import { procedureText } from '../content/procedureText.js';
 import '../styles/procedure.css';
@@ -29,6 +30,7 @@ export function ProcedurePage({ page, initScene }) {
             <div ref={mountRef} className="canvas-mount"></div>
             <ProcedureNav />
             <div dangerouslySetInnerHTML={{ __html: procedureText[page] }} />
+            <ProcedureFooter />
         </div>
     );
 }

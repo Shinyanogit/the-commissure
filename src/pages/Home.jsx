@@ -44,11 +44,11 @@ export function Home() {
                         className="ariticle2"
                         to="/acdf"
                         image="/acdfsnap.webp"
-                        header="Anterior Cervical Discectomy and Fusion (PCDF)"
+                        header="Anterior Cervical Discectomy and Fusion (ACDF)"
                         date="May 24, 2026"
                     >
                         Anterior cervical discectomy and fusion (ACDF) is a spinal surgical procedure that aims to relieve neural compression and stabilize the cervical spine.
-                        ACDF consists of three main components: <span className="highlight-red">intervertebral disc removal (discectomy)</span>, <span className="highlight-red">interbody cage implantation</span>, and <span className="highlight-red"></span>anterior plate fixation.
+                        ACDF consists of three main components: <span className="highlight-red">intervertebral disc removal (discectomy)</span>, <span className="highlight-red">interbody cage implantation</span>, and <span className="highlight-red">anterior plate fixation</span>.
                         Compared with posterior cervical decompression and fusion (PCDF), ACDF is performed through an <span className="highlight-red">anterior approach</span>, utilizing a small incision in the front of the neck to access the cervical vertebrae.
                         Owing to this surgical approach, ACDF is particularly effective for treating pathologies involving the anterior structures of the cervical spine.
                     </ArticleCard>
