@@ -1,12 +1,13 @@
-export function ProcedureFooter() {
+export function ProcedureFooter({ sceneCount, currentScene }) {
     return (
         <footer>
             <div className='indicator'>
-                <span className="dot"></span>
-                <span className="dot active"></span>
-                <span className="dot"></span>
-                <span className="dot"></span>
-                <span className="dot"></span>
+                {Array.from({ length: sceneCount }).map((_, i) => (
+                    <span
+                        key={i}
+                        className={`dot ${i === currentScene ? 'active' : ''}`}
+                    />
+                ))}
             </div>
             <div className="copyright">© 2026 The Commissure</div>
         </footer>

@@ -207,21 +207,21 @@
     }
 
     .procedurePage .text {
-    width: 90%;
-    left: 5%;
-    bottom: 5%;
+        width: 90%;
+        left: 5%;
+        bottom: 5%;
     }
 
     .procedurePage .title {
-    font-size: 1.2rem;
+        font-size: 1.2rem;
     }
 
     .procedurePage .paragraph {
-    font-size: 0.8rem;
+        font-size: 0.8rem;
     }
 
     .procedurePage ul {
-    padding-left: 0.8rem;
+        padding-left: 0.8rem;
     }
 
     .procedurePage footer {
