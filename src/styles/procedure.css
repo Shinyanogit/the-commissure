@@ -10,6 +10,7 @@
 .procedurePage nav {
     position: fixed;
     width: 100%;
+    height: 10vh;
     top: 0;
     left: 0;
     display: flex;
@@ -23,10 +24,10 @@
 
 .procedurePage .logo {
     display: block;
-    width: 20vw;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    height: 10dvh;
+    padding-top: 5%;
     object-fit: contain;
+    z-index: 200;
 }
 
 .procedurePage .nav-list {
@@ -45,7 +46,7 @@
     padding-left: 2rem;
     padding-right: 2rem;
     padding-bottom: 2rem;
-    background: rgba(0, 0, 0, 0.8);
+    background: black;
     transform: translateX(100%);
     transition: transform 0.5s ease;
 }
@@ -141,6 +142,54 @@
     opacity: 0;
 }
 
+.procedurePage footer {
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 5vh;
+    left: 0;
+    bottom: 0; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    background: black;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.procedurePage .indicator {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.procedurePage .dot {
+    width: 10px;
+    height: 10px;
+    background-color: gray;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.procedurePage .dot.active {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+}
+
+.procedurePage .copyright {
+    position: absolute;
+    left: 50%;
+    bottom: 20%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+    font-size: 1rem;
+}
+
 @media (max-width: 768px) {
     .procedurePage .nav-list {
         width: 100vw;
@@ -173,5 +222,35 @@
 
     .procedurePage ul {
     padding-left: 0.8rem;
+    }
+
+    .procedurePage footer {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .procedurePage .indicator {
+        gap: 0.8rem;
+    }
+
+    .procedurePage .dot {
+        width: 9px;
+        height: 9px;
+        background-color: gray;
+        border-radius: 50%;
+        transition: 0.3s;
+    }
+
+    .procedurePage .dot.active {
+        width: 11px;
+        height: 11px;
+        background-color: white;
+    }
+
+    .procedurePage .copyright {
+        position: static;
+        left: auto;
+        bottom: auto;
+        transform: none;
     }
 }
