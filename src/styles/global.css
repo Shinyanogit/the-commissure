@@ -3,6 +3,16 @@
     src: url('/MavenPro-Regular.woff');
 }
 
+:root {
+    --app-height: 100vh;
+    background: black;
+}
+
+html,
+#root {
+    background: black;
+}
+
 body {
     margin: 0;
     padding: 0;

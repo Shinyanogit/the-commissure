@@ -30,6 +30,7 @@ blender/
 
 # Internal working docs (project spec / TODO) — kept local, not shared on GitHub
 docs/
+FOR*.md
 
 # Vercel CLI local link (contains project/org ids) — set as GitHub secrets instead
 .vercel
