@@ -70,25 +70,26 @@
     z-index: 10;
 }
 
-.homePage .hero,
-.homePage .article,
-.homePage .news,
-.homePage .about,
-.homePage .authors,
+.homePage .hero {
+    position: relative;
+    top: 0;
+    height: 100dvh;
+}
+
 .homePage .display {
-    position: sticky;
-    top: 10dvh;
-    margin-top: 10dvh;
-    height: 90dvh;
+    position: relative;
+    bottom: 0;
+    height: 100dvh;
 }
 
 .homePage .article,
 .homePage .news,
 .homePage .about,
 .homePage .authors {
+    position: relative;
+    height: auto;
     background: rgba(0, 0, 0, 0.8);
 }
-
 
 .homePage .hero .text {
     position: relative;
