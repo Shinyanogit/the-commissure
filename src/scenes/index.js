@@ -84,7 +84,7 @@ export function initHomeScene(mount) {
     let progress = 0;
     const handleScroll = (event) => {
         const scrollTop = window.scrollY;
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - getViewportSize().height);
         progress = THREE.MathUtils.clamp(scrollTop / maxScroll, 0, 1);
         camera.position.y = - 0.3 * progress;
     };
@@ -96,8 +96,7 @@ export function initHomeScene(mount) {
         '.article',
         '.news',
         '.about',
-        '.authors',
-        '.display'
+        '.authors'
     ];
     sections.forEach((section, index) => {
         if (index > 0) {
