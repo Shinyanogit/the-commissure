@@ -4,7 +4,7 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import gsap from 'gsap';
 import { or, rotate, texture } from 'three/tsl';
 
-export function initAccfScene(mount, root) {
+export function initAccfScene(mount, root, sceneCount, currentScene, setCurrentScene) {
     let disposed = false;
     const activeTimelines = new Set();
     const timeoutIds = new Set();
@@ -80,19 +80,6 @@ export function initAccfScene(mount, root) {
             );
         }
     };
-
-    // Text
-    const scene0 = root.querySelectorAll('.scene0');
-    const scene1 = root.querySelectorAll('.scene1');
-    const scene2 = root.querySelectorAll('.scene2');
-    const scene3 = root.querySelectorAll('.scene3');
-    const scene4 = root.querySelectorAll('.scene4');
-    const scene5 = root.querySelectorAll('.scene5');
-    const scene6 = root.querySelectorAll('.scene6');
-    scene0.forEach(text => {
-        text.style.opacity = 1;
-        text.style.display = 'block';
-    });
 
     // Geometry
     let c5Structure = [];
@@ -220,7 +207,6 @@ export function initAccfScene(mount, root) {
 
     // Wheel + touch swipe support for mobile
     let isAnimating = false;
-    let sceneCount = 0;
     let touchStartY = null;
     const TOUCH_SWIPE_THRESHOLD = 40;
 
@@ -228,8 +214,13 @@ export function initAccfScene(mount, root) {
         if (isAnimating) return;
         isAnimating = true;
         if (event.deltaY > 0) {
-            sceneCount++;
-            transferScene(sceneCount);
+            if (currentScene >= sceneCount - 1) {
+                isAnimating = false;
+                return;
+            } else {
+                currentScene++;
+            }
+            transferScene(currentScene);
         } else {
             delay(() => {
                 isAnimating = false;
@@ -253,8 +244,13 @@ export function initAccfScene(mount, root) {
 
         if (deltaY > TOUCH_SWIPE_THRESHOLD) {
             isAnimating = true;
-            sceneCount++;
-            transferScene(sceneCount);
+            if (currentScene >= sceneCount - 1) {
+                isAnimating = false;
+                return;
+            } else {
+                currentScene++;
+            }
+            transferScene(currentScene);
         } else {
             delay(() => {
                 isAnimating = false;
@@ -265,7 +261,7 @@ export function initAccfScene(mount, root) {
     window.addEventListener('wheel', handleWheel);
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
-    function transferScene(sceneCount) {
+    function transferScene(currentScene) {
         const sceneStartTime = Date.now();
         const tl = gsap.timeline({
             onComplete: () => {
@@ -280,25 +276,24 @@ export function initAccfScene(mount, root) {
             }
         });
         activeTimelines.add(tl);
-        if (sceneCount === 1) {
-            tl.to(scene0, {
-                opacity: 0,
-                duration: 0.5,
-                ease: 'power2.inOut',
-                onComplete:() => {
-                    scene0.forEach(text => {
-                        text.style.display = 'none';
-                    });
-                    scene1.forEach(text => {
-                        text.style.display = 'block'
-                    })
-                }
-            }, 0);
-            tl.to(scene1, {
-                opacity: 1,
-                duration: 0.5,
-                ease: 'power2.inOut'
-            });
+        tl.to('.text', {
+            opacity: 0,
+            y: -10,
+            duration: 0.5,
+            ease: 'power2.inOut'
+        });
+        tl.add(() => {
+            setCurrentScene(currentScene);
+        });
+        tl.add(() => {
+            requestAnimationFrame(() => {
+                tl.fromTo('.text',
+                    { opacity: 0, y: 10 },
+                    { opacity: 1, y: 0, duration: 0.5, ease: 'power2.inOut' }
+                );
+            })
+        });
+        if (currentScene === 1) {
             tl.to(camera.position, {
                 x: 0,
                 y: 0.4,
@@ -335,25 +330,7 @@ export function initAccfScene(mount, root) {
                     ease: 'power2.inOut'
                 }, 0);
             });
-        } else if (sceneCount === 2) {
-            tl.to(scene1, {
-                opacity: 0,
-                duration: 0.5,
-                ease: 'power2.inOut',
-                onComplete:() => {
-                    scene1.forEach(text => {
-                        text.style.display = 'none';
-                    });
-                    scene2.forEach(text => {
-                        text.style.display = 'block'
-                    })
-                }
-            }, 0);
-            tl.to(scene2, {
-                opacity: 1,
-                duration: 0.5,
-                ease: 'power2.inOut'
-            });
+        } else if (currentScene === 2) {
             tl.to(camera.position, {
                 x: 0.2,
                 y: 0.2,
@@ -385,25 +362,7 @@ export function initAccfScene(mount, root) {
                     ease: 'power2.inOut'
                 }, transparentStartTime);
             });
-        } else if (sceneCount === 3) {
-            tl.to(scene2, {
-                opacity: 0,
-                duration: 0.5,
-                ease: 'power2.inOut',
-                onComplete:() => {
-                    scene2.forEach(text => {
-                        text.style.display = 'none';
-                    });
-                    scene3.forEach(text => {
-                        text.style.display = 'block'
-                    })
-                }
-            }, 0);
-            tl.to(scene3, {
-                opacity: 1,
-                duration: 0.5,
-                ease: 'power2.inOut'
-            });
+        } else if (currentScene === 3) {
             c5Transparent.forEach((c5transparent) => {
                 tl.to(c5transparent.material, {
                     opacity: 1,
@@ -495,25 +454,7 @@ export function initAccfScene(mount, root) {
                     }, corpectomyStartTime);
                 });
             };
-        } else if (sceneCount == 4) {
-            tl.to(scene3, {
-                opacity: 0,
-                duration: 0.5,
-                ease: 'power2.inOut',
-                onComplete:() => {
-                    scene3.forEach(text => {
-                        text.style.display = 'none';
-                    });
-                    scene4.forEach(text => {
-                        text.style.display = 'block'
-                    })
-                }
-            }, 0);
-            tl.to(scene4, {
-                opacity: 1,
-                duration: 0.5,
-                ease: 'power2.inOut'
-            });
+        } else if (currentScene === 4) {
             tl.to(camera.position, {
                 x: -0.1,
                 y: 0.1,
@@ -558,25 +499,7 @@ export function initAccfScene(mount, root) {
                 }, extensionStartTime);
             }
         }
-        else if (sceneCount == 5) {
-            tl.to(scene4, {
-                opacity: 0,
-                duration: 0.5,
-                ease: 'power2.inOut',
-                onComplete:() => {
-                    scene4.forEach(text => {
-                        text.style.display = 'none';
-                    });
-                    scene5.forEach(text => {
-                        text.style.display = 'block'
-                    })
-                }
-            }, 0);
-            tl.to(scene5, {
-                opacity: 1,
-                duration: 0.5,
-                ease: 'power2.inOut'
-            });
+        else if (currentScene === 5) {
             tl.to(camera.position, {
                 x: 0.2,
                 y: 0.2,
@@ -639,25 +562,7 @@ export function initAccfScene(mount, root) {
                     );
                 })
             }
-        } else if (sceneCount == 6) {
-            tl.to(scene5, {
-                opacity: 0,
-                duration: 0.5,
-                ease: 'power2.inOut',
-                onComplete:() => {
-                    scene5.forEach(text => {
-                        text.style.display = 'none';
-                    });
-                    scene6.forEach(text => {
-                        text.style.display = 'block'
-                    })
-                }
-            }, 0);
-            tl.to(scene6, {
-                opacity: 1,
-                duration: 0.5,
-                ease: 'power2.inOut'
-            });
+        } else if (currentScene === 6) {
             tl.to(camera.position, {
                 x: -0.1,
                 y: 0.1,

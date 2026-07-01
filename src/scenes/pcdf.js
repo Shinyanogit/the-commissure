@@ -271,7 +271,12 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         touchStartY = null;
         if (deltaY > TOUCH_SWIPE_THRESHOLD) {
             isAnimating = true;
-            currentScene++;
+            if (currentScene >= sceneCount - 1) {
+                isAnimating = false;
+                return;
+            } else {
+                currentScene++;
+            }
             transferScene(currentScene);
         } else {
             delay(() => {
