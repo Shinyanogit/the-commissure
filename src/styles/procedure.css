@@ -386,6 +386,29 @@
 }
 
 @media (max-width: 640px) {
+    .procedurePage .canvas-mount canvas {
+        filter: none;
+    }
+
+    .procedurePage .procedure-atlas-glow {
+        filter: blur(48px);
+        opacity: 0.14;
+    }
+
+    .procedurePage .nav-list {
+        backdrop-filter: blur(10px);
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+    }
+
+    .procedurePage .procedure-hero-card {
+        backdrop-filter: blur(12px);
+        box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
+    }
+
+    .procedurePage .procedure-footer {
+        backdrop-filter: blur(8px);
+    }
+
     .procedurePage .logo {
         height: 3.6rem;
     }
