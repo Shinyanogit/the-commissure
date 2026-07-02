@@ -1,256 +1,416 @@
+.procedurePage {
+    position: relative;
+    min-height: 100dvh;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at top left, rgba(0, 155, 158, 0.16), transparent 28%),
+        linear-gradient(135deg, #02040a 0%, #050816 45%, #02060f 100%);
+    color: #f4f7ff;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.procedurePage .canvas-mount {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
 .procedurePage .canvas-mount canvas {
     position: absolute;
-}
-
-.procedurePage .hamburger {
-    display: flex;
-    z-index: 200;
-}
-
-.procedurePage nav {
-    position: fixed;
+    inset: 0;
     width: 100%;
-    height: 10vh;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    filter: saturate(1.05) contrast(1.04);
+}
+
+.procedurePage .procedure-atlas-glow {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(80px);
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.procedurePage .glow-one {
+    top: 7rem;
+    left: -4rem;
+    width: 20rem;
+    height: 20rem;
+    background: rgba(0, 155, 158, 0.38);
+}
+
+.procedurePage .glow-two {
+    right: -3rem;
+    bottom: 3rem;
+    width: 24rem;
+    height: 24rem;
+    background: rgba(123, 97, 255, 0.28);
+}
+
+.procedurePage .procedure-nav {
+    position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
+    padding: 0 2.5%;
     box-sizing: border-box;
-    z-index: 100;
+    z-index: 40;
+}
+
+.procedurePage .procedure-logo-link {
+    display: inline-flex;
+    align-items: center;
 }
 
 .procedurePage .logo {
     display: block;
-    height: 10dvh;
-    padding-top: 5%;
+    height: 4rem;
     object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.procedurePage .logo:hover {
+    transform: scale(1.03);
+}
+
+.procedurePage .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 0.32rem;
+    cursor: pointer;
+    padding: 0.35rem;
+    border: 0;
+    background: transparent;
     z-index: 200;
+}
+
+.procedurePage .hamburger span {
+    width: 1.3rem;
+    height: 1px;
+    background: #f4f7ff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.procedurePage .hamburger.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.procedurePage .hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.procedurePage .hamburger.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
 }
 
 .procedurePage .nav-list {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 30vw;
-    height: 100vh;
-    box-sizing: border-box;
-    list-style: none;
+    top: calc(100% + 0.8rem);
+    right: 2.5rem;
+    width: min(92vw, 24rem);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    padding-top: 5rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-bottom: 2rem;
-    background: black;
-    transform: translateX(100%);
-    transition: transform 0.5s ease;
+    gap: 0.7rem;
+    list-style: none;
+    margin: 0;
+    padding: 1.2rem 1.25rem 1.35rem;
+    background: rgba(3, 7, 17, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 1rem;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(18px);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
 .procedurePage .nav-list.active {
-    transform: translateX(0);
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .procedurePage .subtitle {
     position: relative;
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(244, 247, 255, 0.72);
 }
 
 .procedurePage .subtitle::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -8px;
-    width: 120%;
-    height: 2px;
-    background: linear-gradient(
-        to right,
-        cyan 20%,
-        cyan 50%,
-        transparent
-    );
-}
-
-.procedurePage .text {
-    position: absolute;
-    width: 30%;
-    height: auto;
-    left: 10%;
-    bottom: 10%;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-}
-
-.procedurePage .title {
-    padding: 2%;
-    position: relative;
-    display: block;
-    align-items: center;
-    text-align: left;
-    font-size: 1.5rem;
-}
-
-.procedurePage .title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    bottom: -0.35rem;
     width: 100%;
     height: 1px;
-    background: linear-gradient(
-    to right,
-    transparent,
-    white 20%,
-    white 80%,
-    transparent
-    );
+    background: linear-gradient(90deg, rgba(139, 221, 244, 0.9), transparent);
 }
 
-.procedurePage .paragraph {
-    padding: 1%;
+.procedurePage .nav-list a {
     display: block;
+    padding: 0.42rem 0;
+    color: rgba(244, 247, 255, 0.92);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.procedurePage .nav-list a:hover,
+.procedurePage .nav-list a:focus-visible {
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+.procedurePage .procedure-shell {
+    position: relative;
+    z-index: 20;
+    min-height: 100dvh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 7.5rem 2.5rem 6.5rem;
+    box-sizing: border-box;
+}
+
+.procedurePage .procedure-hero-card {
+    width: min(780px, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 1.1rem 1.1rem;
+    background: linear-gradient(145deg, rgba(4, 9, 19, 0.8), rgba(4, 9, 19, 0.62));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1.2rem;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(18px);
+}
+
+.procedurePage .procedure-hero-copy {
+    padding: 0.3rem 0.25rem 0.2rem;
+}
+
+.procedurePage .procedure-eyebrow {
+    display: inline-flex;
+    width: fit-content;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    font-size: 0.74rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(244, 247, 255, 0.72);
+}
+
+.procedurePage .procedure-title-row {
+    display: flex;
     align-items: center;
-    text-align: justify;
-    font-size: 1rem;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0.8rem 0 1rem;
 }
 
-.procedurePage .paragraph a {
-    color: white;
-}
-
-.procedurePage ul {
-    margin-top: 0;
-    margin-bottom: 0;
-    text-align:left;
-    padding-left: 1rem;
-}
-
-.procedurePage .scene0,
-.procedurePage .scene1,
-.procedurePage .scene2,
-.procedurePage .scene3,
-.procedurePage .scene4,
-.procedurePage .scene5,
-.procedurePage .scene6 {
-    display: none;
-    opacity: 0;
-}
-
-.procedurePage footer {
-    position: fixed;
+.procedurePage .procedure-title {
     margin: 0;
+    font-size: clamp(1.5rem, 2.2vw, 2.35rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+}
+
+.procedurePage .procedure-toggle {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.06);
+    color: #f4f7ff;
+    padding: 0.55rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.procedurePage .procedure-toggle:hover,
+.procedurePage .procedure-toggle:focus-visible {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+.procedurePage .procedure-toggle.active {
+    background: linear-gradient(135deg, rgba(142, 221, 244, 0.18), rgba(123, 97, 255, 0.2));
+    border-color: rgba(142, 221, 244, 0.35);
+}
+
+.procedurePage .procedure-paragraph {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(244, 247, 255, 0.82);
+    transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.35s ease;
+}
+
+.procedurePage .procedure-paragraph.open {
+    max-height: 32rem;
+    opacity: 1;
+    margin-top: 0.2rem;
+}
+
+.procedurePage .procedure-paragraph p {
+    margin: 0 0 0.9rem;
+}
+
+.procedurePage .procedure-paragraph p:last-child {
+    margin-bottom: 0;
+}
+
+.procedurePage .procedure-paragraph ul {
+    margin: 0.4rem 0 0 1.2rem;
     padding: 0;
-    width: 100%;
-    height: 5vh;
+    display: grid;
+    gap: 0.45rem;
+}
+
+.procedurePage .procedure-paragraph li {
+    color: rgba(244, 247, 255, 0.8);
+}
+
+.procedurePage .procedure-paragraph a {
+    color: #8eddf4;
+    text-decoration: none;
+}
+
+.procedurePage .procedure-paragraph a:hover,
+.procedurePage .procedure-paragraph a:focus-visible {
+    text-decoration: underline;
+}
+
+.procedurePage .highlight-red {
+    color: #8eddf4;
+    font-weight: 600;
+}
+
+.procedurePage .procedure-footer {
+    position: fixed;
     left: 0;
-    bottom: 0; 
+    right: 0;
+    bottom: 0;
+    z-index: 40;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-    background: black;
-    box-sizing: border-box;
-    z-index: 100;
+    padding: 1rem 2.5rem 1.2rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(2, 4, 10, 0.72) 35%, rgba(2, 4, 10, 0.95) 100%);
+    backdrop-filter: blur(14px);
 }
 
 .procedurePage .indicator {
-    position: relative;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .procedurePage .dot {
-    width: 10px;
-    height: 10px;
-    background-color: gray;
+    width: 0.6rem;
+    height: 0.6rem;
     border-radius: 50%;
-    transition: 0.3s;
+    background: rgba(255, 255, 255, 0.24);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .procedurePage .dot.active {
-    width: 12px;
-    height: 12px;
-    background-color: white;
+    transform: scale(1.15);
+    background: linear-gradient(135deg, #8eddf4, #7b61ff);
+}
+
+.procedurePage .footer-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.2rem;
+    color: rgba(244, 247, 255, 0.72);
+    font-size: 0.8rem;
+}
+
+.procedurePage .footer-label {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
 }
 
 .procedurePage .copyright {
-    position: absolute;
-    left: 50%;
-    bottom: 20%;
-    transform: translateX(-50%);
-    opacity: 0.5;
-    font-size: 1rem;
+    opacity: 0.72;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .procedurePage .procedure-nav {
+        height: 4.5rem;
+    }
+
     .procedurePage .nav-list {
-        width: 100vw;
-        padding-left: 2rem;
-        padding-right: 2rem;
+        right: 1.2rem;
     }
 
-    .procedurePage .subtitle {
-        position: relative;
-        font-size: 1.5rem;
+    .procedurePage .procedure-shell {
+        padding: 6.5rem 1.2rem 5.5rem;
     }
 
-    .procedurePage .logo {
-        width: 70vw;
+    .procedurePage .procedure-hero-card {
+        grid-template-columns: 1fr;
     }
 
-    .procedurePage .text {
-        width: 90%;
-        left: 5%;
-        bottom: 5%;
-    }
-
-    .procedurePage .title {
-        font-size: 1.2rem;
-    }
-
-    .procedurePage .paragraph {
-        font-size: 0.8rem;
-    }
-
-    .procedurePage ul {
-        padding-left: 0.8rem;
-    }
-
-    .procedurePage footer {
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-
-    .procedurePage .indicator {
-        gap: 0.8rem;
-    }
-
-    .procedurePage .dot {
-        width: 9px;
-        height: 9px;
-        background-color: gray;
-        border-radius: 50%;
-        transition: 0.3s;
-    }
-
-    .procedurePage .dot.active {
-        width: 11px;
-        height: 11px;
-        background-color: white;
-    }
-
-    .procedurePage .copyright {
+    .procedurePage .procedure-side-card {
         position: static;
-        left: auto;
-        bottom: auto;
-        transform: none;
+    }
+
+    .procedurePage .procedure-footer {
+        padding: 0.9rem 1.2rem 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .procedurePage .logo {
+        height: 3.6rem;
+    }
+
+    .procedurePage .procedure-shell {
+        padding: 6rem 1rem 5rem;
+    }
+
+    .procedurePage .procedure-hero-card {
+        padding: 1rem;
+        border-radius: 1.1rem;
+    }
+
+    .procedurePage .procedure-title {
+        font-size: 1.45rem;
+    }
+
+    .procedurePage .procedure-paragraph {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .procedurePage .procedure-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.55rem;
+    }
+
+    .procedurePage .footer-meta {
+        align-items: flex-start;
     }
 }

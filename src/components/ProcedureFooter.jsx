@@ -1,7 +1,7 @@
 export function ProcedureFooter({ sceneCount, currentScene }) {
     return (
-        <footer>
-            <div className='indicator'>
+        <footer className="procedure-footer">
+            <div className="indicator">
                 {Array.from({ length: sceneCount }).map((_, i) => (
                     <span
                         key={i}
@@ -9,7 +9,10 @@ export function ProcedureFooter({ sceneCount, currentScene }) {
                     />
                 ))}
             </div>
-            <div className="copyright">© 2026 The Commissure</div>
+            <div className="footer-meta">
+                <span className="footer-label">Atlas progression</span>
+                <span className="copyright">© 2026 The Commissure</span>
+            </div>
         </footer>
     );
 }
