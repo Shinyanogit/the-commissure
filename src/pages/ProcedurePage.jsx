@@ -10,6 +10,8 @@ import '../styles/procedure.css';
 export function ProcedurePage({ page, initScene }) {
     const mountRef = useRef(null);
     const rootRef = useRef(null);
+    const shellRef = useRef(null);
+    const cardRef = useRef(null);
     const navigate = useNavigate();
 
     const data = procedureText[page];
@@ -26,8 +28,8 @@ export function ProcedurePage({ page, initScene }) {
 
     useEffect(() => {
         if (!rootRef.current) return undefined;
-        const shell = rootRef.current.querySelector('.procedure-shell');
-        const card = rootRef.current.querySelector('.procedure-hero-card');
+        const shell = shellRef.current;
+        const card = cardRef.current;
         const footer = rootRef.current.querySelector('.procedure-footer');
 
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -49,7 +51,7 @@ export function ProcedurePage({ page, initScene }) {
 
     useEffect(() => {
         if (!rootRef.current) return undefined;
-        const card = rootRef.current.querySelector('.procedure-hero-card');
+        const card = cardRef.current;
         if (!card) return undefined;
 
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -75,8 +77,8 @@ export function ProcedurePage({ page, initScene }) {
             <div className="procedure-atlas-glow glow-one"></div>
             <div className="procedure-atlas-glow glow-two"></div>
             <ProcedureNav />
-            <main className="procedure-shell">
-                <section className="procedure-hero-card">
+            <main ref={shellRef} className="procedure-shell">
+                <section ref={cardRef} className="procedure-hero-card">
                     <div className="procedure-hero-copy">
                         <span className="procedure-eyebrow">Interactive surgical atlas</span>
                         <div className="procedure-title-row">
