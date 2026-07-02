@@ -2,12 +2,28 @@ import { useCallback, useRef } from 'react';
 
 export function useTiltCard() {
     const cardRef = useRef(null);
+    const rectRef = useRef(null);
+
+    const cacheRect = useCallback(() => {
+        const card = cardRef.current;
+        if (!card) return null;
+
+        const rect = card.getBoundingClientRect();
+        rectRef.current = rect;
+        return rect;
+    }, []);
+
+    const handleMouseEnter = useCallback(() => {
+        cacheRect();
+    }, [cacheRect]);
 
     const handleMouseMove = useCallback((event) => {
         const card = cardRef.current;
         if (!card) return;
 
-        const rect = card.getBoundingClientRect();
+        const rect = rectRef.current ?? cacheRect();
+        if (!rect) return;
+
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
         const rotateY = ((x / rect.width) - 0.5) * 8;
@@ -25,7 +41,8 @@ export function useTiltCard() {
         card.style.transform = '';
         card.style.setProperty('--tilt-x', '0deg');
         card.style.setProperty('--tilt-y', '0deg');
+        rectRef.current = null;
     }, []);
 
-    return { cardRef, handleMouseMove, handleMouseLeave };
+    return { cardRef, handleMouseEnter, handleMouseMove, handleMouseLeave };
 }

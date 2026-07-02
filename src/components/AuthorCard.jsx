@@ -1,12 +1,13 @@
 import { useTiltCard } from './useTiltCard.js';
 
 export function AuthorCard({ image, name, university, children }) {
-    const { cardRef, handleMouseMove, handleMouseLeave } = useTiltCard();
+    const { cardRef, handleMouseEnter, handleMouseMove, handleMouseLeave } = useTiltCard();
 
     return (
         <li
             className="author-card"
             ref={cardRef}
+            onMouseEnter={handleMouseEnter}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >

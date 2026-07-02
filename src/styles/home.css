@@ -38,6 +38,7 @@
     opacity: 0.22;
     pointer-events: none;
     z-index: 0;
+    will-change: transform;
 }
 
 .homePage .ambient-one {
@@ -298,6 +299,7 @@
     border-radius: 999px;
     border: 1px solid rgba(255,255,255,0.4);
     animation: bob 1.6s ease-in-out infinite;
+    will-change: transform, opacity;
 }
 
 .homePage .scroll-indicator span:nth-child(2) { animation-delay: 0.2s; }
@@ -316,6 +318,13 @@
     min-height: auto;
     padding: 5.5rem 0;
     margin-top: 2.2rem;
+}
+
+.homePage .article,
+.homePage .news,
+.homePage .about {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1100px;
 }
 
 .homePage .article::before,
@@ -404,6 +413,7 @@
     transform-style: preserve-3d;
     transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     will-change: transform;
+    contain: paint;
 }
 
 .homePage .article-card::after,
