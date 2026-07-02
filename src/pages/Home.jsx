@@ -13,8 +13,14 @@ import '../styles/home.css';
 gsap.registerPlugin(ScrollTrigger);
 
 export function Home() {
+    const pageRef = useRef(null);
     const mountRef = useRef(null);
     const heroRef = useRef(null);
+    const titleRef = useRef(null);
+    const subtitleRef = useRef(null);
+    const primaryCtaRef = useRef(null);
+    const secondaryCtaRef = useRef(null);
+    const indicatorRef = useRef(null);
     const sectionsRef = useRef([]);
 
     useBodyClass('home-page');
@@ -25,59 +31,60 @@ export function Home() {
     }, []);
 
     useEffect(() => {
-        const hero = heroRef.current;
-        if (!hero) return undefined;
+        if (!pageRef.current || !heroRef.current) return undefined;
 
-        const title = hero.querySelector('.title');
-        const subtitle = hero.querySelector('.subtitle');
-        const ctas = hero.querySelectorAll('.hero-actions a');
-        const indicator = hero.querySelector('.scroll-indicator');
+        const ctx = gsap.context(() => {
+            const title = titleRef.current;
+            const subtitle = subtitleRef.current;
+            const ctas = [primaryCtaRef.current, secondaryCtaRef.current].filter(Boolean);
+            const indicator = indicatorRef.current;
 
-        const timeline = gsap.timeline({ defaults: { duration: 1, ease: 'power3.out' } });
-        timeline.fromTo(title, { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08 })
-            .fromTo(subtitle, { y: 20, opacity: 0 }, { y: 0, opacity: 1 }, '-=0.6')
-            .fromTo(ctas, { y: 18, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.12 }, '-=0.6')
-            .fromTo(indicator, { y: 12, opacity: 0 }, { y: 0, opacity: 1 }, '-=0.4');
+            const timeline = gsap.timeline({ defaults: { duration: 1, ease: 'power3.out' } });
 
-        const reveals = sectionsRef.current.filter(Boolean);
-        reveals.forEach((section, index) => {
-            gsap.fromTo(section, {
-                y: 40,
-                opacity: 0,
-                scale: 0.98,
-            }, {
-                y: 0,
-                opacity: 1,
-                scale: 1,
-                duration: 0.9,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 85%',
-                    once: true,
-                },
-                delay: index * 0.03,
-                onComplete: () => section.classList.add('is-visible'),
+            if (title) {
+                timeline.fromTo(title, { y: 30, opacity: 0 }, { y: 0, opacity: 1 }, 0);
+            }
+
+            if (subtitle) {
+                timeline.fromTo(subtitle, { y: 20, opacity: 0 }, { y: 0, opacity: 1 }, '-=0.6');
+            }
+
+            if (ctas.length > 0) {
+                timeline.fromTo(ctas, { y: 18, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.12 }, '-=0.6');
+            }
+
+            if (indicator) {
+                timeline.fromTo(indicator, { y: 12, opacity: 0 }, { y: 0, opacity: 1 }, '-=0.4');
+            }
+
+            const reveals = sectionsRef.current.filter(Boolean);
+            reveals.forEach((section, index) => {
+                gsap.fromTo(section, {
+                    y: 40,
+                    opacity: 0,
+                    scale: 0.98,
+                }, {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.9,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 85%',
+                        once: true,
+                    },
+                    delay: index * 0.03,
+                    onComplete: () => section.classList.add('is-visible'),
+                });
             });
-        });
+        }, pageRef);
 
-        const heroMotion = gsap.to(hero, {
-            backgroundPosition: '50% 40%',
-            duration: 12,
-            ease: 'none',
-            repeat: -1,
-            yoyo: true,
-        });
-
-        return () => {
-            timeline.kill();
-            heroMotion.kill();
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     return (
-        <div className='homePage' id="top">
+        <div ref={pageRef} className='homePage' id="top">
             <div ref={mountRef} className="canvas-mount"></div>
             <div className="ambient ambient-one"></div>
             <div className="ambient ambient-two"></div>
@@ -86,15 +93,15 @@ export function Home() {
                 <div className="hero-shell">
                     <div className="text">
                         <div className="eyebrow">Immersive spine surgery education</div>
-                        <div className="title">Visualizing Spine Surgeries in 3D</div>
-                        <div className="subtitle">Explore the anatomy, pathology and surgical techniques through interactive 3D models designed for clarity and curiosity.</div>
+                        <div ref={titleRef} className="title">Visualizing Spine Surgeries in 3D</div>
+                        <div ref={subtitleRef} className="subtitle">Explore the anatomy, pathology and surgical techniques through interactive 3D models designed for clarity and curiosity.</div>
                         <div className="hero-actions">
-                            <a href="#articles" className="primary-cta">Explore procedures</a>
-                            <a href="#about" className="secondary-cta">Meet the mission</a>
+                            <a ref={primaryCtaRef} href="#articles" className="primary-cta">Explore procedures</a>
+                            <a ref={secondaryCtaRef} href="#about" className="secondary-cta">Meet the mission</a>
                         </div>
                     </div>
                 </div>
-                <div className="scroll-indicator" aria-hidden="true">
+                <div ref={indicatorRef} className="scroll-indicator" aria-hidden="true">
                     <span></span>
                     <span></span>
                     <span></span>

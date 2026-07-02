@@ -1,15 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export function HomeNav() {
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const tickingRef = useRef(false);
 
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 24);
-        onScroll();
+        const updateScrolled = () => {
+            tickingRef.current = false;
+            setScrolled((current) => {
+                const next = window.scrollY > 24;
+                return current === next ? current : next;
+            });
+        };
+
+        updateScrolled();
+
+        const onScroll = () => {
+            if (tickingRef.current) return;
+            tickingRef.current = true;
+            window.requestAnimationFrame(updateScrolled);
+        };
+
         window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+            tickingRef.current = false;
+        };
     }, []);
 
     return (

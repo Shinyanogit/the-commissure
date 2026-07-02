@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import { useTiltCard } from './useTiltCard.js';
 
 export function ArticleCard({ className, to, image, header, date, children }) {
-    const { cardRef, handleMouseMove, handleMouseLeave } = useTiltCard();
+    const { cardRef, handleMouseEnter, handleMouseMove, handleMouseLeave } = useTiltCard();
 
     return (
         <li
             className={`article-card ${className}`}
             ref={cardRef}
+            onMouseEnter={handleMouseEnter}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
