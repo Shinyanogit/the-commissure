@@ -1,24 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export function HomeNav() {
     const [open, setOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 24);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     return (
-        <nav>
-            <Link to="/"><img src="/logo.png" className="logo" /></Link>
+        <nav className={`home-nav${scrolled ? ' scrolled' : ''}`}>
+            <Link to="/" className="nav-logo-link">
+                <img src="/logo.png" className="logo" alt="The Commissure" />
+            </Link>
             <div
                 className={`hamburger${open ? ' active' : ''}`}
                 onClick={() => setOpen((value) => !value)}
+                aria-label="Toggle navigation"
             >
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <ul className={`nav-list${open ? ' active' : ''}`}>
-                <li><a href="">Articles</a></li>
-                <li><a href="">About us</a></li>
-                <li><a href="">Authors</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#about">About us</a></li>
+                <li><a href="#authors">Authors</a></li>
             </ul>
         </nav>
     );
