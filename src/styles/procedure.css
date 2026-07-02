@@ -115,6 +115,7 @@
     top: calc(100% + 0.8rem);
     right: 2.5rem;
     width: min(92vw, 24rem);
+    max-height: calc(100dvh - 2rem);
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
@@ -130,6 +131,9 @@
     opacity: 0;
     pointer-events: none;
     transition: transform 0.35s ease, opacity 0.35s ease;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    box-sizing: border-box;
 }
 
 .procedurePage .nav-list.active {
@@ -334,7 +338,7 @@
 
 .procedurePage .dot.active {
     transform: scale(1.15);
-    background: linear-gradient(135deg, #8eddf4, #7b61ff);
+    background: linear-gradient(135deg, #1bc7d0, #0ea5c7);
 }
 
 .procedurePage .footer-meta {
@@ -386,13 +390,30 @@
         height: 3.6rem;
     }
 
+    .procedurePage .nav-list {
+        position: fixed;
+        top: calc(4.5rem + 0.5rem);
+        right: 1rem;
+        left: 50%;
+        width: min(92vw, 20rem);
+        max-width: calc(100vw - 2rem);
+        max-height: calc(100dvh - 5.5rem);
+        transform: translate(-50%, -10px);
+        z-index: 220;
+    }
+
+    .procedurePage .nav-list.active {
+        transform: translate(-50%, 0);
+    }
+
     .procedurePage .procedure-shell {
-        padding: 6rem 1rem 5rem;
+        padding: 6rem 1rem 5.5rem;
     }
 
     .procedurePage .procedure-hero-card {
         padding: 1rem;
         border-radius: 1.1rem;
+        margin-bottom: 0.75rem;
     }
 
     .procedurePage .procedure-title {
