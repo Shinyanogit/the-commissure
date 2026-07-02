@@ -5,20 +5,16 @@ import gsap from 'gsap';
 
 export function initHomeScene(mount) {
     let disposed = false;
-    const activeTimelines = new Set();
-    const timeoutIds = new Set();
     const getViewportSize = () => ({
         width: window.visualViewport?.width ?? window.innerWidth,
         height: window.visualViewport?.height ?? window.innerHeight,
     });
-    const delay = (callback, ms) => {
-        const id = window.setTimeout(() => {
-            timeoutIds.delete(id);
-            callback();
-        }, ms);
-        timeoutIds.add(id);
-        return id;
-    };
+    const getPixelRatio = () => Math.min(window.devicePixelRatio || 1, window.innerWidth <= 768 ? 1.5 : 2);
+    let renderFrameId = 0;
+    let scrollFrameId = 0;
+    let lastWidth = 0;
+    let lastHeight = 0;
+    let lastPixelRatio = 0;
 
     // Camera
     const scene = new THREE.Scene();
@@ -27,12 +23,28 @@ export function initHomeScene(mount) {
     camera.up.set(0, 1, 0);
     camera.position.set( 0, 0, -0.7 );
 
+    const render = () => {
+        if (disposed) return;
+        camera.lookAt( 0, camera.position.y, 0 );
+        renderer.render( scene, camera );
+    };
+
+    const requestRender = () => {
+        if (disposed || renderFrameId) return;
+        renderFrameId = window.requestAnimationFrame(() => {
+            renderFrameId = 0;
+            render();
+        });
+    };
+
     // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
     renderer.setSize( width, height );
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(getPixelRatio());
     mount.appendChild( renderer.domElement );
-    renderer.setAnimationLoop( animate );
+    lastWidth = width;
+    lastHeight = height;
+    lastPixelRatio = getPixelRatio();
 
     // Light
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -77,49 +89,60 @@ export function initHomeScene(mount) {
         })
         spine.position.set(0, 0, 0);
         scene.add( spine );
+        requestRender();
     });
 
     // Scroll
     let progress = 0;
-    const handleScroll = (event) => {
-        const scrollTop = window.scrollY;
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        progress = THREE.MathUtils.clamp(scrollTop / maxScroll, 0, 1);
-        camera.position.y = - 0.3 * progress;
+    const handleScroll = () => {
+        if (disposed || scrollFrameId) return;
+        scrollFrameId = window.requestAnimationFrame(() => {
+            scrollFrameId = 0;
+            const scrollTop = window.scrollY;
+            const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+            const nextProgress = THREE.MathUtils.clamp(scrollTop / maxScroll, 0, 1);
+            if (nextProgress === progress) return;
+            progress = nextProgress;
+            camera.position.y = -0.3 * progress;
+            requestRender();
+        });
     };
     window.addEventListener('scroll', handleScroll);
 
     // Resize
     const handleResize = () => {
         const { width: viewportWidth, height: viewportHeight } = getViewportSize();
+        const pixelRatio = getPixelRatio();
+        if (viewportWidth === lastWidth && viewportHeight === lastHeight && pixelRatio === lastPixelRatio) return;
+
         camera.aspect = viewportWidth / viewportHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(viewportWidth, viewportHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setPixelRatio(pixelRatio);
+        lastWidth = viewportWidth;
+        lastHeight = viewportHeight;
+        lastPixelRatio = pixelRatio;
+        requestRender();
     };
     window.addEventListener('resize', handleResize);
     window.visualViewport?.addEventListener('resize', handleResize);
 
-    // Animate
-    function animate() {
-        camera.lookAt( 0, camera.position.y, 0 );
-        renderer.render( scene, camera );
-    }
+    requestRender();
     return () => {
         disposed = true;
         window.removeEventListener('scroll', handleScroll);
         window.removeEventListener('resize', handleResize);
         window.visualViewport?.removeEventListener('resize', handleResize);
-        timeoutIds.forEach((id) => window.clearTimeout(id));
-        timeoutIds.clear();
-        activeTimelines.forEach((tl) => tl.kill());
-        activeTimelines.clear();
-        renderer.setAnimationLoop(null);
+        if (scrollFrameId) {
+            window.cancelAnimationFrame(scrollFrameId);
+            scrollFrameId = 0;
+        }
+        if (renderFrameId) {
+            window.cancelAnimationFrame(renderFrameId);
+            renderFrameId = 0;
+        }
         if (renderer.domElement.parentNode === mount) {
             mount.removeChild(renderer.domElement);
-        }
-        if (typeof backgroundTexture !== 'undefined' && backgroundTexture) {
-            backgroundTexture.dispose();
         }
         renderer.dispose();
     };

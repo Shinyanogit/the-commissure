@@ -8,6 +8,11 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
     let disposed = false;
     const activeTimelines = new Set();
     const timeoutIds = new Set();
+    const getPixelRatio = () => Math.min(window.devicePixelRatio || 1, window.innerWidth <= 768 ? 1.5 : 2);
+    let renderFrameId = 0;
+    let lastWidth = 0;
+    let lastHeight = 0;
+    let lastPixelRatio = 0;
     const delay = (callback, ms) => {
         const id = window.setTimeout(() => {
             timeoutIds.delete(id);
@@ -27,9 +32,25 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
     // Renderer
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(getPixelRatio());
     mount.appendChild( renderer.domElement );
-    renderer.setAnimationLoop( animate );
+    lastWidth = window.innerWidth;
+    lastHeight = window.innerHeight;
+    lastPixelRatio = getPixelRatio();
+
+    const render = () => {
+        if (disposed) return;
+        camera.lookAt(cameraTarget);
+        renderer.render( scene, camera );
+    };
+
+    const requestRender = () => {
+        if (disposed || renderFrameId) return;
+        renderFrameId = window.requestAnimationFrame(() => {
+            renderFrameId = 0;
+            render();
+        });
+    };
 
     // Light
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -51,6 +72,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         texture.matrixAutoUpdate = false;
         updateBackground(texture);
         scene.background = texture;
+        requestRender();
     } );
     function updateBackground(texture) {
         const screenAspect = window.innerWidth / window.innerHeight;
@@ -234,6 +256,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         });
         pcdf.position.set(0, 0, 0);
         scene.add( pcdf );
+        requestRender();
     });
 
     // Wheel + touch swipe support
@@ -284,7 +307,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
             }, 2000);
         }
     };
-    window.addEventListener('wheel', handleWheel);
+    window.addEventListener('wheel', handleWheel, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
     function transferScene(currentScene) {
@@ -301,6 +324,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                 }
             }
         });
+        tl.eventCallback('onUpdate', render);
         activeTimelines.add(tl);
         tl.to('.procedure-hero-copy', {
             opacity: 0,
@@ -824,19 +848,24 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
 
     // Resize
     const handleResize = () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        const pixelRatio = getPixelRatio();
+        if (viewportWidth === lastWidth && viewportHeight === lastHeight && pixelRatio === lastPixelRatio) return;
+
+        camera.aspect = viewportWidth / viewportHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(viewportWidth, viewportHeight);
+        renderer.setPixelRatio(pixelRatio);
+        lastWidth = viewportWidth;
+        lastHeight = viewportHeight;
+        lastPixelRatio = pixelRatio;
+        requestRender();
         if (backgroundTexture) updateBackground(backgroundTexture)
     };
     window.addEventListener('resize', handleResize);
+    requestRender();
 
-    // Animate
-    function animate() {
-        camera.lookAt(cameraTarget);
-        renderer.render( scene, camera );
-    }
     return () => {
         disposed = true;
         window.removeEventListener('wheel', handleWheel);
@@ -847,7 +876,10 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         timeoutIds.clear();
         activeTimelines.forEach((tl) => tl.kill());
         activeTimelines.clear();
-        renderer.setAnimationLoop(null);
+        if (renderFrameId) {
+            window.cancelAnimationFrame(renderFrameId);
+            renderFrameId = 0;
+        }
         if (renderer.domElement.parentNode === mount) {
             mount.removeChild(renderer.domElement);
         }

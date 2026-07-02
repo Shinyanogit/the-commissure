@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export function ProcedureNav() {
+function ProcedureNavComponent() {
     const [open, setOpen] = useState(false);
 
     return (
@@ -30,3 +30,5 @@ export function ProcedureNav() {
         </nav>
     );
 }
+
+export const ProcedureNav = memo(ProcedureNavComponent);
