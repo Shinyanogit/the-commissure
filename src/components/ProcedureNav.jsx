@@ -5,16 +5,20 @@ export function ProcedureNav() {
     const [open, setOpen] = useState(false);
 
     return (
-        <nav>
-            <Link to="/"><img src="/logo.png" className="logo" /></Link>
-            <div
+        <nav className="procedure-nav">
+            <Link to="/" className="procedure-logo-link" aria-label="Go to home">
+                <img src="/logo.png" className="logo" alt="The Commissure" />
+            </Link>
+            <button
+                type="button"
                 className={`hamburger${open ? ' active' : ''}`}
                 onClick={() => setOpen((value) => !value)}
+                aria-label="Toggle navigation"
             >
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
             <ul className={`nav-list${open ? ' active' : ''}`}>
                 <li className="subtitle">Posterior Surgery</li>
                 <li><Link to="/pcdf">Posterior Cervical Discectomy and Fusion (PCDF)</Link></li>

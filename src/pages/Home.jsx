@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArticleCard } from '../components/ArticleCard.jsx';
 import { AuthorCard } from '../components/AuthorCard.jsx';
 import { Footer } from '../components/Footer.jsx';
@@ -8,26 +10,101 @@ import { useBodyClass } from '../components/useBodyClass.js';
 import { initHomeScene } from '../scenes/index.js';
 import '../styles/home.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function Home() {
-    const canvasContainer = useRef(null);
     const mountRef = useRef(null);
+    const heroRef = useRef(null);
+    const sectionsRef = useRef([]);
+
     useBodyClass('home-page');
+
     useEffect(() => {
         if (!mountRef.current) return undefined;
         return initHomeScene(mountRef.current);
     }, []);
+
+    useEffect(() => {
+        const hero = heroRef.current;
+        if (!hero) return undefined;
+
+        const title = hero.querySelector('.title');
+        const subtitle = hero.querySelector('.subtitle');
+        const ctas = hero.querySelectorAll('.hero-actions a');
+        const indicator = hero.querySelector('.scroll-indicator');
+
+        const timeline = gsap.timeline({ defaults: { duration: 1, ease: 'power3.out' } });
+        timeline.fromTo(title, { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08 })
+            .fromTo(subtitle, { y: 20, opacity: 0 }, { y: 0, opacity: 1 }, '-=0.6')
+            .fromTo(ctas, { y: 18, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.12 }, '-=0.6')
+            .fromTo(indicator, { y: 12, opacity: 0 }, { y: 0, opacity: 1 }, '-=0.4');
+
+        const reveals = sectionsRef.current.filter(Boolean);
+        reveals.forEach((section, index) => {
+            gsap.fromTo(section, {
+                y: 40,
+                opacity: 0,
+                scale: 0.98,
+            }, {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                duration: 0.9,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 85%',
+                    once: true,
+                },
+                delay: index * 0.03,
+                onComplete: () => section.classList.add('is-visible'),
+            });
+        });
+
+        const heroMotion = gsap.to(hero, {
+            backgroundPosition: '50% 40%',
+            duration: 12,
+            ease: 'none',
+            repeat: -1,
+            yoyo: true,
+        });
+
+        return () => {
+            timeline.kill();
+            heroMotion.kill();
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        };
+    }, []);
+
     return (
-        <div className='homePage'>
+        <div className='homePage' id="top">
             <div ref={mountRef} className="canvas-mount"></div>
+            <div className="ambient ambient-one"></div>
+            <div className="ambient ambient-two"></div>
             <HomeNav />
-            <div className="content hero">
-                <div className="text">
-                    <div className="title">Visualizing Spine Surgeries in 3D</div>
-                    <div className="subtitle">Explore the anatomy, pathology and surgical techniques through interactive 3D models</div>
+            <div ref={heroRef} className="content hero">
+                <div className="hero-shell">
+                    <div className="text">
+                        <div className="eyebrow">Immersive spine surgery education</div>
+                        <div className="title">Visualizing Spine Surgeries in 3D</div>
+                        <div className="subtitle">Explore the anatomy, pathology and surgical techniques through interactive 3D models designed for clarity and curiosity.</div>
+                        <div className="hero-actions">
+                            <a href="#articles" className="primary-cta">Explore procedures</a>
+                            <a href="#about" className="secondary-cta">Meet the mission</a>
+                        </div>
+                    </div>
+                </div>
+                <div className="scroll-indicator" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
-            <div className="content article">
-                <div className="title">Featured Articles</div>
+            <div ref={(node) => { sectionsRef.current[0] = node; }} className="content article" id="articles">
+                <div className="section-heading">
+                    <div className="eyebrow">Featured articles</div>
+                    <div className="title">A modern atlas of cervical surgery.</div>
+                </div>
                 <ul className="article-list">
                     <ArticleCard
                         className="article1"
@@ -41,7 +118,7 @@ export function Home() {
                         Owing to its ability to decompress the spinal cord and provide immediate stabilization, PCDF is a powerful surgical technique that allows surgeons to treat some of the most complex spinal disorders and improve patients’ quality of life.
                     </ArticleCard>
                     <ArticleCard
-                        className="ariticle2"
+                        className="article2"
                         to="/acdf"
                         image="/acdfsnap.webp"
                         header="Anterior Cervical Discectomy and Fusion (ACDF)"
@@ -65,8 +142,11 @@ export function Home() {
                     </ArticleCard>
                 </ul>
             </div>
-            <div className="content news">
-                <div className="title">Latest News</div>
+            <div ref={(node) => { sectionsRef.current[1] = node; }} className="content news">
+                <div className="section-heading">
+                    <div className="eyebrow">Latest news</div>
+                    <div className="title">Updates from the editorial team.</div>
+                </div>
                 <ul className="news-list">
                     <li>
                         <span className="header"><a href="">Koki Tokida joined the editorial board</a></span>
@@ -84,24 +164,13 @@ export function Home() {
                         <span className="header"><Link to="/pcf">Article on Posterior Cervical Foraminotomy (PCF) is now available</Link></span>
                         <span className="date">Jun 18, 2026</span>
                     </li>
-                    <li>
-                        <span className="header"><Link to="/acdf">Article on Anterior Cervical Discectomy and Fusion (ACDF) is now available</Link></span>
-                        <span className="date">May 24, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/pcdf">Article on Posterior Cervical Decompression and Fusion (PCDF) is now available</Link></span>
-                        <span className="date">May 17, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><a href="">Rintaro Imada joined the editorial board</a></span>
-                        <span className="date">May 10, 2026</span>
-                    </li>
                 </ul>
             </div>
-            <div className="content about">
+            <div ref={(node) => { sectionsRef.current[2] = node; }} className="content about" id="about">
                 <ul className="about-list">
-                    <li><img src="/about.webp" /></li>
+                    <li><img src="/about.webp" alt="Medical illustration" /></li>
                     <li>
+                        <div className="eyebrow">About the project</div>
                         <div className="title">What we owe to the society</div>
                         <div className="paragraph">
                             We are a group of medical students dedicated to improving the lives of patients suffering from spinal disorders.
@@ -112,8 +181,11 @@ export function Home() {
                     </li>
                 </ul>
             </div>
-            <div className="content authors">
-                <div className="title">Featured Authors</div>
+            <div ref={(node) => { sectionsRef.current[3] = node; }} className="content authors" id="authors">
+                <div className="section-heading">
+                    <div className="eyebrow">Featured authors</div>
+                    <div className="title">The minds shaping the experience.</div>
+                </div>
                 <ul className="author-list">
                     <AuthorCard
                         image="/rintaroimada.webp"

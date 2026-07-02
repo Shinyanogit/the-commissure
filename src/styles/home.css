@@ -1,85 +1,311 @@
 .homePage {
     margin: 0;
     padding: 0;
-    width: 100dvw;
-    height: auto;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at top left, rgba(0, 155, 158, 0.18), transparent 32%),
+        linear-gradient(135deg, #030711 0%, #050816 45%, #02040b 100%);
+    color: #f6f7fb;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
+
 .homePage .canvas-mount {
     position: fixed;
+    inset: 0;
     width: 100%;
     height: 100%;
+    pointer-events: none;
+    z-index: 0;
 }
+
 .homePage .canvas-mount canvas {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
-    transform: translateY(10%) scale(1.2);
-    transform-origin: center;
     display: block;
+    transform: translateY(8%) scale(1.16);
+    transform-origin: center;
+    filter: saturate(1.1) contrast(1.05);
+}
+
+.homePage .ambient {
+    position: fixed;
+    border-radius: 999px;
+    filter: blur(70px);
+    opacity: 0.22;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.homePage .ambient-one {
+    width: 24rem;
+    height: 24rem;
+    top: 8rem;
+    left: -4rem;
+    background: rgba(0, 155, 158, 0.35);
+    animation: drift 14s ease-in-out infinite alternate;
+}
+
+.homePage .ambient-two {
+    width: 28rem;
+    height: 28rem;
+    bottom: 3rem;
+    right: -8rem;
+    background: rgba(123, 97, 255, 0.25);
+    animation: drift 18s ease-in-out infinite alternate-reverse;
 }
 
 .homePage .hamburger {
     display: none;
+    flex-direction: column;
+    gap: 0.3rem;
+    cursor: pointer;
+    padding: 0.35rem;
 }
 
-.homePage nav {
+.homePage .hamburger span {
+    width: 1.3rem;
+    height: 1px;
+    background: #f6f7fb;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.homePage .hamburger.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.homePage .hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.homePage .hamburger.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+.homePage .home-nav {
     position: fixed;
-    width: 100%;
-    height: 10vh;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-    background: rgba(0, 0, 0, 0.8);
+    padding: 0 2.5%;
     box-sizing: border-box;
     z-index: 100;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+.homePage .home-nav.scrolled {
+    background: rgba(3, 7, 17, 0.58);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.homePage .nav-logo-link {
+    display: inline-flex;
+    align-items: center;
 }
 
 .homePage .logo {
     display: block;
-    height: 10dvh;
-    padding-top: 5%;
+    height: 4rem;
     object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.homePage .logo:hover {
+    transform: scale(1.03);
 }
 
 .homePage .nav-list {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .homePage .nav-list a {
+    position: relative;
     display: inline-block;
+    color: rgba(246, 247, 251, 0.9);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .homePage .nav-list a::after {
-    bottom: -3px;
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.3rem;
+    width: 0;
+    height: 1px;
+    background: #ffffff;
+    transition: width 0.3s ease;
+}
+
+.homePage .nav-list a:hover::after,
+.homePage .nav-list a:focus-visible::after {
+    width: 100%;
 }
 
 .homePage .content {
     position: relative;
-    width: 100%;
+    width: min(1180px, calc(100% - 3rem));
+    margin: 0 auto;
     left: 0;
     z-index: 10;
+    padding-top: 2rem;
 }
 
 .homePage .hero {
     position: relative;
-    top: 0;
-    height: 100dvh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    padding: 7rem 0 4rem;
 }
+
+.homePage .hero-shell {
+    position: relative;
+    width: min(720px, 100%);
+    padding: 2.5rem 0 4rem;
+}
+
+.homePage .hero .text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.homePage .eyebrow {
+    display: inline-flex;
+    width: fit-content;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(246, 247, 251, 0.74);
+}
+
+.homePage .hero .title,
+.homePage .section-heading .title,
+.homePage .about .title,
+.homePage .news .title,
+.homePage .authors .title {
+    position: relative;
+    width: 100%;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+}
+
+.homePage .hero .title {
+    font-size: clamp(2.8rem, 5vw, 5.15rem);
+    max-width: 11ch;
+}
+
+.homePage .hero .subtitle {
+    max-width: 44rem;
+    font-size: clamp(1.02rem, 2vw, 1.25rem);
+    line-height: 1.7;
+    color: rgba(246, 247, 251, 0.73);
+}
+
+.homePage .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+.homePage .hero-actions a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.homePage .hero-actions a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.22), transparent 70%);
+    transform: scale(0.5);
+    opacity: 0;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    z-index: -1;
+}
+
+.homePage .hero-actions a:hover::before,
+.homePage .hero-actions a:focus-visible::before {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.homePage .hero-actions .primary-cta {
+    color: #ffffff;
+    background: linear-gradient(135deg, #1bc7d0 0%, #0ea5c7 55%, #0f5f8a 100%);
+    box-shadow: 0 18px 45px rgba(14, 165, 199, 0.28);
+}
+
+.homePage .hero-actions .secondary-cta {
+    color: #f6f7fb;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: transparent;
+    backdrop-filter: blur(12px);
+}
+
+.homePage .hero-actions a:hover,
+.homePage .hero-actions a:focus-visible {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.homePage .scroll-indicator {
+    position: absolute;
+    left: 50%;
+    bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    transform: translateX(-50%);
+}
+
+.homePage .scroll-indicator span {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.4);
+    animation: bob 1.6s ease-in-out infinite;
+}
+
+.homePage .scroll-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.homePage .scroll-indicator span:nth-child(3) { animation-delay: 0.4s; }
 
 .homePage .display {
     position: relative;
-    bottom: 0;
-    height: 100dvh;
+    min-height: 40vh;
 }
 
 .homePage .article,
@@ -87,105 +313,49 @@
 .homePage .about,
 .homePage .authors {
     position: relative;
-    height: auto;
-    background: rgba(0, 0, 0, 0.8);
+    min-height: auto;
+    padding: 5.5rem 0;
+    margin-top: 2.2rem;
 }
 
-.homePage .hero .text {
-    position: relative;
-    width: 50%;
-    height: auto;
-    top: 50%;
-    left: 5%;
-    transform: translateY(-50%);
-}
-
-.homePage .hero .title {
-    margin: 0 0 30px 0;
-    position: relative;
-    width: 100%;
-    height: auto;
-    align-items: center;
-    text-align: left;
-    font-size: 5rem;
-}
-
-.homePage .hero .title::after {
+.homePage .article::before,
+.homePage .news::before,
+.homePage .about::before,
+.homePage .authors::before {
     content: '';
     position: absolute;
-    left: 0;
-    bottom: -15px;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(
-        to right,
-        cyan 20%,
-        cyan 50%,
-        transparent
-    );
+    inset: 0;
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    backdrop-filter: blur(0px);
+    opacity: 0.6;
+    transition: backdrop-filter 0.8s ease, opacity 0.8s ease, transform 0.8s ease;
+    z-index: -1;
 }
 
-.homePage .hero .subtitle {
-    position: relative;
-    width: 100%;
-    height: auto;
-    align-items: center;
-    text-align: left;
-    font-size: 2rem;
+.homePage .article.is-visible::before,
+.homePage .news.is-visible::before,
+.homePage .about.is-visible::before,
+.homePage .authors.is-visible::before {
+    backdrop-filter: blur(18px);
+    opacity: 1;
 }
 
-.homePage .article-card {
-    transition: all 0.3s ease;
-    cursor: pointer;
+.homePage .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
 }
 
-.homePage .article-card:hover {
-    transform: translateY(-10px);
-}
-
-.homePage .article a,
-.homePage .news a,
-.homePage .authors a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.homePage .article .title,
+.homePage .section-heading .title,
+.homePage .about .title,
 .homePage .news .title,
 .homePage .authors .title {
-    position: relative;
-    margin: 1rem 0 1rem 0;
-    width: fit-content;
-    height: auto;
-    top: 0;
-    left: 5%;
-    display: block;
-    align-items: center;
-    text-align: left;
-    font-size: 2rem;
-}
-
-.homePage .news .title,
-.homePage .authors .title {
-    margin: 1rem 0 1em 0;
-}
-
-.homePage .article .title::after,
-.homePage .news .title::after,
-.homePage .about .title::after,
-.homePage .authors .title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -0.5rem;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(
-        to right,
-        cyan 20%,
-        black 90%,
-        transparent
-    );
+    font-size: clamp(1.8rem, 3vw, 2.35rem);
 }
 
 .homePage .article-list,
@@ -193,18 +363,26 @@
 .homePage .author-list {
     position: relative;
     margin: 0;
-    padding: 0;
-    width: 90%;
-    height: auto;
-    left: 5%;
-    display: flex;
-    gap: 1rem;
+    padding: 0 1.2rem;
+    display: grid;
+    gap: 1.2rem;
     list-style: none;
+    box-sizing: border-box;
 }
 
-.homePage .about-list,
+.homePage .article-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 1.2rem;
+}
+
+.homePage .about-list {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 2rem;
+}
+
 .homePage .author-list {
-    margin: 1rem 0 1rem 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .homePage .article-list li,
@@ -215,28 +393,83 @@
     margin: 0;
 }
 
-.homePage .article img {
+.homePage .article-card,
+.homePage .author-card {
     position: relative;
-    margin: 1rem 0 0.5rem 0;
+    border-radius: 1.35rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
+    transform-style: preserve-3d;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    will-change: transform;
+}
+
+.homePage .article-card::after,
+.homePage .author-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(123, 97, 255, 0.18), transparent 45%, rgba(0, 155, 158, 0.16));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.homePage .article-card:hover,
+.homePage .article-card:focus-within,
+.homePage .author-card:hover,
+.homePage .author-card:focus-within {
+    border-color: rgba(255, 255, 255, 0.24);
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28);
+}
+
+.homePage .article-card:hover::after,
+.homePage .author-card:hover::after {
+    opacity: 1;
+}
+
+.homePage .article-card a,
+.homePage .author-card a,
+.homePage .news a {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.homePage .image-shell {
+    overflow: hidden;
+}
+
+.homePage .article img,
+.homePage .author-list img,
+.homePage .about img {
+    position: relative;
     width: 100%;
-    height: 30vh;
+    height: 16rem;
     object-fit: cover;
     display: block;
+    transform: scale(1.03);
+    transition: transform 0.45s ease;
+}
+
+.homePage .article-card:hover img,
+.homePage .author-card:hover img,
+.homePage .about img:hover {
+    transform: scale(1.08);
+}
+
+.homePage .card-copy {
+    padding: 1.2rem 1.15rem 1.35rem;
 }
 
 .homePage .article .header {
-    position: relative;
-    margin: 0.5rem 0 0.5rem 0;
-    height: auto;
-    align-items: center;
-    text-align: left;
-    font-size: 1.5rem;
-}
-
-.homePage .article .header:hover,
-.homePage .news a:hover,
-.homePage .author-list .name:hover {
-    text-decoration: underline;
+    margin: 0 0 0.45rem;
+    font-size: 1.12rem;
+    font-weight: 600;
+    line-height: 1.35;
 }
 
 .homePage .article .date,
@@ -246,129 +479,148 @@
 .homePage .author-list .university,
 .homePage .author-list .biography {
     position: relative;
-    align-items: center;
     text-align: left;
-    font-size: 1rem;
+    font-size: 0.96rem;
+    line-height: 1.7;
+    color: rgba(246, 247, 251, 0.74);
 }
 
 .homePage .article .date,
 .homePage .article .paragraph {
-    margin: 0.5rem 0 0.5rem 0;
-}
-
-.homePage .article .paragraph {
-    margin: 0.5rem 0 1rem 0;
+    margin: 0 0 0.55rem;
 }
 
 .homePage .article .date,
 .homePage .news-list .date,
 .homePage .author-list .university {
-    opacity: 0.6;
+    opacity: 0.8;
+}
+
+.homePage .article .paragraph {
+    margin-bottom: 0;
+}
+
+.homePage .highlight-red {
+    color: #ffd6d6;
 }
 
 .homePage .news-list {
     position: relative;
     list-style: none;
-    margin: 1rem 0 1rem 0;
-    padding: 0;
-    width: 90%;
-    height: auto;
-    left: 5%;
+    margin: 0;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
 }
 
 .homePage .news-list li {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    justify-content: space-between;
+    gap: 2rem;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    font-size: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    font-size: 0.98rem;
+}
+
+.homePage .news-list a {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+}
+
+.homePage .news-list a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.2rem;
+    width: 0;
+    height: 1px;
+    background: #ffffff;
+    transition: width 0.3s ease;
+}
+
+.homePage .news-list a:hover::after,
+.homePage .news-list a:focus-visible::after {
+    width: 100%;
 }
 
 .homePage .about img {
-    position: relative;
     width: 100%;
-    height: 50vh;
+    max-width: 32rem;
+    height: 20rem;
     object-fit: cover;
+    object-position: center;
+    border-radius: 1rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
     display: block;
+    margin: 0 auto;
+}
+
+.homePage .about .eyebrow {
+    margin-bottom: 0.75rem;
 }
 
 .homePage .about .title {
-    position: relative;
-    margin: 0 0 1.5rem 0;
-    align-items: center;
-    text-align: left;
-    font-size: 2rem;
-}
-
-.homePage .author-card {
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.homePage .author-card:hover {
-    transform: translateY(-10px);
-}
-
-.homePage .author-list img {
-    position: relative;
-    width: 100%;
-    height: 30vh;
-    object-fit: cover;
-    display: block;
+    margin: 0 0 1rem;
 }
 
 .homePage .author-list .name {
-    position: relative;
-    margin: 0.5rem 0 0 0;
-    font-size: 2rem;
+    margin: 0 0 0.45rem;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
-.homePage .author-list .university,
 .homePage .author-list .biography {
-    margin: 0.5rem 0 0 0;
+    margin-top: 0.7rem;
 }
 
 .homePage footer {
     position: relative;
-    width: 100%;
-    left: 0;
+    width: min(1180px, calc(100% - 3rem));
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-    background: rgba(0, 0, 0, 0.8);
+    padding: 2rem 0 2.4rem;
     box-sizing: border-box;
     z-index: 10;
+}
+
+.homePage .footer-brand {
+    display: inline-flex;
+    align-items: center;
 }
 
 .homePage .icon {
     position: relative;
     display: block;
-    width: 6vw;
-    margin-top: 1.5%;
-    margin-bottom: 1.5%;
+    width: 3.2rem;
     object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.homePage .footer-brand:hover .icon {
+    transform: translateY(-2px) scale(1.03);
 }
 
 .homePage .copyright {
     position: absolute;
     left: 50%;
-    bottom: 20%;
     transform: translateX(-50%);
     opacity: 0.5;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .homePage .footer-list {
     position: relative;
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .homePage .footer-list a {
@@ -379,126 +631,132 @@
 }
 
 .homePage .footer-list a::after {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
-    bottom: -3px;
+    bottom: -0.25rem;
     width: 0;
     height: 1px;
-    background-color: currentColor;
+    background: #ffffff;
     transition: width 0.3s ease;
 }
 
-.homePage .footer-list a:hover::after {
+.homePage .footer-list a:hover::after,
+.homePage .footer-list a:focus-visible::after {
     width: 100%;
+}
+
+@keyframes drift {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(2rem, -1.5rem, 0) scale(1.05); }
+}
+
+@keyframes bob {
+    0%, 100% { transform: translateY(0); opacity: 0.55; }
+    50% { transform: translateY(0.4rem); opacity: 1; }
 }
 
 @media (max-width: 768px) {
     .homePage .hamburger {
         display: flex;
+        z-index: 110;
+    }
+
+    .homePage .home-nav {
+        height: 4.5rem;
     }
 
     .homePage .logo {
-        width: 70vw;
+        height: 3.6rem;
     }
 
     .homePage .nav-list {
         position: absolute;
         top: 100%;
-        right: 0;
-        width: 100vw;
-        height: 100vh;
-        padding: 1rem 0;
+        left: 50%;
+        width: min(92vw, 20rem);
+        padding: 1.5rem 1.25rem 1.75rem;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         gap: 1rem;
-        background: rgba(0, 0, 0, 0.8);
-        transform: translateX(100%);
-        transition: transform 0.5s ease;
+        background: rgba(3, 7, 17, 0.95);
+        backdrop-filter: blur(16px);
+        transform: translate(-50%, -10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.35s ease, opacity 0.35s ease;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+        border-radius: 1rem;
     }
 
     .homePage .nav-list.active {
-        transform: translateX(0);
+        transform: translate(-50%, 0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .homePage .content {
+        width: min(100%, calc(100% - 1.5rem));
     }
 
     .homePage .hero {
-        height: 80vh;
+        min-height: 88dvh;
+        padding-top: 5rem;
     }
 
-    .homePage .hero .text {
-        width: 90%;
+    .homePage .hero-shell {
+        padding-bottom: 3rem;
     }
 
     .homePage .hero .title {
-        font-size: 3rem;
+        font-size: 2.7rem;
     }
 
     .homePage .hero .subtitle {
-        font-size: 1.5rem;
-    }
-
-    .homePage .article-card,
-    .homePage .author-card {
-        transition: none;
-    }
-
-    .homePage .article-card:hover,
-    .homePage .author-card:hover {
-        transform: none;
+        font-size: 1rem;
     }
 
     .homePage .article-list,
     .homePage .about-list,
     .homePage .author-list {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
 
-    .homePage .article-list,
+    .homePage .article,
+    .homePage .news,
+    .homePage .about,
+    .homePage .authors {
+        padding: 3.5rem 0;
+    }
+
+    .homePage .article::before,
+    .homePage .news::before,
+    .homePage .about::before,
+    .homePage .authors::before {
+        border-radius: 1.25rem;
+    }
+
     .homePage .news-list li {
-        gap: 0.5rem;
+        flex-direction: column;
+        gap: 0.35rem;
     }
 
-    .homePage .author-list {
-        gap: 2rem;
-    }
-
-    .homePage .article img,
-    .homePage .about img,
-    .homePage .author-list img {
-        height: 20vh;
-    }
-
-    .homePage .author-list .name {
-        font-size: 1.5rem;
+    .homePage .about img {
+        height: 16rem;
     }
 
     .homePage footer {
         flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .homePage .icon {
-        width: 100%;
-        height: 8vh;
-        margin-top: 1rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .homePage .footer-list {
-        margin-bottom: 0.5rem;
-    }
-
-    .homePage .footer-list a:hover::after {
-        width: 0;
+        gap: 0.8rem;
+        padding-top: 1.2rem;
     }
 
     .homePage .copyright {
         position: relative;
-        width: 100%;
-        margin-bottom: 1rem;
-        left: 0;
-        transform: translateX(0%);
+        left: auto;
+        transform: none;
         text-align: center;
     }
 }
