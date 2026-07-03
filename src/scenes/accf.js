@@ -234,6 +234,7 @@ export function initAccfScene(mount, root, sceneCount, currentScene, setCurrentS
     const TOUCH_SWIPE_THRESHOLD = 40;
 
     const handleWheel = (event) => {
+        if (event.target.closest(".procedure-paragraph.open")) return;
         if (isAnimating) return;
         isAnimating = true;
         if (event.deltaY > 0) {
@@ -252,6 +253,7 @@ export function initAccfScene(mount, root, sceneCount, currentScene, setCurrentS
     };
 
     const handleTouchStart = (event) => {
+        if (event.target.closest(".procedure-paragraph.open")) return;
         if (event.touches.length !== 1) return;
         touchStartY = event.touches[0].clientY;
     };
