@@ -281,8 +281,7 @@
 }
 
 .procedurePage .procedure-paragraph.open {
-    /* max-height: var(--procedure-panel-max-height); */
-    max-height: 28rem;
+    max-height: var(--procedure-panel-max-height);
     opacity: 1;
     margin-top: 0.2rem;
     overflow-y: auto;
