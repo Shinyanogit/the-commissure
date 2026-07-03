@@ -212,10 +212,14 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
     });
 
     // Wheel + touch swipe support
+    let lastWheelTime = 0;
     let isAnimating = false;
     let touchStartY = null;
     const TOUCH_SWIPE_THRESHOLD = 40;
     const handleWheel = (event) => {
+        const now = performance.now();
+        if (now - lastWheelTime < 2000) return;
+        lastWheelTime = now;
         if (event.target.closest(".procedure-paragraph.open")) return;
         if (isAnimating) return;
         isAnimating = true;

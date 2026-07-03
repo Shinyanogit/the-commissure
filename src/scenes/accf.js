@@ -221,11 +221,14 @@ export function initAccfScene(mount, root, sceneCount, currentScene, setCurrentS
     });
 
     // Wheel + touch swipe support for mobile
+    let lastWheelTime = 0;
     let isAnimating = false;
     let touchStartY = null;
     const TOUCH_SWIPE_THRESHOLD = 40;
-
     const handleWheel = (event) => {
+        const now = performance.now();
+        if (now - lastWheelTime < 2000) return;
+        lastWheelTime = now;
         if (event.target.closest(".procedure-paragraph.open")) return;
         if (isAnimating) return;
         isAnimating = true;
