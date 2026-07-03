@@ -313,17 +313,10 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
     function transferScene(currentScene) {
-        const sceneStartTime = Date.now();
         const tl = gsap.timeline({
             onComplete: () => {
-                const sceneElapseTime = Date.now() - sceneStartTime;
-                if (sceneElapseTime < 2000) {
-                    delay(() => {
-                        isAnimating = false;
-                    }, 2000 - sceneElapseTime)
-                } else {
-                    isAnimating = false;
-                }
+                activeTimelines.delete(tl);
+                isAnimating = false;
             }
         });
         tl.eventCallback('onUpdate', render);
@@ -832,6 +825,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                 ease: 'power2.inOut'
             }, 0);
         }
+        return tl;
     };
 
     // Resize
