@@ -13,14 +13,6 @@ export function initAccfScene(mount, root, sceneCount, currentScene, setCurrentS
     let lastWidth = 0;
     let lastHeight = 0;
     let lastPixelRatio = 0;
-    const delay = (callback, ms) => {
-        const id = window.setTimeout(() => {
-            timeoutIds.delete(id);
-            callback();
-        }, ms);
-        timeoutIds.add(id);
-        return id;
-    };
 
     // Camera
     const scene = new THREE.Scene();
@@ -229,11 +221,15 @@ export function initAccfScene(mount, root, sceneCount, currentScene, setCurrentS
     });
 
     // Wheel + touch swipe support for mobile
+    let lastWheelTime = 0;
     let isAnimating = false;
     let touchStartY = null;
     const TOUCH_SWIPE_THRESHOLD = 40;
-
     const handleWheel = (event) => {
+        const now = performance.now();
+        if (now - lastWheelTime < 2000) return;
+        lastWheelTime = now;
+        if (event.target.closest(".procedure-paragraph.open")) return;
         if (isAnimating) return;
         isAnimating = true;
         if (event.deltaY > 0) {
@@ -244,14 +240,11 @@ export function initAccfScene(mount, root, sceneCount, currentScene, setCurrentS
                 currentScene++;
             }
             transferScene(currentScene);
-        } else {
-            delay(() => {
-                isAnimating = false;
-            }, 2000);
-        }
+        };
     };
 
     const handleTouchStart = (event) => {
+        if (event.target.closest(".procedure-paragraph.open")) return;
         if (event.touches.length !== 1) return;
         touchStartY = event.touches[0].clientY;
     };
@@ -274,49 +267,24 @@ export function initAccfScene(mount, root, sceneCount, currentScene, setCurrentS
                 currentScene++;
             }
             transferScene(currentScene);
-        } else {
-            delay(() => {
-                isAnimating = false;
-            }, 2000);
-        }
+        };
     };
 
     window.addEventListener('wheel', handleWheel, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
     function transferScene(currentScene) {
-        const sceneStartTime = Date.now();
         const tl = gsap.timeline({
             onComplete: () => {
-                const sceneElapseTime = Date.now() - sceneStartTime;
-                if (sceneElapseTime < 2000) {
-                    delay(() => {
-                        isAnimating = false;
-                    }, 2000 - sceneElapseTime)
-                } else {
-                    isAnimating = false;
-                }
+                activeTimelines.delete(tl);
+                isAnimating = false;
             }
         });
         tl.eventCallback('onUpdate', render);
         activeTimelines.add(tl);
-        tl.to('.procedure-hero-copy', {
-            opacity: 0,
-            y: -10,
-            duration: 0.5,
-            ease: 'power2.inOut'
-        });
         tl.add(() => {
             setCurrentScene(currentScene);
-        });
-        tl.add(() => {
-            requestAnimationFrame(() => {
-                tl.fromTo('.procedure-hero-copy',
-                    { opacity: 0, y: 10 },
-                    { opacity: 1, y: 0, duration: 0.5, ease: 'power2.inOut' }
-                );
-            })
-        });
+        }, 0);
         if (currentScene === 1) {
             tl.to(camera.position, {
                 x: 0,

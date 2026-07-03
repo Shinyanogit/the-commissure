@@ -80,7 +80,7 @@ export function ProcedurePage({ page, initScene }) {
             <main ref={shellRef} className="procedure-shell">
                 <section ref={cardRef} className="procedure-hero-card">
                     <div className="procedure-hero-copy">
-                        <span className="procedure-eyebrow">Interactive surgical atlas</span>
+                        <span className="procedure-eyebrow">spine surgical atlas</span>
                         <div className="procedure-title-row">
                             <h1 className="procedure-title">{data.scenes[currentScene].title}</h1>
                             <button
