@@ -13,14 +13,6 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
     let lastWidth = 0;
     let lastHeight = 0;
     let lastPixelRatio = 0;
-    const delay = (callback, ms) => {
-        const id = window.setTimeout(() => {
-            timeoutIds.delete(id);
-            callback();
-        }, ms);
-        timeoutIds.add(id);
-        return id;
-    };
 
     // Camera
     const scene = new THREE.Scene();
@@ -235,11 +227,7 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
                 currentScene++;
             }
             transferScene(currentScene);
-        } else {
-            delay(() => {
-                isAnimating = false;
-            }, 2000);
-        }
+        };
     };
     const handleTouchStart = (event) => {
         if (event.target.closest(".procedure-paragraph.open")) return;
@@ -263,27 +251,16 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
                 currentScene++;
             }
             transferScene(currentScene);
-        } else {
-            delay(() => {
-                isAnimating = false;
-            }, 2000);
-        }
+        };
     };
     window.addEventListener('wheel', handleWheel, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
     function transferScene(currentScene) {
-        const sceneStartTime = Date.now();
         const tl = gsap.timeline({
             onComplete: () => {
-                const sceneElapseTime = Date.now() - sceneStartTime;
-                if (sceneElapseTime < 2000) {
-                    delay(() => {
-                        isAnimating = false;
-                    }, 2000 - sceneElapseTime)
-                } else {
-                    isAnimating = false;
-                }
+                activeTimelines.delete(tl);
+                isAnimating = false;
             }
         });
         tl.eventCallback('onUpdate', render);

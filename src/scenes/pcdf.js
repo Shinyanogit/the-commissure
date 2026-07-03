@@ -809,7 +809,6 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                 ease: 'power2.inOut'
             }, 0);
         }
-        return tl;
     };
 
     // Resize
