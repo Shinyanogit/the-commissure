@@ -170,6 +170,14 @@ export function Home() {
                         <span className="header"><Link to="/pcf">Article on Posterior Cervical Foraminotomy (PCF) is now available</Link></span>
                         <span className="date">Jun 18, 2026</span>
                     </li>
+                    <li>
+                        <span className="header"><Link to="/acdf">Article on Anterior Cervical Discectomy and Fusion (ACDF) is now available</Link></span>
+                        <span className="date">May 24, 2026</span>
+                    </li>
+                    <li>
+                        <span className="header"><Link to="/pcdf">Article on Posterior Cervical Decompression and Fusion (PCDF) is now available</Link></span>
+                        <span className="date">May 17, 2026</span>
+                    </li>
                 </ul>
             </div>
             <div ref={(node) => { sectionsRef.current[2] = node; }} className="content about" id="about">
