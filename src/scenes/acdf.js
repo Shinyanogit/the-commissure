@@ -278,23 +278,9 @@ export function initAcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         });
         tl.eventCallback('onUpdate', render);
         activeTimelines.add(tl);
-        tl.to('.procedure-hero-copy', {
-            opacity: 0,
-            y: -10,
-            duration: 0.5,
-            ease: 'power2.inOut'
-        });
         tl.add(() => {
             setCurrentScene(currentScene);
-        });
-        tl.add(() => {
-            requestAnimationFrame(() => {
-                tl.fromTo('.procedure-hero-copy',
-                    { opacity: 0, y: 10 },
-                    { opacity: 1, y: 0, duration: 0.5, ease: 'power2.inOut' }
-                );
-            })
-        });
+        }, 0);
         if (currentScene === 1) {
             tl.to(camera.position, {
                 x: 0,

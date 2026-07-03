@@ -7,6 +7,7 @@
         linear-gradient(135deg, #02040a 0%, #050816 45%, #02060f 100%);
     color: #f4f7ff;
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --procedure-panel-max-height: calc(100dvh - 18rem);
 }
 
 .procedurePage .canvas-mount {
@@ -197,10 +198,14 @@
     border-radius: 1.2rem;
     box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
     backdrop-filter: blur(18px);
+    max-height: calc(100dvh - 12rem);
+    min-height: 0;
 }
 
 .procedurePage .procedure-hero-copy {
     padding: 0.3rem 0.25rem 0.2rem;
+    min-width: 0;
+    min-height: 0;
 }
 
 .procedurePage .procedure-eyebrow {
@@ -222,6 +227,7 @@
     justify-content: space-between;
     gap: 1rem;
     margin: 0.8rem 0 1rem;
+    min-width: 0;
 }
 
 .procedurePage .procedure-title {
@@ -230,6 +236,9 @@
     line-height: 1.08;
     letter-spacing: -0.03em;
     color: #ffffff;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .procedurePage .procedure-toggle {
@@ -243,6 +252,7 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    flex-shrink: 0;
 }
 
 .procedurePage .procedure-toggle:hover,
@@ -264,17 +274,27 @@
     font-size: 1rem;
     line-height: 1.8;
     color: rgba(244, 247, 255, 0.82);
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-x: hidden;
     transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.35s ease;
 }
 
 .procedurePage .procedure-paragraph.open {
-    max-height: 32rem;
+    max-height: var(--procedure-panel-max-height);
     opacity: 1;
     margin-top: 0.2rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-gutter: stable;
 }
 
 .procedurePage .procedure-paragraph p {
     margin: 0 0 0.9rem;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .procedurePage .procedure-paragraph p:last-child {
@@ -286,15 +306,20 @@
     padding: 0;
     display: grid;
     gap: 0.45rem;
+    overflow-wrap: anywhere;
 }
 
 .procedurePage .procedure-paragraph li {
     color: rgba(244, 247, 255, 0.8);
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .procedurePage .procedure-paragraph a {
     color: #8eddf4;
     text-decoration: none;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .procedurePage .procedure-paragraph a:hover,
@@ -386,6 +411,10 @@
 }
 
 @media (max-width: 640px) {
+    .procedurePage {
+        --procedure-panel-max-height: calc(100dvh - 30rem);
+    }
+
     .procedurePage .canvas-mount canvas {
         filter: none;
     }
@@ -403,6 +432,7 @@
     .procedurePage .procedure-hero-card {
         backdrop-filter: blur(12px);
         box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
+        max-height: calc(100dvh - 10.5rem);
     }
 
     .procedurePage .procedure-footer {
