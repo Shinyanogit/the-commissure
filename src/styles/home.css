@@ -320,13 +320,6 @@
     margin-top: 2.2rem;
 }
 
-.homePage .article,
-.homePage .news,
-.homePage .about {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 1100px;
-}
-
 .homePage .article::before,
 .homePage .news::before,
 .homePage .about::before,
@@ -340,7 +333,7 @@
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
     backdrop-filter: blur(0px);
     opacity: 0.6;
-    transition: backdrop-filter 0.8s ease, opacity 0.8s ease, transform 0.8s ease;
+    transition: backdrop-filter 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
     z-index: -1;
 }
 

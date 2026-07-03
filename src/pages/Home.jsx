@@ -39,7 +39,7 @@ export function Home() {
             const ctas = [primaryCtaRef.current, secondaryCtaRef.current].filter(Boolean);
             const indicator = indicatorRef.current;
 
-            const timeline = gsap.timeline({ defaults: { duration: 1, ease: 'power3.out' } });
+            const timeline = gsap.timeline({ defaults: { duration: 0.7, ease: 'power3.out' } });
 
             if (title) {
                 timeline.fromTo(title, { y: 30, opacity: 0 }, { y: 0, opacity: 1 }, 0);
@@ -67,14 +67,13 @@ export function Home() {
                     y: 0,
                     opacity: 1,
                     scale: 1,
-                    duration: 0.9,
+                    duration: 0.5,
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: section,
-                        start: 'top 85%',
+                        start: 'top 90%',
                         once: true,
                     },
-                    delay: index * 0.03,
                     onComplete: () => section.classList.add('is-visible'),
                 });
             });
