@@ -274,11 +274,16 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         };
     };
     const handleTouchStart = (event) => {
+        if (event.target.closest(".procedure-hero-card")) return;
         if (event.target.closest(".procedure-paragraph.open")) return;
         if (event.touches.length !== 1) return;
         touchStartY = event.touches[0].clientY;
     };
     const handleTouchEnd = (event) => {
+        if (event.target.closest(".procedure-hero-card")) {
+            touchStartY = null;
+            return;
+        }
         if (isAnimating || touchStartY === null) {
             touchStartY = null;
             return;
