@@ -173,6 +173,13 @@ export function ProcedurePage({ page, initScene }) {
     };
 
     const handleCardPointerDown = (event) => {
+        if (
+            event.target.closest('button') ||
+            event.target.closest('a') ||
+            event.target.closest('input') ||
+            event.target.closest('textarea') ||
+            event.target.closest('.procedure-paragraph')
+        ) { return; }
         if (event.button !== 0 || !cardRef.current) return;
 
         dragStateRef.current = {
