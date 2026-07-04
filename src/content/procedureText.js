@@ -126,7 +126,7 @@ export const procedureText = {
         paragraph:
         `
         One of the advantages of performing PCF is that it allows patients to maintain <span class="highlight-red">normal neck motion</span> after the surgery. 
-        Unlike <span class="highlight-red"><a href="pcf.html">posterior cervical discectomy (PCDF)</a></span> and <span class="highlight-red"><a href="acdf.html">anterior cervical discectomy (ACDF)</a></span>, PCF does not require the spine to be fused permanently, owing to the minimally invasive nature of this procedure. 
+        Unlike <span class="highlight-red"><a href="#pcdf">posterior cervical discectomy and fusion (PCDF)</a></span> and <span class="highlight-red"><a href="#acdf">anterior cervical discectomy (ACDF)</a></span>, PCF does not require the spine to be fused permanently, owing to the minimally invasive nature of this procedure. 
         However, PCF may not be suitable for conditions that require surgical interventions on <span class="highlight-red">multiple vertebral levels</span>. 
         Performing PCF on multiple levels may lead to <span class="highlight-red">spinal instability</span>, which could in turn lead to worsening of symptoms.
         `
