@@ -126,7 +126,7 @@ export const procedureText = {
         paragraph:
         `
         One of the advantages of performing PCF is that it allows patients to maintain <span class="highlight-red">normal neck motion</span> after the surgery. 
-        Unlike <span class="highlight-red"><a href="#pcdf">posterior cervical discectomy and fusion (PCDF)</a></span> and <span class="highlight-red"><a href="#acdf">anterior cervical discectomy (ACDF)</a></span>, PCF does not require the spine to be fused permanently, owing to the minimally invasive nature of this procedure. 
+        Unlike <span class="highlight-red"><Link to="/pcdf">posterior cervical discectomy and fusion (PCDF)</link></span> and <span class="highlight-red"><Link to="/acdf">anterior cervical discectomy (ACDF)</link></span>, PCF does not require the spine to be fused permanently, owing to the minimally invasive nature of this procedure. 
         However, PCF may not be suitable for conditions that require surgical interventions on <span class="highlight-red">multiple vertebral levels</span>. 
         Performing PCF on multiple levels may lead to <span class="highlight-red">spinal instability</span>, which could in turn lead to worsening of symptoms.
         `
@@ -154,7 +154,7 @@ export const procedureText = {
         `
         Anterior cervical discectomy and fusion (ACDF) is a surgical procedure that aims to relieve compression on the spinal cord and stabilize the cervical spine. 
         ACDF consists of three main procedures: <span class="highlight-red">anterior cervical discectomy</span>, <span class="highlight-red">interbody cage implantation</span>, and <span class="highlight-red">anterior cervical fixation</span>. 
-        Compared with <span class="highlight-red"><a href="#pcdf">posterior cervical decompression and fusion (PCDF)</a></span>, ACDF is performed through a frontal approach, utilizing a small incision in the front of the neck to access the cervical vertebrae. 
+        Compared with <span class="highlight-red"><Link to="/pcdf">posterior cervical decompression and fusion (PCDF)</Link></span>, ACDF is performed through a frontal approach, utilizing a small incision in the front of the neck to access the cervical vertebrae. 
         Owing to this surgical approach, ACDF is particularly effective for treating pathologies involving the <span class="highlight-red">anterior structures</span> of the cervical spine.
         `
       },
@@ -276,7 +276,7 @@ export const procedureText = {
         A cervical intervertebral disc herniation is illustrated in this sagittal model. 
         As shown, a herniated disc may migrate <span class="highlight-red">behind</span> the vertebral body and cause extensive compression of the spinal cord. 
         Such a lesion can be difficult to remove through discectomy alone because a substantial portion of the herniated disc is located <span class="highlight-red">posterior</span> to the vertebral body. 
-        In this situation, ACCF may be preferred over <span class="highlight-red"><a href="#acdf">anterior cervical discectomy and fusion (ACDF)</a></span>, as removal of the vertebral body provides <span class="highlight-red">direct access</span> to the migrated disc fragment and allows for more complete decompression.
+        In this situation, ACCF may be preferred over <span class="highlight-red"><Link to="/acdf">anterior cervical discectomy and fusion (ACDF)</Link></span>, as removal of the vertebral body provides <span class="highlight-red">direct access</span> to the migrated disc fragment and allows for more complete decompression.
         `
       },
       {
