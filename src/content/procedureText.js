@@ -5,68 +5,72 @@ export const procedureText = {
         title: 'Posterior Cervical Decompression and Fusion (PCDF)',
         paragraph: 
         `
-        PCDF is a spinal procedure performed to relieve pressure within the spinal canal. 
-        It consists of two components: <span class="highlight-red">posterior cervical laminectomy</span> and <span class="highlight-red">posterior cervical instrumentation</span>. 
-      Owing to its ability to decompress the spinal cord and provide immediate stabilization, PCDF is a powerful surgical technique that allows surgeons to treat some of the most complex spinal disorders and improve patients’ quality of life.
+        PCDF is a spinal procedure performed to relieve compression of the spinal cord and nerves through a posterior approach. 
+        It consists of two major components: <span class="highlight-red">posterior cervical laminectomy</span> and <span class="highlight-red">posterior cervical fixation</span>. 
+        Owing to its ability to decompress the spinal cord and provide stabilization, PCDF is a powerful surgical technique that allows surgeons to treat complex spinal disorders and improve patients’ quality of life.
         `
       },
       {
         title: 'Indication for PCDF',
         paragraph:
         `
-        PCDF is typically recommended for conditions in which conservative treatment has failed to relieve compression within the spinal canal. 
-        Such conditions include <span class="highlight-red">cervical spondylotic myelopathy</span>, <span class="highlight-red">ossification of the posterior longitudinal ligament</span>, <span class="highlight-red">spinal deformities</span>, and <span class="highlight-red">tumors</span>. 
-        Here, a bony overgrowth of the C5 lamina (the posterior part of the vertebral arch) is observed. 
-        This lesion can lead to compression of the spinal cord, resulting in a variety of neurological symptoms, including upper extremity <span class="highlight-red">pain</span>, <span class="highlight-red">sensory disturbances</span> in the hands, and, in severe cases, <span class="highlight-red">paralysis</span> of the upper and/or lower limbs.
+        PCDF is recommended for conditions in which conservative treatment has <span class="highlight-red">failed</span> to relieve symptoms. 
+        Common indications include:
+        <ul>
+        <li><span class="highlight-red">Cervical spondylotic radiculopathy and myelopathy</span></li>
+        <li><span class="highlight-red">Ossification of the posterior longitudinal ligament (OPLL)</span></li>
+        <li><span class="highlight-red">Congenital deformities</span></li>
+        <li><span class="highlight-red">Tumors</span></li>
+        </ul>
+        In this 3D model, a <span class="highlight-red">bony overgrowth</span> of the C5 lamina is depicted. 
+        This lesion can compress the spinal cord and nerves, resulting in a variety of neurological symptoms, including pain, sensory disturbances in the upper extremities, and, in severe cases, paralysis of the extremities.
         `
       },
       {
         title: 'Posterior Cervical Laminectomy',
         paragraph:
         `
-        Posterior cervical laminectomy is a fundamental step in PCDF and is usually performed at an early stage of the procedure. 
-        In this operation, the <span class="highlight-red">lamina</span>—a roof-like bony structure covering the spinal cord—is removed. 
-        Once the lamina is removed, the spinal canal is enlarged, allowing the spinal cord to decompress from the offending lesion and providing immediate <span class="highlight-red">relief of pressure</span>. 
-        A common concern regarding a laminectomy is that the spinal cord may become more vulnerable to injury due to the loss of posterior bony protection. 
-        However, in most cases, the surrounding soft tissues—such as paraspinal muscles and adipose tissue—continue to provide coverage and structural support over the spinal cord, thereby reducing the risk of direct injury.
+        Posterior cervical laminectomy is a fundamental step in PCDF and is usually performed at an <span class="highlight-red">early stage</span> of the procedure. 
+        In this procedure, the <span class="highlight-red">lamina</span>, a roof-like bony structure covering the spinal cord, is removed. Once the lamina is removed, the spinal canal is enlarged, allowing the spinal cord to decompress from the offending lesion. 
+        While laminectomy exposes the spinal cord, surrounding soft tissues, such as <span class="highlight-red">paraspinal muscles</span> and <span class="highlight-red">adipose tissues</span>, continue to provide coverage and structural support over the spinal cord, thereby reducing the risk of direct injury.
         `
       },
       {
-        title: 'Post-Laminectomy Cervical Kyphosis',
+        title: 'Post-Laminectomy Kyphosis',
         paragraph:
         `
-        Posterior cervical laminectomy has both benefits and limitations. 
-        While it is effective in providing adequate decompression of the spinal cord, <span class="highlight-red">post-laminectomy kyphosis</span>—a major complication of the procedure—may occur. 
-        Post-laminectomy kyphosis refers to a loss of normal cervical lordosis, resulting in a forward curvature of the neck. 
-        This deformity occurs in part because, during a laminectomy, posterior stabilizing structures such as the ligamentous complex and paraspinal musculature are <span class="highlight-red">disrupted </span>or <span class="highlight-red">detached</span>.
-        Post-laminectomy cervical kyphosis may place increased tension on the spinal cord and can potentially worsen neurological symptoms or lead to <span class="highlight-red">delayed neurological deterioration</span>.
+        Laminectomy has both benefits and limitations. 
+        While it is effective at decompressing the spinal cord, it also comes with the risk of <span class="highlight-red">post-laminectomy kyphosis</span>. 
+        Post-laminectomy kyphosis is a major post-operative complication of the spine, where normal cervical lordosis is lost, and the neck starts to <span class="highlight-red">tilt forward</span>. 
+        This deformity occurs because during a laminectomy, posterior stabilizing structures, including the <span class="highlight-red">ligamentous complex</span> and <span class="highlight-red">paraspinal musculature</span>, are detached. 
+        Post-laminectomy kyphosis may place increased tension on the spinal cord and can potentially <span class="highlight-red">worsen</span> neurological symptoms.
         `
       },
       {
-        title: 'Posterior Cervical Instrumentation',
+        title: 'Posterior Cervical Fixation',
         paragraph:
         `
-        To prevent post-laminectomy cervical kyphosis, <span class="highlight-red">posterior cervical instrumentation</span> is often performed. 
-        In this procedure, screws and rods are placed along the posterior elements of the cervical spine to provide <span class="highlight-red">mechanical stability</span>. 
-        Specifically, screws may be inserted into the lateral masses or pedicles of the vertebrae, which serve as anchoring structures connecting the anterior and posterior spinal columns. 
+        To reduce the risk of post-laminectomy kyphosis, surgeons may perform <span class="highlight-red">posterior cervical fixation</span>. 
+        In this procedure, <span class="highlight-red">screws</span> and <span class="highlight-red">rods</span> are placed along the posterior elements of the spine to provide <span class="highlight-red">mechanical support</span>. 
+        Specifically, screws are inserted into the <span class="highlight-red">lateral masses</span> of the vertebrae, which serve as anchoring structures connecting the anterior and posterior spinal columns. 
         The number of screws used depends on the extent of pathology and the number of vertebral levels requiring decompression. 
-        Typically, rods are then connected across multiple levels to provide rigid fixation and maintain cervical alignment. 
-        One potential drawback of this procedure is a <span class="highlight-red">reduction in cervical range of motion</span>. 
-        Because the implanted hardware provides rigid stabilization, segmental mobility is restricted. 
-        However, some degree of neck motion may still be preserved in non-fused segments that are not affected by disease or included in the fusion construct.
+        Rods are then implanted to connect spinal screws across multiple levels, providing rigid fixation and proper alignment. 
+        One potential drawback of this procedure is the reduction in the <span class="highlight-red">range of motion</span>. 
+        Because the implanted hardware provides rigid stabilization, segmental mobility is <span class="highlight-red">restricted</span>. 
+        Some degree of neck motion may still be preserved in non-fused segments that are not affected by disease.
         `
       },
       {
         title: 'Summary',
         paragraph:
         `
-        Some of the key concepts of PCDF are as follows:
+        Some of the key concepts of PCDF are as follows: 
         <ul>
-        <li>It involves both a <span class="highlight-red">laminectomy </span>and <span class="highlight-red">posterior instrumentation</span>.</li>
-        <li>It is especially effective in managing compressive cervical spine disorders that are  <span class="highlight-red">refractory </span>to conservative treatment.</li>
-        <li>It may be associated with complications such as <span class="highlight-red">post-laminectomy kyphosis </span>and <span class="highlight-red">reduced range of motion</span>.</li>
+        <li>It involves both <span class="highlight-red">posterior cervical laminectomy</span> and <span class="highlight-red">posterior cervical fixation</span>.</li>
+        <li>It is effective in managing compressive disorders that are <span class="highlight-red">refractory</span> to conservative treatment.</li>
+        <li>It may cause post-operative complications such as <span class="highlight-red">post-laminectomy kyphosis</span> and <span class="highlight-red">reduced range of motion</span>.</li>
         </ul>
-        Despite these potential complications, PCDF remains an effective surgical intervention that provides reliable spinal cord decompression and stability against underlying pathology.
+        Despite potential complications, PCDF remains an effective surgical intervention that provides reliable spinal cord decompression and stability against underlying pathology. 
         `
       }
     ]
