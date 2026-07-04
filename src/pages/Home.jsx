@@ -119,9 +119,9 @@ export function Home() {
                         header="Posterior Cervical Decompression and Fusion (PCDF)"
                         date="May 17, 2026"
                     >
-                        PCDF is a spinal procedure performed to relieve pressure within the spinal canal.
-                        It consists of two components: <span className="highlight-red">posterior cervical laminectomy</span> and <span className="highlight-red">posterior cervical instrumentation</span>.
-                        Owing to its ability to decompress the spinal cord and provide immediate stabilization, PCDF is a powerful surgical technique that allows surgeons to treat some of the most complex spinal disorders and improve patients’ quality of life.
+                        PCDF is a spinal procedure performed to relieve compression of the spinal cord and nerves through a posterior approach. 
+                        It consists of two major components: posterior cervical laminectomy and posterior cervical fixation. 
+                        Owing to its ability to decompress the spinal cord and provide stabilization, PCDF is a powerful surgical technique…
                     </ArticleCard>
                     <ArticleCard
                         className="article2"
@@ -130,10 +130,9 @@ export function Home() {
                         header="Anterior Cervical Discectomy and Fusion (ACDF)"
                         date="May 24, 2026"
                     >
-                        Anterior cervical discectomy and fusion (ACDF) is a spinal surgical procedure that aims to relieve neural compression and stabilize the cervical spine.
-                        ACDF consists of three main components: <span className="highlight-red">intervertebral disc removal (discectomy)</span>, <span className="highlight-red">interbody cage implantation</span>, and <span className="highlight-red">anterior plate fixation</span>.
-                        Compared with posterior cervical decompression and fusion (PCDF), ACDF is performed through an <span className="highlight-red">anterior approach</span>, utilizing a small incision in the front of the neck to access the cervical vertebrae.
-                        Owing to this surgical approach, ACDF is particularly effective for treating pathologies involving the anterior structures of the cervical spine.
+                        Anterior cervical discectomy and fusion (ACDF) is a surgical procedure that aims to relieve compression on the spinal cord and stabilize the cervical spine. 
+                        ACDF consists of three main procedures: anterior cervical discectomy, interbody cage implantation, and anterior cervical fixation. 
+                        Compared with posterior cervical decompression and fusion (PCDF), ACDF is…
                     </ArticleCard>
                     <ArticleCard
                         className="article3"
@@ -142,9 +141,9 @@ export function Home() {
                         header="Posterior Cervical Foraminotomy (PCF)"
                         date="Jun 18, 2026"
                     >
-                        Posterior cervical foraminotomy (PCF) is a spinal surgical technique that relieves pressure on nerves of the neck by removing a small amount of bone from the spine.
-                        Compared with some other neck surgeries, a major advantage of PCF is that it allows patients to <span className="highlight-red">maintain normal neck motion</span> even after the surgery.
-                        Surgeons may additionally perform surgeries to remove parts of the herniated spinal discs to achieve adequate neural decompression and symptom relief.
+                        Posterior cervical foraminotomy (PCF) is a surgical procedure that relieves pressure on spine cord and nerves by widening the neural foramen posteriorly. 
+                        A major advantage of PCF is that it allows patients to preserve range of motion after the surgery. 
+                        During the procedure, surgeons may additionally perform discectomy or osteophytectomy to…
                     </ArticleCard>
                 </ul>
             </div>
