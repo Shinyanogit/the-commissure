@@ -330,5 +330,94 @@ export const procedureText = {
         `
       }
     ]
+  },
+  pcl_open: {
+    scenes: [
+      {
+        title: 'Anterior Cervical Corpectomy and Fusion (ACCF)',
+        paragraph:
+        `
+        Anterior cervical corpectomy and fusion (ACCF) is a surgical procedure that relieves compression on the spinal cord by removing one or more levels of intervertebral discs and the vertebral bodies. 
+        The procedure consists of three major steps: <span class="highlight-red">anterior cervical discectomy and corpectomy</span>, <span class="highlight-red">vertebral body reconstruction</span>, and <span class="highlight-red">anterior cervical fixation</span>. 
+        By reconstructing the anterior column, ACCF provides effective decompression and stabilization, making it a valuable surgical technique for treating cervical spinal disorders that extend posteriorly to the vertebral body.
+        `
+      },
+      {
+        title: 'Indication for ACCF',
+        paragraph:
+        `
+        ACCF is commonly performed to treat cervical disorders where the pathological lesion is located <span class="highlight-red">behind</span> the vertebral body and cannot be adequately addressed by discectomy alone. 
+        Common indications include:
+        <ul>
+            <li><span class="highlight-red">Cervical spondylotic myelopathy</span></li>
+            <li><span class="highlight-red">Ossification of the posterior longitudinal ligament (OPLL)</span></li>
+            <li><span class="highlight-red">Cervical spinal trauma and vertebral fractures</span></li>
+            <li><span class="highlight-red">Tumors involving the vertebral body</span></li>
+        </ul>
+        In this 3D model, a herniated intervertebral disc is compressing the spinal cord. 
+        Cervical disc herniation may produce a variety of neurological symptoms, including pain, numbness, and, in severe cases, weakness in the upper and lower extremities.
+        `
+      },
+      {
+        title: 'Posterior Lesion of Cervical Spine',
+        paragraph:
+        `
+        A cervical intervertebral disc herniation is illustrated in this sagittal model. 
+        As shown, a herniated disc may migrate <span class="highlight-red">behind</span> the vertebral body and cause extensive compression of the spinal cord. 
+        Such a lesion can be difficult to remove through discectomy alone because a substantial portion of the herniated disc is located <span class="highlight-red">posterior</span> to the vertebral body. 
+        In this situation, ACCF may be preferred over <span class="highlight-red"><a href="/acdf">anterior cervical discectomy and fusion (ACDF)</a></span>, as removal of the vertebral body provides <span class="highlight-red">direct access</span> to the migrated disc fragment and allows for more complete decompression.
+        `
+      },
+      {
+        title: 'Anterior Cervical Discectomy and Corpectomy',
+        paragraph:
+        `
+        The initial step of ACCF is <span class="highlight-red">discectomy</span>, during which the affected intervertebral disc is removed. 
+        In some cases, however, the herniated disc cannot be completely excised because disc fragments remain <span class="highlight-red">behind</span> the vertebral body. 
+        To access these residual fragments directly, a <span class="highlight-red">corpectomy</span> is then performed, in which a large portion of the vertebral body is removed. 
+        This provides a clear surgical corridor to the <span class="highlight-red">posterior</span> aspect of the vertebral body, allowing complete removal of the remaining disc fragments and adequate decompression.
+        `
+      },
+      {
+        title: 'Vertebral Body Reconstruction',
+        paragraph:
+        `
+        Once adequate decompression has been confirmed, a <span class="highlight-red">vertebral body replacement</span> is implanted to restore spinal stability. 
+        Several reconstruction options are available, including:
+        <ul>
+            <li><span class="highlight-red">Cadaveric bone grafts</span> (allografts)</li>
+            <li><span class="highlight-red">Iliac crest bone grafts</span> (autografts)</li>
+            <li><span class="highlight-red">Expandable vertebral body cages</span></li>
+        </ul>
+        In this 3D model, an expandable cage is inserted to replace the resected vertebral body. 
+        Once in place, the cage is expanded to restore the height of the spinal column and achieve a secure fit between the adjacent vertebrae. 
+        Many expandable cages are designed with openings that allow bone to <span class="highlight-red">grow into</span> and <span class="highlight-red">around</span> the implant, thereby promoting solid spinal fusion.
+        `
+      },
+      {
+        title: 'Anterior Cervical Fixation',
+        paragraph:
+        `
+        To stabilize the reconstructed spine, <span class="highlight-red">anterior fixation</span> is performed using <span class="highlight-red">plates</span> and <span class="highlight-red">screws</span>. 
+        This instrumentation secures the vertebral body replacement, prevents implant migration, and provides immediate <span class="highlight-red">mechanical stability</span> while spinal fusion occurs. 
+        Because the fused vertebral segments no longer move independently, cervical range of motion may be reduced, particularly when multiple levels undergo discectomy and corpectomy. 
+        After fixation, surgeons typically use <span class="highlight-red">radiographic imaging</span> to confirm the correct placement of the plate, screws, and vertebral body replacement device.
+        `
+      },
+      {
+        title: 'Summary',
+        paragraph:
+        `
+        Some of the key features of ACCF are as follows:
+        <ul>
+            <li>It is highly effective for treating lesions located <span class="highlight-red">behind</span> the vertebral body.</li>
+            <li>It consists of three major steps: <span class="highlight-red">discectomy and corpectomy</span>, <span class="highlight-red">expandable cage implantation</span>, and <span class="highlight-red">cervical plate fixation</span>.</li>
+            <li>Several options are available for reconstructing the resected vertebral body, including <span class="highlight-red">allografts</span>, <span class="highlight-red">autografts</span>, and <span class="highlight-red">expandable cages</span>.</li>
+            <li>Fusion may reduce cervical range of motion, particularly when <span class="highlight-red">multiple levels</span> are involved.</li>
+        </ul>
+        Despite its greater complexity and invasiveness, ACCF remains an effective surgical approach for treating cervical spinal disorders that cannot be adequately managed with discectomy and fusion alone.
+        `
+      }
+    ]
   }
 };
