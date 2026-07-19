@@ -18,7 +18,7 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.01, 100 );
     camera.up.set(0, 1, 0);
-    camera.position.set( 0.2, 0.205, 0 );
+    camera.position.set( 0, 0.205, -0.2 );
     const cameraTarget = new THREE.Vector3(0, 0.205, 0);
 
     // Renderer
@@ -157,7 +157,6 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
                         } else if (child.name.includes('after')) {
                             child.material.transparent = true;
                             child.material.opacity = 0;
-                            child.visible = false;
                             child.material.needsUpdate = true;
                             if (child.name.includes('c3')) {
                                 c3LaminaAfter = child;
@@ -341,112 +340,6 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
             setCurrentScene(currentScene);
         }, 0);
         if (currentScene === 1) {
-            tl.to(camera.position, {
-                x: 0.2,
-                y: 0.205,
-                z: -1,
-                duration: 1,
-                ease: 'power2.inOut'
-            }, 0);
-            tl.to(cameraTarget, {
-                x: 0,
-                y: 0.205,
-                z: -1,
-                duration: 1,
-                ease: 'power2.inOut'
-            }, 0);
-            tl.to(camera.up, {
-                x: 0,
-                y: 1,
-                z: 0,
-                duration: 1,
-                ease: 'power2.inOut'
-            }, 0);
-            tl.to(camera, {
-                fov: 30,
-                duration: 1,
-                ease: 'power2.inOut',
-                onUpdate: () => {
-                    camera.updateProjectionMatrix();
-                }
-            }, 0);
-            c3456Structure.forEach((c3456structure) => {
-                tl.to(c3456structure.position, {
-                    z: '-=1',
-                    duration: 1,
-                    ease: 'power2.inOut'
-                }, 0);
-            });
-            let transparentStartTime = tl.duration();
-            transparentStructure.forEach((transparentstructure) => {
-                transparentstructure.material.transparent = true;
-                transparentstructure.material.needsUpdate = true;
-                tl.to(transparentstructure.material, {
-                    opacity: 0,
-                    duration: 1,
-                    ease: 'power2.inOut'
-                }, transparentStartTime);
-            });
-        } else if (currentScene === 2) {
-            tl.to(camera.position, {
-                x: 0,
-                y: 0.18,
-                z: -0.2,
-                duration: 1,
-                ease: 'power2.inOut'
-            }, 0);
-            tl.to(cameraTarget, {
-                x: 0,
-                y: 0.205,
-                z: 0,
-                duration: 1,
-                ease: 'power2.inOut'
-            }, 0);
-            transparentStructure.forEach((transparentstructure) => {
-                tl.to(transparentstructure.material, {
-                    opacity: 1,
-                    duration: 1,
-                    ease: 'power2.inOut',
-                    onComplete: () => {
-                        transparentstructure.material.transparent = false;
-                        transparentstructure.material.needsUpdate = true;
-                    }
-                }, 0);
-            });
-            c3456Structure.forEach((c3456structure) => {
-                tl.to(c3456structure.position, {
-                    z: '+=1',
-                    duration: 1,
-                    ease: 'power2.inOut'
-                }, 0);
-            });
-            removedLigament.material.transparent = true;
-            removedLigament.material.needsUpdate = true;
-            tl.to(removedLigament.material, {
-                opacity: 0,
-                duration: 1,
-                ease: 'power2.inOut',
-                onComplete: () => {
-                    removedLigament.visible = false;
-                }
-            }, 0);
-            let hingeStartTime = tl.duration();
-            removedHinge.forEach((removedhinge, index) => {
-                tl.to(removedhinge.position, {
-                    z: '-=0.2',
-                    duration: 1,
-                    ease: 'power2.inOut'
-                }, hingeStartTime + index * 0.1);
-            });
-        } else if (currentScene === 3) {
-            removedOpen.forEach((removedopen, index) => {
-                tl.to(removedopen.position, {
-                    z: '-=0.2',
-                    duration: 1,
-                    ease: 'power2.inOut'
-                }, index * 0.1);
-            });
-        } else if (currentScene === 4) {
             c3LaminaBefore.forEach((lamina) => {
                 tl.to(lamina.position, {
                     x: c3LaminaAfter.position.x,
@@ -511,65 +404,6 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
                     ease: 'power2.inOut'
                 }, 0);
             });
-            let spacerStartTime = tl.duration();
-            boneSpacer.forEach((spacer, index) => {
-                tl.to(spacer.material, {
-                    opacity: 1,
-                    duration: 1,
-                    ease: 'power2.inOut',
-                    onComplete: () => {
-                        spacer.material.transparent = false;
-                        spacer.material.needsUpdate = true;
-                    }
-                }, spacerStartTime + index * 0.1);
-                tl.to(spacer.position, {
-                    z: '+=0.2',
-                    duration: 1,
-                    ease: 'power2.inOut'
-                }, spacerStartTime + index * 0.1);
-            });
-        } else if (currentScene === 5) {
-            plate.forEach((plateMesh, index) => {
-                tl.to(plateMesh.material, {
-                    opacity: 1,
-                    duration: 1,
-                    ease: 'power2.inOut',
-                    onComplete: () => {
-                        plateMesh.material.transparent = false;
-                        plateMesh.material.needsUpdate = true;
-                    }
-                }, index * 0.1);
-                tl.to(plateMesh.position, {
-                    z: '+=0.2',
-                    duration: 1,
-                    ease: 'power2.inOut'
-                }, index * 0.1);
-            });
-            let screwStartTime = tl.duration();
-            screw.forEach((screwMesh, index) => {
-                tl.to(screwMesh.material, {
-                    opacity: 1,
-                    duration: 1,
-                    ease: 'power2.inOut',
-                    onComplete: () => {
-                        screwMesh.material.transparent = false;
-                        screwMesh.material.needsUpdate = true;
-                    }
-                }, screwStartTime + index * 0.05);
-                tl.to(screwMesh.position, {
-                    z: '+=0.2',
-                    duration: 1,
-                    ease: 'power2.inOut'
-                }, screwStartTime + index * 0.05);
-            });
-        } else if (currentScene === 6) {   
-            tl.to(camera.position, {
-                x: -0.1,
-                y: 0.205,
-                z: -0.2,
-                duration: 1,
-                ease: 'power2.inOut'
-            }, 0);
         }
     };
 
