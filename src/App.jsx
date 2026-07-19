@@ -5,6 +5,7 @@ import { Acdf } from './pages/Acdf.jsx';
 import { Home } from './pages/Home.jsx';
 import { Pcdf } from './pages/Pcdf.jsx';
 import { Pcf } from './pages/Pcf.jsx';
+import { Pcl_open } from './pages/Pcl_open.jsx';
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -26,6 +27,7 @@ export function App() {
                 <Route path="/accf" element={<Accf />} />
                 <Route path="/pcdf" element={<Pcdf />} />
                 <Route path="/pcf" element={<Pcf />} />
+                <Route path="/pcl_open" element={<Pcl_open />} />
             </Routes>
         </>
     );
