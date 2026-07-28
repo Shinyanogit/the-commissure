@@ -8,6 +8,11 @@ import { basename, join } from "node:path";
 const DIST = "dist";
 const PUBLIC = "public";
 const ROUTES = ["/", "/acdf", "/accf", "/pcdf", "/pcf"];
+const REQUIRED_RUNTIME_ASSETS = [
+  "draco/draco_decoder.js",
+  "draco/draco_decoder.wasm",
+  "draco/draco_wasm_wrapper.js",
+];
 const HOST = "127.0.0.1";
 
 let failed = false;
@@ -71,6 +76,12 @@ if (!existsSync(DIST)) {
         ? pass(asset)
         : fail(`missing .glb asset: ${asset}`);
     }
+  }
+
+  for (const asset of REQUIRED_RUNTIME_ASSETS) {
+    existsSync(join(DIST, asset))
+      ? pass(asset)
+      : fail(`missing runtime asset: ${asset}`);
   }
 }
 
