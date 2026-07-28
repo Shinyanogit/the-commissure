@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Xcode and Swift build output
+DerivedData
+.build
+xcuserdata
+*.xcuserstate
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -28,12 +34,20 @@ blender/
 *.blend
 *.blend1
 
-# Internal working docs (project spec / TODO) — kept local, not shared on GitHub
-docs/
+# Internal working docs are local by default. The product/design contract and
+# native iOS specifications below are intentionally versioned for collaborators.
+docs/*
+!docs/DESIGN_CONCEPT.md
+!docs/ios/
+!docs/ios/**
 
 # Vercel CLI local link (contains project/org ids) — set as GitHub secrets instead
 .vercel
 
-# Claude Code personal/local settings — never shared
-.claude/settings.local.json
+# Personal AI settings and handoff notes — never shared
+.claude/
+FOR*.md
 .env*
+*.p8
+*.p12
+*.mobileprovision

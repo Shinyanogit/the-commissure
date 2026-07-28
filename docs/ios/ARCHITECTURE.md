@@ -1,0 +1,322 @@
+# Native iOS Architecture
+
+Status: implementation contract
+Stack: Swift 6.2, SwiftUI, RealityKit, structured concurrency
+Minimum deployment: iOS/iPadOS 18
+
+## 1. Architecture goals
+
+- Deterministic forward, backward, and random-access scene navigation.
+- Smooth interaction with parsing, hashing, and file work kept off the main
+  actor.
+- A readable codebase where UI, domain state, 3D adaptation, and distribution
+  have clear ownership.
+- Extension by adding an intent, capability, or content field without rewriting
+  the scene engine.
+- No backend dependency for core learning.
+
+## 2. Repository target
+
+The final monorepo boundary is:
+
+```text
+/
+├── web/                         # Existing React/Vite product
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── vercel.json
+├── ios/
+│   ├── TheCommissure.xcodeproj
+│   ├── App/                     # SwiftUI app, features, infrastructure
+│   ├── Packages/
+│   │   └── CommissureCore/      # Pure Foundation domain package
+│   ├── Resources/               # Bundled manifest/content/assets
+│   ├── Tests/
+│   ├── UITests/
+│   └── fastlane/
+├── content/
+│   ├── schema/                  # JSON Schema and version fixtures
+│   ├── procedures/              # Shared metadata/text source
+│   ├── ios-scenes/              # iOS scene state definitions
+│   └── catalog/                 # Release manifest source
+├── tooling/                     # Validators, converters, pack builder
+├── docs/
+└── .github/workflows/
+```
+
+Phase 1 moved the existing Web product unchanged into `web/` with `git mv`.
+Vercel's Root Directory is `web`, the build still reads `web/vercel.json`, and a
+real preview verified all five routes, all five GLBs, and the Draco decoder.
+GitHub Actions runs Web CI from `web/` only when `web/**` or its workflow changes.
+The `ios/`, `content/`, and `tooling/` roots now exist as explicit ownership
+boundaries; runnable native/content workflows are added with their implementations
+rather than as no-op placeholders.
+
+## 3. Runtime ownership
+
+```text
+SwiftUI gesture/button
+        ↓ ProcedureIntent
+ProcedureSession reducer (MainActor)
+        ↓ resolved target
+SceneStateResolver (pure domain)
+        ↓ ResolvedSceneState
+RealitySceneAdapter (MainActor)
+        ↓ presentation transition
+RealityKit entities + camera
+
+AssetSource → AssetStore actor → verified local pack → ContentStore → session
+```
+
+### `CommissureCore`
+
+A local Swift package importing Foundation only. It owns:
+
+- procedure, step, scene, camera, and part value types;
+- manifest and pack metadata;
+- `ProcedureIntent` and session state transitions;
+- absolute-state resolution and validation;
+- pure gesture intent resolution;
+- compatibility and content-version rules.
+
+It does not import SwiftUI, RealityKit, `URLSession`, or persistence frameworks.
+
+### App target
+
+- **LibraryFeature:** catalog presentation and download actions.
+- **ProcedureFeature:** `ProcedureSession`, theater UI, step tray, explanation.
+- **ColophonFeature:** sources, authors, licenses, disclaimer, diagnostics info.
+- **RealitySceneAdapter:** maps stable part IDs to RealityKit entity paths and
+  presents resolved states.
+- **AssetStore actor:** downloads, verifies, installs, evicts, and deduplicates
+  asset work.
+- **ContentStore actor:** loads bundled/cached definitions and localized text,
+  validates compatibility, and returns immutable domain values.
+- **LocaleStore:** owns `followSystem / english / japanese`, resolves one locale,
+  and projects keyed content without touching scene/session state.
+- **AppPreferences:** small `UserDefaults` values only.
+- **Diagnostics:** `Logger`, signposts, and MetricKit hooks.
+
+`ProcedureSession` and the scene adapter are concrete types. A protocol is
+introduced only at a real substitution boundary: `AssetSource` may have bundled,
+remote-static, and test implementations. Avoid coordinator/router frameworks,
+dependency-injection containers, a generic renderer hierarchy, and Combine.
+
+## 4. Domain model
+
+```swift
+struct ProcedureDefinition: Decodable, Identifiable, Sendable {
+    let schemaVersion: Int
+    let id: String
+    let asset: AssetReference
+    let parts: [PartBinding]
+    let baseState: SceneState
+    let steps: [ProcedureStep]
+}
+
+struct ProcedureStep: Decodable, Identifiable, Sendable {
+    let id: String
+    let titleKey: String
+    let bodyKey: String
+    let accessibilitySummaryKey: String
+    let viewPolicy: ViewPolicy
+    let state: SceneState
+    let entrance: [TransitionBeat]
+}
+
+enum ViewPolicy: String, Decodable, Sendable {
+    case preserveAdjustment
+    case reframe
+}
+
+struct SceneState: Decodable, Sendable {
+    let camera: CameraPose?
+    let parts: [String: PartState]
+}
+
+struct PartState: Decodable, Sendable {
+    let pose: Pose?
+    let opacity: Float?
+    let isVisible: Bool?
+}
+
+enum ProcedureIntent: Equatable, Sendable {
+    case nextStep
+    case previousStep
+    case selectStep(String)
+    case orbit(yaw: Float, pitch: Float)
+    case zoom(scale: Float)
+    case resetView
+}
+```
+
+The decoded `SceneState` may omit values unchanged from `baseState`. Before
+rendering, `SceneStateResolver` produces a `ResolvedSceneState` containing the
+camera and every dynamic part. A target is always resolved from immutable asset
+baseline plus the selected canonical state—never from current render values.
+
+Rules:
+
+- Relative mutations such as `+=`, `-=`, and array-order coupling are forbidden.
+- Every dynamic part has a stable semantic ID and an exact USDZ entity path.
+- Components of an implant share an explicit implant ID; index position is not
+  identity.
+- `entrance` is restricted to explanatory choreography such as staggered screw
+  insertion or transient flexion. Its final beat must equal the step's canonical
+  state.
+- A beat is an allowlisted duration/easing plus absolute target data. It cannot
+  branch, loop, call an operation, reference current render values, or contain an
+  expression. CI bounds beat count/duration and resolves every beat to a complete
+  snapshot before publication; compiled Swift owns interpolation/cancellation.
+- Authored camera pose and user yaw/pitch/zoom adjustment are separate values.
+  `preserveAdjustment` is the default; a medically justified `reframe` resets
+  adjustment and moves to the authored camera. Reset always returns to the
+  current step's authored camera. Policy is a closed enum owned by
+  `ProcedureSession`, not arbitrary remote camera logic.
+
+## 5. Session and transition semantics
+
+`@MainActor @Observable ProcedureSession` is the single source of truth for the
+active procedure. It holds content readiness, selected step ID, authored target,
+user camera adjustment, and transition status.
+
+Intent handling is reducer-like and synchronous:
+
+1. Validate the intent against current capabilities and bounds.
+2. Update the selected domain state immediately.
+3. Resolve a complete target snapshot.
+4. Ask the adapter to retarget from its current presentation state.
+
+There is one active presentation transition. A new target cancels/rebases it;
+input is not discarded behind an arbitrary timer. If content is preparing, only
+the latest target step is retained and applied once the adapter is ready.
+
+## 6. Gesture extensibility
+
+`GestureIntentResolver` is a pure state machine that consumes normalized touch
+samples and emits zero or more `ProcedureIntent` values. SwiftUI gestures do not
+call RealityKit directly.
+
+The resolver owns:
+
+- edge exclusion and control hit precedence;
+- touch-count claims;
+- deadband, axis lock, distance, and velocity thresholds;
+- cancellation and interruption;
+- capability checks such as `canGoNext`, `canOrbit`, and `canZoom`.
+
+Adding trackpad, Pencil, game controller, or a future gesture creates an input
+adapter that emits existing intents whenever possible. Adding a new intent adds
+one exhaustive reducer case and tests; it does not add per-procedure branches.
+
+## 7. Presentation, icons, and localization
+
+Views receive an immutable, MECE presentation value instead of reaching into
+stores independently:
+
+```swift
+struct TheaterViewState: Equatable, Sendable {
+    let navigation: NavigationPresentation
+    let scene: ScenePresentation
+    let explanation: ExplanationPresentation
+    let progress: StepTrayPresentation
+    let utility: UtilityPresentation
+}
+```
+
+Each field has one view owner. A procedure title, step index, or action is not
+copied into two fields to make layout convenient. Debug assertions and snapshot
+reviews compare the screen inventory against this ownership contract.
+
+Routine control meaning is centralized as semantic actions, then mapped to SF
+Symbols and localized accessibility copy in the design system:
+
+```swift
+enum AppAction: Hashable, Sendable {
+    case back, resetView, previousStep, nextStep
+    case selectStep, zoomIn, zoomOut, changeLanguage
+    case download, cancelDownload, retry
+}
+```
+
+Views do not choose ad-hoc icons or embed English labels. An unfamiliar,
+destructive, consent, or error action may display text in addition to its icon.
+
+System UI uses Xcode String Catalogs. Procedure prose uses versioned `en.json`
+and `ja.json` with identical stable keys. `LocaleStore` resolves the effective
+locale once and `ContentStore` returns localized values; feature views never
+scatter `if language == ...` branches. Changing locale rebuilds presentation
+values only—it does not decode/reload USDZ, recreate `ProcedureSession`, or
+alter the active step. CI rejects missing/extra keys and unreviewed locale
+revisions.
+
+## 8. Concurrency and responsiveness
+
+- Swift 6 strict concurrency is enabled from the first commit.
+- SwiftUI state and RealityKit mutation remain on `MainActor`.
+- Manifest fetch, file download, streaming SHA-256 verification, JSON decoding,
+  and cache indexing run in actors/background tasks.
+- `AssetStore` deduplicates in-flight requests by pack ID/version so multiple
+  views cannot download or verify the same asset twice.
+- Downloads use background-capable `URLSession`; only one pack downloads and
+  one model parses at a time. UI observes value snapshots,
+  not mutable task objects.
+- Cancellation is propagated when work is no longer useful, except an atomic
+  install already committing to disk.
+- One procedure model is live. Library previews are still images, not hidden 3D
+  scenes. Step neighbors may be state-precomputed, but extra models are not
+  preloaded.
+
+## 9. Error boundaries
+
+- Domain decoding returns structured validation failures with procedure, field,
+  and schema version.
+- A failed remote refresh never replaces a valid bundled or cached catalog.
+- A pack becomes `ready` only after signature/manifest checks, byte hash,
+  schema validation, entity-binding validation, and atomic rename all pass.
+- Scene adapter errors surface a stable recovery UI and diagnostics code; they
+  do not leave a partially mutated model onscreen.
+
+## 10. Test architecture
+
+### Pure unit tests
+
+- Every step path and random jump resolves to the expected complete snapshot.
+- Repeated navigation has zero drift.
+- Intent bounds, latest-wins cancellation, and pre-load intent behavior.
+- Gesture thresholds, direction locking, edge exclusion, and cancellation.
+- Locale resolution/key parity and in-place language changes with stable session
+  identity.
+- MECE presentation ownership and centralized icon/action mappings.
+- Manifest compatibility, signature fixture, hash mismatch, and version rules.
+- Orthogonal bundled/installed/offered/transfer/failure facts and the derived UI
+  state, including a failed update beside a still-ready prior version.
+- Cache eviction protects the active pack and never deletes bundled content.
+
+### Adapter/integration tests
+
+- Every required semantic ID maps to exactly one expected USDZ entity.
+- Canonical screenshots and entity transforms for all 26 steps.
+- Download interruption, resume/retry, corrupt pack, no network, Low Data Mode,
+  low storage, and stale manifest.
+- Locale fallback and restricted-Markdown parsing.
+
+### UI and physical-device tests
+
+- iPhone and iPad, portrait and landscape, large Dynamic Type, VoiceOver,
+  Reduce Motion, dark appearance, and offline relaunch.
+- ACDF is the correctness spike; PCDF is the worst-case performance gate.
+
+## 11. Coding rules
+
+- Feature folders own views and their local presentation types.
+- Business rules do not live in SwiftUI view bodies or RealityKit callbacks.
+- Prefer value types and exhaustive enums; mutable singletons are prohibited.
+- Avoid a protocol with one production conformer except the documented asset
+  seam.
+- Comments explain non-obvious constraints, not syntax.
+- Public names use medical terminology consistently: `disc`, `cranium`, and
+  `ligamentumFlavum`; source-file typos are normalized at conversion time.
+- Locale conditionals, literal SF Symbol names, and user-facing strings do not
+  appear in feature view bodies.
