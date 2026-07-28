@@ -19,7 +19,7 @@ every downstream contract in the same commit.
 
 ## Implementation boundary
 
-No native source belongs in the current root Web directories. Phase 1 creates:
+Phase 1 established the current repository roots:
 
 ```text
 web/       existing React/Vite product
@@ -28,6 +28,7 @@ content/   validated copy, localization, scene data, catalog source
 tooling/   conversion and validation tools
 ```
 
-The Web move occurs atomically with Vercel preview verification as described in
-[`ROADMAP.md`](ROADMAP.md). The Phase 0 documentation commit does not relocate or
-modify production Web code.
+The Web move preserved source blobs with `git mv`, and Vercel now builds from
+`web/`. Native source belongs only in `ios/`; shared validated content belongs in
+`content/`; conversion and validation code belongs in `tooling/`. See the Phase 1
+evidence and next gate in [`ROADMAP.md`](ROADMAP.md).

@@ -45,10 +45,13 @@ The final monorepo boundary is:
 └── .github/workflows/
 ```
 
-The existing Web files are not moved until the Vercel Root Directory is changed
-to `web/` and a preview deployment proves parity. The reorganization uses
-`git mv` in a dedicated change so history remains traceable and Web/iOS work is
-unambiguous.
+Phase 1 moved the existing Web product unchanged into `web/` with `git mv`.
+Vercel's Root Directory is `web`, the build still reads `web/vercel.json`, and a
+real preview verified all five routes, all five GLBs, and the Draco decoder.
+GitHub Actions runs Web CI from `web/` only when `web/**` or its workflow changes.
+The `ios/`, `content/`, and `tooling/` roots now exist as explicit ownership
+boundaries; runnable native/content workflows are added with their implementations
+rather than as no-op placeholders.
 
 ## 3. Runtime ownership
 

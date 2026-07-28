@@ -180,9 +180,8 @@ Therefore:
 
 After Shinya performs the Phase 0 compact checkpoint:
 
-1. Record the current Web baseline, make deployment assumptions explicit, then
-   mechanically move unchanged Web files into `web/` with a verified Vercel
-   preview and rollback boundary.
+1. **Complete:** record the latest Web baseline, mechanically move the unchanged
+   product into `web/`, and verify the real Vercel preview and rollback boundary.
 2. Convert/instrument ACDF as an iOS 18 RealityKit spike and measure the strict
    size, fidelity, frame, memory, loading, and thermal gates.
 3. Freeze schema v1 and encode ACDF as stable bindings plus complete canonical

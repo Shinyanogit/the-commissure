@@ -1,6 +1,6 @@
 # iOS App Store Roadmap
 
-Status: implementation sequence frozen after Phase 0 review
+Status: Phase 1 complete; Phase 2 is next
 Branch: `feat/ios-native-app`
 This is an engineering order, not a calendar estimate.
 
@@ -46,7 +46,7 @@ removes accidental logic/dependency creep before merge.
   consequential ambiguity, or projected recurring infrastructure above
   ¥500/month should interrupt Shinya.
 
-## 4. Phase 0 — concept and specification freeze (current)
+## 4. Phase 0 — concept and specification freeze (complete)
 
 Deliverables:
 
@@ -71,26 +71,36 @@ Exit criteria:
 After the Phase 0 documentation commit, stop before implementation and wait for
 Shinya to operate compact. The agent does not trigger compact.
 
-## 5. Phase 1 — safe monorepo separation
+## 5. Phase 1 — safe monorepo separation (complete 2026-07-28)
 
-Work:
+Completed work:
 
-1. Move the current React/Vite product with `git mv` into `web/`.
-2. Create explicit `ios/`, `content/`, and `tooling/` boundaries.
-3. Update npm, smoke tests, path-filtered GitHub Actions, and contributor docs.
-4. Change Vercel Root Directory to `web/` and regenerate a preview.
-5. Verify all five routes, models, and production fallback before merge.
+1. [x] Move the latest React/Vite product with `git mv` into `web/`.
+2. [x] Create explicit `ios/`, `content/`, and `tooling/` boundaries.
+3. [x] Update smoke tests, path-filtered Web CI, ignore guards, and contributor docs.
+4. [x] Change Vercel Root Directory to `web/` and generate a real preview.
+5. [x] Verify all five routes, five models, Draco, and rendered homepage/ACDF/PCDF.
 
-Exit criteria:
+Exit evidence:
 
-- `web/` build/test passes from a clean checkout.
-- Vercel preview reproduces the current production routes and 3D assets.
-- Web, iOS, and content CI use path filters and separate working directories.
-- No local `.claude/`, credentials, Blender sources, or `FOR*.md` enter Git.
-- File history remains traceable through `git mv`.
+- `npm ci`, `npm run build`, and the expanded route/asset smoke test pass from
+  `web/`; the output bundle hashes match the pre-move baseline.
+- Vercel reports Root Directory `web`; its preview ran build plus smoke and
+  returned authenticated HTTP 200 with exact byte counts for every GLB and the
+  Draco WASM. Rendered homepage, ACDF, and worst-case Web model PCDF showed one
+  correctly sized canvas and no app-origin console warning/error.
+- Web CI has a `web/**` path filter and `web` working directory. Native and
+  content workflows are created when Phases 3/4 provide runnable validators and
+  tests; no misleading no-op workflow is committed.
+- Local `.claude/`, credentials, Blender sources, generated output, and
+  `FOR*.md` remain ignored. Root and Web `.vercelignore` files prevent fallback
+  CLI uploads from traversing local Blender/native/private directories.
+- The latest upstream Web additions were included, and all moved tracked blobs
+  remain traceable through rename detection.
 
-Rollback: revert the Vercel Root Directory and leave the last successful
-production deployment active; do not merge a relocation with a broken preview.
+Rollback: set the Vercel Root Directory back to the repository root and leave
+the last successful production deployment active; revert the Phase 1 commit by
+PR if necessary. No force-push or destructive reset is required.
 
 ## 6. Phase 2 — native asset and performance spikes
 

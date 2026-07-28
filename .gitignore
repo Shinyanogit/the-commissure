@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Xcode and Swift build output
+DerivedData
+.build
+xcuserdata
+*.xcuserstate
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -42,3 +48,6 @@ docs/*
 .claude/
 FOR*.md
 .env*
+*.p8
+*.p12
+*.mobileprovision
