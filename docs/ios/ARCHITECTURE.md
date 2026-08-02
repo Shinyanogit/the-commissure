@@ -4,8 +4,9 @@ Status: implementation contract
 Stack: Swift 6.2, SwiftUI, RealityKit, structured concurrency
 Minimum deployment: iOS/iPadOS 18
 
-Phase 5A implementation status (2026-08-02): the tracked Xcode project and local
-pure-Foundation package implement the ownership graph below. The SwiftUI shell
+Phase 5A implementation status (2026-08-02, merged in PR #56 as `fece5e8`): the
+tracked Xcode project and local pure-Foundation package implement the ownership
+graph below. The SwiftUI shell
 now consumes immutable presentation projections for Library, Theater, Bottom
 Step Tray, Colophon, and Settings. The scene slot and transfer states remain
 explicit placeholders until Phase 5B/6; domain, RealityKit, and I/O ownership

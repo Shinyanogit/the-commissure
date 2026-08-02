@@ -1,7 +1,7 @@
 # iOS App Store Roadmap
 
-Status: Phase 5A visual shell candidate in progress on branch; Phase 4 merged as `f2a81d7`
-Repository baseline: `main` through PR #54 (`f2a81d7`); each phase uses a dedicated branch.
+Status: Phase 5B visual refinement next; Phase 5A merged as `fece5e8`
+Repository baseline: `main` through PR #56 (`fece5e8`); each phase uses a dedicated branch.
 This is an engineering order, not a calendar estimate.
 
 ## 1. Objective and priority
@@ -320,10 +320,11 @@ Exit criteria:
 - No UI file performs network/file I/O or searches RealityKit entities.
 - Maximum Dynamic Type and VoiceOver retain every essential action.
 
-### Phase 5A machine-gated visual shell (2026-08-02)
+### Phase 5A machine-gated visual shell (completed 2026-08-02; PR #56)
 
-The first native presentation shell is implemented on `feat/ios-phase5-visual-shell`
-from the Phase 5 docs merge. The Claude Design project remains a static reference
+The first native presentation shell was implemented on
+`feat/ios-phase5-visual-shell` from the Phase 5 docs merge and merged as
+`fece5e8`. The Claude Design project remains a static reference
 surface; its synced brief is not a runtime dependency. Opus agent routing was not
 available in this session, so Codex implemented the same strict visual allowlist
 from the frozen brief without allowing visual code to cross into domain or I/O
@@ -345,7 +346,7 @@ Completed candidate scope:
   icon accessibility metadata, and a non-gesture action path for every routine
   control.
 
-Evidence before phase close: Swift format/lint passed; XcodeGen regeneration,
+Phase exit evidence: Swift format/lint passed; XcodeGen regeneration,
 simulator build/run, and 26 simulator tests (23 app-unit tests plus three UI
 tests, including explicit app-preference Japanese String Catalog coverage). The
 existing Web/content boundary audits also pass. This is not final visual
