@@ -207,6 +207,19 @@ Rules:
   new version activates on the next safe open.
 - OS purge of optional cache becomes `evicted`, not corrupt or ready.
 
+### Phase 4 implementation evidence (2026-08-02)
+
+The concrete actor now enforces one active pack across different versions and
+shares a single task for identical pack/version requests. Manifest paths are
+preflighted before the source is called. Exact file set, byte count, lowercase
+SHA-256, and available space are checked before any staged version can be moved
+under `packs/<id>/<version>`. Capacity is checked both before transfer and after
+verification. A corrupt/cancelled/low-storage candidate leaves every prior
+complete directory intact; a cached reopen discovers its completion marker and
+rechecks the expected file set, bytes, and SHA-256 without touching an offline
+source. Deterministic tests also protect active keys
+from eviction and remove only orphan staging directories during recovery.
+
 ## 6. Cache policy
 
 - Persistent verified packs live in Application Support and are excluded from

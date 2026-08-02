@@ -4,6 +4,15 @@ Status: release contract
 Product: The Commissure 1.0
 Platforms: iPhone and iPad, iOS/iPadOS 18 or later
 
+Phase 4 archive status (2026-08-02): the unsigned generic-device archive smoke
+passes for the iOS 18 Swift 6 foundation (`0.1.0` / build `1`, 3.4 MB archive
+before native models and signing). The repair covers the first independent-QC
+findings around gesture arbitration, exact scene/cache identity, pack-key safety,
+and runtime locale projection; a fresh `gpt-5.6-sol` / xhigh QC passed with zero
+open findings. This is build evidence only; it is not a signed distribution
+archive and does not satisfy metadata, rights, medical, floor-device, privacy,
+screenshot, or App Store review gates below.
+
 ## 1. Release scope
 
 Included:
