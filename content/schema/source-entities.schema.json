@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thecommissure.app/schema/source-entities-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "procedureId", "assetPath", "assetSha256", "entities"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "procedureId": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "assetPath": { "type": "string", "pattern": "^web/public/.+\\.glb$" },
+    "assetSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "entities": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

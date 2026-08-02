@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thecommissure.app/schema/provenance-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "procedureId", "contentRevision", "englishSource", "translationReview", "medicalReview", "rightsReview", "assetSource", "license", "authors"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "procedureId": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "contentRevision": { "type": "integer", "minimum": 1 },
+    "englishSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "migration", "normalizations"],
+      "properties": {
+        "path": { "const": "web/src/content/procedureText.js" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "migration": { "const": "mechanical-html-to-restricted-markdown" },
+        "normalizations": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["from", "to", "reason"],
+            "properties": {
+              "from": { "type": "string", "minLength": 1 },
+              "to": { "type": "string", "minLength": 1 },
+              "reason": { "const": "terminologyCorrection" }
+            }
+          }
+        }
+      }
+    },
+    "translationReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reviewer", "reviewedAt"],
+      "properties": {
+        "status": { "const": "editorialReviewed" },
+        "reviewer": { "type": "string", "minLength": 3 },
+        "reviewedAt": { "type": "string", "format": "date" }
+      }
+    },
+    "medicalReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "releaseGate"],
+      "properties": {
+        "status": { "enum": ["inheritedWebsiteSource", "ownerApproved"] },
+        "releaseGate": { "type": "boolean" }
+      }
+    },
+    "rightsReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "releaseGate"],
+      "properties": {
+        "status": { "enum": ["ownerConfirmationRequired", "ownerApproved"] },
+        "releaseGate": { "type": "boolean" }
+      }
+    },
+    "assetSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^web/public/.+\\.glb$" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "license": { "type": "string", "minLength": 1 },
+    "authors": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  }
+}

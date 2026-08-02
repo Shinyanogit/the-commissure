@@ -179,6 +179,31 @@ Therefore:
   TestFlight/App Store submission. Neither simulator nor M1 iPad evidence may
   be presented as proof for A12-class hardware or iOS/iPadOS 18 behavior.
 
+### Phase 3 contract resolution (2026-08-02)
+
+- The fixed remote-data boundary is now executable rather than prose-only:
+  closed schemas and one validator own IDs, restricted Markdown, translation
+  parity/review records, complete absolute state, bindings, versions, catalog
+  hashes/sizes, and provenance.
+- Exact legacy GLB names are retained in hash-bound source inventories, but
+  canonical IDs/entity paths are the only runtime identity. This resolves the
+  audited substring and array-index coupling without rewriting Web timelines.
+  ACDF/PCDF paths include the loader's `/root` prefix and must match the accepted
+  native conversion manifest; PCDF screw component IDs use
+  `screw_<component>_<index>`.
+- English remains meaning-equivalent to the adopted website source through
+  deterministic mechanical conversion plus three recorded PCF terminology
+  corrections. Japanese is key-matched and editorially reviewed; owner medical
+  wording approval and asset/text rights are still explicit release gates rather
+  than inferred from schema success.
+- Twenty-six negative fixtures prove the validator fails closed for every
+  Phase 3 exit example plus divergent final entrance state, degenerate
+  camera/rotation, duplicate binding, path traversal, non-HTTP URL forms,
+  locale identity, provenance revision, view-policy divergence, canonical-root
+  substitution, and localized internal-link label drift. The schema never
+  accepts downloaded code, expressions, arbitrary URLs, relative mutation, or
+  a renderer-specific GSAP operation.
+
 ## 7. Apple and operating constraints
 
 - Apple documents `RealityView` for iOS 18+

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "pcdf",
+  "abbreviation": "PCDF",
+  "version": "1.0.0",
+  "revision": 1,
+  "titleKey": "procedure.title",
+  "summaryKey": "procedure.summary",
+  "asset": {
+    "id": "pcdf_model",
+    "version": "1.0.0"
+  },
+  "sceneFile": "content/ios-scenes/pcdf.json",
+  "locales": [
+    "en",
+    "ja"
+  ],
+  "steps": [
+    {
+      "id": "pcdf_overview",
+      "titleKey": "step.overview.title",
+      "bodyKey": "step.overview.body",
+      "accessibilitySummaryKey": "step.overview.accessibility",
+      "viewPolicy": "preserveAdjustment"
+    },
+    {
+      "id": "pcdf_indications",
+      "titleKey": "step.indications.title",
+      "bodyKey": "step.indications.body",
+      "accessibilitySummaryKey": "step.indications.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "pcdf_laminectomy",
+      "titleKey": "step.laminectomy.title",
+      "bodyKey": "step.laminectomy.body",
+      "accessibilitySummaryKey": "step.laminectomy.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "pcdf_post_laminectomy_kyphosis",
+      "titleKey": "step.post_laminectomy_kyphosis.title",
+      "bodyKey": "step.post_laminectomy_kyphosis.body",
+      "accessibilitySummaryKey": "step.post_laminectomy_kyphosis.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "pcdf_posterior_fixation",
+      "titleKey": "step.posterior_fixation.title",
+      "bodyKey": "step.posterior_fixation.body",
+      "accessibilitySummaryKey": "step.posterior_fixation.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "pcdf_summary",
+      "titleKey": "step.summary.title",
+      "bodyKey": "step.summary.body",
+      "accessibilitySummaryKey": "step.summary.accessibility",
+      "viewPolicy": "reframe"
+    }
+  ]
+}

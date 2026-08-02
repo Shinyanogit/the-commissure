@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thecommissure.app/schema/procedure-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "abbreviation", "version", "revision", "titleKey", "summaryKey", "asset", "sceneFile", "locales", "steps"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "$ref": "#/$defs/id" },
+    "abbreviation": { "type": "string", "pattern": "^[A-Z]{2,8}$" },
+    "version": { "$ref": "#/$defs/semver" },
+    "revision": { "type": "integer", "minimum": 1 },
+    "titleKey": { "$ref": "#/$defs/key" },
+    "summaryKey": { "$ref": "#/$defs/key" },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "version": { "$ref": "#/$defs/semver" }
+      }
+    },
+    "sceneFile": { "type": "string", "pattern": "^content/ios-scenes/[a-z][a-z0-9_-]*\\.json$" },
+    "locales": {
+      "type": "array",
+      "prefixItems": [{ "const": "en" }, { "const": "ja" }],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "titleKey", "bodyKey", "accessibilitySummaryKey", "viewPolicy"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "titleKey": { "$ref": "#/$defs/key" },
+          "bodyKey": { "$ref": "#/$defs/key" },
+          "accessibilitySummaryKey": { "$ref": "#/$defs/key" },
+          "viewPolicy": { "enum": ["preserveAdjustment", "reframe"] }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "key": { "type": "string", "pattern": "^[a-z][a-z0-9_.]*$" },
+    "semver": { "type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$" }
+  }
+}

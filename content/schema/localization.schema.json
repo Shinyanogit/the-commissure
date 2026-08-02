@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thecommissure.app/schema/localization-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "procedureId", "locale", "revision", "review", "strings"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "procedureId": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "locale": { "enum": ["en", "ja"] },
+    "revision": { "type": "integer", "minimum": 1 },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reviewer", "reviewedAt", "sourceDigest"],
+      "properties": {
+        "status": { "const": "editorialReviewed" },
+        "reviewer": { "type": "string", "minLength": 3 },
+        "reviewedAt": { "type": "string", "format": "date" },
+        "sourceDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "strings": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_.]*$" },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    }
+  }
+}

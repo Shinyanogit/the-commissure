@@ -1,0 +1,2927 @@
+{
+  "schemaVersion": 1,
+  "procedureId": "accf",
+  "assetId": "accf_model",
+  "assetVersion": "1.0.0",
+  "rootEntityPath": "/root/procedure_accf",
+  "parts": [
+    {
+      "id": "disc_c4_c5",
+      "sourceEntity": "c4-c5 disk",
+      "entityPath": "/root/procedure_accf/anatomy/disc_c4_c5",
+      "dynamic": true
+    },
+    {
+      "id": "disc_c5_c6",
+      "sourceEntity": "c5-c6 disk",
+      "entityPath": "/root/procedure_accf/anatomy/disc_c5_c6",
+      "dynamic": true
+    },
+    {
+      "id": "nucleus_c4_c5",
+      "sourceEntity": "c4-c5 nucleus pulposus",
+      "entityPath": "/root/procedure_accf/anatomy/nucleus_c4_c5",
+      "dynamic": true
+    },
+    {
+      "id": "nucleus_c5_c6",
+      "sourceEntity": "c5-c6 nucleus pulposus",
+      "entityPath": "/root/procedure_accf/anatomy/nucleus_c5_c6",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c4_removed",
+      "sourceEntity": "c4 bone removed",
+      "entityPath": "/root/procedure_accf/anatomy/vertebra_c4_removed",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c5_removed_solid",
+      "sourceEntity": "c5 bone removed solid",
+      "entityPath": "/root/procedure_accf/anatomy/vertebra_c5_removed_solid",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c5_removed_transparent",
+      "sourceEntity": "c5 bone removed transparent",
+      "entityPath": "/root/procedure_accf/anatomy/vertebra_c5_removed_transparent",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c5_solid",
+      "sourceEntity": "c5 bone solid",
+      "entityPath": "/root/procedure_accf/anatomy/vertebra_c5_solid",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c5_transparent",
+      "sourceEntity": "c5 bone transparent",
+      "entityPath": "/root/procedure_accf/anatomy/vertebra_c5_transparent",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c6_removed",
+      "sourceEntity": "c6 bone removed",
+      "entityPath": "/root/procedure_accf/anatomy/vertebra_c6_removed",
+      "dynamic": true
+    },
+    {
+      "id": "medulla_c5",
+      "sourceEntity": "c5 nerve medulla",
+      "entityPath": "/root/procedure_accf/anatomy/medulla_c5",
+      "dynamic": true
+    },
+    {
+      "id": "nerve_root_c5",
+      "sourceEntity": "c5 nerve",
+      "entityPath": "/root/procedure_accf/anatomy/nerve_root_c5",
+      "dynamic": true
+    },
+    {
+      "id": "cage_sheath",
+      "sourceEntity": "vertebral body cage sheath",
+      "entityPath": "/root/procedure_accf/implants/cage_sheath",
+      "dynamic": true,
+      "implantId": "vertebral_body_cage"
+    },
+    {
+      "id": "cage_shaft",
+      "sourceEntity": "vertebral body cage shaft",
+      "entityPath": "/root/procedure_accf/implants/cage_shaft",
+      "dynamic": true,
+      "implantId": "vertebral_body_cage"
+    },
+    {
+      "id": "plate",
+      "sourceEntity": "plate",
+      "entityPath": "/root/procedure_accf/implants/plate",
+      "dynamic": true,
+      "implantId": "anterior_plate_system"
+    },
+    {
+      "id": "screw_1",
+      "sourceEntity": "screw 1",
+      "entityPath": "/root/procedure_accf/implants/screw_1",
+      "dynamic": true,
+      "implantId": "anterior_plate_system"
+    },
+    {
+      "id": "screw_2",
+      "sourceEntity": "screw 2",
+      "entityPath": "/root/procedure_accf/implants/screw_2",
+      "dynamic": true,
+      "implantId": "anterior_plate_system"
+    },
+    {
+      "id": "screw_3",
+      "sourceEntity": "screw 3",
+      "entityPath": "/root/procedure_accf/implants/screw_3",
+      "dynamic": true,
+      "implantId": "anterior_plate_system"
+    },
+    {
+      "id": "screw_4",
+      "sourceEntity": "screw 4",
+      "entityPath": "/root/procedure_accf/implants/screw_4",
+      "dynamic": true,
+      "implantId": "anterior_plate_system"
+    }
+  ],
+  "baseState": {
+    "camera": {
+      "position": [
+        0.2,
+        0.2,
+        0
+      ],
+      "target": [
+        0,
+        0.2,
+        0
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fieldOfView": 75
+    },
+    "parts": {
+      "disc_c4_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_c5_c6": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "nucleus_c4_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "nucleus_c5_c6": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c4_removed": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c5_removed_solid": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c5_removed_transparent": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c5_solid": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c5_transparent": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c6_removed": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "medulla_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "nerve_root_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "cage_sheath": {
+        "translation": [
+          0,
+          -0.4,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "cage_shaft": {
+        "translation": [
+          0,
+          -0.4,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "plate": {
+        "translation": [
+          0,
+          -0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_1": {
+        "translation": [
+          0,
+          -0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_2": {
+        "translation": [
+          0,
+          -0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_3": {
+        "translation": [
+          0,
+          -0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_4": {
+        "translation": [
+          0,
+          -0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      }
+    }
+  },
+  "steps": [
+    {
+      "id": "accf_overview",
+      "viewPolicy": "preserveAdjustment",
+      "state": {
+        "camera": {
+          "position": [
+            0.2,
+            0.2,
+            0
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 75
+        },
+        "parts": {
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_removed_solid": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_removed_transparent": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_solid": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_transparent": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "cage_sheath": {
+            "translation": [
+              0,
+              -0.4,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "cage_shaft": {
+            "translation": [
+              0,
+              -0.4,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "plate": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_1": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_2": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_3": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_4": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "accf_indications",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0,
+            0.4,
+            -0.9
+          ],
+          "target": [
+            0,
+            0.2,
+            -1
+          ],
+          "up": [
+            0,
+            0,
+            -1
+          ],
+          "fieldOfView": 25
+        },
+        "parts": {
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c5_c6": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_removed_solid": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_removed_transparent": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_solid": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_transparent": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "cage_sheath": {
+            "translation": [
+              0,
+              -0.4,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "cage_shaft": {
+            "translation": [
+              0,
+              -0.4,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "plate": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_1": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_2": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_3": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_4": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "accf_posterior_lesion",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0.2,
+            0.2,
+            -1
+          ],
+          "target": [
+            0,
+            0.2,
+            -1
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 25
+        },
+        "parts": {
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c5_c6": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_removed_solid": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_removed_transparent": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_solid": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_transparent": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c6_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "cage_sheath": {
+            "translation": [
+              0,
+              -0.4,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "cage_shaft": {
+            "translation": [
+              0,
+              -0.4,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "plate": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_1": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_2": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_3": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_4": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "accf_discectomy_corpectomy",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0,
+            0.1,
+            0.2
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 25
+        },
+        "parts": {
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nucleus_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nucleus_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed_solid": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed_transparent": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_solid": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_transparent": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "cage_sheath": {
+            "translation": [
+              0,
+              -0.4,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "cage_shaft": {
+            "translation": [
+              0,
+              -0.4,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "plate": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_1": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_2": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_3": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_4": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "accf_reconstruction",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            -0.1,
+            0.1,
+            0.2
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 25
+        },
+        "parts": {
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nucleus_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nucleus_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed_solid": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed_transparent": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_solid": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_transparent": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "cage_sheath": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "cage_shaft": {
+            "translation": [
+              0,
+              -0.00125,
+              0.0025
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "plate": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_1": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_2": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_3": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_4": {
+            "translation": [
+              0,
+              -0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "accf_anterior_fixation",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0.2,
+            0.2,
+            0.4
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 15
+        },
+        "parts": {
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nucleus_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nucleus_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed_solid": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed_transparent": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_solid": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_transparent": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "cage_sheath": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "cage_shaft": {
+            "translation": [
+              0,
+              -0.00125,
+              0.0025
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "plate": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "accf_summary",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            -0.1,
+            0.1,
+            0.2
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 15
+        },
+        "parts": {
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nucleus_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nucleus_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed_solid": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed_transparent": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_solid": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_transparent": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "cage_sheath": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "cage_shaft": {
+            "translation": [
+              0,
+              -0.00125,
+              0.0025
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "plate": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          }
+        }
+      },
+      "entrance": []
+    }
+  ]
+}

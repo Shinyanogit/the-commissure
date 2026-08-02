@@ -93,6 +93,11 @@ also requires:
   substitute for supervised surgical training.
 - Every procedure revision records source, author/editor, reviewer, version, and
   date. No patient-identifiable media is present.
+- Phase 3 `editorialReviewed` records prove key-matched migration review only.
+  A provenance value of `medicalReview.status = inheritedWebsiteSource` or a
+  `rightsReview.status = ownerConfirmationRequired` record remains
+  release-blocking; schema/CI success must not be presented as medical or
+  licensing approval.
 - Rights are documented for USDZ/Blender-derived models, text, fonts, icons,
   author media, and screenshots.
 - Production content URLs and public verification key are present; private

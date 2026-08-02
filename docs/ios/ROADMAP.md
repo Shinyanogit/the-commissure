@@ -1,7 +1,7 @@
 # iOS App Store Roadmap
 
-Status: Phase 2 complete on branch; Phase 3 begins after Phase 2 PR/main verification
-Repository baseline: `main` through PR #51; each phase uses a dedicated branch.
+Status: Phase 3 complete on branch; Phase 4 begins after Phase 3 PR/main verification
+Repository baseline: `main` through PR #52 (`6585b6c`); each phase uses a dedicated branch.
 This is an engineering order, not a calendar estimate.
 
 ## 1. Objective and priority
@@ -185,7 +185,7 @@ status: size, geometry, semantic, state, build, simulator, and representative
 physical-device hard gates pass. Exact floor-device performance, ACCF/PCF total
 payload, and App Thinning remain explicitly unpassed release gates.
 
-## 7. Phase 3 — content contract and bilingual migration
+## 7. Phase 3 — content contract and bilingual migration (QC correction cycle 2026-08-02)
 
 Work:
 
@@ -204,6 +204,37 @@ Exit criteria:
   or missing entity fails CI.
 - Web may consume shared prose/metadata, while its GSAP and the iOS scene states
   remain separate renderer-specific representations.
+
+Exit evidence (2026-08-02):
+
+- Closed JSON Schema v1 contracts now cover catalog, procedure, localization,
+  iOS scene, provenance, and source-entity inventories. Four procedure bundles
+  and all 26 steps validate with stable procedure/step/part IDs.
+- English title/body values are mechanically converted from the current Web
+  source into restricted Markdown, with three provenance-recorded PCF
+  terminology corrections, and hash-checked against it. Japanese uses the same
+  86 presentation keys, with an explicit editorial review record.
+- Every iOS scene step contains a complete absolute camera/part snapshot.
+  Canonical entity paths are distinct from exact legacy GLB names; inventories
+  are tied to each source asset SHA-256, and accepted ACDF/PCDF native manifests
+  additionally pin IDs and `/root/procedure_<id>/...` paths. The PCDF kyphosis
+  state includes the Web-defined disc/ligament/nerve visibility. GSAP remains
+  Web-only.
+- Content CI regenerates deterministically, rejects dirty output, validates all
+  catalog file hashes/sizes and provenance, audits its pinned dependencies, and
+  runs 26 negative fixtures. These cover the original contract failures plus
+  eight non-HTTP/protocol-relative URL forms, locale-file identity, provenance revision,
+  procedure/scene view-policy parity, canonical procedure root, and canonical
+  localized internal-link labels.
+- Schema/editorial completion does not imply owner medical or rights approval.
+  Provenance keeps both as fail-closed release gates before external TestFlight
+  or App Store submission.
+- Three fresh independent QC passes found and drove corrections before commit:
+  native entity-path/screw mismatches, incomplete PCDF kyphosis state, weak
+  scene-state geometry checks, a Japanese ACDF label omission, URL allowlist
+  gaps, missing cross-file invariants, and punctuation-prefixed protocol-relative
+  URL bypasses. Phase 3 remains open until a newly
+  frozen candidate passes independent QC and merges through required checks.
 
 ## 8. Phase 4 — native foundation
 

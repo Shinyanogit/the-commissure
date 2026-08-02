@@ -108,6 +108,12 @@ contract, so size-gate fallback does not create a second scene or cache engine.
 
 ## 4. Pack format
 
+Phase 3 implements the unsigned source form of this contract in `content/`.
+Each catalog record pins the five JSON pack files by path, SHA-256, and byte
+count; the model/preview entries and detached production signature are added by
+the later pack-publication phase. Source-entity inventories are validation
+evidence bound to the original GLB digest and are not runtime pack files.
+
 ```text
 catalog-v1/
 ├── manifest.json
@@ -154,6 +160,9 @@ scene states already understood by the shipped app. It cannot load code,
 JavaScript, custom shaders, arbitrary URLs, or new native features. This keeps
 content updates within Apple's rule that downloaded material must not change the
 app into an unreviewed executable product ([App Review Guideline 2.5.2](https://developer.apple.com/app-store/review/guidelines/#software-requirements)).
+The validator permits only canonical links to the four known procedure IDs;
+URI schemes, protocol-relative addresses, and `www.` hosts fail before a pack
+can be cataloged.
 
 ## 5. `AssetStore` lifecycle
 

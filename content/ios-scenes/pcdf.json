@@ -1,0 +1,7977 @@
+{
+  "schemaVersion": 1,
+  "procedureId": "pcdf",
+  "assetId": "pcdf_model",
+  "assetVersion": "1.0.0",
+  "rootEntityPath": "/root/procedure_pcdf",
+  "parts": [
+    {
+      "id": "cranium",
+      "sourceEntity": "cranium bone",
+      "entityPath": "/root/procedure_pcdf/anatomy/cranium",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c1",
+      "sourceEntity": "c1 bone",
+      "entityPath": "/root/procedure_pcdf/anatomy/vertebra_c1",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c2",
+      "sourceEntity": "c2 bone",
+      "entityPath": "/root/procedure_pcdf/anatomy/vertebra_c2",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c3",
+      "sourceEntity": "c3 bone",
+      "entityPath": "/root/procedure_pcdf/anatomy/vertebra_c3",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c4",
+      "sourceEntity": "c4 bone",
+      "entityPath": "/root/procedure_pcdf/anatomy/vertebra_c4",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c5",
+      "sourceEntity": "c5 bone",
+      "entityPath": "/root/procedure_pcdf/anatomy/vertebra_c5",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c6",
+      "sourceEntity": "c6 bone",
+      "entityPath": "/root/procedure_pcdf/anatomy/vertebra_c6",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c7",
+      "sourceEntity": "c7 bone",
+      "entityPath": "/root/procedure_pcdf/anatomy/vertebra_c7",
+      "dynamic": true
+    },
+    {
+      "id": "disc_c2_c3",
+      "sourceEntity": "c2-c3 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_c2_c3",
+      "dynamic": true
+    },
+    {
+      "id": "disc_c3_c4",
+      "sourceEntity": "c3-c4 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_c3_c4",
+      "dynamic": true
+    },
+    {
+      "id": "disc_c4_c5",
+      "sourceEntity": "c4-c5 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_c4_c5",
+      "dynamic": true
+    },
+    {
+      "id": "disc_c5_c6",
+      "sourceEntity": "c5-c6 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_c5_c6",
+      "dynamic": true
+    },
+    {
+      "id": "disc_c6_c7",
+      "sourceEntity": "c6-c7 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_c6_c7",
+      "dynamic": true
+    },
+    {
+      "id": "disc_c7_t1",
+      "sourceEntity": "c7-t1 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_c7_t1",
+      "dynamic": true
+    },
+    {
+      "id": "disc_t1_t2",
+      "sourceEntity": "t1-t2 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_t1_t2",
+      "dynamic": true
+    },
+    {
+      "id": "disc_t2_t3",
+      "sourceEntity": "t2-t3 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_t2_t3",
+      "dynamic": true
+    },
+    {
+      "id": "disc_t3_t4",
+      "sourceEntity": "t3-t4 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_t3_t4",
+      "dynamic": true
+    },
+    {
+      "id": "disc_t4_t5",
+      "sourceEntity": "t4-t5 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_t4_t5",
+      "dynamic": true
+    },
+    {
+      "id": "disc_t5_t6",
+      "sourceEntity": "t5-t6 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_t5_t6",
+      "dynamic": true
+    },
+    {
+      "id": "disc_t6_t7",
+      "sourceEntity": "t6-t7 disk",
+      "entityPath": "/root/procedure_pcdf/anatomy/disc_t6_t7",
+      "dynamic": true
+    },
+    {
+      "id": "ligamentum_flavum",
+      "sourceEntity": "ligament flavum",
+      "entityPath": "/root/procedure_pcdf/anatomy/ligamentum_flavum",
+      "dynamic": true
+    },
+    {
+      "id": "ligamentum_flavum_2",
+      "sourceEntity": "ligament flavum.002",
+      "entityPath": "/root/procedure_pcdf/anatomy/ligamentum_flavum_2",
+      "dynamic": true
+    },
+    {
+      "id": "ligamentum_flavum_3",
+      "sourceEntity": "ligament flavum.003",
+      "entityPath": "/root/procedure_pcdf/anatomy/ligamentum_flavum_3",
+      "dynamic": true
+    },
+    {
+      "id": "posterior_longitudinal_ligament",
+      "sourceEntity": "posterior longitudinal ligament",
+      "entityPath": "/root/procedure_pcdf/anatomy/posterior_longitudinal_ligament",
+      "dynamic": true
+    },
+    {
+      "id": "central_nerve",
+      "sourceEntity": "central nerve",
+      "entityPath": "/root/procedure_pcdf/anatomy/central_nerve",
+      "dynamic": true
+    },
+    {
+      "id": "lamina_c5",
+      "sourceEntity": "c5 removed bone",
+      "entityPath": "/root/procedure_pcdf/anatomy/lamina_c5",
+      "dynamic": true
+    },
+    {
+      "id": "lamina_removed",
+      "sourceEntity": "removed bone",
+      "entityPath": "/root/procedure_pcdf/anatomy/lamina_removed",
+      "dynamic": true
+    },
+    {
+      "id": "ligamentum_flavum_removed",
+      "sourceEntity": "removed ligament flavum.002",
+      "entityPath": "/root/procedure_pcdf/anatomy/ligamentum_flavum_removed",
+      "dynamic": true
+    },
+    {
+      "id": "nerve_root_c5",
+      "sourceEntity": "c5 nerve.001",
+      "entityPath": "/root/procedure_pcdf/anatomy/nerve_root_c5",
+      "dynamic": true
+    },
+    {
+      "id": "medulla_c5",
+      "sourceEntity": "c5 nerve medulla",
+      "entityPath": "/root/procedure_pcdf/anatomy/medulla_c5",
+      "dynamic": true
+    },
+    {
+      "id": "screw_shaft_1",
+      "sourceEntity": "screw shaft 1",
+      "entityPath": "/root/procedure_pcdf/implants/screw_shaft_1",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_1"
+    },
+    {
+      "id": "screw_saddle_1",
+      "sourceEntity": "screw saddle 1",
+      "entityPath": "/root/procedure_pcdf/implants/screw_saddle_1",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_1"
+    },
+    {
+      "id": "screw_cap_1",
+      "sourceEntity": "screw cap 1",
+      "entityPath": "/root/procedure_pcdf/implants/screw_cap_1",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_1"
+    },
+    {
+      "id": "screw_shaft_2",
+      "sourceEntity": "screw shaft 2",
+      "entityPath": "/root/procedure_pcdf/implants/screw_shaft_2",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_2"
+    },
+    {
+      "id": "screw_saddle_2",
+      "sourceEntity": "screw saddle 2",
+      "entityPath": "/root/procedure_pcdf/implants/screw_saddle_2",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_2"
+    },
+    {
+      "id": "screw_cap_2",
+      "sourceEntity": "screw cap 2",
+      "entityPath": "/root/procedure_pcdf/implants/screw_cap_2",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_2"
+    },
+    {
+      "id": "screw_shaft_3",
+      "sourceEntity": "screw shaft 3",
+      "entityPath": "/root/procedure_pcdf/implants/screw_shaft_3",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_3"
+    },
+    {
+      "id": "screw_saddle_3",
+      "sourceEntity": "screw saddle 3",
+      "entityPath": "/root/procedure_pcdf/implants/screw_saddle_3",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_3"
+    },
+    {
+      "id": "screw_cap_3",
+      "sourceEntity": "screw cap 3",
+      "entityPath": "/root/procedure_pcdf/implants/screw_cap_3",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_3"
+    },
+    {
+      "id": "screw_shaft_4",
+      "sourceEntity": "screw shaft 4",
+      "entityPath": "/root/procedure_pcdf/implants/screw_shaft_4",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_4"
+    },
+    {
+      "id": "screw_saddle_4",
+      "sourceEntity": "screw saddle 4",
+      "entityPath": "/root/procedure_pcdf/implants/screw_saddle_4",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_4"
+    },
+    {
+      "id": "screw_cap_4",
+      "sourceEntity": "screw cap 4",
+      "entityPath": "/root/procedure_pcdf/implants/screw_cap_4",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_4"
+    },
+    {
+      "id": "screw_shaft_5",
+      "sourceEntity": "screw shaft 5",
+      "entityPath": "/root/procedure_pcdf/implants/screw_shaft_5",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_5"
+    },
+    {
+      "id": "screw_saddle_5",
+      "sourceEntity": "screw saddle 5",
+      "entityPath": "/root/procedure_pcdf/implants/screw_saddle_5",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_5"
+    },
+    {
+      "id": "screw_cap_5",
+      "sourceEntity": "screw cap 5",
+      "entityPath": "/root/procedure_pcdf/implants/screw_cap_5",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_5"
+    },
+    {
+      "id": "screw_shaft_6",
+      "sourceEntity": "screw shaft 6",
+      "entityPath": "/root/procedure_pcdf/implants/screw_shaft_6",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_6"
+    },
+    {
+      "id": "screw_saddle_6",
+      "sourceEntity": "screw saddle 6",
+      "entityPath": "/root/procedure_pcdf/implants/screw_saddle_6",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_6"
+    },
+    {
+      "id": "screw_cap_6",
+      "sourceEntity": "screw cap 6",
+      "entityPath": "/root/procedure_pcdf/implants/screw_cap_6",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_6"
+    },
+    {
+      "id": "screw_shaft_7",
+      "sourceEntity": "screw shaft 7",
+      "entityPath": "/root/procedure_pcdf/implants/screw_shaft_7",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_7"
+    },
+    {
+      "id": "screw_saddle_7",
+      "sourceEntity": "screw saddle 7",
+      "entityPath": "/root/procedure_pcdf/implants/screw_saddle_7",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_7"
+    },
+    {
+      "id": "screw_cap_7",
+      "sourceEntity": "screw cap 7",
+      "entityPath": "/root/procedure_pcdf/implants/screw_cap_7",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_7"
+    },
+    {
+      "id": "screw_shaft_8",
+      "sourceEntity": "screw shaft 8",
+      "entityPath": "/root/procedure_pcdf/implants/screw_shaft_8",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_8"
+    },
+    {
+      "id": "screw_saddle_8",
+      "sourceEntity": "screw saddle 8",
+      "entityPath": "/root/procedure_pcdf/implants/screw_saddle_8",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_8"
+    },
+    {
+      "id": "screw_cap_8",
+      "sourceEntity": "screw cap 8",
+      "entityPath": "/root/procedure_pcdf/implants/screw_cap_8",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_8"
+    },
+    {
+      "id": "screw_shaft_9",
+      "sourceEntity": "screw shaft 9",
+      "entityPath": "/root/procedure_pcdf/implants/screw_shaft_9",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_9"
+    },
+    {
+      "id": "screw_saddle_9",
+      "sourceEntity": "screw saddle 9",
+      "entityPath": "/root/procedure_pcdf/implants/screw_saddle_9",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_9"
+    },
+    {
+      "id": "screw_cap_9",
+      "sourceEntity": "screw cap 9",
+      "entityPath": "/root/procedure_pcdf/implants/screw_cap_9",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_9"
+    },
+    {
+      "id": "screw_shaft_10",
+      "sourceEntity": "screw shaft 10",
+      "entityPath": "/root/procedure_pcdf/implants/screw_shaft_10",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_10"
+    },
+    {
+      "id": "screw_saddle_10",
+      "sourceEntity": "screw saddle 10",
+      "entityPath": "/root/procedure_pcdf/implants/screw_saddle_10",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_10"
+    },
+    {
+      "id": "screw_cap_10",
+      "sourceEntity": "screw cap 10",
+      "entityPath": "/root/procedure_pcdf/implants/screw_cap_10",
+      "dynamic": true,
+      "implantId": "lateral_mass_screw_10"
+    },
+    {
+      "id": "rod_1",
+      "sourceEntity": "rod 1",
+      "entityPath": "/root/procedure_pcdf/implants/rod_1",
+      "dynamic": true,
+      "implantId": "posterior_rod_1"
+    },
+    {
+      "id": "rod_2",
+      "sourceEntity": "rod 2",
+      "entityPath": "/root/procedure_pcdf/implants/rod_2",
+      "dynamic": true,
+      "implantId": "posterior_rod_2"
+    }
+  ],
+  "baseState": {
+    "camera": {
+      "position": [
+        0.2,
+        0.2,
+        0
+      ],
+      "target": [
+        0,
+        0.2,
+        0
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fieldOfView": 75
+    },
+    "parts": {
+      "cranium": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c1": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c2": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c3": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c4": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c6": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c7": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_c2_c3": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_c3_c4": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_c4_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_c5_c6": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_c6_c7": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_c7_t1": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_t1_t2": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_t2_t3": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_t3_t4": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_t4_t5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_t5_t6": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_t6_t7": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "ligamentum_flavum": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "ligamentum_flavum_2": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "ligamentum_flavum_3": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "posterior_longitudinal_ligament": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "central_nerve": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "lamina_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "lamina_removed": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "ligamentum_flavum_removed": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "nerve_root_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "medulla_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "screw_shaft_1": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_saddle_1": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_cap_1": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_shaft_2": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_saddle_2": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_cap_2": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_shaft_3": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_saddle_3": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_cap_3": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_shaft_4": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_saddle_4": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_cap_4": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_shaft_5": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_saddle_5": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_cap_5": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_shaft_6": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_saddle_6": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_cap_6": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_shaft_7": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_saddle_7": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_cap_7": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_shaft_8": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_saddle_8": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_cap_8": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_shaft_9": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_saddle_9": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_cap_9": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_shaft_10": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_saddle_10": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "screw_cap_10": {
+        "translation": [
+          0,
+          0.2,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "rod_1": {
+        "translation": [
+          0,
+          0,
+          -0.2
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "rod_2": {
+        "translation": [
+          0,
+          0,
+          -0.2
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      }
+    }
+  },
+  "steps": [
+    {
+      "id": "pcdf_overview",
+      "viewPolicy": "preserveAdjustment",
+      "state": {
+        "camera": {
+          "position": [
+            0.2,
+            0.2,
+            0
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 75
+        },
+        "parts": {
+          "cranium": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c2_c3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c3_c4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c6_c7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c7_t1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t1_t2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t2_t3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t3_t4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t4_t5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t5_t6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t6_t7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "posterior_longitudinal_ligament": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "central_nerve": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "lamina_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "lamina_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "rod_1": {
+            "translation": [
+              0,
+              0,
+              -0.2
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "rod_2": {
+            "translation": [
+              0,
+              0,
+              -0.2
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "pcdf_indications",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0,
+            0.4,
+            -1
+          ],
+          "target": [
+            0,
+            0.2,
+            -1
+          ],
+          "up": [
+            0,
+            0,
+            -1
+          ],
+          "fieldOfView": 25
+        },
+        "parts": {
+          "cranium": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c2_c3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c3_c4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c6_c7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c7_t1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t1_t2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t2_t3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t3_t4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t4_t5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t5_t6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t6_t7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "posterior_longitudinal_ligament": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "central_nerve": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "lamina_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "lamina_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "rod_1": {
+            "translation": [
+              0,
+              0,
+              -0.2
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "rod_2": {
+            "translation": [
+              0,
+              0,
+              -0.2
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "pcdf_laminectomy",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0,
+            0.2,
+            -0.2
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 75
+        },
+        "parts": {
+          "cranium": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c2_c3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c3_c4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c6_c7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c7_t1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t1_t2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t2_t3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t3_t4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t4_t5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t5_t6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t6_t7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "posterior_longitudinal_ligament": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "central_nerve": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "lamina_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "lamina_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "rod_1": {
+            "translation": [
+              0,
+              0,
+              -0.2
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "rod_2": {
+            "translation": [
+              0,
+              0,
+              -0.2
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "pcdf_post_laminectomy_kyphosis",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0.2,
+            0.2,
+            0
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 75
+        },
+        "parts": {
+          "cranium": {
+            "translation": [
+              0,
+              -0.05,
+              -0.05
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0.6283185307179586
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c1": {
+            "translation": [
+              0,
+              -0.045,
+              -0.01
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0.6283185307179586
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c2": {
+            "translation": [
+              0,
+              -0.04,
+              -0.005
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0.6283185307179586
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c3": {
+            "translation": [
+              0,
+              -0.023,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0.6283185307179586
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4": {
+            "translation": [
+              0,
+              -0.013,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0.3141592653589793
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5": {
+            "translation": [
+              0,
+              -0.007,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0.15707963267948966
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6": {
+            "translation": [
+              0,
+              -0.004,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0.07853981633974483
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c7": {
+            "translation": [
+              0,
+              -0.001,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0.039269908169872414
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c2_c3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c3_c4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c6_c7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c7_t1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_t1_t2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_t2_t3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_t3_t4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_t4_t5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_t5_t6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_t6_t7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "posterior_longitudinal_ligament": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "central_nerve": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "lamina_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "lamina_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_1": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_2": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_3": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_4": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_5": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_6": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_7": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_8": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_9": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_shaft_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_saddle_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "screw_cap_10": {
+            "translation": [
+              0,
+              0.2,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "rod_1": {
+            "translation": [
+              0,
+              0,
+              -0.2
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "rod_2": {
+            "translation": [
+              0,
+              0,
+              -0.2
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "pcdf_posterior_fixation",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0,
+            0.2,
+            -0.2
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 75
+        },
+        "parts": {
+          "cranium": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c2_c3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c3_c4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c6_c7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c7_t1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t1_t2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t2_t3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t3_t4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t4_t5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t5_t6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t6_t7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "posterior_longitudinal_ligament": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "central_nerve": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "lamina_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "lamina_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_8": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_8": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_8": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_9": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_9": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_9": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_10": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_10": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_10": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "rod_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "rod_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "pcdf_summary",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            -0.2,
+            0.2,
+            0
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 75
+        },
+        "parts": {
+          "cranium": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c2_c3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c3_c4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c5_c6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c6_c7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c7_t1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t1_t2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t2_t3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t3_t4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t4_t5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t5_t6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_t6_t7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "posterior_longitudinal_ligament": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "central_nerve": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "lamina_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "lamina_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_3": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_4": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_6": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_7": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_8": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_8": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_8": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_9": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_9": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_9": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_shaft_10": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_saddle_10": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "screw_cap_10": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "rod_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "rod_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          }
+        }
+      },
+      "entrance": []
+    }
+  ]
+}

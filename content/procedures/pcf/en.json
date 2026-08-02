@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "procedureId": "pcf",
+  "locale": "en",
+  "revision": 1,
+  "review": {
+    "status": "editorialReviewed",
+    "reviewer": "Codex mechanical source migration verification",
+    "reviewedAt": "2026-08-02",
+    "sourceDigest": "fe26c5b8eb449f8d798d370a3e7330ed07913b7d0f7a04e00d3f89e091f62fdd"
+  },
+  "strings": {
+    "procedure.title": "Posterior Cervical Foraminotomy (PCF)",
+    "procedure.summary": "Posterior cervical foraminotomy (PCF) is a surgical procedure that relieves pressure on the spinal cord and nerves by **widening the neural foramen posteriorly**.",
+    "step.overview.title": "Posterior Cervical Foraminotomy (PCF)",
+    "step.overview.body": "Posterior cervical foraminotomy (PCF) is a surgical procedure that relieves pressure on the spinal cord and nerves by **widening the neural foramen posteriorly**.\nA major advantage of PCF is that it allows patients to **preserve range of motion** after the surgery.\nDuring the procedure, surgeons may additionally perform **discectomy** or **osteophytectomy** to achieve adequate decompression and symptom relief.",
+    "step.overview.accessibility": "Posterior Cervical Foraminotomy (PCF). Posterior cervical foraminotomy (PCF) is a surgical procedure that relieves pressure on the spinal cord and nerves by **widening the neural foramen posteriorly**.",
+    "step.indications.title": "Indication for PCF",
+    "step.indications.body": "PCF is commonly performed to treat conditions that affect spinal nerves as they exit the **neural foramen**.\nExamples of conditions where PCF may be considered are:\n- **Cervical spondylotic radiculopathy**\n- **Lateral cervical disc herniation**\n- **Foraminal stenosis**\nIn this 3D model, a C4-C5 intervertebral disc is herniated **laterally**, compressing the spinal nerve as it exits through the neural foramen.\nSuch a condition can cause a variety of symptoms, such as numbness, tingling, and pain in the upper extremity.\nIn severe cases of herniation, the intervertebral disc may compress the spinal cord, affecting balance, walking, or sensory deficits of the lower extremities.",
+    "step.indications.accessibility": "Indication for PCF. PCF is commonly performed to treat conditions that affect spinal nerves as they exit the **neural foramen**.",
+    "step.laminoforaminotomy.title": "Laminoforaminotomy",
+    "step.laminoforaminotomy.body": "During PCF, surgeons first identify the precise location where the surgery will be performed using medical imaging and anatomical landmarks.\nThe surgeons then carefully remove parts of the bone near the neural foramen, a procedure known as **laminoforaminotomy**.\nThis creates more space around the nerve to escape from the pressing disc.\nIn some cases, creating this opening allows surgeons to **directly observe** the herniated disc.",
+    "step.laminoforaminotomy.accessibility": "Laminoforaminotomy. During PCF, surgeons first identify the precise location where the surgery will be performed using medical imaging and anatomical landmarks.",
+    "step.microdiscectomy.title": "Microdiscectomy",
+    "step.microdiscectomy.body": "When necessary, surgeons further perform a **discectomy** to ensure that the nerve is fully decompressed.\nTo perform this step safely and accurately, surgeons may use special types of **microscopes** during disc removal, a procedure known as **microdiscectomy**.\n**Osteophytectomy** may additionally be considered if there is a clear visualization of the osteophyte.",
+    "step.microdiscectomy.accessibility": "Microdiscectomy. When necessary, surgeons further perform a **discectomy** to ensure that the nerve is fully decompressed.",
+    "step.preserved_motion.title": "Preserved Motion after PCF",
+    "step.preserved_motion.body": "One of the advantages of performing PCF is that it allows patients to maintain **normal neck motion** after the surgery.\nUnlike **[posterior cervical decompression and fusion (PCDF)](procedure:pcdf)** and **[anterior cervical discectomy and fusion (ACDF)](procedure:acdf)**, PCF does not require the spine to be fused permanently, owing to the minimally invasive nature of this procedure.\nHowever, PCF may not be suitable for conditions that require surgical interventions on **multiple vertebral levels**.\nPerforming PCF on multiple levels may lead to **spinal instability**, which could in turn lead to worsening of symptoms.",
+    "step.preserved_motion.accessibility": "Preserved Motion after PCF. One of the advantages of performing PCF is that it allows patients to maintain **normal neck motion** after the surgery.",
+    "step.summary.title": "Summary",
+    "step.summary.body": "Some of the key features of PCF are as follows:\n- It is a procedure where a small portion of bone is removed from the spine to create more space around the **neural foramen**.\n- Surgeons may additionally perform a **discectomy** and **osteophytectomy** to ensure adequate pressure relief.\n- It **preserves the range of motion** of the cervical spine but may not be suitable for **multilevel disorders**.\nDue to its minimally invasive nature, PCF may be considered an alternative to fusion surgeries for selected patients with cervical compression.",
+    "step.summary.accessibility": "Summary. Some of the key features of PCF are as follows:"
+  }
+}
