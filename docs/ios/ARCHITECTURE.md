@@ -377,6 +377,10 @@ the iOS absolute scene contract remains in `content/ios-scenes/`.
   `ligamentumFlavum`; source-file typos are normalized at conversion time.
 - Locale conditionals, literal SF Symbol names, and user-facing strings do not
   appear in feature view bodies.
+- Phase 5 visual ownership is bounded by
+  [`CLAUDE_DESIGN_BRIEF.md`](CLAUDE_DESIGN_BRIEF.md): `DesignSystem`, feature
+  views, and preview fixtures may be visual-only; view models, domain state,
+  RealityKit lookup, I/O, and localization loading remain Codex-owned.
 
 ## 12. Phase 4 executable evidence
 

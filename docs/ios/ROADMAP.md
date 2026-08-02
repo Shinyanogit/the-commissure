@@ -1,7 +1,7 @@
 # iOS App Store Roadmap
 
-Status: Phase 4 independent QC passed on branch; commit and PR closure pending
-Repository baseline: `main` through PR #53 (`0d71da8`); each phase uses a dedicated branch.
+Status: Phase 5 Claude Design brief in progress on branch; Phase 4 merged as `f2a81d7`
+Repository baseline: `main` through PR #54 (`f2a81d7`); each phase uses a dedicated branch.
 This is an engineering order, not a calendar estimate.
 
 ## 1. Objective and priority
@@ -283,15 +283,21 @@ Exit evidence:
   projection. The repair covers each with explicit negative/regression tests.
   A fresh `gpt-5.6-sol` / xhigh QC passed with zero open findings against the
   frozen 34-file identity; simulator execution was the only environment-limited
-  item (`NSMachErrorDomain -308`). Commit, PR checks, merge, and verified `main`
-  remain the mechanical closeout. Production visual acceptance remains Phase 5.
+  item (`NSMachErrorDomain -308`). Commit `14de026`, PR #54, CI, merge `f2a81d7`,
+  and local `main == origin/main` closed the phase. Production visual acceptance
+  remains Phase 5.
 
-## 9. Phase 5 — visual system and native shell (Opus 5 boundary)
+## 9. Phase 5 — visual system and native shell (Claude Design → Opus 5)
+
+The visual handoff is frozen in [`CLAUDE_DESIGN_BRIEF.md`](CLAUDE_DESIGN_BRIEF.md).
+Claude Design project: `The Commissure — Sterile Field iOS` (`dfa74f8d-774a-4b68-b35e-ee6ba5700e3d`).
+Synced brief path: `brief/CLAUDE_DESIGN_BRIEF.md`. The project stores static
+references only; SwiftUI source remains in GitHub.
 
 Sequence:
 
 1. Codex freezes design tokens, fixture `ViewState`, accessibility contracts,
-   icon semantics, and MECE ownership for each screen.
+   icon semantics, and MECE ownership for each screen in the brief.
 2. Opus 5 implements only the approved SwiftUI visual directories.
 3. Codex checks dependency direction, removes embedded logic, connects intents,
    and runs previews/tests.

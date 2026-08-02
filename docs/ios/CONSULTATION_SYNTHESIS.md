@@ -259,6 +259,25 @@ Therefore:
   Phase 5 visual acceptance, physical-device performance, medical/rights review,
   signing, or App Store submission.
 
+### Phase 5 visual handoff resolution (2026-08-02)
+
+- Fable's independent repository-grounded recommendation is adopted: Claude
+  Design is a reference/token exploration surface, not a code source or build
+  dependency. Codex freezes the brief and presentation fixtures first; Opus 5
+  hand-writes SwiftUI only in the visual allowlist; Codex owns integration,
+  logic, accessibility plumbing, tests, and performance gates.
+- [`CLAUDE_DESIGN_BRIEF.md`](CLAUDE_DESIGN_BRIEF.md) derives every visual
+  decision from `DESIGN_CONCEPT.md`: 7:2:1 hierarchy, icon-first controls,
+  contextual Bottom Step Tray, MECE ownership, EN/JA metadata, responsive
+  layouts, and Reduce Motion/Dynamic Type/VoiceOver equivalents.
+- A Claude Design project was created for static references only:
+  `dfa74f8d-774a-4b68-b35e-ee6ba5700e3d`. The frozen brief was uploaded as
+  `brief/CLAUDE_DESIGN_BRIEF.md`; no generated code is trusted or imported.
+- The existing Phase 0 GPT Pro synthesis remains the architecture authority.
+  A new Phase 5 browser consultation was not claimed because the signed-in Web
+  connector had no source window; this does not block the brief because its
+  decisions are already covered by the approved concept and Fable handoff.
+
 ## 8. First five implementation tasks
 
 After Shinya performs the Phase 0 compact checkpoint:
