@@ -165,9 +165,19 @@ Therefore:
   entities.
 - Both strict-ARKit-valid packs pass the stricter GPT Pro size/geometry targets,
   so the Fable/GPT Pro bundle-all synthesis remains the default.
-- Absolute-state invariants and simulator interaction pass. Physical iOS load,
-  peak memory, latency, frame, and sustained thermal measurements are still the
-  expansion gate; simulator numbers are not substituted for them.
+- Absolute-state invariants, simulator interaction, and representative physical
+  iPad testing pass. On an M1 iPad Pro, 20-launch ACDF/PCDF first-frame p95 was
+  220/249 ms and peak-memory p95 was 328/331 MB. A 900-second PCDF run measured
+  FPS p05 54 / p50 60, input p95 18 ms, memory 316 MB, peak 329 MB, and nominal
+  worst thermal state.
+- A fresh repository-grounded Fable gate review returned
+  `PROCEED_WITH_REQUIRED_MITIGATION`: current-device hard-stop evidence closes
+  the architecture-expansion gate, while the missed 250 MB memory target,
+  oldest-supported hardware/OS, ACCF/PCF total payload, App Thinning, and
+  measurement-method limitations remain explicit unpassed release risks.
+- Floor-device performance is therefore fail-closed in Phase 7 before external
+  TestFlight/App Store submission. Neither simulator nor M1 iPad evidence may
+  be presented as proof for A12-class hardware or iOS/iPadOS 18 behavior.
 
 ## 7. Apple and operating constraints
 

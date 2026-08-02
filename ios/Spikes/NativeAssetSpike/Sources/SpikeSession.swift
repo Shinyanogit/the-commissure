@@ -15,6 +15,8 @@ struct SpikeMetrics: Equatable {
     var peakParseMemoryMB: Double = 0
     var inputP95MS: Double = 0
     var fps: Double = 0
+    var fpsP05: Double = 0
+    var fpsP50: Double = 0
     var thermal = "nominal"
     var worstThermal = "nominal"
 }
@@ -45,6 +47,7 @@ final class SpikeSession {
     private var loadStart: ContinuousClock.Instant?
     private var pendingInputStart: ContinuousClock.Instant?
     private var inputSamplesMS: [Double] = []
+    private var fpsSamples: [Double] = []
     private var enduranceTask: Task<Void, Never>?
 
     let procedure: SpikeProcedure
@@ -57,6 +60,28 @@ final class SpikeSession {
     var errorMessage: String?
     var isReady = false
     var sceneStatus = "loading"
+
+    var shouldPreventIdleSleep: Bool {
+        ProcessInfo.processInfo.environment["SPIKE_ENDURANCE_SECONDS"] != nil
+    }
+
+    var metricsSummary: String {
+        String(
+            format: "procedure %@; decode %.0f ms; first %.0f ms; bind %.0f ms; memory %.0f MB; peak %.0f MB; input p95 %.0f ms; fps %.0f; fps p05 %.0f; fps p50 %.0f; thermal %@; worst thermal %@",
+            procedure.title,
+            metrics.decodeMS,
+            metrics.firstFrameMS,
+            metrics.bindingMS,
+            metrics.memoryMB,
+            metrics.peakParseMemoryMB,
+            metrics.inputP95MS,
+            metrics.fps,
+            metrics.fpsP05,
+            metrics.fpsP50,
+            metrics.thermal,
+            metrics.worstThermal
+        )
+    }
 
     init() {
         procedure = SpikeProcedure(
@@ -153,6 +178,9 @@ final class SpikeSession {
                 step = domain.selectedStep
             }
             isReady = true
+            sampledFrames = 0
+            fpsSamples.removeAll(keepingCapacity: true)
+            lastFrameSample = clock.now
 
             content.add(root)
             content.add(sceneAdapter.camera)
@@ -200,12 +228,15 @@ final class SpikeSession {
         if let pendingInputStart {
             inputSamplesMS.append(milliseconds(pendingInputStart.duration(to: now)))
             self.pendingInputStart = nil
-            metrics.inputP95MS = percentile95(inputSamplesMS)
+            metrics.inputP95MS = percentile(inputSamplesMS, fraction: 0.95)
         }
         sampledFrames += 1
         let elapsed = lastFrameSample.duration(to: now)
         if elapsed >= .seconds(1) {
             metrics.fps = Double(sampledFrames) / seconds(elapsed)
+            fpsSamples.append(metrics.fps)
+            metrics.fpsP05 = percentile(fpsSamples, fraction: 0.05)
+            metrics.fpsP50 = percentile(fpsSamples, fraction: 0.50)
             sampledFrames = 0
             lastFrameSample = now
             refreshProcessMetrics()
@@ -226,9 +257,9 @@ final class SpikeSession {
         pendingInputStart = ContinuousClock.now
     }
 
-    private func percentile95(_ values: [Double]) -> Double {
+    private func percentile(_ values: [Double], fraction: Double) -> Double {
         let sorted = values.sorted()
-        let index = max(0, Int(ceil(Double(sorted.count) * 0.95)) - 1)
+        let index = max(0, Int(ceil(Double(sorted.count) * fraction)) - 1)
         return sorted[index]
     }
 
@@ -299,9 +330,10 @@ final class SpikeSession {
                 tick += 1
                 try? await Task.sleep(for: .milliseconds(100))
             }
-            self.logger.notice(
-                "ENDURANCE complete seconds=\(duration) fps=\(self.metrics.fps) memory_mb=\(self.metrics.memoryMB) input_p95_ms=\(self.metrics.inputP95MS) worst_thermal=\(self.metrics.worstThermal)"
-            )
+            self.refreshProcessMetrics()
+            let summary = "ENDURANCE complete; \(self.metricsSummary)"
+            self.sceneStatus = summary
+            self.logger.notice("\(summary, privacy: .public)")
         }
     }
 

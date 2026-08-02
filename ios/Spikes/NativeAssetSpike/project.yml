@@ -50,6 +50,17 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: app.thecommissure.native-asset-spike-ui-tests
         GENERATE_INFOPLIST_FILE: YES
+  NativeAssetSpikePhysicalTests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - PhysicalTests
+    dependencies:
+      - target: NativeAssetSpike
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.thecommissure.native-asset-spike-physical-tests
+        GENERATE_INFOPLIST_FILE: YES
 schemes:
   NativeAssetSpike:
     build:
@@ -62,3 +73,12 @@ schemes:
         - NativeAssetSpikeUITests
     run:
       config: Debug
+  NativeAssetSpikePhysical:
+    build:
+      targets:
+        NativeAssetSpike: all
+        NativeAssetSpikePhysicalTests: [test]
+    test:
+      config: Debug
+      targets:
+        - NativeAssetSpikePhysicalTests

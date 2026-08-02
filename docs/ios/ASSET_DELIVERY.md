@@ -1,6 +1,6 @@
 # Asset Delivery, Cache, and Content Update Specification
 
-Status: optimized ACDF/PCDF gate passed; physical/App Thinning gates remain
+Status: optimized ACDF/PCDF current-device gate passed; floor-device/App Thinning gates remain
 Goal: low initial weight, instant cached reuse, zero-backend core operation
 
 ## 1. What “download” means
@@ -50,7 +50,31 @@ flattening, normalized archive timestamps, and strict `usdchecker --arkit`
 validation. Repeated exports with the pinned toolchain are byte-identical.
 ACDF and the pre-optimization worst case PCDF both pass the 8 MB and 250,000
 triangle targets. This evidence retains bundle-all as the 1.0 delivery path;
-it does not yet close total four-pack, App Thinning, or physical-device gates.
+it does not yet close total four-pack, App Thinning, or oldest-supported-device
+gates.
+
+### Phase 2 physical measurements (2026-08-02)
+
+Device: iPad Pro 12.9-inch (5th generation, M1), iPadOS 26.5.2. Tests ran over
+the persistent Xcode Wi-Fi pairing after cable removal.
+
+| Procedure | Samples | Decode p50 / p95 | First frame p50 / p95 | Steady memory p50 / p95 | Peak parse p50 / p95 |
+|---|---:|---:|---:|---:|---:|
+| ACDF | 20 launches | 185 / 198 ms | 211 / 220 ms | 314 / 317 MB | 327 / 328 MB |
+| PCDF | 20 launches | 216 / 218 ms | 240 / 249 ms | 318 / 321 MB | 331 / 331 MB |
+
+The final 900-second PCDF continuous-input run measured FPS p05 54 / p50 60,
+input p95 18 ms, steady memory 316 MB, peak memory 329 MB, and nominal worst
+thermal state. All hard stop thresholds passed. The 250 MB steady-memory target
+did not pass; production integration must audit RealityKit/material/resource
+footprint before the Phase 6 memory gate, without weakening the 350 MB hard
+limit.
+
+These measurements are not proof for A12-class hardware, iOS/iPadOS 18, real
+touch-to-photon latency, or OS-trace-level transient peaks. The spike samples
+memory at 20 ms, derives input latency from programmatic intent-to-frame events,
+and computes FPS in one-second buckets. Oldest-supported hardware/OS remains a
+fail-closed Phase 7 release gate.
 
 ## 3. Bundled-baseline policy with a measured fallback
 
@@ -266,7 +290,9 @@ pipeline must never be used to bypass review.
 
 ## 10. Performance and delivery gates
 
-Measured on the oldest supported physical device and a current iPhone/iPad:
+Acceptance is ultimately measured on the oldest supported physical device and
+a current iPhone/iPad. Phase 2 currently provides the M1 iPad column only;
+oldest-supported hardware/OS is unmeasured and release-blocking in Phase 7.
 
 | Metric | Target | Hard gate |
 |---|---:|---:|
@@ -295,7 +321,8 @@ serves as the worst-case triangle/memory gate: it fell from 996,503 to 144,556
 triangles after semantic selective decimation and now passes the geometry
 target. Bundle-all remains selected because both measured fixtures also pass
 the individual-pack target. Total four-pack and device performance acceptance
-remain conditional until ACCF/PCF conversion and physical measurements. A
-15-minute continuous
-interaction test must avoid sustained serious thermal state; critical thermal
-state is stop-ship.
+remain conditional until ACCF/PCF conversion, App Thinning, and the
+oldest-supported-device suite. The representative M1 iPad physical gate passed,
+including a 15-minute continuous interaction test with nominal worst thermal
+state. Sustained serious thermal state remains a release failure; critical
+thermal state is stop-ship.

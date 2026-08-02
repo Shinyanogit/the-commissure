@@ -1,6 +1,6 @@
 # iOS App Store Roadmap
 
-Status: Phase 2 machine spike complete; physical-device gate pending
+Status: Phase 2 complete on branch; Phase 3 begins after Phase 2 PR/main verification
 Repository baseline: `main` through PR #51; each phase uses a dedicated branch.
 This is an engineering order, not a calendar estimate.
 
@@ -120,9 +120,9 @@ Rollback: set the Vercel Root Directory back to the repository root and leave
 the last successful production deployment active; revert the Phase 1 commit by
 PR if necessary. No force-push or destructive reset is required.
 
-## 6. Phase 2 — native asset and performance spikes
+## 6. Phase 2 — native asset and performance spikes (complete 2026-08-02)
 
-Machine-complete evidence (2026-08-02):
+Exit evidence (2026-08-02):
 
 - Pinned Blender 5.2.0 LTS plus Apple USD Tools 0.25.2 now regenerate
   byte-identical, strict-ARKit-valid USDZ from the tracked Draco GLBs.
@@ -136,10 +136,21 @@ Machine-complete evidence (2026-08-02):
   transform/opacity/visibility across all seven canonical views,
   forward/reverse/direct navigation, vertical flick, horizontal orbit, and
   pinch pass. PCDF also loads and sustains 60 fps in the simulator.
-- Simulator decode/memory/FPS are diagnostic observations only. The attached
-  iPad Pro is unavailable, so oldest-supported/current-device percentiles,
-  peak parse memory, input latency, and 15-minute thermal acceptance remain a
-  hard human/device gate. Phase 3 must not begin until that gate is recorded.
+- Physical tests ran cable-free after persistent pairing on a 2021 iPad Pro
+  12.9-inch (5th generation, M1), iPadOS 26.5.2. ACDF 20-launch p50/p95 was
+  185/198 ms decode, 211/220 ms first frame, 314/317 MB steady memory, and
+  327/328 MB peak parse memory. PCDF was 216/218 ms decode, 240/249 ms first
+  frame, 318/321 MB steady memory, and 331/331 MB peak parse memory.
+- A 900-second PCDF continuous orbit/zoom run passed its executable hard gates:
+  FPS p05 54 / p50 60, input p95 18 ms, steady memory 316 MB, peak memory
+  329 MB, and worst thermal state nominal. The test itself rejects first frame
+  over 4.5 seconds, input p95 over 150 ms, FPS p05 below 45, steady memory over
+  350 MB, peak memory over 450 MB, or serious/critical thermal state.
+- This closes the Phase 2 architecture-expansion gate. The 250 MB steady-memory
+  target is missed and remains an optimization item; hard limits were not
+  relaxed. Oldest-supported hardware and iOS 18 performance remain unmeasured
+  and are a fail-closed Phase 7 release gate before external TestFlight or App
+  Store submission. Simulator or M1 results never substitute for that gate.
 
 ### ACDF correctness spike
 
@@ -170,8 +181,9 @@ ACDF/PCDF results choose bundle-all versus hybrid delivery according to
 
 Exit criteria: both spikes pass the release-stop thresholds or a concrete model
 optimization plan is accepted before product feature work expands. Current
-status: size, geometry, semantic, state, build, and simulator gates pass;
-physical-device performance remains open.
+status: size, geometry, semantic, state, build, simulator, and representative
+physical-device hard gates pass. Exact floor-device performance, ACCF/PCF total
+payload, and App Thinning remain explicitly unpassed release gates.
 
 ## 7. Phase 3 — content contract and bilingual migration
 
@@ -267,6 +279,9 @@ Exit criteria:
 - Thirty minutes of repeated use shows no unbounded memory growth.
 - Oldest-supported iPhone and representative iPad pass performance, rotation,
   thermal, offline, bilingual, and accessibility tests.
+- The oldest-supported hardware/OS performance suite is fail-closed before any
+  external TestFlight or App Store submission; absence of that device or trace
+  is an incomplete gate, not presumed equivalence with the M1 iPad result.
 - No blocker/high defect remains.
 
 ## 12. Phase 8 — GitHub delivery automation

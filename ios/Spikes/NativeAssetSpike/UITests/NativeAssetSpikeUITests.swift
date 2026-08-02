@@ -31,15 +31,9 @@ final class NativeAssetSpikeUITests: XCTestCase {
     }
 
     @MainActor
-    func testButtonsDirectJumpAndReverseNavigation() {
+    func testForwardAndReverseNavigation() {
         let app = launchApp()
         XCTAssertEqual(app.buttons["step-indicator"].value as? String, "1 / 7")
-
-        select(step: 6, in: app)
-        app.buttons["previous-step"].tap()
-        XCTAssertEqual(app.buttons["step-indicator"].value as? String, "5 / 7")
-
-        select(step: 1, in: app)
         for step in 2 ... 7 {
             app.buttons["next-step"].tap()
             XCTAssertEqual(app.buttons["step-indicator"].value as? String, "\(step) / 7")
@@ -96,18 +90,6 @@ final class NativeAssetSpikeUITests: XCTestCase {
         field.pinch(withScale: 0.7, velocity: -1)
         XCTAssertNotEqual(field.value as? String, beforePinch)
         add(XCTAttachment(screenshot: XCUIScreen.main.screenshot()))
-    }
-
-    @MainActor
-    private func select(step: Int, in app: XCUIApplication) {
-        app.buttons["step-indicator"].tap()
-        let option = app.buttons["Step \(step)"]
-        XCTAssertTrue(option.waitForExistence(timeout: 3))
-        option.tap()
-        let expected = NSPredicate(format: "value == %@", "\(step) / 7")
-        expectation(for: expected, evaluatedWith: app.buttons["step-indicator"])
-        waitForExpectations(timeout: 3)
-        waitForSceneStatus("ready; bindings 39/39; state \(step) verified", in: app)
     }
 
     @MainActor

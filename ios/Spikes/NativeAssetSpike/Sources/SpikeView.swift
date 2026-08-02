@@ -1,6 +1,7 @@
 import NativeAssetSpikeCore
 import RealityKit
 import SwiftUI
+import UIKit
 
 struct SpikeView: View {
     @State private var session = SpikeSession()
@@ -40,6 +41,12 @@ struct SpikeView: View {
             }
         }
         .preferredColorScheme(.dark)
+        .onAppear {
+            UIApplication.shared.isIdleTimerDisabled = session.shouldPreventIdleSleep
+        }
+        .onDisappear {
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
     }
 
     private var diagnosticHeader: some View {
@@ -71,6 +78,8 @@ struct SpikeView: View {
                 )
                 .font(.caption2.monospacedDigit())
                 .foregroundStyle(.secondary)
+                .accessibilityIdentifier("metrics-status")
+                .accessibilityValue(session.metricsSummary)
                 Text(session.sceneStatus)
                     .font(.caption2.monospaced())
                     .foregroundStyle(session.sceneStatus.hasPrefix("failed") ? .red : .secondary)
