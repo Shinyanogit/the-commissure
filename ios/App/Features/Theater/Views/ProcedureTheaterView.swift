@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 struct ProcedureTheaterView: View {
@@ -154,8 +155,9 @@ private struct ExplanationPanel: View {
     VStack(alignment: .leading, spacing: DesignTokens.Spacing.compact) {
       HStack(alignment: .firstTextBaseline) {
         Text(state.stepTitle)
-          .font(.headline)
+          .font(.headline.weight(.semibold))
           .foregroundStyle(DesignTokens.Color.textPrimary)
+          .lineLimit(2)
         Spacer()
         Button(action: onCollapse) {
           Image(systemName: "chevron.down")
@@ -167,10 +169,15 @@ private struct ExplanationPanel: View {
         .accessibilityLabel(Text("action.collapse"))
         .accessibilityHint(Text("action.collapse.hint"))
       }
-      Text(state.explanation)
-        .font(.body)
-        .foregroundStyle(DesignTokens.Color.textPrimary)
-        .fixedSize(horizontal: false, vertical: true)
+
+      ScrollView(.vertical, showsIndicators: false) {
+        MarkdownText(markdown: state.explanation)
+          .font(.body)
+          .foregroundStyle(DesignTokens.Color.textPrimary)
+          .frame(maxWidth: .infinity, alignment: .leading)
+      }
+      .frame(maxHeight: 156)
+
       Text(state.accessibilitySummary)
         .font(.caption)
         .foregroundStyle(DesignTokens.Color.textSecondary)
@@ -186,6 +193,21 @@ private struct ExplanationPanel: View {
         .stroke(DesignTokens.Color.textPrimary.opacity(0.1), lineWidth: 1)
     }
     .accessibilityElement(children: .combine)
+  }
+}
+
+private struct MarkdownText: View {
+  let markdown: String
+
+  var body: some View {
+    if let attributed = try? AttributedString(
+      markdown: markdown,
+      options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace)
+    ) {
+      Text(attributed)
+    } else {
+      Text(markdown)
+    }
   }
 }
 

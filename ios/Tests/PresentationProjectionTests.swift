@@ -68,7 +68,7 @@ final class PresentationProjectionTests: XCTestCase {
     XCTAssertEqual(model.libraryViewState.cards.first?.stepCountLabel, "7ステップ")
     XCTAssertEqual(
       model.libraryViewState.cards.first?.availabilityLabel,
-      "このデバイスで利用可能"
+      "この端末で利用できます"
     )
   }
 

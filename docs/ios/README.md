@@ -33,7 +33,10 @@ The Web move preserved source blobs with `git mv`, and Vercel now builds from
 `content/`; conversion and validation code belongs in `tooling/`. See the Phase 1
 evidence and next gate in [`ROADMAP.md`](ROADMAP.md).
 
-Phase 5A adds the native presentation shell under the same boundary. Its views
+Phase 5A adds the native presentation shell under the same boundary. Phase 5B
+currently refines its visual hierarchy on a dedicated branch. Its views
 consume Codex-owned `ViewState` projections and do not perform content, file,
 network, or RealityKit lookup. The shell is a machine-gated implementation
-checkpoint, not final visual, medical-copy, or App Store acceptance.
+checkpoint, not final visual, medical-copy, or App Store acceptance. The connected
+physical iPad is the intended visual-review target; installation is pending the
+owner's Apple Team/provisioning setup.

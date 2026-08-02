@@ -1,6 +1,6 @@
 # iOS App Store Roadmap
 
-Status: Phase 5B visual refinement next; Phase 5A merged as `fece5e8`
+Status: Phase 5B visual refinement in progress on `feat/ios-phase5b-visual-refinement`; Phase 5A merged as `fece5e8`
 Repository baseline: `main` through PR #56 (`fece5e8`); each phase uses a dedicated branch.
 This is an engineering order, not a calendar estimate.
 
@@ -354,6 +354,33 @@ acceptance: the scene is still a preparing placeholder, download states are
 fixture-backed, and Japanese medical copy remains the existing content source
 pending the next editorial/design pass. Phase 5B will refine visual hierarchy
 and copy against screenshots before Phase 6 RealityKit integration.
+
+### Phase 5B visual refinement (in progress)
+
+Candidate branch: `feat/ios-phase5b-visual-refinement`.
+
+The first refinement pass keeps the presentation boundary intact while addressing
+the screenshot review findings:
+
+- Library navigation owns its own brand lockup and hides the duplicate system
+  navigation title; procedure cards use a two-column iPad layout and a single
+  visual hierarchy for identity, teaching summary, availability, and step count.
+- Card copy is visually bounded with Dynamic Type-compatible line limits, while
+  the EN/JA system labels use natural Japanese wording (`この端末で利用できます`,
+  `キャッシュからすぐ使えます`, and `解剖を、ひとつずつ丁寧に。`).
+- Procedure explanations render restricted Markdown rather than exposing raw
+  asterisks/link syntax, and the panel scrolls within a bounded surface so the
+  anatomy field and Bottom Step Tray retain their ownership.
+- The Bottom Step Tray makes its expand/collapse affordance visible through the
+  chevron and marks the selected step without adding a second navigation bar.
+
+Machine checks for this candidate pass Swift formatting, content validation,
+the 15 core tests, and an unsigned generic iOS build. Runtime UI tests are not
+accepted as new evidence in this checkpoint because the available simulator
+worker returned `Invalid device state`; the connected physical iPad is recognized
+but its device build is blocked by the owner-only Apple Team/account and
+provisioning-profile gate. Final screenshot and accessibility acceptance remain
+open until the iPad can install the signed build.
 
 ## 10. Phase 6 — ACDF vertical slice
 

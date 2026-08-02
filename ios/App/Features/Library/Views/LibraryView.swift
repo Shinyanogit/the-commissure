@@ -4,6 +4,8 @@ struct LibraryView: View {
   let state: LibraryViewState
   let onAction: (AppAction) -> Void
 
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
   var body: some View {
     ZStack {
       DesignTokens.Color.stageBlack.ignoresSafeArea()
@@ -17,26 +19,51 @@ struct LibraryView: View {
           } else if state.cards.isEmpty {
             unavailableState
           } else {
-            cards
+            VStack(alignment: .leading, spacing: DesignTokens.Spacing.regular) {
+              Text("library.section.title")
+                .font(.title3.weight(.semibold))
+                .foregroundStyle(DesignTokens.Color.textPrimary)
+
+              cards
+            }
           }
         }
+        .frame(maxWidth: 1_160, alignment: .leading)
         .padding(.horizontal, DesignTokens.Spacing.edge)
         .padding(.vertical, DesignTokens.Spacing.regular)
       }
       .scrollIndicators(.hidden)
     }
+    .toolbar(.hidden, for: .navigationBar)
     .preferredColorScheme(.dark)
   }
 
   private var header: some View {
     HStack(alignment: .top, spacing: DesignTokens.Spacing.regular) {
-      Image(systemName: "waveform.path.ecg")
-        .foregroundStyle(DesignTokens.Color.cyan)
-        .accessibilityHidden(true)
-      Text("library.subtitle")
-        .font(.headline)
-        .foregroundStyle(DesignTokens.Color.textPrimary)
-        .fixedSize(horizontal: false, vertical: true)
+      VStack(alignment: .leading, spacing: DesignTokens.Spacing.compact) {
+        HStack(spacing: DesignTokens.Spacing.compact) {
+          Image(systemName: "waveform.path.ecg")
+            .font(.system(size: 14, weight: .bold))
+            .foregroundStyle(DesignTokens.Color.stageBlack)
+            .frame(width: 32, height: 32)
+            .background(DesignTokens.Color.cyan, in: RoundedRectangle(cornerRadius: 10))
+            .accessibilityHidden(true)
+
+          Text("app.kicker")
+            .font(.caption.weight(.semibold))
+            .tracking(1.4)
+            .foregroundStyle(DesignTokens.Color.cyan)
+        }
+
+        Text("app.title")
+          .font(.largeTitle.weight(.bold))
+          .foregroundStyle(DesignTokens.Color.textPrimary)
+
+        Text("library.subtitle")
+          .font(.subheadline)
+          .foregroundStyle(DesignTokens.Color.textSecondary)
+          .fixedSize(horizontal: false, vertical: true)
+      }
 
       Spacer(minLength: DesignTokens.Spacing.compact)
 
@@ -80,7 +107,10 @@ struct LibraryView: View {
   }
 
   private var cards: some View {
-    LazyVStack(spacing: DesignTokens.Spacing.regular) {
+    LazyVGrid(
+      columns: cardColumns,
+      spacing: DesignTokens.Spacing.regular
+    ) {
       ForEach(state.cards) { card in
         Button {
           onAction(primaryAction(for: card))
@@ -90,6 +120,14 @@ struct LibraryView: View {
         .buttonStyle(.plain)
       }
     }
+  }
+
+  private var cardColumns: [GridItem] {
+    let columnCount = horizontalSizeClass == .regular ? 2 : 1
+    return Array(
+      repeating: GridItem(.flexible(), spacing: DesignTokens.Spacing.regular),
+      count: columnCount
+    )
   }
 
   private var loadingState: some View {
@@ -158,50 +196,57 @@ private struct LibraryCardView: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: DesignTokens.Spacing.regular) {
-      HStack(alignment: .top, spacing: DesignTokens.Spacing.regular) {
-        Image(systemName: "figure.stand")
-          .font(.system(size: 24, weight: .medium))
-          .foregroundStyle(DesignTokens.Color.bone)
-          .frame(width: 52, height: 52)
-          .background(
-            DesignTokens.Color.teal.opacity(0.42),
-            in: RoundedRectangle(cornerRadius: DesignTokens.Radius.control)
-          )
-          .accessibilityHidden(true)
+      HStack(alignment: .center, spacing: DesignTokens.Spacing.compact) {
+        Text(state.id.uppercased())
+          .font(.caption.weight(.bold).monospaced())
+          .foregroundStyle(DesignTokens.Color.cyan)
+          .padding(.horizontal, 9)
+          .padding(.vertical, 5)
+          .background(DesignTokens.Color.teal.opacity(0.32), in: Capsule())
 
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.compact) {
-          Text(state.title)
-            .font(.headline)
-            .foregroundStyle(DesignTokens.Color.textPrimary)
-            .multilineTextAlignment(.leading)
-          Text(state.summary)
-            .font(.subheadline)
-            .foregroundStyle(DesignTokens.Color.textSecondary)
-            .multilineTextAlignment(.leading)
-        }
+        Spacer(minLength: DesignTokens.Spacing.compact)
 
-        Spacer(minLength: 0)
-        Image(systemName: "chevron.right")
-          .font(.system(size: 13, weight: .semibold))
+        Image(systemName: "arrow.up.right")
+          .font(.system(size: 13, weight: .bold))
           .foregroundStyle(DesignTokens.Color.textSecondary)
           .accessibilityHidden(true)
       }
 
+      VStack(alignment: .leading, spacing: DesignTokens.Spacing.compact) {
+        Text(state.title)
+          .font(.title3.weight(.semibold))
+          .foregroundStyle(DesignTokens.Color.textPrimary)
+          .multilineTextAlignment(.leading)
+          .lineLimit(2)
+
+        Text(state.summary)
+          .font(.callout)
+          .foregroundStyle(DesignTokens.Color.textSecondary)
+          .multilineTextAlignment(.leading)
+          .lineLimit(3)
+          .fixedSize(horizontal: false, vertical: true)
+      }
+
+      Spacer(minLength: DesignTokens.Spacing.compact)
+
       HStack(spacing: DesignTokens.Spacing.compact) {
         Image(systemName: availabilityIcon)
-          .font(.system(size: 13, weight: .semibold))
+          .font(.system(size: 12, weight: .semibold))
           .foregroundStyle(availabilityTint)
           .accessibilityHidden(true)
         Text(state.availabilityLabel)
           .font(.caption.weight(.medium))
           .foregroundStyle(DesignTokens.Color.textPrimary)
-        Spacer()
+          .lineLimit(1)
+        Spacer(minLength: DesignTokens.Spacing.compact)
         Text(state.stepCountLabel)
-          .font(.caption)
+          .font(.caption.monospacedDigit())
           .foregroundStyle(DesignTokens.Color.textSecondary)
+          .lineLimit(1)
       }
     }
-    .padding(DesignTokens.Spacing.regular)
+    .frame(maxWidth: .infinity, minHeight: 176, alignment: .topLeading)
+    .padding(DesignTokens.Spacing.spacious)
     .background(
       DesignTokens.Color.stageSurface.opacity(0.86),
       in: RoundedRectangle(cornerRadius: DesignTokens.Radius.card)
@@ -210,6 +255,7 @@ private struct LibraryCardView: View {
       RoundedRectangle(cornerRadius: DesignTokens.Radius.card)
         .stroke(DesignTokens.Color.textPrimary.opacity(0.08), lineWidth: 1)
     }
+    .contentShape(RoundedRectangle(cornerRadius: DesignTokens.Radius.card))
     .accessibilityElement(children: .combine)
     .accessibilityHint(Text("library.card.hint"))
   }

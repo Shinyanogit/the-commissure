@@ -298,6 +298,25 @@ Therefore:
   hierarchy refinement are Phase 5B work and must not be misreported as release
   acceptance.
 
+### Phase 5B visual refinement resolution (2026-08-02)
+
+- The screenshot-led refinement preserves the approved Sterile Field contract:
+  dark stage remains dominant, cyan is reserved for active identity/progress, and
+  the bottom edge remains the sole owner of step movement. A regular-width iPad
+  receives two equal procedure columns; compact-width layouts remain one column.
+- Japanese system copy was shortened and naturalized at the UI boundary without
+  rewriting the medically consequential shared procedure source. The existing
+  English/Ja content keys and provenance remain unchanged for a later editorial
+  gate.
+- The explanation surface now parses the already-validated restricted Markdown
+  presentation syntax and scrolls within a bounded panel. No new renderer or
+  domain dependency is introduced; malformed presentation text falls back to
+  plain text.
+- A connected iPad is the only intended visual-review target for this candidate.
+  The cable/pairing path is healthy, but Xcode reports no signed-in Team account
+  and no provisioning profile for `app.thecommissure.ios`; this is an owner-only
+  Apple action, not evidence against the UI or Wi-Fi path.
+
 ## 8. First five implementation tasks
 
 After Shinya performs the Phase 0 compact checkpoint:
