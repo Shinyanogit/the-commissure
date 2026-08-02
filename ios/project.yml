@@ -1,0 +1,83 @@
+name: TheCommissure
+options:
+  minimumXcodeGenVersion: 2.45.0
+  deploymentTarget:
+    iOS: "18.0"
+settings:
+  base:
+    SWIFT_VERSION: 6.0
+    SWIFT_STRICT_CONCURRENCY: complete
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    PRODUCT_BUNDLE_IDENTIFIER: app.thecommissure.ios
+    MARKETING_VERSION: 0.1.0
+    CURRENT_PROJECT_VERSION: 1
+    TARGETED_DEVICE_FAMILY: "1,2"
+    CODE_SIGN_STYLE: Automatic
+packages:
+  CommissureCore:
+    path: Packages/CommissureCore
+targets:
+  TheCommissure:
+    type: application
+    platform: iOS
+    sources:
+      - App
+      - path: ../content
+        type: folder
+        buildPhase: resources
+    dependencies:
+      - package: CommissureCore
+    info:
+      path: App/Generated/Info.plist
+      properties:
+        CFBundleDisplayName: The Commissure
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+  TheCommissureTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Tests
+    dependencies:
+      - target: TheCommissure
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.thecommissure.ios-tests
+        GENERATE_INFOPLIST_FILE: YES
+  TheCommissureUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - UITests
+    dependencies:
+      - target: TheCommissure
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.thecommissure.ios-ui-tests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  TheCommissure:
+    build:
+      targets:
+        TheCommissure: all
+        TheCommissureTests: [test]
+        TheCommissureUITests: [test]
+    test:
+      config: Debug
+      targets:
+        - TheCommissureTests
+        - TheCommissureUITests
+    run:
+      config: Debug
+    archive:
+      config: Release

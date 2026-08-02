@@ -1,7 +1,7 @@
 # iOS App Store Roadmap
 
-Status: Phase 3 complete on branch; Phase 4 begins after Phase 3 PR/main verification
-Repository baseline: `main` through PR #52 (`6585b6c`); each phase uses a dedicated branch.
+Status: Phase 4 independent QC passed on branch; commit and PR closure pending
+Repository baseline: `main` through PR #53 (`0d71da8`); each phase uses a dedicated branch.
 This is an engineering order, not a calendar estimate.
 
 ## 1. Objective and priority
@@ -185,7 +185,7 @@ status: size, geometry, semantic, state, build, simulator, and representative
 physical-device hard gates pass. Exact floor-device performance, ACCF/PCF total
 payload, and App Thinning remain explicitly unpassed release gates.
 
-## 7. Phase 3 — content contract and bilingual migration (QC correction cycle 2026-08-02)
+## 7. Phase 3 — content contract and bilingual migration (complete 2026-08-02)
 
 Work:
 
@@ -233,10 +233,11 @@ Exit evidence (2026-08-02):
   native entity-path/screw mismatches, incomplete PCDF kyphosis state, weak
   scene-state geometry checks, a Japanese ACDF label omission, URL allowlist
   gaps, missing cross-file invariants, and punctuation-prefixed protocol-relative
-  URL bypasses. Phase 3 remains open until a newly
-  frozen candidate passes independent QC and merges through required checks.
+  URL bypasses. The fourth frozen candidate passed independent QC, commit
+  `958f794` passed Content CI/Vercel in PR #53, and merged as `0d71da8` with
+  local `main == origin/main`.
 
-## 8. Phase 4 — native foundation
+## 8. Phase 4 — native foundation (independent QC passed 2026-08-02)
 
 Work:
 
@@ -254,6 +255,36 @@ Exit criteria:
 - Offline launch, stale catalog, low storage, cancellation, and cache recovery
   have deterministic tests.
 - App launch never awaits a catalog request.
+
+Exit evidence:
+
+- A tracked Xcode project targets iOS/iPadOS 18 with Swift 6 strict concurrency
+  and embeds the shared `content/` tree as the offline baseline.
+- The Foundation-only `CommissureCore` package implements content values,
+  `SceneStateResolver`, `ProcedureSession`, `GestureIntentResolver`, pack
+  presentation, and stale/replay catalog decisions. Its fifteen tests pass and
+  the source imports neither SwiftUI nor RealityKit.
+- Concrete app infrastructure implements bundled bilingual loading,
+  `RealitySceneAdapter`, locale preferences, structured diagnostics, and an
+  `AssetStore` actor. Twenty deterministic app tests cover equal-request
+  deduplication, cross-pack serialization, pre/post-transfer low storage,
+  corruption rollback, cancellation, verified offline cached reopen, staging recovery,
+  protected eviction, exact cached file sets, unsafe path/pack-key preflight,
+  exact RealityKit hierarchy binding, language reprojection, and all four content bundles.
+- Two UI tests launch without network setup and display the bundled ACDF fixture
+  in English and Japanese. Swift format, simulator tests, XcodeGen regeneration,
+  boundary/secret audits, and the unsigned generic-device archive pass on Xcode
+  26.2; the archive is 3.4 MB before native models/signing, and its app payload
+  contains the four procedure JSON bundles plus both localized String Catalog
+  outputs. The bundle version is sourced from the Xcode build settings rather
+  than duplicated in the generated Info.plist.
+- The first independent QC found six contract gaps in gesture arbitration,
+  scene identity, cache-file exactness, pack-key preflight, and runtime locale
+  projection. The repair covers each with explicit negative/regression tests.
+  A fresh `gpt-5.6-sol` / xhigh QC passed with zero open findings against the
+  frozen 34-file identity; simulator execution was the only environment-limited
+  item (`NSMachErrorDomain -308`). Commit, PR checks, merge, and verified `main`
+  remain the mechanical closeout. Production visual acceptance remains Phase 5.
 
 ## 9. Phase 5 — visual system and native shell (Opus 5 boundary)
 

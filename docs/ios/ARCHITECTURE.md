@@ -4,6 +4,12 @@ Status: implementation contract
 Stack: Swift 6.2, SwiftUI, RealityKit, structured concurrency
 Minimum deployment: iOS/iPadOS 18
 
+Phase 4 implementation status (2026-08-02): the tracked Xcode project and local
+pure-Foundation package implement the ownership graph below, and a fresh
+independent `gpt-5.6-sol` / xhigh QC passed with zero open findings. The current
+app view is an intentionally minimal offline fixture shell; Phase 5 owns
+production visual design.
+
 ## 1. Architecture goals
 
 - Deterministic forward, backward, and random-access scene navigation.
@@ -371,3 +377,33 @@ the iOS absolute scene contract remains in `content/ios-scenes/`.
   `ligamentumFlavum`; source-file typos are normalized at conversion time.
 - Locale conditionals, literal SF Symbol names, and user-facing strings do not
   appear in feature view bodies.
+
+## 12. Phase 4 executable evidence
+
+- `CommissureCore` contains only Foundation imports and owns decoded content,
+  absolute-state resolution, deterministic session intents, gesture resolution,
+  pack presentation facts, and replay/stale-catalog policy.
+- The app owns concrete `ContentStore` and `AssetStore` actors,
+  `ProcedureSessionController`, `RealitySceneAdapter`, preferences, `Logger`,
+  signposts, and MetricKit subscription. App launch reads the bundled `content/`
+  folder and never creates or awaits a catalog request.
+- `AssetStore` deduplicates equal requests, serializes different packs, rejects
+  unsafe paths and pack identities before filesystem/network access, verifies
+  exact cached file sets/bytes/SHA-256,
+  checks free space before transfer and again before activation, stages writes,
+  and atomically moves only a complete version. Existing versions are not
+  replaced by a corrupt update, protected versions cannot be evicted, and
+  staging recovery never removes ready packs.
+- Swift format, fifteen Core tests, twenty app unit tests, two offline-launch UI
+  tests, deterministic XcodeGen regeneration, and an unsigned generic-device
+  archive pass with Swift 6.2.3/Xcode 26.2. The archive embeds the four
+  procedure JSON fixtures and both localized String Catalog outputs and is
+  3.4 MB before models, signing, and App Store processing. Marketing/build
+  versions are sourced from Xcode build settings in the generated Info.plist.
+- The Phase 4 repair rejects nested noncanonical scene paths and asset-version
+  drift, resolves RealityKit bindings by complete hierarchy rather than leaf
+  name, cancels a one-finger drag on a second touch, maps vertical flicks to
+  steps and horizontal claims to orbit, rejects unsafe pack IDs, and reprojects
+  the active library when the language changes. Fresh simulator execution remains
+  environment-limited after worker startup (`NSMachErrorDomain -308`); this does
+  not change the compile/archive or prior successful runtime evidence.

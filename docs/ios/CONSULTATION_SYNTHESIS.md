@@ -223,6 +223,42 @@ Therefore:
   ([Releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases),
   [Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)).
 
+### Phase 4 implementation resolution (2026-08-02)
+
+- The one-package recommendation is now concrete: `CommissureCore` is a single
+  Foundation-only package, while network, disk, RealityKit, preferences, and
+  MetricKit remain concrete app infrastructure.
+- The cache boundary is executable and tested rather than represented by UI
+  flags: bundled, installed, offered, transfer, compatibility, failure, and
+  in-use facts remain orthogonal; the presentation state is derived.
+- App startup consumes bundled fixtures only. Static remote delivery is an
+  optional `AssetSource` seam and cannot delay the first Library frame.
+- The Phase 4 shell is test scaffolding. It does not settle Phase 5 layout,
+  bottom-bar behavior, visual hierarchy, or icon treatment.
+- The generated Info.plist reads marketing/build versions from Xcode settings,
+  keeping the release identity in one place while the Phase 4 candidate remains
+  a development build (`0.1.0`, build `1`).
+- The first native independent QC was intentionally fail-closed: it exposed
+  mismatched gesture-axis semantics, touch-count cancellation, nested scene-path
+  and asset-version acceptance, non-exact cache-file verification, unsafe pack
+  identities, and missing runtime locale reprojection. The repair candidate
+  centralizes and tests each boundary before a fresh QC freeze; no visual or
+  App Store conclusion is inferred from the interim archive.
+
+### Phase 4 independent QC closeout (2026-08-02)
+
+- The repair reverses vertical semantics to match the product contract (down
+  advances, up goes back), rejects missing-leading-slash, duplicate-slash, and
+  trailing-slash entity paths, and adds regression coverage for all variants.
+- The frozen 34-file candidate passed a fresh read-only `gpt-5.6-sol` / xhigh
+  audit with zero open findings. Core 15/15, app 20, UI 2 compile/archive
+  evidence, exact cache and hierarchy checks, bilingual reprojection, and
+  offline-launch boundaries passed. Simulator execution was separately recorded
+  as environment-limited after worker startup (`NSMachErrorDomain -308`).
+- This closes Phase 4's machine-verifiable foundation gate. It does not approve
+  Phase 5 visual acceptance, physical-device performance, medical/rights review,
+  signing, or App Store submission.
+
 ## 8. First five implementation tasks
 
 After Shinya performs the Phase 0 compact checkpoint:
