@@ -19,4 +19,17 @@ final class TheCommissureUITests: XCTestCase {
 
     XCTAssertTrue(app.staticTexts["前方頸椎椎間板切除固定術（ACDF）"].waitForExistence(timeout: 5))
   }
+
+  func testSelectedJapanesePreferenceLocalizesSystemChrome() {
+    let app = XCUIApplication()
+    app.launchArguments = [
+      "-AppleLanguages", "(en)",
+      "-AppleLocale", "en_US",
+      "-appLanguage", "japanese",
+    ]
+    app.launch()
+
+    XCTAssertTrue(app.staticTexts["このデバイスで利用可能"].waitForExistence(timeout: 5))
+    XCTAssertTrue(app.staticTexts["7ステップ"].waitForExistence(timeout: 5))
+  }
 }

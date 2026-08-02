@@ -278,6 +278,26 @@ Therefore:
   connector had no source window; this does not block the brief because its
   decisions are already covered by the approved concept and Fable handoff.
 
+### Phase 5A visual shell implementation resolution (2026-08-02)
+
+- The frozen brief remains the visual contract even though this session could not
+  route an Opus agent (`Available agents: empty`). Codex therefore implemented the
+  allowlisted SwiftUI shell directly and records it as a fallback implementation,
+  not as Opus-authored code.
+- The shell is intentionally split from the final visual/content pass: it proves
+  semantic actions, presentation projections, explicit EN/JA system-label
+  selection, accessibility labels/hints, and the Library → Theater route while
+  leaving the RealityKit scene in `.preparing` and remote transfer states as
+  deterministic fixtures. `LOCALIZATION_PREFERS_STRING_CATALOGS=YES` is part of
+  the XcodeGen contract so projection-resolved String Catalog keys are shipped;
+  the model selects the matching `lproj` bundle without scattering locale
+  conditionals through views.
+- The first implementation review found the expected visual/content debt (dense
+  cards, duplicated navigation title, and awkward inherited Japanese prose). The
+  navigation-title duplication was removed in the shell; copy and screenshot-led
+  hierarchy refinement are Phase 5B work and must not be misreported as release
+  acceptance.
+
 ## 8. First five implementation tasks
 
 After Shinya performs the Phase 0 compact checkpoint:

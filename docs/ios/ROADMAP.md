@@ -1,6 +1,6 @@
 # iOS App Store Roadmap
 
-Status: Phase 5 Claude Design brief in progress on branch; Phase 4 merged as `f2a81d7`
+Status: Phase 5A visual shell candidate in progress on branch; Phase 4 merged as `f2a81d7`
 Repository baseline: `main` through PR #54 (`f2a81d7`); each phase uses a dedicated branch.
 This is an engineering order, not a calendar estimate.
 
@@ -319,6 +319,40 @@ Exit criteria:
 - The 7:2:1 hierarchy holds in light-controlled screenshot review.
 - No UI file performs network/file I/O or searches RealityKit entities.
 - Maximum Dynamic Type and VoiceOver retain every essential action.
+
+### Phase 5A machine-gated visual shell (2026-08-02)
+
+The first native presentation shell is implemented on `feat/ios-phase5-visual-shell`
+from the Phase 5 docs merge. The Claude Design project remains a static reference
+surface; its synced brief is not a runtime dependency. Opus agent routing was not
+available in this session, so Codex implemented the same strict visual allowlist
+from the frozen brief without allowing visual code to cross into domain or I/O
+ownership.
+
+Completed candidate scope:
+
+- `DesignTokens`, semantic `AppAction` descriptors, bilingual String Catalog
+  labels/hints, and deterministic `ViewState`/preview fixtures.
+- Dark 7:2:1 Library shell with explicit bundled/cached/download/transfer/failure
+  presentation states, icon-first cards, language/settings/about controls, and
+  safe-area-aware material surfaces.
+- Procedure Theater shell with a full-bleed scene slot, explanation owner, reset/
+  back actions, and Compact/Expanded Bottom Step Tray using the same intents.
+- Codex-owned projection from `ContentStore` and `ProcedureSessionController`:
+  opening a real bundled procedure, forward/back/direct step intents, and locale
+  reprojection preserve the active session step.
+- Colophon/settings shells, Dynamic Type-compatible system typography, localized
+  icon accessibility metadata, and a non-gesture action path for every routine
+  control.
+
+Evidence before phase close: Swift format/lint passed; XcodeGen regeneration,
+simulator build/run, and 26 simulator tests (23 app-unit tests plus three UI
+tests, including explicit app-preference Japanese String Catalog coverage). The
+existing Web/content boundary audits also pass. This is not final visual
+acceptance: the scene is still a preparing placeholder, download states are
+fixture-backed, and Japanese medical copy remains the existing content source
+pending the next editorial/design pass. Phase 5B will refine visual hierarchy
+and copy against screenshots before Phase 6 RealityKit integration.
 
 ## 10. Phase 6 — ACDF vertical slice
 
