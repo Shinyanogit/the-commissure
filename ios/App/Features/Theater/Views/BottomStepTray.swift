@@ -45,15 +45,21 @@ struct BottomStepTray: View {
     Button {
       onAction(density == .expanded ? .collapseTray : .expandTray)
     } label: {
-      VStack(spacing: 2) {
-        Text("\(state.currentStep) / \(state.totalSteps)")
-          .font(.subheadline.weight(.semibold).monospacedDigit())
-          .foregroundStyle(DesignTokens.Color.textPrimary)
-        ProgressView(value: Double(state.currentStep), total: Double(state.totalSteps))
-          .tint(DesignTokens.Color.cyan)
-          .frame(maxWidth: 104)
+      HStack(spacing: DesignTokens.Spacing.compact) {
+        VStack(spacing: 3) {
+          Text("\(state.currentStep) / \(state.totalSteps)")
+            .font(.subheadline.weight(.semibold).monospacedDigit())
+            .foregroundStyle(DesignTokens.Color.textPrimary)
+          ProgressView(value: Double(state.currentStep), total: Double(state.totalSteps))
+            .tint(DesignTokens.Color.cyan)
+            .frame(maxWidth: 104)
+        }
+
+        Image(systemName: density == .expanded ? "chevron.down" : "chevron.up")
+          .font(.system(size: 12, weight: .bold))
+          .foregroundStyle(DesignTokens.Color.cyan)
       }
-      .frame(maxWidth: .infinity, minHeight: 44)
+      .frame(maxWidth: .infinity, minHeight: 48)
       .contentShape(Rectangle())
     }
     .buttonStyle(.plain)
@@ -71,8 +77,14 @@ struct BottomStepTray: View {
             onAction(.selectStep(id))
           } label: {
             VStack(spacing: 4) {
-              Text("\(index + 1)")
-                .font(.caption.weight(.semibold).monospacedDigit())
+              HStack(spacing: 4) {
+                if index + 1 == state.currentStep {
+                  Image(systemName: "circle.fill")
+                    .font(.system(size: 6, weight: .bold))
+                }
+                Text("\(index + 1)")
+                  .font(.caption.weight(.semibold).monospacedDigit())
+              }
               Text(state.stepLabels[safe: index] ?? "")
                 .font(.caption2)
                 .lineLimit(1)
