@@ -381,8 +381,9 @@ development team; the full device test scheme passes 23 app tests and three UI
 tests. The test bundle resolves the app-bundled `content/` first and keeps a
 source-tree fallback for local-only runs, so device tests do not depend on the
 Mac filesystem. Screenshot-led visual and manual accessibility acceptance
-remain the human gate for closing Phase 5B. No simulator result is claimed for
-this checkpoint.
+remain the human gate for closing Phase 5B. GitHub CI's simulator app/UI suite
+also passes, but no simulator result is treated as physical visual evidence or
+as a substitute for the installed-iPad review.
 
 ## 10. Phase 6 — ACDF vertical slice
 
