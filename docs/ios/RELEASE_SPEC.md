@@ -9,6 +9,15 @@ procedure state, with runtime EN/JA system-label selection covered by simulator
 UI tests. The scene placeholder and fixture-backed transfer states are not
 release evidence.
 
+The Phase 5A composition is not a release baseline. The owner rejected the
+incremental Phase 5B direction, so Phase 5R requires materially divergent static
+designs, a disposable interaction prototype for Theater/tray/step transitions,
+complete state-matrix coverage, clean production translation from the approved
+Figma specification, and exact-build iPad/iPhone screenshot/accessibility
+acceptance before the visual shell can be called release-ready. Runtime plumbing
+evidence does not close this gate; generated design code is never a production
+source.
+
 Phase 4 archive status (2026-08-02): the unsigned generic-device archive smoke
 passes for the iOS 18 Swift 6 foundation (`0.1.0` / build `1`, 3.4 MB archive
 before native models and signing). The repair covers the first independent-QC

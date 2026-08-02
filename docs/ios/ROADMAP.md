@@ -1,6 +1,9 @@
 # iOS App Store Roadmap
 
-Status: Phase 5B visual refinement next; Phase 5A merged as `fece5e8`
+Status: Phase 5R greenfield UI/UX reset in progress on
+`docs/ios-phase5r-design-reset`; Phase 5A merged as `fece5e8`. The prior
+`feat/ios-phase5b-visual-refinement` branch is retained as plumbing evidence,
+not a visual baseline.
 Repository baseline: `main` through PR #56 (`fece5e8`); each phase uses a dedicated branch.
 This is an engineering order, not a calendar estimate.
 
@@ -294,7 +297,7 @@ Claude Design project: `The Commissure — Sterile Field iOS` (`dfa74f8d-774a-4b
 Synced brief path: `brief/CLAUDE_DESIGN_BRIEF.md`. The project stores static
 references only; SwiftUI source remains in GitHub.
 
-Sequence:
+Original sequence:
 
 1. Codex freezes design tokens, fixture `ViewState`, accessibility contracts,
    icon semantics, and MECE ownership for each screen in the brief.
@@ -302,6 +305,9 @@ Sequence:
 3. Codex checks dependency direction, removes embedded logic, connects intents,
    and runs previews/tests.
 4. Screenshot comparison and device review decide acceptance.
+
+That sequence is now superseded by the Phase 5R reset below. No new SwiftUI
+visual implementation starts until a static composition is selected.
 
 Deliverables:
 
@@ -352,8 +358,61 @@ tests, including explicit app-preference Japanese String Catalog coverage). The
 existing Web/content boundary audits also pass. This is not final visual
 acceptance: the scene is still a preparing placeholder, download states are
 fixture-backed, and Japanese medical copy remains the existing content source
-pending the next editorial/design pass. Phase 5B will refine visual hierarchy
-and copy against screenshots before Phase 6 RealityKit integration.
+pending a new editorial/design pass. The later incremental Phase 5B branch was
+not accepted as the visual direction; its physical install/test evidence is
+kept separately as plumbing evidence. Phase 5R replaces it with a greenfield
+composition workflow before Phase 6 RealityKit integration.
+
+### Phase 5R greenfield UI/UX reset (in progress 2026-08-02)
+
+Phase 5R is a deliberate composition reset, not a domain rewrite. The product
+owner's visual rejection and the fresh Fable review both found that the earlier
+shell was implemented before any divergent static composition had been chosen.
+The native visual layer therefore returns to design exploration while
+`CommissureCore`, content, cache, localization, gestures, and RealityKit seams
+remain Codex-owned contracts.
+
+| Subphase | Scope | Exit criteria | Gate |
+|---|---|---|---|
+| **5R0 — salvage and supersession** | Record the reset decision, keep the prior UI branch unmerged, and re-land non-visual device-test/Markdown work independently | Decision record, coupled docs, and branch boundaries committed; Web/content untouched | Shinya acknowledges the reset scope |
+| **5R1A — brief lock** | Reconcile the reset brief with the fixed concept, screen ownership, real-content provenance, and fixture contract | 7:2:1, icon semantics, MECE, tray ownership, and no-generated-code rules are explicit | Fable/GPT Pro challenge is recorded |
+| **5R1B — divergent static concepts** | Claude Design/Figma plus a design-specialist model creates at least 3 materially different Theater compositions and 1–2 Library compositions using real anatomy stills | Every frame names viewport, fixture, tokens, locale, and tray density; no generated code; rejected shell is not reused as a candidate | Shinya selects a direction to prototype |
+| **5R1C — interaction prototype** | Build a disposable Figma/ProtoPie-scale prototype for Theater, compact/expanded/minimal tray, and forward/back/direct step transitions | Interaction evidence validates ownership and state transitions; no production SwiftUI or medical-content invention | Shinya approves the interaction direction |
+| **5R2 — state-matrix design** | Extend the selected direction across every real availability, transfer, scene, locale, accessibility, and orientation fixture | 100% fixture-to-frame coverage; worst states shown beside hero states; MECE and 7:2:1 checklist passes; same AppAction path is specified for gesture and accessible alternatives | Shinya approves the implementation-ready matrix |
+| **5R3A — disposable visual interpretation** | Opus 5 may create a throwaway SwiftUI/reference interpretation to expose translation ambiguities | Reference is disposable, allowlisted, and never treated as production source | Codex accepts or returns the spec for clarification |
+| **5R3B — production visual translation** | Codex reimplements the approved Figma composition cleanly; Opus owns only the visual allowlist, Codex owns integration and logic | Reference parity, fixture reachability, accessibility, physical iPad/iPhone screenshots, and fresh QC pass | Exact-build device visual acceptance |
+
+### Phase 5R workflow rules
+
+- Static frames, an annotated state matrix, and a small interaction prototype
+  are the design evidence. Figma Dev Mode output, Claude Design exports, and
+  model-generated SwiftUI are never copied into production code.
+- Theater is designed first on a 13-inch iPad landscape viewport, then Library,
+  iPhone portrait, iPad portrait, EN/JA, Dynamic Type, VoiceOver, Reduce Motion,
+  and failure/offline states. Real shipped anatomy stills are mandatory; a
+  placeholder capsule cannot prove anatomy-first composition or 7:2:1.
+- The new visual branch is separate from `feat/ios-phase5b-visual-refinement`:
+  `feat/ios-phase5r1-design-exploration` holds static candidates and the
+  disposable prototype, followed by one implementation branch after the
+  direction gate. Each subphase updates the coupled docs, runs independent QC,
+  and commits in English before the next subphase.
+- Existing `ViewState` fixtures are extended, not replaced. Tray/explanation
+  state must round-trip through the model; a view-local copy cannot become the
+  source of truth.
+
+### Phase 5R first deliverables
+
+- [`design/DESIGN_RESET_DECISION.md`](design/DESIGN_RESET_DECISION.md)
+- [`design/FIXTURE_MATRIX.md`](design/FIXTURE_MATRIX.md)
+- [`design/ANATOMY_STILL_PROVENANCE.md`](design/ANATOMY_STILL_PROVENANCE.md)
+- `CLAUDE_DESIGN_BRIEF.md` v2 with the reset workflow and no-generated-code rule
+- A provenance manifest for 3–5 real ACDF/PCDF anatomy stills
+- 3+ annotated Theater compositions and 1–2 annotated Library compositions,
+  followed by an interaction prototype for tray density and step transitions
+
+Phase 5R does not add onboarding, a generic tab bar, light-mode theming,
+unshipped features, remote UI code, or recurring backend cost. Phase 6 begins
+only after the selected visual direction has passed the physical iPad gate.
 
 ## 10. Phase 6 — ACDF vertical slice
 

@@ -6,11 +6,11 @@ Minimum deployment: iOS/iPadOS 18
 
 Phase 5A implementation status (2026-08-02, merged in PR #56 as `fece5e8`): the
 tracked Xcode project and local pure-Foundation package implement the ownership
-graph below. The SwiftUI shell
-now consumes immutable presentation projections for Library, Theater, Bottom
-Step Tray, Colophon, and Settings. The scene slot and transfer states remain
-explicit placeholders until Phase 5B/6; domain, RealityKit, and I/O ownership
-remain outside the visual allowlist.
+graph below. The SwiftUI shell consumes immutable presentation projections for
+Library, Theater, Bottom Step Tray, Colophon, and Settings. The shell is
+plumbing evidence, not an accepted visual composition. Phase 5R now restarts
+composition in Claude Design/Figma before Opus 5 writes replacement SwiftUI;
+domain, RealityKit, and I/O ownership remain outside the visual allowlist.
 
 ## 1. Architecture goals
 
@@ -397,6 +397,19 @@ bundle even when the key is resolved from a presentation projection rather than
 directly in a SwiftUI body. The visible theater uses `.preparing` until the Phase
 6 RealityKit adapter binds the verified scene; the placeholder is not release
 evidence.
+
+### Phase 5R visual reset boundary
+
+The approved visual source is still `docs/DESIGN_CONCEPT.md`, but the Phase 5A
+view composition is not a source of truth. Divergent static frames, a disposable
+interaction prototype for Theater/tray/step transitions, and an annotated
+fixture matrix must be accepted before replacement views are written. The
+visual allowlist remains `DesignSystem`, feature views, and preview fixtures;
+those files may consume Codex-owned projections but may not import file/network
+APIs, search RealityKit entities, or create a second state source with view-local
+copies of `ViewState`. Gesture and accessibility alternatives must dispatch the
+same semantic intent path. The reset does not alter `CommissureCore`, content
+schemas, cache/download invariants, localization keys, or gesture resolution.
 
 ## 12. Phase 4 executable evidence
 

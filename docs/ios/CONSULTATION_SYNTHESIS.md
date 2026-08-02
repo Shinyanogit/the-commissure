@@ -298,6 +298,64 @@ Therefore:
   hierarchy refinement are Phase 5B work and must not be misreported as release
   acceptance.
 
+### Phase 5R greenfield UI/UX reset resolution (2026-08-02)
+
+- A fresh repository-grounded Fable review was run after the product owner
+  rejected the incremental Phase 5B direction. Fable's verdict was that the
+  visual composition should be restarted from a blank canvas: the earlier
+  SwiftUI shell was implemented before any divergent static compositions were
+  produced, compared, or selected.
+- Fable identified structural rather than cosmetic mismatches: cyan used as
+  ambient branding, anatomy color reused for transfer state, ambiguous card
+  actions, a stacked theater rather than an anatomy-first field, and fixture
+  state copied into view-local state instead of round-tripping through
+  `ViewState`.
+- The reset therefore rejects Phase 5A/5B view composition as a visual
+  baseline while preserving `DESIGN_CONCEPT.md`, semantic actions, ViewState
+  fixtures, localization/accessibility contracts, `CommissureCore`, content,
+  cache, gesture, and RealityKit ownership. The prior branch remains unmerged
+  and is evidence of plumbing only.
+- The replacement sequence is 5R0 salvage/supersession → 5R1 divergent static
+  composition exploration → 5R2 complete state-matrix design → 5R3 Opus
+  SwiftUI implementation and physical-iPad visual acceptance. Static frames and
+  fixture coverage are human gates; generated Figma/Claude code is reference
+  only and never enters the repository.
+
+### Phase 5R GPT Pro counter-review (2026-08-02)
+
+- GPT Pro independently agrees with the Composition Reset, while sharpening the
+  boundary: the architecture, domain, cache, content, RealityKit, gesture, and
+  test foundations remain in place. The reset discards composition, information
+  hierarchy, navigation ownership, layout, and visual decisions—not validated
+  infrastructure.
+- The only material addition to Fable's sequence is an interaction gate between
+  static references and SwiftUI. Phase 5R1 is therefore split into a locked
+  brief, deliberately divergent static candidates, and a small Figma/ProtoPie
+  prototype covering Theater, Bottom Step Tray, and step transitions. The owner
+  selects from the interaction evidence, not a polished hero frame alone.
+- Phase 5R2 is the state contract gate: state, gesture/AppAction/ViewState/UI
+  round-trip, localization, accessibility, and viewport matrices must be
+  complete. Gesture and VoiceOver/pointer/keyboard alternatives dispatch the
+  same AppAction; Dynamic Type, Reduce Motion, EN/JA long strings, failure, and
+  offline states are first-class fixtures.
+- Phase 5R3 is split into disposable visual interpretation (Opus 5 may use a
+  throwaway reference implementation) and production translation (Codex
+  reimplements cleanly from the approved Figma specification). Generated code
+  is never copied into the production branch, and no SwiftUI composition work
+  starts before the R2 implementation-ready gate.
+- Incremental refinement is allowed only when information hierarchy, screen
+  ownership, navigation, and the Bottom Step Tray are already sound. This
+  product has crossed the reset threshold because the owner rejected the
+  composition itself; spacing, radius, typography, or color patches cannot
+  restore a failed composition.
+- Acceptance is semantic rather than decorative: cyan is active-state-only,
+  anatomy remains the visual subject, the tray is the sole step owner, every
+  screen remains MECE, icon-only actions have localized accessible equivalents,
+  and the same state/intent behavior passes on physical iPad and iPhone.
+- The consultation was recorded against
+  `docs/ios/CONSULTATION_SYNTHESIS.md`; no browser tab, credential, or generated
+  UI code is a repository dependency.
+
 ## 8. First five implementation tasks
 
 After Shinya performs the Phase 0 compact checkpoint:

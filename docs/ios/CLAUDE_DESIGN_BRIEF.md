@@ -1,14 +1,15 @@
 # Claude Design Brief — The Sterile Field (iOS)
 
-Status: Phase 5 visual brief, Codex-frozen for reference generation
+Status: Phase 5R v2 reset brief, Codex-frozen for static/interactive reference generation
 Date: 2026-08-02
 Authority: [`DESIGN_CONCEPT.md`](../DESIGN_CONCEPT.md)
 Implementation target: SwiftUI on iOS/iPadOS 18+
 
 This brief turns the approved product concept into a bounded visual handoff.
-It is the input for Claude Design reference generation and the Opus 5 SwiftUI
-visual pass. It does not replace the approved design concept, the product
-specification, or the domain contracts.
+It is the input for Claude Design/Figma reference generation, the interaction
+prototype, and the later Opus 5/Codex visual translation. It does not replace
+the approved design concept, the product specification, or the domain
+contracts.
 
 ## 1. Product sentence and visual stance
 
@@ -35,6 +36,32 @@ The following order is binding:
 5. Codex owns state projection, intent dispatch, RealityKit, file/network work,
    localization plumbing, performance, tests, CI, and integration. Codex may
    simplify or reject a visual implementation that violates these boundaries.
+
+### 2.1 Phase 5R reset workflow
+
+The previous Phase 5A/5B composition is plumbing evidence only. It is not a
+candidate to polish, trace, or use as the default layout. The design work must
+produce at least three materially different Theater compositions and one or two
+Library compositions with real shipped anatomy stills. A candidate that merely
+changes spacing, radii, typography, or color in the rejected shell is not
+divergent.
+
+Static candidates are followed by a disposable Figma/ProtoPie-scale interaction
+prototype covering the Theater, compact/expanded/minimal Bottom Step Tray, and
+forward/back/direct step transitions. Shinya selects the direction from both
+static and interaction evidence before any production SwiftUI composition is
+written. The selected direction then receives the complete fixture matrix.
+
+Claude Design/Figma exports, Dev Mode code, and model-generated SwiftUI are
+reference artifacts only. They are not copied into the production target or
+made runtime dependencies. Opus 5 may use a disposable reference implementation
+to expose translation ambiguities; Codex reimplements production SwiftUI from
+the approved visual specification and existing presentation contracts.
+
+Until the matrix and direction gate pass, visual SwiftUI changes are frozen.
+Codex may continue non-visual fixtures, validators, accessibility plumbing,
+tests, CI, and domain/RealityKit/cache work, but a visual need that crosses a
+boundary is recorded as an integration task rather than hidden in a view.
 
 Claude Design exports must contain only shipped UI, real content, real SF
 Symbols, and states represented by the fixture contract. No fictional feature,
@@ -227,13 +254,19 @@ an accessible action path independent of the gesture resolver.
 
 ## 9. Claude Design deliverables
 
-The first design pass should produce static references for:
+The first design pass should produce at least three deliberately divergent
+static Theater compositions and one or two Library compositions for:
 
 1. Library card and all acquisition states.
 2. Theater shell with compact/expanded/minimal Bottom Step Tray.
 3. Explanation collapse/expand and loading/failure presentation.
 4. Colophon/settings and locale control.
 5. EN/JA, Dynamic Type, VoiceOver, Reduce Motion, iPhone, and iPad variants.
+
+After static review, produce a disposable interaction prototype for the
+Theater, tray density changes, and forward/back/direct step transitions. The
+prototype is not a production navigation model; it exists to test ownership,
+discoverability, and state transition comprehension before implementation.
 
 Each reference must list the token names used, component/state name, viewport,
 and the fixture state it represents. Exported screenshots are review evidence;
@@ -257,7 +290,11 @@ localization loading, persistence, network/file access, project settings, CI,
 or App Store metadata. Views must consume localized presentation values and
 must not scatter `if locale == ...` branches, duplicate localization keys, or
 embed user-facing English/Japanese literals. Any visual need that crosses this
-boundary becomes a Codex integration task.
+boundary becomes a Codex integration task. Any Opus reference implementation
+created before the direction gate is disposable and is never copied into the
+production branch. Production acceptance is based on the approved Figma
+specification, the fixture matrix, intent round-tripping, and physical-device
+evidence—not on source-code similarity to the reference.
 
 ## 11. Acceptance checklist
 
