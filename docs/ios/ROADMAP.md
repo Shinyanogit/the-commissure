@@ -375,12 +375,14 @@ the screenshot review findings:
   chevron and marks the selected step without adding a second navigation bar.
 
 Machine checks for this candidate pass Swift formatting, content validation,
-the 15 core tests, and an unsigned generic iOS build. Runtime UI tests are not
-accepted as new evidence in this checkpoint because the available simulator
-worker returned `Invalid device state`; the connected physical iPad is recognized
-but its device build is blocked by the owner-only Apple Team/account and
-provisioning-profile gate. Final screenshot and accessibility acceptance remain
-open until the iPad can install the signed build.
+the 15 core tests, and an unsigned generic iOS build. The connected physical
+iPad now has a signed build installed and launched using the configured
+development team; the full device test scheme passes 23 app tests and three UI
+tests. The test bundle resolves the app-bundled `content/` first and keeps a
+source-tree fallback for local-only runs, so device tests do not depend on the
+Mac filesystem. Screenshot-led visual and manual accessibility acceptance
+remain the human gate for closing Phase 5B. No simulator result is claimed for
+this checkpoint.
 
 ## 10. Phase 6 — ACDF vertical slice
 

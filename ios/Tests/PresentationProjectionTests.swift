@@ -10,7 +10,7 @@ final class PresentationProjectionTests: XCTestCase {
     let preferences = AppPreferences(defaults: defaults)
     preferences.language = .english
     let model = FoundationAppModel(
-      contentStore: ContentStore(contentRoot: repositoryContentRoot()),
+      contentStore: ContentStore(contentRoot: testContentRoot()),
       preferences: preferences
     )
 
@@ -31,7 +31,7 @@ final class PresentationProjectionTests: XCTestCase {
     let preferences = AppPreferences(defaults: defaults)
     preferences.language = .english
     let model = FoundationAppModel(
-      contentStore: ContentStore(contentRoot: repositoryContentRoot()),
+      contentStore: ContentStore(contentRoot: testContentRoot()),
       preferences: preferences
     )
 
@@ -59,7 +59,7 @@ final class PresentationProjectionTests: XCTestCase {
     let preferences = AppPreferences(defaults: defaults)
     preferences.language = .japanese
     let model = FoundationAppModel(
-      contentStore: ContentStore(contentRoot: repositoryContentRoot()),
+      contentStore: ContentStore(contentRoot: testContentRoot()),
       preferences: preferences
     )
 
@@ -79,12 +79,4 @@ final class PresentationProjectionTests: XCTestCase {
     defaults.removePersistentDomain(forName: defaultsSuiteName)
     return defaults
   }
-}
-
-private func repositoryContentRoot() -> URL {
-  URL(fileURLWithPath: #filePath)
-    .deletingLastPathComponent()
-    .deletingLastPathComponent()
-    .deletingLastPathComponent()
-    .appendingPathComponent("content", isDirectory: true)
 }

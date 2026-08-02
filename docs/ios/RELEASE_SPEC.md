@@ -13,9 +13,11 @@ release evidence.
 
 The Phase 5B candidate improves iPad card density, removes duplicate navigation
 chrome, renders restricted Markdown in the explanation surface, and makes the
-Bottom Step Tray density affordance explicit. These are not release gates until
-the signed build is reviewed on the connected physical iPad; the current device
-build is blocked by the missing owner Team account and provisioning profile.
+Bottom Step Tray density affordance explicit. A signed candidate now installs
+and launches on the connected physical iPad, and the full device test scheme
+passes. These changes still do not close release gates until the exact build is
+reviewed manually for screenshots, accessibility, medical copy, and App Store
+requirements.
 
 Phase 4 archive status (2026-08-02): the unsigned generic-device archive smoke
 passes for the iOS 18 Swift 6 foundation (`0.1.0` / build `1`, 3.4 MB archive

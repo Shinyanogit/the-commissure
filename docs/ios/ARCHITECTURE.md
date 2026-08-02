@@ -417,8 +417,11 @@ evidence.
   selected-step marker. All controls still dispatch the existing exhaustive
   `AppAction` values, preserving the gesture/accessibility extension point.
 - This candidate has no file/network/RealityKit access and does not alter the Web
-  tree or shared content. Physical screenshot acceptance remains pending the
-  owner-only signing profile required to install on the connected iPad.
+  tree or shared content. The signed candidate installs and launches on the
+  connected iPad, and the full device test scheme passes. Test fixtures resolve
+  the app-bundled `content/` before the source-tree fallback so physical tests
+  remain independent of the Mac filesystem. Screenshot-led visual acceptance
+  remains the human gate.
 
 ## 12. Phase 4 executable evidence
 

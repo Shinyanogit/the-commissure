@@ -313,9 +313,11 @@ Therefore:
   domain dependency is introduced; malformed presentation text falls back to
   plain text.
 - A connected iPad is the only intended visual-review target for this candidate.
-  The cable/pairing path is healthy, but Xcode reports no signed-in Team account
-  and no provisioning profile for `app.thecommissure.ios`; this is an owner-only
-  Apple action, not evidence against the UI or Wi-Fi path.
+  The cable/pairing path is healthy. Xcode now resolves the configured
+  development team and managed profile for `app.thecommissure.ios`; the signed
+  candidate installs, launches, and passes the full device test scheme. The
+  remaining gate is manual screenshot/accessibility review, not connectivity or
+  code signing.
 
 ## 8. First five implementation tasks
 
