@@ -157,6 +157,18 @@ Therefore:
 - Exact floor device within iOS 18-capable hardware.
 - Hosting migration from GitHub only if observed service metrics justify it.
 
+### Phase 2 evidence update (2026-08-02)
+
+- ACDF: 475,227 → 159,465 triangles; 7,424,303-byte USDZ; 39 exact semantic
+  entities.
+- PCDF: 996,503 → 144,556 triangles; 6,171,993-byte USDZ; 68 exact semantic
+  entities.
+- Both strict-ARKit-valid packs pass the stricter GPT Pro size/geometry targets,
+  so the Fable/GPT Pro bundle-all synthesis remains the default.
+- Absolute-state invariants and simulator interaction pass. Physical iOS load,
+  peak memory, latency, frame, and sustained thermal measurements are still the
+  expansion gate; simulator numbers are not substituted for them.
+
 ## 7. Apple and operating constraints
 
 - Apple documents `RealityView` for iOS 18+

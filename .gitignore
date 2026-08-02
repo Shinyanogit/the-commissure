@@ -17,6 +17,9 @@ DerivedData
 .build
 xcuserdata
 *.xcuserstate
+ios/Spikes/**/GeneratedAssets/
+ios/Spikes/**/NativeAssetSpike.xcodeproj/
+tooling/native-assets/output/
 
 # Editor directories and files
 .vscode/*

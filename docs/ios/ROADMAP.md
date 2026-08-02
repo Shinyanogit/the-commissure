@@ -1,7 +1,7 @@
 # iOS App Store Roadmap
 
-Status: Phase 1 complete; Phase 2 is next
-Repository baseline: `main` through PR #50; each phase uses a dedicated branch.
+Status: Phase 2 machine spike complete; physical-device gate pending
+Repository baseline: `main` through PR #51; each phase uses a dedicated branch.
 This is an engineering order, not a calendar estimate.
 
 ## 1. Objective and priority
@@ -122,6 +122,25 @@ PR if necessary. No force-push or destructive reset is required.
 
 ## 6. Phase 2 — native asset and performance spikes
 
+Machine-complete evidence (2026-08-02):
+
+- Pinned Blender 5.2.0 LTS plus Apple USD Tools 0.25.2 now regenerate
+  byte-identical, strict-ARKit-valid USDZ from the tracked Draco GLBs.
+- ACDF is 159,465 triangles / 7,424,303 bytes across 39 semantic entities;
+  PCDF is 144,556 triangles / 6,171,993 bytes across 68 semantic entities.
+  Both pass the individual-pack and triangle targets, not merely the hard gates.
+- Six pure Swift tests prove complete absolute states, direct/sequential
+  equality, `1 → 6 → 3 → 7 → 1`, fifty drift-free cycles, loading-time
+  latest-wins, and invalid-step containment.
+- Simulator RealityKit loading, exact ACDF/PCDF path binding, verified ACDF
+  transform/opacity/visibility across all seven canonical views,
+  forward/reverse/direct navigation, vertical flick, horizontal orbit, and
+  pinch pass. PCDF also loads and sustains 60 fps in the simulator.
+- Simulator decode/memory/FPS are diagnostic observations only. The attached
+  iPad Pro is unavailable, so oldest-supported/current-device percentiles,
+  peak parse memory, input latency, and 15-minute thermal acceptance remain a
+  hard human/device gate. Phase 3 must not begin until that gate is recorded.
+
 ### ACDF correctness spike
 
 ACDF is first because its Blender source exists and it exercises materials,
@@ -150,7 +169,9 @@ ACDF/PCDF results choose bundle-all versus hybrid delivery according to
 [ASSET_DELIVERY.md](ASSET_DELIVERY.md), then update that decision in docs.
 
 Exit criteria: both spikes pass the release-stop thresholds or a concrete model
-optimization plan is accepted before product feature work expands.
+optimization plan is accepted before product feature work expands. Current
+status: size, geometry, semantic, state, build, and simulator gates pass;
+physical-device performance remains open.
 
 ## 7. Phase 3 — content contract and bilingual migration
 
