@@ -1,7 +1,7 @@
 # iOS App Store Roadmap
 
 Status: Phase 1 complete; Phase 2 is next
-Branch: `feat/ios-native-app`
+Repository baseline: `main` through PR #50; each phase uses a dedicated branch.
 This is an engineering order, not a calendar estimate.
 
 ## 1. Objective and priority
@@ -45,6 +45,24 @@ removes accidental logic/dependency creep before merge.
 - Only an owner-only Apple action, a new credential/account, a medically
   consequential ambiguity, or projected recurring infrastructure above
   ¥500/month should interrupt Shinya.
+
+### Phase completion protocol
+
+Every phase closes in this order:
+
+1. Satisfy the phase exit criteria and run its relevant build, test, performance,
+   and release checks.
+2. Update the source-of-truth specification plus every coupled roadmap,
+   architecture, status, release, and local `FORshinya.md` handoff section.
+3. Freeze the scoped diff and complete independent machine QC; interactive UI
+   phases also require active visual QC.
+4. Stage only phase-owned files and create an English commit naming the completed
+   outcome.
+5. Open a pull request, merge it only after required CI/preview gates pass, and
+   verify the resulting `main` state before beginning the next phase.
+
+Shinya alone operates compact. When a compact checkpoint is chosen, documentation
+and the phase commit must already be durable before Codex asks for compact.
 
 ## 4. Phase 0 — concept and specification freeze (complete)
 
