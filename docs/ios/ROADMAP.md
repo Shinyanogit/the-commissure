@@ -370,7 +370,16 @@ owner's visual rejection and the fresh Fable review both found that the earlier
 shell was implemented before any divergent static composition had been chosen.
 The native visual layer therefore returns to design exploration while
 `CommissureCore`, content, cache, localization, gestures, and RealityKit seams
-remain Codex-owned contracts.
+remain Codex-owned contracts. The product owner's explicit implementation split
+is authoritative: Opus 5 writes the approved production visual layer in the
+allowlist; Codex integrates it and owns all underlying logic. If Opus is not
+available, visual implementation pauses rather than falling back to Codex
+composition work.
+
+Current checkpoint: 5R0 and 5R1A are complete in commit `c697874` on this
+docs-only branch. Fable/GPT Pro reconciliation, the v2 brief, fixture contract,
+provenance template, and branch boundary are committed. No static candidate or
+interaction prototype exists yet; the next subphase is 5R1B.
 
 | Subphase | Scope | Exit criteria | Gate |
 |---|---|---|---|
@@ -380,7 +389,7 @@ remain Codex-owned contracts.
 | **5R1C — interaction prototype** | Build a disposable Figma/ProtoPie-scale prototype for Theater, compact/expanded/minimal tray, and forward/back/direct step transitions | Interaction evidence validates ownership and state transitions; no production SwiftUI or medical-content invention | Shinya approves the interaction direction |
 | **5R2 — state-matrix design** | Extend the selected direction across every real availability, transfer, scene, locale, accessibility, and orientation fixture | 100% fixture-to-frame coverage; worst states shown beside hero states; MECE and 7:2:1 checklist passes; same AppAction path is specified for gesture and accessible alternatives | Shinya approves the implementation-ready matrix |
 | **5R3A — disposable visual interpretation** | Opus 5 may create a throwaway SwiftUI/reference interpretation to expose translation ambiguities | Reference is disposable, allowlisted, and never treated as production source | Codex accepts or returns the spec for clarification |
-| **5R3B — production visual translation** | Codex reimplements the approved Figma composition cleanly; Opus owns only the visual allowlist, Codex owns integration and logic | Reference parity, fixture reachability, accessibility, physical iPad/iPhone screenshots, and fresh QC pass | Exact-build device visual acceptance |
+| **5R3B — production visual implementation** | Opus 5 hand-writes the approved SwiftUI visual layer in the allowlist; Codex integrates intents and underlying logic without redesigning it | Reference parity, fixture reachability, accessibility, physical iPad/iPhone screenshots, and fresh QC pass | Exact-build device visual acceptance |
 
 ### Phase 5R workflow rules
 

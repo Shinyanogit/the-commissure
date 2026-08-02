@@ -1,6 +1,6 @@
 # Phase 5R — Greenfield UI/UX Reset Decision
 
-Status: accepted decision, design exploration not started; GPT Pro counter-review reconciled
+Status: accepted decision; 5R0/5R1A docs gate complete, design exploration not started
 Date: 2026-08-02
 Branch: `docs/ios-phase5r-design-reset`
 
@@ -16,6 +16,10 @@ GPT Pro independently confirmed this Composition Reset. It adds one required
 intermediate gate: a small interactive prototype must validate Theater,
 Bottom Step Tray, and step transitions after static candidates and before any
 production SwiftUI. This is a composition reset, not an architecture reset.
+For implementation ownership, the product owner's explicit split controls the
+GPT Pro suggestion: Opus 5 is the production visual author after the direction
+gate, while Codex integrates and owns the underlying logic. A missing Opus
+route pauses visual work instead of authorizing another Codex-led composition.
 
 This is a reset of composition and visual implementation, not a rewrite of the
 native domain, cache, content, or RealityKit foundation.
@@ -91,10 +95,10 @@ visual branch is parked.
 5. The chosen composition covers the complete fixture matrix, including failure,
    offline, Japanese long strings, Dynamic Type, VoiceOver, Reduce Motion, and
    all three tray densities.
-6. Opus 5 may create a disposable visual interpretation, but production SwiftUI
-   is reimplemented from the approved Figma specification in the visual
-   allowlist; generated Figma/Claude
-   code is reference-only and never enters the repository.
+6. Opus 5 may create a disposable visual interpretation before implementation,
+   then hand-writes the approved production SwiftUI in the visual allowlist;
+   generated Figma/Claude code is reference-only and never enters the
+   repository. Codex integrates and audits without redesigning the composition.
 7. Codex verifies intent round-tripping, dependency direction, accessibility,
    performance, and exact iPad screenshots before Phase 5R closes.
 

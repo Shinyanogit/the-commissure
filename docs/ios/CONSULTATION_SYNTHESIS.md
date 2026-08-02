@@ -339,10 +339,15 @@ Therefore:
   same AppAction; Dynamic Type, Reduce Motion, EN/JA long strings, failure, and
   offline states are first-class fixtures.
 - Phase 5R3 is split into disposable visual interpretation (Opus 5 may use a
-  throwaway reference implementation) and production translation (Codex
-  reimplements cleanly from the approved Figma specification). Generated code
-  is never copied into the production branch, and no SwiftUI composition work
-  starts before the R2 implementation-ready gate.
+  throwaway reference implementation) and production implementation. GPT Pro
+  proposed a Codex clean reimplementation, but the product owner's explicit
+  division controls: after R2, Opus 5 hand-writes the approved production
+  visual layer in the allowlist, while Codex integrates intents, logic,
+  accessibility plumbing, tests, and boundaries without redesigning it. No
+  generated code is copied into the production branch, and no SwiftUI
+  composition work starts before the R2 implementation-ready gate. If Opus is
+  unavailable, the visual phase pauses rather than falling back to a Codex-led
+  composition.
 - Incremental refinement is allowed only when information hierarchy, screen
   ownership, navigation, and the Bottom Step Tray are already sound. This
   product has crossed the reset threshold because the owner rejected the

@@ -10,7 +10,9 @@ graph below. The SwiftUI shell consumes immutable presentation projections for
 Library, Theater, Bottom Step Tray, Colophon, and Settings. The shell is
 plumbing evidence, not an accepted visual composition. Phase 5R now restarts
 composition in Claude Design/Figma before Opus 5 writes replacement SwiftUI;
-domain, RealityKit, and I/O ownership remain outside the visual allowlist.
+Opus remains the visual author after the direction gate, while domain,
+RealityKit, and I/O ownership remain outside the visual allowlist and with
+Codex.
 
 ## 1. Architecture goals
 
