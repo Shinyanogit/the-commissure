@@ -1,0 +1,1445 @@
+{
+  "schemaVersion": 1,
+  "procedureId": "pcf",
+  "assetId": "pcf_model",
+  "assetVersion": "1.0.0",
+  "rootEntityPath": "/root/procedure_pcf",
+  "parts": [
+    {
+      "id": "vertebra_c5",
+      "sourceEntity": "c5 bone",
+      "entityPath": "/root/procedure_pcf/anatomy/vertebra_c5",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c4_removed",
+      "sourceEntity": "c4 bone removed",
+      "entityPath": "/root/procedure_pcf/anatomy/vertebra_c4_removed",
+      "dynamic": true
+    },
+    {
+      "id": "vertebra_c5_removed",
+      "sourceEntity": "c5 bone removed",
+      "entityPath": "/root/procedure_pcf/anatomy/vertebra_c5_removed",
+      "dynamic": true
+    },
+    {
+      "id": "ligamentum_flavum_removed_1",
+      "sourceEntity": "ligamentum flavum removed",
+      "entityPath": "/root/procedure_pcf/anatomy/ligamentum_flavum_removed_1",
+      "dynamic": true
+    },
+    {
+      "id": "ligamentum_flavum_removed_2",
+      "sourceEntity": "ligamentum flavum removed.001",
+      "entityPath": "/root/procedure_pcf/anatomy/ligamentum_flavum_removed_2",
+      "dynamic": true
+    },
+    {
+      "id": "disc_c4_c5",
+      "sourceEntity": "c4-c5 disk",
+      "entityPath": "/root/procedure_pcf/anatomy/disc_c4_c5",
+      "dynamic": true
+    },
+    {
+      "id": "nucleus_c4_c5_herniated",
+      "sourceEntity": "c4-c5 nucleus pulposus herniated",
+      "entityPath": "/root/procedure_pcf/anatomy/nucleus_c4_c5_herniated",
+      "dynamic": true
+    },
+    {
+      "id": "nucleus_c4_c5_normal",
+      "sourceEntity": "c4-c5 nucleus pulposus normal",
+      "entityPath": "/root/procedure_pcf/anatomy/nucleus_c4_c5_normal",
+      "dynamic": true
+    },
+    {
+      "id": "nerve_root_c5",
+      "sourceEntity": "c5 nerve",
+      "entityPath": "/root/procedure_pcf/anatomy/nerve_root_c5",
+      "dynamic": true
+    },
+    {
+      "id": "medulla_c5",
+      "sourceEntity": "c5 nerve medulla",
+      "entityPath": "/root/procedure_pcf/anatomy/medulla_c5",
+      "dynamic": true
+    }
+  ],
+  "baseState": {
+    "camera": {
+      "position": [
+        0.2,
+        0.2,
+        0
+      ],
+      "target": [
+        0,
+        0.2,
+        0
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fieldOfView": 75
+    },
+    "parts": {
+      "vertebra_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c4_removed": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "vertebra_c5_removed": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "ligamentum_flavum_removed_1": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "ligamentum_flavum_removed_2": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "disc_c4_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "nucleus_c4_c5_herniated": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "nucleus_c4_c5_normal": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 0,
+        "isVisible": false
+      },
+      "nerve_root_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      },
+      "medulla_c5": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "radians": 0
+        },
+        "opacity": 1,
+        "isVisible": true
+      }
+    }
+  },
+  "steps": [
+    {
+      "id": "pcf_overview",
+      "viewPolicy": "preserveAdjustment",
+      "state": {
+        "camera": {
+          "position": [
+            0.2,
+            0.2,
+            0
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 75
+        },
+        "parts": {
+          "vertebra_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_removed_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_removed_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5_herniated": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5_normal": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "pcf_indications",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0,
+            0.4,
+            -0.9
+          ],
+          "target": [
+            0,
+            0.2,
+            -1
+          ],
+          "up": [
+            0,
+            0,
+            -1
+          ],
+          "fieldOfView": 25
+        },
+        "parts": {
+          "vertebra_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c5_removed": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_removed_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "ligamentum_flavum_removed_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5_herniated": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5_normal": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              1,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "pcf_laminoforaminotomy",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0.045,
+            0.205,
+            -0.1
+          ],
+          "target": [
+            0.015,
+            0.205,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 20
+        },
+        "parts": {
+          "vertebra_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5_herniated": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5_normal": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "pcf_microdiscectomy",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0.045,
+            0.205,
+            -0.1
+          ],
+          "target": [
+            0.015,
+            0.205,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 20
+        },
+        "parts": {
+          "vertebra_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5_herniated": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nucleus_c4_c5_normal": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "pcf_preserved_motion",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0.2,
+            0.2,
+            0
+          ],
+          "target": [
+            0,
+            0.2,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 75
+        },
+        "parts": {
+          "vertebra_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5_herniated": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nucleus_c4_c5_normal": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          }
+        }
+      },
+      "entrance": []
+    },
+    {
+      "id": "pcf_summary",
+      "viewPolicy": "reframe",
+      "state": {
+        "camera": {
+          "position": [
+            0.045,
+            0.205,
+            -0.1
+          ],
+          "target": [
+            0.015,
+            0.205,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fieldOfView": 35
+        },
+        "parts": {
+          "vertebra_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "vertebra_c4_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "vertebra_c5_removed": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed_1": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "ligamentum_flavum_removed_2": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "disc_c4_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "nucleus_c4_c5_herniated": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nucleus_c4_c5_normal": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 0,
+            "isVisible": false
+          },
+          "nerve_root_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          },
+          "medulla_c5": {
+            "translation": [
+              0,
+              0,
+              0
+            ],
+            "rotation": {
+              "axis": [
+                1,
+                0,
+                0
+              ],
+              "radians": 0
+            },
+            "opacity": 1,
+            "isVisible": true
+          }
+        }
+      },
+      "entrance": []
+    }
+  ]
+}

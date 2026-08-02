@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "pcdf_provenance",
+  "procedureId": "pcdf",
+  "contentRevision": 1,
+  "englishSource": {
+    "path": "web/src/content/procedureText.js",
+    "sha256": "0125beb9ba3d0f4dfbea0ef3258b8493f6a27231171ef6d74c9fdce23da2dc6b",
+    "migration": "mechanical-html-to-restricted-markdown",
+    "normalizations": []
+  },
+  "translationReview": {
+    "status": "editorialReviewed",
+    "reviewer": "Codex bilingual editorial pass",
+    "reviewedAt": "2026-08-02"
+  },
+  "medicalReview": {
+    "status": "inheritedWebsiteSource",
+    "releaseGate": true
+  },
+  "rightsReview": {
+    "status": "ownerConfirmationRequired",
+    "releaseGate": true
+  },
+  "assetSource": {
+    "path": "web/public/Posterior Cervical Decompression and Fusion (PCDF) Light.glb",
+    "sha256": "d8d57774af3e59cdbfccf2636f6b4ab3f8934e0c48c542086684935cc3eedff9"
+  },
+  "license": "Repository-controlled educational asset",
+  "authors": [
+    "The Commissure contributors"
+  ]
+}

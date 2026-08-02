@@ -105,6 +105,25 @@ dependency-injection containers, a generic renderer hierarchy, and Combine.
 
 ## 4. Domain model
 
+Phase 3 freezes six closed JSON Schema v1 documents under `content/schema/`:
+
+| Contract | Ownership |
+|---|---|
+| catalog | version/capabilities plus exact file path, SHA-256, and byte count |
+| procedure | renderer-neutral identity, localization keys, ordered step IDs, view policy |
+| localization | one locale, revision, review record, and restricted-Markdown strings |
+| scene | iOS-only bindings, absolute base/step snapshots, and allowlisted entrance beats |
+| provenance | Web-text migration, asset digest, review, rights, and authorship status |
+| source entities | asset-digest-bound exact legacy GLB names used to verify bindings |
+
+Legacy `sourceEntity` spelling is retained only as conversion input. Runtime
+state addresses the normalized `entityPath`; source array order and substrings
+are never identity. The Phase 3 generator maps model-local animation offsets to
+the canonical converted USDZ coordinate convention before emitting complete
+snapshots. Absolute paths include the USDZ loader's `/root` entity; ACDF/PCDF
+IDs and paths are cross-checked against their accepted native conversion
+manifests. Catalog hashes are calculated after deterministic JSON generation.
+
 ```swift
 struct ProcedureDefinition: Decodable, Identifiable, Sendable {
     let schemaVersion: Int
@@ -169,6 +188,15 @@ Rules:
   branch, loop, call an operation, reference current render values, or contain an
   expression. CI bounds beat count/duration and resolves every beat to a complete
   snapshot before publication; compiled Swift owns interpolation/cancellation.
+- Validation also requires the last entrance target to equal the canonical step
+  state, a nondegenerate camera basis, and a nonzero axis for every rotation.
+- Cross-file validation fixes `en` and `ja` to their named files, matches the
+  provenance revision and procedure/scene view policy, and requires the exact
+  `/root/procedure_<id>` root. Changing every path consistently to another root
+  is still invalid.
+- Restricted Markdown accepts only canonical `procedure:<id>` links whose label
+  matches that procedure's title in the active locale. URI schemes,
+  protocol-relative URLs, and bare `www.` hosts are rejected fail-closed.
 - Authored camera pose and user yaw/pitch/zoom adjustment are separate values.
   `preserveAdjustment` is the default; a medically justified `reframe` resets
   adjustment and moves to the authored camera. Reset always returns to the
@@ -250,6 +278,12 @@ scatter `if language == ...` branches. Changing locale rebuilds presentation
 values only—it does not decode/reload USDZ, recreate `ProcedureSession`, or
 alter the active step. CI rejects missing/extra keys and unreviewed locale
 revisions.
+
+While Web still imports `procedureText.js`, content validation mechanically
+recreates the English restricted-Markdown projection, applies only its three
+provenance-recorded terminology corrections, and rejects all other drift. This
+is a migration guard, not a shared renderer: Web GSAP remains in `web/`, while
+the iOS absolute scene contract remains in `content/ios-scenes/`.
 
 ## 8. Concurrency and responsiveness
 

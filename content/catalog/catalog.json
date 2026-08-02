@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "generation": 1,
+  "publishedAt": "2026-08-02T00:00:00Z",
+  "procedures": [
+    {
+      "id": "acdf",
+      "version": "1.0.0",
+      "revision": 1,
+      "sceneSchemaVersion": 1,
+      "minimumAppBuild": 1,
+      "locales": [
+        "en",
+        "ja"
+      ],
+      "requiredCapabilities": [
+        "absoluteSceneState",
+        "restrictedMarkdown",
+        "bilingualV1"
+      ],
+      "files": [
+        {
+          "role": "procedure",
+          "path": "content/procedures/acdf/procedure.json",
+          "sha256": "44cc9b00cfe13c9fc08bc3747e59faa424bdc69ae7c15f68abd17b066e82527a",
+          "bytes": 1963
+        },
+        {
+          "role": "scene",
+          "path": "content/ios-scenes/acdf.json",
+          "sha256": "26503a5d4b5a1a85890886ba6a6a90dfeba08d33700c1d5285fa655effeec288",
+          "bytes": 39257
+        },
+        {
+          "role": "localization-en",
+          "path": "content/procedures/acdf/en.json",
+          "sha256": "c424e272f058f80d82086a85bfd36a92ef89f09165226cd555296121951415aa",
+          "bytes": 7233
+        },
+        {
+          "role": "localization-ja",
+          "path": "content/procedures/acdf/ja.json",
+          "sha256": "9da84ca9650f5835ed454bb7ea484dbc3576894d74e64658595615e8678c76a9",
+          "bytes": 7155
+        },
+        {
+          "role": "provenance",
+          "path": "content/procedures/acdf/provenance.json",
+          "sha256": "f038234c6318fa63ffefddafa13d71f669e17b94d8f5b0cef9babd0eda2d39d5",
+          "bytes": 967
+        }
+      ],
+      "provenanceId": "acdf_provenance"
+    },
+    {
+      "id": "accf",
+      "version": "1.0.0",
+      "revision": 1,
+      "sceneSchemaVersion": 1,
+      "minimumAppBuild": 1,
+      "locales": [
+        "en",
+        "ja"
+      ],
+      "requiredCapabilities": [
+        "absoluteSceneState",
+        "restrictedMarkdown",
+        "bilingualV1"
+      ],
+      "files": [
+        {
+          "role": "procedure",
+          "path": "content/procedures/accf/procedure.json",
+          "sha256": "21d76cf177bba60e8ad0ed293cb7ffdea2d54bef612222981eca70996b7ff205",
+          "bytes": 2019
+        },
+        {
+          "role": "scene",
+          "path": "content/ios-scenes/accf.json",
+          "sha256": "4775da34e20d71a47f740c58bef256d9963c54f8c2f458a69c778ecc43c75c9c",
+          "bytes": 60509
+        },
+        {
+          "role": "localization-en",
+          "path": "content/procedures/accf/en.json",
+          "sha256": "720ac78c0293dc65c48aeb41954e0c203e5340df449f09315c9302d232f9a5c5",
+          "bytes": 7139
+        },
+        {
+          "role": "localization-ja",
+          "path": "content/procedures/accf/ja.json",
+          "sha256": "cf60306a2a765c21a1b2e34151fdc3f16ce3eba45058dea6e8ee48b2f8bca308",
+          "bytes": 6654
+        },
+        {
+          "role": "provenance",
+          "path": "content/procedures/accf/provenance.json",
+          "sha256": "7539b1ea1f4cefa70cad4dcbbfad7061ed6ab53ebfeae83efa1baecc2c6799d8",
+          "bytes": 967
+        }
+      ],
+      "provenanceId": "accf_provenance"
+    },
+    {
+      "id": "pcdf",
+      "version": "1.0.0",
+      "revision": 1,
+      "sceneSchemaVersion": 1,
+      "minimumAppBuild": 1,
+      "locales": [
+        "en",
+        "ja"
+      ],
+      "requiredCapabilities": [
+        "absoluteSceneState",
+        "restrictedMarkdown",
+        "bilingualV1"
+      ],
+      "files": [
+        {
+          "role": "procedure",
+          "path": "content/procedures/pcdf/procedure.json",
+          "sha256": "3ccad3bf01b8a8569fe318cf92bef5142645391a1796733e4236c57367e7965d",
+          "bytes": 1779
+        },
+        {
+          "role": "scene",
+          "path": "content/ios-scenes/pcdf.json",
+          "sha256": "165b189db3958cc5e88bfec690cb90d82a7d829deb71fe588257965c4ce4303d",
+          "bytes": 166096
+        },
+        {
+          "role": "localization-en",
+          "path": "content/procedures/pcdf/en.json",
+          "sha256": "696f291fef2199e6e8f0292a73977fb6f6b26408bc38bfedf241ab5d7a6f032f",
+          "bytes": 5859
+        },
+        {
+          "role": "localization-ja",
+          "path": "content/procedures/pcdf/ja.json",
+          "sha256": "b7599d638dc7b46406af909335a878d36d052813ab4c2ab65ae825f7430ced88",
+          "bytes": 5291
+        },
+        {
+          "role": "provenance",
+          "path": "content/procedures/pcdf/provenance.json",
+          "sha256": "05be5e43ade8ba07f79e88c4a992d194b5e27ebd2bb380b645a870b096f70a52",
+          "bytes": 971
+        }
+      ],
+      "provenanceId": "pcdf_provenance"
+    },
+    {
+      "id": "pcf",
+      "version": "1.0.0",
+      "revision": 1,
+      "sceneSchemaVersion": 1,
+      "minimumAppBuild": 1,
+      "locales": [
+        "en",
+        "ja"
+      ],
+      "requiredCapabilities": [
+        "absoluteSceneState",
+        "restrictedMarkdown",
+        "bilingualV1"
+      ],
+      "files": [
+        {
+          "role": "procedure",
+          "path": "content/procedures/pcf/procedure.json",
+          "sha256": "b7432307ecfa57cf901d33e8943fc8bd097cfab0b59f0199739e6f68e129e8d7",
+          "bytes": 1749
+        },
+        {
+          "role": "scene",
+          "path": "content/ios-scenes/pcf.json",
+          "sha256": "d7ea9d18e023d74b70639ae80cecaa4bc7316fa58eebb2c3906709da13417b3a",
+          "bytes": 29724
+        },
+        {
+          "role": "localization-en",
+          "path": "content/procedures/pcf/en.json",
+          "sha256": "0c841becb5366d260688dfafca1f96c2cf41022b79df751da8393486294d3f05",
+          "bytes": 5305
+        },
+        {
+          "role": "localization-ja",
+          "path": "content/procedures/pcf/ja.json",
+          "sha256": "c722d44ad60f2fb9c06ef75ec43557b40c2abfd58409562ba3279707f36af70c",
+          "bytes": 5001
+        },
+        {
+          "role": "provenance",
+          "path": "content/procedures/pcf/provenance.json",
+          "sha256": "edfd0368a430ecef2a74562eb90e5182f8da9ddbf2b00640c6f4c73467b8bf14",
+          "bytes": 1478
+        }
+      ],
+      "provenanceId": "pcf_provenance"
+    }
+  ]
+}

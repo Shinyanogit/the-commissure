@@ -1,0 +1,14 @@
+{
+  "name": "the-commissure-content-tooling",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "migrate": "node migrate-content.mjs",
+    "validate": "node validate-content.mjs",
+    "test": "node test-validator.mjs"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  }
+}

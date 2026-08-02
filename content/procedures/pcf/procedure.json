@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "pcf",
+  "abbreviation": "PCF",
+  "version": "1.0.0",
+  "revision": 1,
+  "titleKey": "procedure.title",
+  "summaryKey": "procedure.summary",
+  "asset": {
+    "id": "pcf_model",
+    "version": "1.0.0"
+  },
+  "sceneFile": "content/ios-scenes/pcf.json",
+  "locales": [
+    "en",
+    "ja"
+  ],
+  "steps": [
+    {
+      "id": "pcf_overview",
+      "titleKey": "step.overview.title",
+      "bodyKey": "step.overview.body",
+      "accessibilitySummaryKey": "step.overview.accessibility",
+      "viewPolicy": "preserveAdjustment"
+    },
+    {
+      "id": "pcf_indications",
+      "titleKey": "step.indications.title",
+      "bodyKey": "step.indications.body",
+      "accessibilitySummaryKey": "step.indications.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "pcf_laminoforaminotomy",
+      "titleKey": "step.laminoforaminotomy.title",
+      "bodyKey": "step.laminoforaminotomy.body",
+      "accessibilitySummaryKey": "step.laminoforaminotomy.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "pcf_microdiscectomy",
+      "titleKey": "step.microdiscectomy.title",
+      "bodyKey": "step.microdiscectomy.body",
+      "accessibilitySummaryKey": "step.microdiscectomy.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "pcf_preserved_motion",
+      "titleKey": "step.preserved_motion.title",
+      "bodyKey": "step.preserved_motion.body",
+      "accessibilitySummaryKey": "step.preserved_motion.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "pcf_summary",
+      "titleKey": "step.summary.title",
+      "bodyKey": "step.summary.body",
+      "accessibilitySummaryKey": "step.summary.accessibility",
+      "viewPolicy": "reframe"
+    }
+  ]
+}
