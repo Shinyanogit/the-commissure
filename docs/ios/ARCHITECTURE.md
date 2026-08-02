@@ -4,11 +4,12 @@ Status: implementation contract
 Stack: Swift 6.2, SwiftUI, RealityKit, structured concurrency
 Minimum deployment: iOS/iPadOS 18
 
-Phase 4 implementation status (2026-08-02): the tracked Xcode project and local
-pure-Foundation package implement the ownership graph below, and a fresh
-independent `gpt-5.6-sol` / xhigh QC passed with zero open findings. The current
-app view is an intentionally minimal offline fixture shell; Phase 5 owns
-production visual design.
+Phase 5A implementation status (2026-08-02): the tracked Xcode project and local
+pure-Foundation package implement the ownership graph below. The SwiftUI shell
+now consumes immutable presentation projections for Library, Theater, Bottom
+Step Tray, Colophon, and Settings. The scene slot and transfer states remain
+explicit placeholders until Phase 5B/6; domain, RealityKit, and I/O ownership
+remain outside the visual allowlist.
 
 ## 1. Architecture goals
 
@@ -381,6 +382,20 @@ the iOS absolute scene contract remains in `content/ios-scenes/`.
   [`CLAUDE_DESIGN_BRIEF.md`](CLAUDE_DESIGN_BRIEF.md): `DesignSystem`, feature
   views, and preview fixtures may be visual-only; view models, domain state,
   RealityKit lookup, I/O, and localization loading remain Codex-owned.
+
+### Phase 5A presentation projection
+
+`FoundationAppModel` projects bundled `LibraryItem` and `ProcedureBundle` values
+into `LibraryViewState` and `TheaterViewState`. `ProcedureSessionController`
+remains the only step reducer; view actions are exhaustive `AppAction` values and
+never resolve content or RealityKit entities. The model keeps the session identity
+and selected step while `AppPreferences` triggers a localized text reprojection.
+Dynamic system labels use the selected `lproj` resource bundle explicitly, and
+`LOCALIZATION_PREFERS_STRING_CATALOGS=YES` keeps every catalog key in the app
+bundle even when the key is resolved from a presentation projection rather than
+directly in a SwiftUI body. The visible theater uses `.preparing` until the Phase
+6 RealityKit adapter binds the verified scene; the placeholder is not release
+evidence.
 
 ## 12. Phase 4 executable evidence
 

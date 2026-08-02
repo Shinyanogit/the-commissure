@@ -32,3 +32,8 @@ The Web move preserved source blobs with `git mv`, and Vercel now builds from
 `web/`. Native source belongs only in `ios/`; shared validated content belongs in
 `content/`; conversion and validation code belongs in `tooling/`. See the Phase 1
 evidence and next gate in [`ROADMAP.md`](ROADMAP.md).
+
+Phase 5A adds the native presentation shell under the same boundary. Its views
+consume Codex-owned `ViewState` projections and do not perform content, file,
+network, or RealityKit lookup. The shell is a machine-gated implementation
+checkpoint, not final visual, medical-copy, or App Store acceptance.

@@ -4,6 +4,11 @@ Status: release contract
 Product: The Commissure 1.0
 Platforms: iPhone and iPad, iOS/iPadOS 18 or later
 
+Phase 5A status (2026-08-02): the visual shell builds and projects bundled
+procedure state, with runtime EN/JA system-label selection covered by simulator
+UI tests. The scene placeholder and fixture-backed transfer states are not
+release evidence.
+
 Phase 4 archive status (2026-08-02): the unsigned generic-device archive smoke
 passes for the iOS 18 Swift 6 foundation (`0.1.0` / build `1`, 3.4 MB archive
 before native models and signing). The repair covers the first independent-QC
