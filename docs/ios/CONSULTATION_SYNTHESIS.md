@@ -157,6 +157,28 @@ Therefore:
 - Exact floor device within iOS 18-capable hardware.
 - Hosting migration from GitHub only if observed service metrics justify it.
 
+### Phase 2 evidence update (2026-08-02)
+
+- ACDF: 475,227 → 159,465 triangles; 7,424,303-byte USDZ; 39 exact semantic
+  entities.
+- PCDF: 996,503 → 144,556 triangles; 6,171,993-byte USDZ; 68 exact semantic
+  entities.
+- Both strict-ARKit-valid packs pass the stricter GPT Pro size/geometry targets,
+  so the Fable/GPT Pro bundle-all synthesis remains the default.
+- Absolute-state invariants, simulator interaction, and representative physical
+  iPad testing pass. On an M1 iPad Pro, 20-launch ACDF/PCDF first-frame p95 was
+  220/249 ms and peak-memory p95 was 328/331 MB. A 900-second PCDF run measured
+  FPS p05 54 / p50 60, input p95 18 ms, memory 316 MB, peak 329 MB, and nominal
+  worst thermal state.
+- A fresh repository-grounded Fable gate review returned
+  `PROCEED_WITH_REQUIRED_MITIGATION`: current-device hard-stop evidence closes
+  the architecture-expansion gate, while the missed 250 MB memory target,
+  oldest-supported hardware/OS, ACCF/PCF total payload, App Thinning, and
+  measurement-method limitations remain explicit unpassed release risks.
+- Floor-device performance is therefore fail-closed in Phase 7 before external
+  TestFlight/App Store submission. Neither simulator nor M1 iPad evidence may
+  be presented as proof for A12-class hardware or iOS/iPadOS 18 behavior.
+
 ## 7. Apple and operating constraints
 
 - Apple documents `RealityView` for iOS 18+

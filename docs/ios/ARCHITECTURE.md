@@ -307,6 +307,23 @@ revisions.
 - iPhone and iPad, portrait and landscape, large Dynamic Type, VoiceOver,
   Reduce Motion, dark appearance, and offline relaunch.
 - ACDF is the correctness spike; PCDF is the worst-case performance gate.
+- Phase 2 implements the proof as disposable `ios/Spikes/NativeAssetSpike`,
+  backed by a pure Swift package whose canonical snapshots contain no SwiftUI
+  or RealityKit. The adapter captures entity baselines once, resolves every
+  target from an absolute snapshot, cancels active playback controllers, and
+  retargets the latest intent. This shape is evidence for Phase 4, not a second
+  production architecture.
+- The spike keeps ordinary correctness UI tests separate from its opt-in
+  `NativeAssetSpikePhysical` scheme. That physical scheme owns repeated process
+  launch sampling and the 900-second endurance gate, keeps the display awake
+  only while endurance is requested, exposes machine-readable metrics through
+  accessibility values, and enforces the hard latency/FPS/memory/thermal limits
+  in XCTest. The development team is supplied locally at invocation and is not
+  committed.
+- Native conversion lives in `tooling/native-assets`: tracked GLB inputs plus
+  exact manifests yield canonical semantic USDZ. Source spelling/index order
+  never enters runtime binding. Generated USDZ, reports, and Xcode projects are
+  ignored so Web deployment and repository weight remain unchanged.
 
 ## 11. Coding rules
 
