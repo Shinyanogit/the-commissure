@@ -1,11 +1,18 @@
-# Keep CLI deploys lean. (Vercel's GitHub-integration deploys build from the
-# repo and already exclude these via .gitignore — this only matters for a
-# manual `vercel` CLI upload, which would otherwise include blender/ + dist/.)
-blender/
+# Guard fallback CLI deployments started from the monorepo root. Git-integrated
+# builds use `web/` as Root Directory and its more specific `.vercelignore`.
+/blender/
 dist/
-docs/
-stash/
-script/
-node_modules
-.git
-.claude
+/docs/
+/stash/
+/script/
+node_modules/
+/.git/
+/.claude/
+/.vercel/
+FOR*.md
+/ios/
+/content/
+/tooling/
+web/dist/
+web/node_modules/
+web/script/

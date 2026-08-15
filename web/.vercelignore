@@ -1,0 +1,5 @@
+# Keep fallback CLI previews lean. Normal deployment uses the GitHub integration
+# with this directory configured as the Vercel Root Directory.
+dist/
+script/
+node_modules

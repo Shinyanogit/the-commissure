@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "accf",
+  "abbreviation": "ACCF",
+  "version": "1.0.0",
+  "revision": 1,
+  "titleKey": "procedure.title",
+  "summaryKey": "procedure.summary",
+  "asset": {
+    "id": "accf_model",
+    "version": "1.0.0"
+  },
+  "sceneFile": "content/ios-scenes/accf.json",
+  "locales": [
+    "en",
+    "ja"
+  ],
+  "steps": [
+    {
+      "id": "accf_overview",
+      "titleKey": "step.overview.title",
+      "bodyKey": "step.overview.body",
+      "accessibilitySummaryKey": "step.overview.accessibility",
+      "viewPolicy": "preserveAdjustment"
+    },
+    {
+      "id": "accf_indications",
+      "titleKey": "step.indications.title",
+      "bodyKey": "step.indications.body",
+      "accessibilitySummaryKey": "step.indications.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "accf_posterior_lesion",
+      "titleKey": "step.posterior_lesion.title",
+      "bodyKey": "step.posterior_lesion.body",
+      "accessibilitySummaryKey": "step.posterior_lesion.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "accf_discectomy_corpectomy",
+      "titleKey": "step.discectomy_corpectomy.title",
+      "bodyKey": "step.discectomy_corpectomy.body",
+      "accessibilitySummaryKey": "step.discectomy_corpectomy.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "accf_reconstruction",
+      "titleKey": "step.reconstruction.title",
+      "bodyKey": "step.reconstruction.body",
+      "accessibilitySummaryKey": "step.reconstruction.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "accf_anterior_fixation",
+      "titleKey": "step.anterior_fixation.title",
+      "bodyKey": "step.anterior_fixation.body",
+      "accessibilitySummaryKey": "step.anterior_fixation.accessibility",
+      "viewPolicy": "reframe"
+    },
+    {
+      "id": "accf_summary",
+      "titleKey": "step.summary.title",
+      "bodyKey": "step.summary.body",
+      "accessibilitySummaryKey": "step.summary.accessibility",
+      "viewPolicy": "reframe"
+    }
+  ]
+}

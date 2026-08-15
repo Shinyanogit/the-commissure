@@ -1,0 +1,61 @@
+name: Content CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "tooling/content/**"
+      - "tooling/native-assets/manifests/**"
+      - "web/src/content/procedureText.js"
+      - "web/public/*.glb"
+      - ".github/workflows/content-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "tooling/content/**"
+      - "tooling/native-assets/manifests/**"
+      - "web/src/content/procedureText.js"
+      - "web/public/*.glb"
+      - ".github/workflows/content-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: content-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tooling/content
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: tooling/content/package-lock.json
+
+      - name: Install pinned tooling
+        run: npm ci
+
+      - name: Verify generated content is current
+        run: |
+          npm run migrate
+          git diff --exit-code -- ../../content
+
+      - name: Validate contracts and negative fixtures
+        run: |
+          npm run validate
+          npm test
+
+      - name: Audit validation dependencies
+        run: npm audit --audit-level=moderate

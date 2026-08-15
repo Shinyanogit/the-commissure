@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "accf_provenance",
+  "procedureId": "accf",
+  "contentRevision": 1,
+  "englishSource": {
+    "path": "web/src/content/procedureText.js",
+    "sha256": "0125beb9ba3d0f4dfbea0ef3258b8493f6a27231171ef6d74c9fdce23da2dc6b",
+    "migration": "mechanical-html-to-restricted-markdown",
+    "normalizations": []
+  },
+  "translationReview": {
+    "status": "editorialReviewed",
+    "reviewer": "Codex bilingual editorial pass",
+    "reviewedAt": "2026-08-02"
+  },
+  "medicalReview": {
+    "status": "inheritedWebsiteSource",
+    "releaseGate": true
+  },
+  "rightsReview": {
+    "status": "ownerConfirmationRequired",
+    "releaseGate": true
+  },
+  "assetSource": {
+    "path": "web/public/Anterior Cervical Corpectomy and Fusion (ACCF) Light.glb",
+    "sha256": "ab13b22ffabca7153e456b13cdd751bfbbe964f17ef70905c44ea6de29fb9af6"
+  },
+  "license": "Repository-controlled educational asset",
+  "authors": [
+    "The Commissure contributors"
+  ]
+}

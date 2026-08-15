@@ -1,0 +1,336 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "action.about" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "About" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "このアプリについて" } }
+      }
+    },
+    "action.about.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open sources and app information." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "出典とアプリ情報を開きます。" } }
+      }
+    },
+    "action.back" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Back" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "戻る" } }
+      }
+    },
+    "action.back.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Return to the procedure library." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "手技ライブラリに戻ります。" } }
+      }
+    },
+    "action.cancel" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel download" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ダウンロードをキャンセル" } }
+      }
+    },
+    "action.cancel.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Stop the current content transfer." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "現在のコンテンツ転送を停止します。" } }
+      }
+    },
+    "action.collapse" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Collapse" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "閉じる" } }
+      }
+    },
+    "action.collapse.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Show less step detail." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ステップの詳細を閉じます。" } }
+      }
+    },
+    "action.download" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Download" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ダウンロード" } }
+      }
+    },
+    "action.download.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Download this procedure for offline use." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "この手技をダウンロードしてオフラインで使います。" } }
+      }
+    },
+    "action.expand" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Expand" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "開く" } }
+      }
+    },
+    "action.expand.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Show all steps." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "すべてのステップを表示します。" } }
+      }
+    },
+    "action.explanation" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Show explanation" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "説明を表示" } }
+      }
+    },
+    "action.explanation.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Show the current teaching point." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "現在の学習ポイントを表示します。" } }
+      }
+    },
+    "action.language" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Language" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "言語" } }
+      }
+    },
+    "action.language.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Choose the display language." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "表示言語を選択します。" } }
+      }
+    },
+    "action.more" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "More" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "その他" } }
+      }
+    },
+    "action.more.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open language and app options." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "言語とアプリの設定を開きます。" } }
+      }
+    },
+    "action.next" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Next step" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "次のステップ" } }
+      }
+    },
+    "action.next.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Advance to the next step." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "次のステップに進みます。" } }
+      }
+    },
+    "action.previous" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Previous step" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "前のステップ" } }
+      }
+    },
+    "action.previous.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Return to the previous step." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "前のステップに戻ります。" } }
+      }
+    },
+    "action.reset" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reset view" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "表示をリセット" } }
+      }
+    },
+    "action.reset.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Return the model to its canonical view." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "モデルを標準の表示に戻します。" } }
+      }
+    },
+    "action.retry" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Retry" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "再試行" } }
+      }
+    },
+    "action.retry.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Try the content transfer again." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "コンテンツ転送をもう一度試します。" } }
+      }
+    },
+    "action.settings" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "設定" } }
+      }
+    },
+    "action.settings.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open app preferences." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "アプリの設定を開きます。" } }
+      }
+    },
+    "action.tray.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reveal or hide direct step selection." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ステップ選択を表示または非表示にします。" } }
+      }
+    },
+    "action.unknown" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Action" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "操作" } }
+      }
+    },
+    "action.unknown.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Perform the selected action." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "選択した操作を実行します。" } }
+      }
+    },
+    "app.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The Commissure" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "The Commissure" } }
+      }
+    },
+    "colophon.body" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The Commissure is a focused anatomy-learning theater. It presents versioned educational content with a calm, offline-first interface." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "The Commissureは、解剖学習に集中するためのシアターです。バージョン管理された教育コンテンツを、オフライン優先の落ち着いた画面で提示します。" } }
+      }
+    },
+    "colophon.disclaimer" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Educational use only. This app does not provide medical advice or replace supervised training." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "教育目的に限ります。このアプリは医療助言を提供せず、指導下のトレーニングに代わるものではありません。" } }
+      }
+    },
+    "colophon.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "About The Commissure" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "The Commissureについて" } }
+      }
+    },
+    "content.unavailable" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Content unavailable" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "コンテンツを利用できません" } }
+      }
+    },
+    "language.english" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "English" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "英語" } }
+      }
+    },
+    "language.followSystem" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Follow system" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "システムに従う" } }
+      }
+    },
+    "language.japanese" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Japanese" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "日本語" } }
+      }
+    },
+    "library.card.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open the procedure, or download it when it is not installed." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "手技を開きます。未インストールの場合はダウンロードします。" } }
+      }
+    },
+    "library.loading" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Preparing the library" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ライブラリを準備しています" } }
+      }
+    },
+    "library.loading.detail" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Bundled content stays available without a network connection." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "バンドル済みコンテンツはネットワークなしでも利用できます。" } }
+      }
+    },
+    "library.status.bundled" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Ready on this device" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "このデバイスで利用可能" } }
+      }
+    },
+    "library.status.cached" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Ready from cache" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "キャッシュから利用可能" } }
+      }
+    },
+    "library.status.download" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Download %@" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "%@をダウンロード" } }
+      }
+    },
+    "library.status.downloading" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Downloading %ld%%" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ダウンロード中 %ld%%" } }
+      }
+    },
+    "library.status.offline" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unavailable offline" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "オフラインでは利用できません" } }
+      }
+    },
+    "library.status.verifying" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Verifying" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "検証中" } }
+      }
+    },
+    "library.steps" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%ld steps" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "%ldステップ" } }
+      }
+    },
+    "library.subtitle" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Anatomy, one deliberate step at a time." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "解剖を、一つずつ確かなステップで。" } }
+      }
+    },
+    "theater.scene.accessibility" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Anatomy field. Use step controls below to move through the procedure." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "解剖フィールドです。下のステップ操作で手技を進めます。" } }
+      }
+    },
+    "theater.scene.placeholder" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Anatomy field" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "解剖フィールド" } }
+      }
+    },
+    "theater.scene.preparing" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Preparing the anatomy field" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "解剖フィールドを準備しています" } }
+      }
+    },
+    "theater.scene.transitioning" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Updating the view" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "表示を更新しています" } }
+      }
+    },
+    "theater.scene.failed" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The anatomy field is unavailable" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "解剖フィールドを利用できません" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

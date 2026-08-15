@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "procedureId": "pcf",
+  "locale": "ja",
+  "revision": 1,
+  "review": {
+    "status": "editorialReviewed",
+    "reviewer": "Codex bilingual editorial pass",
+    "reviewedAt": "2026-08-02",
+    "sourceDigest": "a114c519e44c10fc5f7e0e301224a49bbf32a941a1b407c54a51e8bbdab404e8"
+  },
+  "strings": {
+    "procedure.title": "後方頸椎椎間孔拡大術（PCF）",
+    "procedure.summary": "後方頸椎椎間孔拡大術（PCF）は、後方から**神経孔を拡大**して脊髄・神経への圧迫を解除する手術です。",
+    "step.overview.title": "後方頸椎椎間孔拡大術（PCF）",
+    "step.overview.body": "後方頸椎椎間孔拡大術（PCF）は、後方から**神経孔を拡大**して脊髄・神経への圧迫を解除する手術です。\nPCFの大きな利点は、術後の**可動域を温存**できることです。\n十分な除圧と症状改善のため、手術中に**椎間板切除**や**骨棘切除**を追加することがあります。",
+    "step.overview.accessibility": "後方頸椎椎間孔拡大術（PCF）. 後方頸椎椎間孔拡大術（PCF）は、後方から**神経孔を拡大**して脊髄・神経への圧迫を解除する手術です。",
+    "step.indications.title": "PCFの適応",
+    "step.indications.body": "PCFは、脊髄神経が**神経孔**から出る部位に影響する病態の治療で一般的に行われます。\nPCFを検討し得る病態には以下があります。\n- **頸椎症性神経根症**\n- **外側型頸椎椎間板ヘルニア**\n- **椎間孔狭窄**\nこの3DモデルではC4–C5椎間板が**外側**へヘルニアを起こし、神経孔から出る脊髄神経を圧迫しています。\nこの病態により、上肢のしびれ、異常感覚、痛みなどが生じることがあります。\n重度のヘルニアでは椎間板が脊髄を圧迫し、平衡、歩行、下肢の感覚に障害を来すことがあります。",
+    "step.indications.accessibility": "PCFの適応. PCFは、脊髄神経が**神経孔**から出る部位に影響する病態の治療で一般的に行われます。",
+    "step.laminoforaminotomy.title": "椎弓・椎間孔拡大",
+    "step.laminoforaminotomy.body": "PCFではまず、画像と解剖学的ランドマークを用いて正確な手術部位を同定します。\n続いて神経孔近傍の骨を慎重に一部切除する**椎弓・椎間孔拡大**を行います。\nこれにより、椎間板に圧迫されている神経周囲の空間が広がります。\nこの開口部を作ることで、ヘルニア椎間板を**直接観察**できる場合もあります。",
+    "step.laminoforaminotomy.accessibility": "椎弓・椎間孔拡大. PCFではまず、画像と解剖学的ランドマークを用いて正確な手術部位を同定します。",
+    "step.microdiscectomy.title": "顕微鏡下椎間板切除",
+    "step.microdiscectomy.body": "必要に応じて、神経を十分に除圧するため**椎間板切除**を追加します。\nこの操作を安全かつ正確に行うため、椎間板切除時に専用の**顕微鏡**を用いることがあり、これを**顕微鏡下椎間板切除**と呼びます。\n骨棘を明瞭に確認できる場合は、**骨棘切除**も検討されます。",
+    "step.microdiscectomy.accessibility": "顕微鏡下椎間板切除. 必要に応じて、神経を十分に除圧するため**椎間板切除**を追加します。",
+    "step.preserved_motion.title": "PCF後の可動性温存",
+    "step.preserved_motion.body": "PCFの利点の一つは、術後も**正常な頸部運動**を保てることです。\n**[後方頸椎除圧固定術（PCDF）](procedure:pcdf)**や**[前方頸椎椎間板切除固定術（ACDF）](procedure:acdf)**と異なり、PCFは低侵襲であり、脊椎を永久に固定する必要がありません。\nただし、**複数椎間**に手術介入が必要な病態にはPCFが適さないことがあります。\n複数椎間でPCFを行うと**脊椎不安定性**が生じ、症状が悪化する可能性があります。",
+    "step.preserved_motion.accessibility": "PCF後の可動性温存. PCFの利点の一つは、術後も**正常な頸部運動**を保てることです。",
+    "step.summary.title": "まとめ",
+    "step.summary.body": "PCFの主な特徴は以下のとおりです。\n- 脊椎の骨を少量切除し、**神経孔**周囲の空間を拡大する手術です。\n- 十分に圧迫を解除するため、**椎間板切除**や**骨棘切除**を追加することがあります。\n- 頸椎の**可動域を温存**しますが、**多椎間病変**には適さないことがあります。\nPCFは低侵襲であるため、頸椎圧迫を有する選択された患者では固定術の代替として検討されます。",
+    "step.summary.accessibility": "まとめ. PCFの主な特徴は以下のとおりです。"
+  }
+}

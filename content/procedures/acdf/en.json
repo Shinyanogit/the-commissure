@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "procedureId": "acdf",
+  "locale": "en",
+  "revision": 1,
+  "review": {
+    "status": "editorialReviewed",
+    "reviewer": "Codex mechanical source migration verification",
+    "reviewedAt": "2026-08-02",
+    "sourceDigest": "331ca34eb2f05edb8a5f7ef69ceed3376d5f11726b2f940a15ca778e53325d01"
+  },
+  "strings": {
+    "procedure.title": "Anterior Cervical Discectomy and Fusion (ACDF)",
+    "procedure.summary": "Anterior cervical discectomy and fusion (ACDF) is a surgical procedure that aims to relieve compression on the spinal cord and stabilize the cervical spine.",
+    "step.overview.title": "Anterior Cervical Discectomy and Fusion (ACDF)",
+    "step.overview.body": "Anterior cervical discectomy and fusion (ACDF) is a surgical procedure that aims to relieve compression on the spinal cord and stabilize the cervical spine.\nACDF consists of three main procedures: **anterior cervical discectomy**, **interbody cage implantation**, and **anterior cervical fixation**.\nCompared with **[posterior cervical decompression and fusion (PCDF)](procedure:pcdf)**, ACDF is performed through a frontal approach, utilizing a small incision in the front of the neck to access the cervical vertebrae.\nOwing to this surgical approach, ACDF is particularly effective for treating pathologies involving the **anterior structures** of the cervical spine.",
+    "step.overview.accessibility": "Anterior Cervical Discectomy and Fusion (ACDF). Anterior cervical discectomy and fusion (ACDF) is a surgical procedure that aims to relieve compression on the spinal cord and stabilize the cervical spine.",
+    "step.indications.title": "Indication for ACDF",
+    "step.indications.body": "ACDF is commonly performed to treat pathologies involving the **anterior aspect** of the cervical spine.\nCommon indications include:\n- **Cervical radiculopathy** and **myelopathy**\n- **Degenerative disc disease**\n- **Cervical spondylosis** with **ventral** osteophyte formation\n- **Cervical spinal malalignment**\nIn this 3D model, anterior compression of the spinal cord is demonstrated.\nSpecifically, a C4–C5 disc herniation with cervical myelopathy is depicted.\nThis represents a typical clinical scenario in which ACDF may be preferred over a posterior approach, allowing for direct decompression through an anterior surgical corridor.",
+    "step.indications.accessibility": "Indication for ACDF. ACDF is commonly performed to treat pathologies involving the **anterior aspect** of the cervical spine.",
+    "step.discectomy.title": "Anterior Cervical Discectomy",
+    "step.discectomy.body": "The first step in ACDF is removing the damaged intervertebral disc, otherwise known as **discectomy**.\nThe intervertebral disc is a soft, cushion-like structure located between vertebrae.\nIt acts as a shock absorber, helping the spine withstand movements and mechanical stress.\nWhen a disc herniates, part of the disc bulges outward and presses on the **spinal cord** or **nearby nerves**.\nThis pressure may cause symptoms such as neck pain, weakness, numbness, or tingling sensation in the upper extremity, or difficulty with balance and coordination.\nBy removing the herniated disc, the surgeon can relieve pressure on the spinal cord and nerves, often improving these symptoms.\nRemoving the disc also allows the surgeon to directly access and remove other structures that may be causing compression, such as **bone spurs**.",
+    "step.discectomy.accessibility": "Anterior Cervical Discectomy. The first step in ACDF is removing the damaged intervertebral disc, otherwise known as **discectomy**.",
+    "step.cage_types.title": "Types of Interbody Cages",
+    "step.cage_types.body": "After discectomy, an **interbody cage** is placed to fill the removed disc space.\nInterbody cages can be made from a variety of materials, including:\n- Durable **medical-grade plastics**, such as Polyetheretherketone (PEEK)\n- **Porous titanium**\n- **Structural bone grafts** (allograft or autograft)\nOftentimes, surgeons choose the material of the cage **before** the surgery.\nOn the other hand, the size of the cage is usually determined **during** the surgery.\nOnce the discectomy is completed, surgeons manually measure and test the appropriate size of the cages that can adequately replace the removed disc.",
+    "step.cage_types.accessibility": "Types of Interbody Cages. After discectomy, an **interbody cage** is placed to fill the removed disc space.",
+    "step.cage_implantation.title": "Interbody Cage Implantation",
+    "step.cage_implantation.body": "Once the size of the interbody cage has been determined, it is inserted into the exact space where the disc has been removed.\nThe role of this instrument is to restore the **disc height**, restore the **alignment** of the cervical spine, and to provide a **scaffold for fusion**.\nInterbody cages are designed in a way that, over time, new bone grows **through** or **around** the implant, joining the adjacent vertebrae into a single, stable bone.\nIt is also designed to **withstand forces** placed on the neck during everyday activities while the bones heal completely.",
+    "step.cage_implantation.accessibility": "Interbody Cage Implantation. Once the size of the interbody cage has been determined, it is inserted into the exact space where the disc has been removed.",
+    "step.anterior_fixation.title": "Anterior Cervical Fixation",
+    "step.anterior_fixation.body": "The fusion of the vertebral bones may take between **6 and 12 months**, depending on the extent of the surgery, the patient's comorbidities, and other factors.\nUntil the vertebrae have fused into a single solid bone, **cervical plate fixation** may be performed.\nDuring this step, a small metal plate, usually made of **titanium**, is attached to the front of the vertebrae with **screws**.\nThe plate acts as an internal brace, keeping the vertebrae and interbody cage in the correct position while the bones heal.\nDepending on the extent of the spinal disorder, the plate may span one or more spinal levels.\nIn most cases, the plate and screws are intended to remain in the body **permanently**.",
+    "step.anterior_fixation.accessibility": "Anterior Cervical Fixation. The fusion of the vertebral bones may take between **6 and 12 months**, depending on the extent of the surgery, the patient's comorbidities, and other factors.",
+    "step.summary.title": "Summary",
+    "step.summary.body": "Some of the key features of ACDF are as follows:\n- It consists of **anterior cervical discectomy**, **interbody cage implantation**, and **anterior cervical fixation**.\n- It is highly effective in treating disorders affecting the **anterior** portion of the spine.\n- It uses **interbody cages** and **bone grafts** to promote fusion between adjacent vertebrae.\n- The plate and screws are typically intended to remain in place **permanently**, even after bone fusion has occurred.\nOwing to these advantages, ACDF remains one of the most performed procedures to relieve compression on the spinal cord and nerves while providing long-term stability to the cervical spine.",
+    "step.summary.accessibility": "Summary. Some of the key features of ACDF are as follows:"
+  }
+}
