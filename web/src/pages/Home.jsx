@@ -154,6 +154,10 @@ export function Home() {
                 </div>
                 <ul className="news-list">
                     <li>
+                        <span className="header"><Link to="/pcl_open">Article on Open Door Posterior Cervical Laminoplasty (Open-door PCL) is now available</Link></span>
+                        <span className="date">Aug 15, 2026</span>
+                    </li>
+                    <li>
                         <span className="header"><a href="">Koki Tokida joined the editorial board</a></span>
                         <span className="date">Jun 27, 2026</span>
                     </li>
@@ -172,10 +176,6 @@ export function Home() {
                     <li>
                         <span className="header"><Link to="/acdf">Article on Anterior Cervical Discectomy and Fusion (ACDF) is now available</Link></span>
                         <span className="date">May 24, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/pcdf">Article on Posterior Cervical Decompression and Fusion (PCDF) is now available</Link></span>
-                        <span className="date">May 17, 2026</span>
                     </li>
                 </ul>
             </div>
