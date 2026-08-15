@@ -116,7 +116,7 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
     dracoLoader.setDecoderPath('/draco/');
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
-    gltfLoader.load('/Posterior Cervical Laminoplasty (Open Door).glb', ( gltf ) => {
+    gltfLoader.load('/Posterior Cervical Laminoplasty (Open Door) Lighter.glb', ( gltf ) => {
         if (disposed) return;
         const pcl_open = gltf.scene;
         pcl_open.traverse((child) => {
