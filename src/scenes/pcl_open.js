@@ -388,20 +388,6 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
                 }, transparentStartTime);
             });
         } else if (currentScene === 2) {
-            tl.to(camera.position, {
-                x: 0,
-                y: 0.18,
-                z: -0.2,
-                duration: 1,
-                ease: 'power2.inOut'
-            }, 0);
-            tl.to(cameraTarget, {
-                x: 0,
-                y: 0.205,
-                z: 0,
-                duration: 1,
-                ease: 'power2.inOut'
-            }, 0);
             transparentStructure.forEach((transparentstructure) => {
                 tl.to(transparentstructure.material, {
                     opacity: 1,
@@ -413,12 +399,27 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
                     }
                 }, 0);
             });
+            let cameraStartTime = tl.duration();
+            tl.to(camera.position, {
+                x: 0,
+                y: 0.18,
+                z: -0.2,
+                duration: 1,
+                ease: 'power2.inOut'
+            }, cameraStartTime);
+            tl.to(cameraTarget, {
+                x: 0,
+                y: 0.205,
+                z: 0,
+                duration: 1,
+                ease: 'power2.inOut'
+            }, cameraStartTime);
             c3456Structure.forEach((c3456structure) => {
                 tl.to(c3456structure.position, {
                     z: '+=1',
                     duration: 1,
                     ease: 'power2.inOut'
-                }, 0);
+                }, cameraStartTime);
             });
             removedLigament.material.transparent = true;
             removedLigament.material.needsUpdate = true;
@@ -429,7 +430,7 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
                 onComplete: () => {
                     removedLigament.visible = false;
                 }
-            }, 0);
+            }, cameraStartTime);
             let hingeStartTime = tl.duration();
             removedHinge.forEach((removedhinge, index) => {
                 tl.to(removedhinge.position, {
@@ -447,6 +448,10 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
                 }, index * 0.1);
             });
         } else if (currentScene === 4) {
+            let c3LaminaStartTime = tl.duration();
+            let c4LaminaStartTime = c3LaminaStartTime + 0.2;
+            let c5LaminaStartTime = c4LaminaStartTime + 0.2;
+            let c6LaminaStartTime = c5LaminaStartTime + 0.2;
             c3LaminaBefore.forEach((lamina) => {
                 tl.to(lamina.position, {
                     x: c3LaminaAfter.position.x,
@@ -454,14 +459,14 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
                     z: c3LaminaAfter.position.z,
                     duration: 1,
                     ease: 'power2.inOut'
-                }, 0);
+                }, c3LaminaStartTime);
                 tl.to(lamina.rotation, {
                     x: c3LaminaAfter.rotation.x,
                     y: c3LaminaAfter.rotation.y,
                     z: c3LaminaAfter.rotation.z,
                     duration: 1,
                     ease: 'power2.inOut'
-                }, 0);
+                }, c3LaminaStartTime);
             });
             c4LaminaBefore.forEach((lamina) => {
                 tl.to(lamina.position, {
@@ -470,14 +475,14 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
                     z: c4LaminaAfter.position.z,
                     duration: 1,
                     ease: 'power2.inOut'
-                }, 0);
+                }, c4LaminaStartTime);
                 tl.to(lamina.rotation, {
                     x: c4LaminaAfter.rotation.x,
                     y: c4LaminaAfter.rotation.y,
                     z: c4LaminaAfter.rotation.z,
                     duration: 1,
                     ease: 'power2.inOut'
-                }, 0);
+                }, c4LaminaStartTime);
             });
             c5LaminaBefore.forEach((lamina) => {
                 tl.to(lamina.position, {
@@ -486,14 +491,14 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
                     z: c5LaminaAfter.position.z,
                     duration: 1,
                     ease: 'power2.inOut'
-                }, 0);
+                }, c5LaminaStartTime);
                 tl.to(lamina.rotation, {
                     x: c5LaminaAfter.rotation.x,
                     y: c5LaminaAfter.rotation.y,
                     z: c5LaminaAfter.rotation.z,
                     duration: 1,
                     ease: 'power2.inOut'
-                }, 0);
+                }, c5LaminaStartTime);
             });
             c6LaminaBefore.forEach((lamina) => {
                 tl.to(lamina.position, {
@@ -502,14 +507,14 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
                     z: c6LaminaAfter.position.z,
                     duration: 1,
                     ease: 'power2.inOut'
-                }, 0);
+                }, c6LaminaStartTime);
                 tl.to(lamina.rotation, {
                     x: c6LaminaAfter.rotation.x,
                     y: c6LaminaAfter.rotation.y,
                     z: c6LaminaAfter.rotation.z,
                     duration: 1,
                     ease: 'power2.inOut'
-                }, 0);
+                }, c6LaminaStartTime);
             });
             let spacerStartTime = tl.duration();
             boneSpacer.forEach((spacer, index) => {
