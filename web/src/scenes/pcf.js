@@ -215,6 +215,7 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
     let lastWheelTime = 0;
     let isAnimating = false;
     let touchStartY = null;
+    let touchStartedInCard = false;
     const TOUCH_SWIPE_THRESHOLD = 40;
     const handleWheel = (event) => {
         const now = performance.now();
@@ -234,11 +235,21 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
         };
     };
     const handleTouchStart = (event) => {
+        touchStartedInCard = Boolean(event.target.closest('.procedure-hero-card'));
+        if (touchStartedInCard) {
+            touchStartY = null;
+            return;
+        }
         if (event.target.closest(".procedure-paragraph.open")) return;
         if (event.touches.length !== 1) return;
         touchStartY = event.touches[0].clientY;
     };
     const handleTouchEnd = (event) => {
+        if (touchStartedInCard) {
+            touchStartedInCard = false;
+            touchStartY = null;
+            return;
+        }
         if (isAnimating || touchStartY === null) {
             touchStartY = null;
             return;
@@ -246,6 +257,7 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
         const touchEndY = event.changedTouches[0].clientY;
         const deltaY = touchStartY - touchEndY;
         touchStartY = null;
+        touchStartedInCard = false;
         if (deltaY > TOUCH_SWIPE_THRESHOLD) {
             isAnimating = true;
             if (currentScene >= sceneCount - 1) {

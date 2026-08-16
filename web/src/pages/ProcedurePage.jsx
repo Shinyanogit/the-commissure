@@ -102,9 +102,21 @@ export function ProcedurePage({ page, initScene }) {
         const bottomReserve = viewportWidth <= 640 ? 104 : 120;
 
         const maxWidth = Math.max(300, Math.min(980, viewportWidth - (sideGutter * 2)));
-        const minWidth = Math.min(maxWidth, Math.max(260, Math.min(460, maxWidth * 0.52)));
-
         const maxHeight = Math.max(220, Math.min(780, viewportHeight - topReserve - bottomReserve));
+
+        if (viewportWidth <= 640) {
+            const minWidth = Math.min(maxWidth, Math.max(160, Math.min(240, maxWidth * 0.42)));
+            const minHeight = Math.min(maxHeight, Math.max(112, Math.min(200, maxHeight * 0.34)));
+
+            return {
+                minWidth,
+                maxWidth,
+                minHeight,
+                maxHeight,
+            };
+        }
+
+        const minWidth = Math.min(maxWidth, Math.max(260, Math.min(460, maxWidth * 0.52)));
         const minHeight = Math.min(maxHeight, Math.max(180, Math.min(300, maxHeight * 0.5)));
 
         return {
@@ -341,11 +353,71 @@ export function ProcedurePage({ page, initScene }) {
         markSuppressedClick();
     };
 
+    const resetDragState = () => {
+        dragStateRef.current = {
+            pointerId: null,
+            startX: 0,
+            startY: 0,
+            startRect: null,
+            startPosition: cardPositionRef.current,
+            hasDragged: false,
+        };
+        setIsDraggingCard(false);
+    };
+
+    const cancelActiveTouchDrag = () => {
+        const dragState = dragStateRef.current;
+        if (dragState.pointerId == null) return;
+
+        try {
+            if (cardRef.current?.hasPointerCapture(dragState.pointerId)) {
+                cardRef.current.releasePointerCapture(dragState.pointerId);
+            }
+        } catch {
+            // Ignore capture release failures.
+        }
+
+        resetDragState();
+    };
+
+    const canStartDragFromTarget = (target) => !(
+        target.closest('button') ||
+        target.closest('a') ||
+        target.closest('input') ||
+        target.closest('textarea') ||
+        target.closest('.procedure-resize-handle') ||
+        target.closest('.procedure-paragraph')
+    );
+
     const handleCardPointerDown = (event) => {
         if (event.pointerType === 'touch') {
             touchPointsRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
 
+            if (
+                touchPointsRef.current.size === 1
+                && !isResizingRef.current
+                && !isPinchingRef.current
+                && cardRef.current
+                && canStartDragFromTarget(event.target)
+            ) {
+                dragStateRef.current = {
+                    pointerId: event.pointerId,
+                    startX: event.clientX,
+                    startY: event.clientY,
+                    startRect: cardRef.current.getBoundingClientRect(),
+                    startPosition: cardPositionRef.current,
+                    hasDragged: false,
+                };
+
+                try {
+                    event.currentTarget.setPointerCapture(event.pointerId);
+                } catch {
+                    // Pointer capture is best effort.
+                }
+            }
+
             if (touchPointsRef.current.size >= 2 && !pinchStateRef.current.active) {
+                cancelActiveTouchDrag();
                 beginPinch();
                 event.preventDefault();
                 event.stopPropagation();
@@ -356,14 +428,7 @@ export function ProcedurePage({ page, initScene }) {
 
         if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') return;
         if (isResizingRef.current || isPinchingRef.current) return;
-        if (
-            event.target.closest('button') ||
-            event.target.closest('a') ||
-            event.target.closest('input') ||
-            event.target.closest('textarea') ||
-            event.target.closest('.procedure-resize-handle') ||
-            event.target.closest('.procedure-paragraph')
-        ) { return; }
+        if (!canStartDragFromTarget(event.target)) return;
         if (event.button !== 0 || !cardRef.current) return;
 
         dragStateRef.current = {
@@ -395,7 +460,7 @@ export function ProcedurePage({ page, initScene }) {
                 const { startDistance, startSize } = pinchStateRef.current;
 
                 if (startDistance > 0 && nextDistance > 0) {
-                    const ratio = clamp(nextDistance / startDistance, 0.65, 1.55);
+                    const ratio = clamp(nextDistance / startDistance, 0.4, 1.55);
                     markCardSizeLocked();
                     updateCardSize({
                         width: startSize.width * ratio,
@@ -405,7 +470,39 @@ export function ProcedurePage({ page, initScene }) {
 
                 event.preventDefault();
                 event.stopPropagation();
+
+                return;
             }
+
+            const dragState = dragStateRef.current;
+            if (dragState.pointerId !== event.pointerId || !dragState.startRect) return;
+
+            const deltaX = event.clientX - dragState.startX;
+            const deltaY = event.clientY - dragState.startY;
+            const distance = Math.hypot(deltaX, deltaY);
+
+            if (!dragState.hasDragged) {
+                if (distance < 5) return;
+                dragState.hasDragged = true;
+                setIsDraggingCard(true);
+            }
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            const proposedPosition = {
+                x: dragState.startPosition.x + deltaX,
+                y: dragState.startPosition.y + deltaY,
+            };
+
+            const nextRect = {
+                left: dragState.startRect.left + deltaX,
+                right: dragState.startRect.right + deltaX,
+                top: dragState.startRect.top + deltaY,
+                bottom: dragState.startRect.bottom + deltaY,
+            };
+
+            setCardPosition(clampCardPosition(proposedPosition, nextRect));
 
             return;
         }
@@ -460,15 +557,7 @@ export function ProcedurePage({ page, initScene }) {
             markSuppressedClick();
         }
 
-        dragStateRef.current = {
-            pointerId: null,
-            startX: 0,
-            startY: 0,
-            startRect: null,
-            startPosition: cardPositionRef.current,
-            hasDragged: false,
-        };
-        setIsDraggingCard(false);
+        resetDragState();
     };
 
     const clearTouchPointer = (event) => {
