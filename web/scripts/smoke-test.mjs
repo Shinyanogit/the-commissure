@@ -7,7 +7,7 @@ import { basename, join } from "node:path";
 
 const DIST = "dist";
 const PUBLIC = "public";
-const ROUTES = ["/", "/acdf", "/accf", "/pcdf", "/pcf"];
+const ROUTES = ["/", "/articles", "/acdf", "/accf", "/pcdf", "/pcf"];
 const REQUIRED_RUNTIME_ASSETS = [
   "draco/draco_decoder.js",
   "draco/draco_decoder.wasm",

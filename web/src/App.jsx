@@ -2,6 +2,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Accf } from './pages/Accf.jsx';
 import { Acdf } from './pages/Acdf.jsx';
+import { Articles } from './pages/Articles.jsx';
 import { Home } from './pages/Home.jsx';
 import { Pcdf } from './pages/Pcdf.jsx';
 import { Pcf } from './pages/Pcf.jsx';
@@ -23,6 +24,7 @@ export function App() {
             <ScrollToTop />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/articles" element={<Articles />} />
                 <Route path="/acdf" element={<Acdf />} />
                 <Route path="/accf" element={<Accf />} />
                 <Route path="/pcdf" element={<Pcdf />} />

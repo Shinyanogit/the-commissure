@@ -1,13 +1,15 @@
+import { Link } from 'react-router-dom';
+
 export function Footer() {
     return (
         <footer>
-            <a href="#top" className="footer-brand">
+            <Link to="/" className="footer-brand">
                 <img src="/icon.png" className="icon" alt="The Commissure icon" />
-            </a>
+            </Link>
             <ul className="footer-list">
-                <li><a href="#articles">Articles</a></li>
-                <li><a href="#about">About us</a></li>
-                <li><a href="#authors">Authors</a></li>
+                <li><Link to="/articles">Articles</Link></li>
+                <li><Link to="/#about">About us</Link></li>
+                <li><Link to="/#authors">Authors</Link></li>
             </ul>
             <div className="copyright">© 2026 The Commissure</div>
         </footer>
