@@ -8,7 +8,6 @@ import { procedureText } from '../content/procedureText.js';
 import '../styles/procedure.css';
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-const CARD_RESIZE_EDGES = ['n', 'e', 's', 'w', 'ne', 'nw', 'se', 'sw'];
 
 const createInitialCardSize = () => {
     if (typeof window === 'undefined') {
@@ -39,28 +38,21 @@ export function ProcedurePage({ page, initScene }) {
         startPosition: { x: 0, y: 0 },
         hasDragged: false,
     });
-    const resizeStateRef = useRef({
-        pointerId: null,
-        startX: 0,
-        startY: 0,
-        startSize: null,
-        startPosition: { x: 0, y: 0 },
-        startRect: null,
-        edge: 'se',
-        handleElement: null,
-    });
     const touchPointsRef = useRef(new Map());
     const pinchStateRef = useRef({
         active: false,
         startDistance: 0,
         startSize: null,
+        startPosition: { x: 0, y: 0 },
+        startRect: null,
+        anchorX: 0.5,
+        anchorY: 0.5,
     });
     const suppressClickRef = useRef(false);
     const cardPositionRef = useRef({ x: 0, y: 0 });
     const cardSizeRef = useRef(createInitialCardSize());
     const defaultCardSizeRef = useRef(null);
     const hasUserResizedRef = useRef(false);
-    const isResizingRef = useRef(false);
     const isPinchingRef = useRef(false);
     const navigate = useNavigate();
 
@@ -72,7 +64,6 @@ export function ProcedurePage({ page, initScene }) {
     const [cardSize, setCardSize] = useState(() => createInitialCardSize());
     const [isCardSizeLocked, setIsCardSizeLocked] = useState(false);
     const [isDraggingCard, setIsDraggingCard] = useState(false);
-    const [isResizingCard, setIsResizingCard] = useState(false);
     const [isPinchingCard, setIsPinchingCard] = useState(false);
 
     useBodyClass('procedure-page');
@@ -102,21 +93,9 @@ export function ProcedurePage({ page, initScene }) {
         const bottomReserve = viewportWidth <= 640 ? 104 : 120;
 
         const maxWidth = Math.max(300, Math.min(980, viewportWidth - (sideGutter * 2)));
-        const maxHeight = Math.max(220, Math.min(780, viewportHeight - topReserve - bottomReserve));
-
-        if (viewportWidth <= 640) {
-            const minWidth = Math.min(maxWidth, Math.max(160, Math.min(240, maxWidth * 0.42)));
-            const minHeight = Math.min(maxHeight, Math.max(112, Math.min(200, maxHeight * 0.34)));
-
-            return {
-                minWidth,
-                maxWidth,
-                minHeight,
-                maxHeight,
-            };
-        }
-
         const minWidth = Math.min(maxWidth, Math.max(260, Math.min(460, maxWidth * 0.52)));
+
+        const maxHeight = Math.max(220, Math.min(780, viewportHeight - topReserve - bottomReserve));
         const minHeight = Math.min(maxHeight, Math.max(180, Math.min(300, maxHeight * 0.5)));
 
         return {
@@ -294,6 +273,23 @@ export function ProcedurePage({ page, initScene }) {
         clampCardPositionToViewport();
     }, [cardSize.width, cardSize.height, currentScene, isExplanationOpen]);
 
+    useEffect(() => {
+        const card = cardRef.current;
+        if (!card) return undefined;
+
+        const preventGestureZoom = (event) => {
+            event.preventDefault();
+        };
+
+        card.addEventListener('gesturestart', preventGestureZoom);
+        card.addEventListener('gesturechange', preventGestureZoom);
+
+        return () => {
+            card.removeEventListener('gesturestart', preventGestureZoom);
+            card.removeEventListener('gesturechange', preventGestureZoom);
+        };
+    }, []);
+
     const handleClick = (event) => {
         const link = event.target.closest('a[href^="/"]');
         if (!link || !rootRef.current?.contains(link)) return;
@@ -328,13 +324,37 @@ export function ProcedurePage({ page, initScene }) {
         return Math.hypot(second.x - first.x, second.y - first.y);
     };
 
+    const getPinchMidpoint = (pointsMap) => {
+        const points = Array.from(pointsMap.values());
+        if (points.length < 2) return null;
+
+        const [first, second] = points;
+        return {
+            x: (first.x + second.x) / 2,
+            y: (first.y + second.y) / 2,
+        };
+    };
+
     const beginPinch = () => {
-        if (touchPointsRef.current.size < 2) return;
+        const card = cardRef.current;
+        if (touchPointsRef.current.size < 2 || !card) return;
+
+        const midpoint = getPinchMidpoint(touchPointsRef.current);
+        const startRect = card.getBoundingClientRect();
+        const safeWidth = Math.max(startRect.width, 1);
+        const safeHeight = Math.max(startRect.height, 1);
+
+        const anchorX = midpoint ? clamp((midpoint.x - startRect.left) / safeWidth, 0, 1) : 0.5;
+        const anchorY = midpoint ? clamp((midpoint.y - startRect.top) / safeHeight, 0, 1) : 0.5;
 
         pinchStateRef.current = {
             active: true,
             startDistance: getPinchDistance(touchPointsRef.current),
             startSize: cardSizeRef.current,
+            startPosition: cardPositionRef.current,
+            startRect,
+            anchorX,
+            anchorY,
         };
         isPinchingRef.current = true;
         setIsPinchingCard(true);
@@ -347,6 +367,10 @@ export function ProcedurePage({ page, initScene }) {
             active: false,
             startDistance: 0,
             startSize: null,
+            startPosition: cardPositionRef.current,
+            startRect: null,
+            anchorX: 0.5,
+            anchorY: 0.5,
         };
         isPinchingRef.current = false;
         setIsPinchingCard(false);
@@ -385,7 +409,6 @@ export function ProcedurePage({ page, initScene }) {
         target.closest('a') ||
         target.closest('input') ||
         target.closest('textarea') ||
-        target.closest('.procedure-resize-handle') ||
         target.closest('.procedure-paragraph')
     );
 
@@ -395,7 +418,6 @@ export function ProcedurePage({ page, initScene }) {
 
             if (
                 touchPointsRef.current.size === 1
-                && !isResizingRef.current
                 && !isPinchingRef.current
                 && cardRef.current
                 && canStartDragFromTarget(event.target)
@@ -427,7 +449,7 @@ export function ProcedurePage({ page, initScene }) {
         }
 
         if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') return;
-        if (isResizingRef.current || isPinchingRef.current) return;
+        if (isPinchingRef.current) return;
         if (!canStartDragFromTarget(event.target)) return;
         if (event.button !== 0 || !cardRef.current) return;
 
@@ -452,20 +474,47 @@ export function ProcedurePage({ page, initScene }) {
             touchPointsRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
 
             if (touchPointsRef.current.size >= 2 && !pinchStateRef.current.active) {
+                cancelActiveTouchDrag();
                 beginPinch();
             }
 
-            if (pinchStateRef.current.active && pinchStateRef.current.startSize) {
+            if (pinchStateRef.current.active && pinchStateRef.current.startSize && pinchStateRef.current.startRect) {
                 const nextDistance = getPinchDistance(touchPointsRef.current);
-                const { startDistance, startSize } = pinchStateRef.current;
+                const midpoint = getPinchMidpoint(touchPointsRef.current);
+                const {
+                    startDistance,
+                    startSize,
+                    startPosition,
+                    startRect,
+                    anchorX,
+                    anchorY,
+                } = pinchStateRef.current;
 
                 if (startDistance > 0 && nextDistance > 0) {
-                    const ratio = clamp(nextDistance / startDistance, 0.4, 1.55);
-                    markCardSizeLocked();
-                    updateCardSize({
+                    const ratio = clamp(nextDistance / startDistance, 0.55, 1.6);
+                    const nextSize = clampCardSize({
                         width: startSize.width * ratio,
                         height: startSize.height * ratio,
                     });
+
+                    if (midpoint) {
+                        const nextLeft = midpoint.x - (anchorX * nextSize.width);
+                        const nextTop = midpoint.y - (anchorY * nextSize.height);
+                        const proposedPosition = {
+                            x: startPosition.x + (nextLeft - startRect.left),
+                            y: startPosition.y + (nextTop - startRect.top),
+                        };
+                        const nextRect = {
+                            left: nextLeft,
+                            right: nextLeft + nextSize.width,
+                            top: nextTop,
+                            bottom: nextTop + nextSize.height,
+                        };
+                        setCardPosition(clampCardPosition(proposedPosition, nextRect));
+                    }
+
+                    markCardSizeLocked();
+                    updateCardSize(nextSize);
                 }
 
                 event.preventDefault();
@@ -507,7 +556,7 @@ export function ProcedurePage({ page, initScene }) {
             return;
         }
 
-        if (isResizingRef.current || isPinchingRef.current) return;
+        if (isPinchingRef.current) return;
         const dragState = dragStateRef.current;
         if (dragState.pointerId !== event.pointerId || !dragState.startRect) return;
 
@@ -567,6 +616,24 @@ export function ProcedurePage({ page, initScene }) {
         if (touchPointsRef.current.size < 2) {
             finishPinch();
         }
+
+        if (touchPointsRef.current.size === 1 && !isPinchingRef.current && cardRef.current) {
+            const [remainingPointerId, remainingPoint] = Array.from(touchPointsRef.current.entries())[0];
+            dragStateRef.current = {
+                pointerId: remainingPointerId,
+                startX: remainingPoint.x,
+                startY: remainingPoint.y,
+                startRect: cardRef.current.getBoundingClientRect(),
+                startPosition: cardPositionRef.current,
+                hasDragged: false,
+            };
+
+            try {
+                cardRef.current.setPointerCapture(remainingPointerId);
+            } catch {
+                // Pointer capture is best effort.
+            }
+        }
     };
 
     const handleCardPointerUp = (event) => {
@@ -579,164 +646,9 @@ export function ProcedurePage({ page, initScene }) {
         finishCardDrag(event);
     };
 
-    const finishResize = (event) => {
-        const resizeState = resizeStateRef.current;
-        if (resizeState.pointerId !== event.pointerId) return;
-
-        try {
-            if (resizeState.handleElement?.hasPointerCapture(event.pointerId)) {
-                resizeState.handleElement.releasePointerCapture(event.pointerId);
-            }
-        } catch {
-            // Ignore capture release failures.
-        }
-
-        resizeStateRef.current = {
-            pointerId: null,
-            startX: 0,
-            startY: 0,
-            startSize: null,
-            startPosition: cardPositionRef.current,
-            startRect: null,
-            edge: 'se',
-            handleElement: null,
-        };
-        isResizingRef.current = false;
-        setIsResizingCard(false);
-        markSuppressedClick();
-    };
-
-    const handleResizePointerDown = (event) => {
-        if (event.pointerType === 'touch') return;
-        if (event.pointerType === 'mouse' && event.button !== 0) return;
-        if (!cardRef.current) return;
-
-        const edge = event.currentTarget.dataset.edge || 'se';
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        resizeStateRef.current = {
-            pointerId: event.pointerId,
-            startX: event.clientX,
-            startY: event.clientY,
-            startSize: cardSizeRef.current,
-            startPosition: cardPositionRef.current,
-            startRect: cardRef.current.getBoundingClientRect(),
-            edge,
-            handleElement: event.currentTarget,
-        };
-        isResizingRef.current = true;
-        setIsResizingCard(true);
-        setIsDraggingCard(false);
-
-        try {
-            event.currentTarget.setPointerCapture(event.pointerId);
-        } catch {
-            // Pointer capture is best effort.
-        }
-    };
-
-    const handleResizePointerMove = (event) => {
-        const resizeState = resizeStateRef.current;
-        if (!isResizingRef.current || resizeState.pointerId !== event.pointerId || !resizeState.startSize || !resizeState.startRect) return;
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        const deltaX = event.clientX - resizeState.startX;
-        const deltaY = event.clientY - resizeState.startY;
-
-        const edge = resizeState.edge;
-        const resizesWest = edge.includes('w');
-        const resizesEast = edge.includes('e');
-        const resizesNorth = edge.includes('n');
-        const resizesSouth = edge.includes('s');
-
-        let nextWidth = resizeState.startSize.width;
-        let nextHeight = resizeState.startSize.height;
-
-        if (resizesEast) {
-            nextWidth = resizeState.startSize.width + deltaX;
-        }
-
-        if (resizesWest) {
-            nextWidth = resizeState.startSize.width - deltaX;
-        }
-
-        if (resizesSouth) {
-            nextHeight = resizeState.startSize.height + deltaY;
-        }
-
-        if (resizesNorth) {
-            nextHeight = resizeState.startSize.height - deltaY;
-        }
-
-        const nextSize = clampCardSize({ width: nextWidth, height: nextHeight });
-        const widthDelta = nextSize.width - resizeState.startSize.width;
-        const heightDelta = nextSize.height - resizeState.startSize.height;
-
-        let nextPosition = {
-            x: resizeState.startPosition.x,
-            y: resizeState.startPosition.y,
-        };
-
-        if (resizesWest) {
-            nextPosition.x = resizeState.startPosition.x - widthDelta;
-        }
-
-        if (resizesSouth) {
-            nextPosition.y = resizeState.startPosition.y + heightDelta;
-        }
-
-        const positionDeltaX = nextPosition.x - resizeState.startPosition.x;
-        const positionDeltaY = nextPosition.y - resizeState.startPosition.y;
-
-        const nextRect = {
-            left: resizeState.startRect.left + positionDeltaX,
-            right: resizeState.startRect.right + positionDeltaX + widthDelta,
-            top: resizeState.startRect.top + positionDeltaY - heightDelta,
-            bottom: resizeState.startRect.bottom + positionDeltaY,
-        };
-
-        nextPosition = clampCardPosition(nextPosition, nextRect);
-
-        markCardSizeLocked();
-        updateCardSize(nextSize);
-        setCardPosition(nextPosition);
-    };
-
-    const resetCardSize = () => {
-        if (!defaultCardSizeRef.current) return;
-        hasUserResizedRef.current = false;
-        setIsCardSizeLocked(false);
-        updateCardSize(defaultCardSizeRef.current);
-        clampCardPositionToViewport();
-    };
-
-    const handleResizeHandleKeyDown = (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            resetCardSize();
-            return;
-        }
-
-        if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
-            return;
-        }
-
-        event.preventDefault();
-        markCardSizeLocked();
-
-        const step = event.shiftKey ? 30 : 18;
-        const deltaWidth = event.key === 'ArrowRight' ? step : event.key === 'ArrowLeft' ? -step : 0;
-        const deltaHeight = event.key === 'ArrowDown' ? step : event.key === 'ArrowUp' ? -step : 0;
-
-        updateCardSize((currentSize) => ({
-            width: currentSize.width + deltaWidth,
-            height: currentSize.height + deltaHeight,
-        }));
-    };
+    const cardScaleBase = defaultCardSizeRef.current ?? cardSize;
+    const rawCardScale = Math.sqrt((cardSize.width * cardSize.height) / (cardScaleBase.width * cardScaleBase.height));
+    const cardScale = clamp(Number.isFinite(rawCardScale) ? rawCardScale : 1, 0.78, 1.45);
 
     return (
         <div className="procedurePage" ref={rootRef} onClick={handleClick}>
@@ -757,12 +669,11 @@ export function ProcedurePage({ page, initScene }) {
                         transform: `translate3d(${cardPosition.x}px, ${cardPosition.y}px, 0)`,
                         width: `${cardSize.width}px`,
                         height: isCardSizeLocked && isExplanationOpen ? `${cardSize.height}px` : 'auto',
-                        '--card-scale': 1,
+                        '--card-scale': cardScale,
                         '--card-width': `${cardSize.width}px`,
                         '--card-height': `${cardSize.height}px`,
                     }}
                     data-dragging={isDraggingCard ? 'true' : 'false'}
-                    data-resizing={isResizingCard ? 'true' : 'false'}
                     data-pinching={isPinchingCard ? 'true' : 'false'}
                     data-can-drag="true"
                 >
@@ -783,36 +694,6 @@ export function ProcedurePage({ page, initScene }) {
                             <div className={`procedure-paragraph${isExplanationOpen ? ' open' : ''}`} dangerouslySetInnerHTML={{ __html: data.scenes[currentScene].paragraph }} />
                         </div>
                     </div>
-                    {CARD_RESIZE_EDGES.map((edge) => (
-                        edge === 'se'
-                            ? (
-                                <button
-                                    key={edge}
-                                    type="button"
-                                    className="procedure-resize-handle"
-                                    data-edge={edge}
-                                    onPointerDown={handleResizePointerDown}
-                                    onPointerMove={handleResizePointerMove}
-                                    onPointerUp={finishResize}
-                                    onPointerCancel={finishResize}
-                                    onDoubleClick={resetCardSize}
-                                    onKeyDown={handleResizeHandleKeyDown}
-                                    aria-label="Resize card. Drag any card edge or corner to resize, or press Enter to reset."
-                                />
-                            )
-                            : (
-                                <span
-                                    key={edge}
-                                    className="procedure-resize-handle"
-                                    data-edge={edge}
-                                    onPointerDown={handleResizePointerDown}
-                                    onPointerMove={handleResizePointerMove}
-                                    onPointerUp={finishResize}
-                                    onPointerCancel={finishResize}
-                                    role="presentation"
-                                />
-                            )
-                    ))}
                 </section>
             </main>
             <ProcedureFooter

@@ -590,6 +590,7 @@
         backdrop-filter: blur(12px);
         box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
         max-height: calc(100dvh - 10.5rem);
+        touch-action: none;
     }
 
     .procedurePage .procedure-footer {
