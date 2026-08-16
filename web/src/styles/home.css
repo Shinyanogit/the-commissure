@@ -316,8 +316,8 @@
 .homePage .authors {
     position: relative;
     min-height: auto;
-    padding: 5.5rem 0;
-    margin-top: 2.2rem;
+    padding: 3.5rem 0;
+    margin-top: 1.4rem;
 }
 
 .homePage .article::before,
@@ -370,6 +370,67 @@
     gap: 1.2rem;
     list-style: none;
     box-sizing: border-box;
+}
+
+.homePage .articles-group {
+    position: relative;
+    margin-top: 2.5rem;
+}
+
+.homePage .articles-group-header {
+    margin: 0 0 1.25rem;
+    padding: 0 1rem;
+}
+
+.homePage .articles-group-header .eyebrow {
+    margin: 0;
+}
+
+.homePage .article-view-more-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 1.4rem 1.2rem 0;
+}
+
+.homePage .article-view-more {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.35rem;
+    padding: 0.55rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.04);
+    color: #f6f7fb;
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.homePage .article-view-more::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.14), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    border-radius: inherit;
+}
+
+.homePage .article-view-more:hover::before,
+.homePage .article-view-more:focus-visible::before {
+    opacity: 1;
+}
+
+.homePage .article-view-more:hover,
+.homePage .article-view-more:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.07);
 }
 
 .homePage .article-list {

@@ -45,9 +45,9 @@ export function HomeNav() {
                 <span></span>
             </div>
             <ul className={`nav-list${open ? ' active' : ''}`}>
-                <li><a href="#articles">Articles</a></li>
-                <li><a href="#about">About us</a></li>
-                <li><a href="#authors">Authors</a></li>
+                <li><Link to="/articles">Articles</Link></li>
+                <li><Link to="/#about">About us</Link></li>
+                <li><Link to="/#authors">Authors</Link></li>
             </ul>
         </nav>
     );

@@ -109,7 +109,7 @@ export function Home() {
             <div ref={(node) => { sectionsRef.current[0] = node; }} className="content article" id="articles">
                 <div className="section-heading">
                     <div className="eyebrow">Featured articles</div>
-                    <div className="title">A modern atlas of cervical surgery.</div>
+                    <div className="title">A modern atlas of cervical surgery</div>
                 </div>
                 <ul className="article-list">
                     <ArticleCard
@@ -146,11 +146,14 @@ export function Home() {
                         During the procedure, surgeons may additionally perform discectomy or osteophytectomy to…
                     </ArticleCard>
                 </ul>
+                <div className="article-view-more-wrap">
+                    <Link to="/articles" className="article-view-more">View more</Link>
+                </div>
             </div>
             <div ref={(node) => { sectionsRef.current[1] = node; }} className="content news">
                 <div className="section-heading">
                     <div className="eyebrow">Latest news</div>
-                    <div className="title">Updates from the editorial team.</div>
+                    <div className="title">Updates from the editorial team</div>
                 </div>
                 <ul className="news-list">
                     <li>
@@ -197,7 +200,7 @@ export function Home() {
             <div ref={(node) => { sectionsRef.current[3] = node; }} className="content authors" id="authors">
                 <div className="section-heading">
                     <div className="eyebrow">Featured authors</div>
-                    <div className="title">The minds shaping the experience.</div>
+                    <div className="title">The minds shaping the experience</div>
                 </div>
                 <ul className="author-list">
                     <AuthorCard
