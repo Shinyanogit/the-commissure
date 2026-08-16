@@ -29,7 +29,7 @@ const articleGroups = [
             {
                 className: 'article5',
                 to: '/pcl_open',
-                image: '/background.webp',
+                image: '/openpclsnap.webp',
                 header: 'Open-door Posterior Cervical Laminoplasty (Open-door PCL)',
                 date: 'Aug 15, 2026',
                 description:
@@ -52,7 +52,7 @@ const articleGroups = [
             {
                 className: 'article4',
                 to: '/accf',
-                image: '/about.webp',
+                image: '/accfsnap.webp',
                 header: 'Anterior Cervical Corpectomy and Fusion (ACCF)',
                 date: 'Jun 27, 2026',
                 description:
