@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import gsap from 'gsap';
 import { texture } from 'three/tsl';
 
@@ -13,6 +14,15 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
     let lastWidth = 0;
     let lastHeight = 0;
     let lastPixelRatio = 0;
+    let orbitControls = null;
+    let isInteractive = false;
+
+    const diveDeeperButton = document.createElement('button');
+    diveDeeperButton.type = 'button';
+    diveDeeperButton.className = 'pcdf-dive-deeper';
+    diveDeeperButton.textContent = 'Enter interactive mode';
+    diveDeeperButton.setAttribute('aria-pressed', 'false');
+    root.appendChild(diveDeeperButton);
 
     // Camera
     const scene = new THREE.Scene();
@@ -32,7 +42,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
 
     const render = () => {
         if (disposed) return;
-        camera.lookAt(cameraTarget);
+        if (!isInteractive) camera.lookAt(cameraTarget);
         renderer.render( scene, camera );
     };
 
@@ -43,6 +53,40 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
             render();
         });
     };
+
+    const leaveInteractiveMode = () => {
+        if (!orbitControls) return;
+        orbitControls.dispose();
+        orbitControls = null;
+        isInteractive = false;
+        root.classList.remove('pcdf-interactive');
+        diveDeeperButton.textContent = 'Enter interactive mode';
+        diveDeeperButton.setAttribute('aria-pressed', 'false');
+        requestRender();
+    };
+
+    const enterInteractiveMode = () => {
+        if (orbitControls || currentScene !== 5) return;
+        isInteractive = true;
+        root.classList.add('pcdf-interactive');
+        orbitControls = new OrbitControls(camera, renderer.domElement);
+        orbitControls.target.copy(cameraTarget);
+        orbitControls.enableDamping = false;
+        orbitControls.addEventListener('change', requestRender);
+        orbitControls.update();
+        diveDeeperButton.textContent = 'Exit interactive mode';
+        diveDeeperButton.setAttribute('aria-pressed', 'true');
+        requestRender();
+    };
+
+    const handleDiveDeeperClick = () => {
+        if (isInteractive) {
+            leaveInteractiveMode();
+        } else {
+            enterInteractiveMode();
+        }
+    };
+    diveDeeperButton.addEventListener('click', handleDiveDeeperClick);
 
     // Light
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -313,6 +357,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
     function transferScene(currentScene) {
+        if (isInteractive) leaveInteractiveMode();
         const tl = gsap.timeline({
             onComplete: () => {
                 activeTimelines.delete(tl);
@@ -824,6 +869,9 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                 duration: 1,
                 ease: 'power2.inOut'
             }, 0);
+            tl.add(() => diveDeeperButton.classList.add('visible'), tl.duration());
+        } else {
+            diveDeeperButton.classList.remove('visible');
         }
     };
 
@@ -853,6 +901,11 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         window.removeEventListener('touchstart', handleTouchStart, { passive: true });
         window.removeEventListener('touchend', handleTouchEnd, { passive: true });
         window.removeEventListener('resize', handleResize);
+        diveDeeperButton.removeEventListener('click', handleDiveDeeperClick);
+        leaveInteractiveMode();
+        if (diveDeeperButton.parentNode === root) {
+            root.removeChild(diveDeeperButton);
+        }
         timeoutIds.forEach((id) => window.clearTimeout(id));
         timeoutIds.clear();
         activeTimelines.forEach((tl) => tl.kill());

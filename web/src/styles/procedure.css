@@ -209,7 +209,50 @@
     overflow: hidden;
     z-index: 35;
     box-sizing: border-box;
-    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+    transition: opacity 0.4s ease, visibility 0s linear 0.4s, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.procedurePage.pcdf-interactive .procedure-hero-card {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition-delay: 0s;
+}
+
+.procedurePage .pcdf-dive-deeper {
+    position: fixed;
+    right: 2.5rem;
+    bottom: 6.5rem;
+    z-index: 40;
+    border: 1px solid rgba(142, 221, 244, 0.42);
+    border-radius: 999px;
+    padding: 0.78rem 1.05rem;
+    background: rgba(4, 9, 19, 0.72);
+    color: #f4f7ff;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    font: inherit;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(0.75rem);
+    transition: opacity 0.4s ease, transform 0.4s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.procedurePage .pcdf-dive-deeper.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.procedurePage .pcdf-dive-deeper:hover,
+.procedurePage .pcdf-dive-deeper:focus-visible {
+    background: rgba(20, 40, 52, 0.88);
+    border-color: rgba(142, 221, 244, 0.72);
+    outline: none;
 }
 
 .procedurePage .procedure-hero-card[data-can-drag='true'] {
@@ -562,6 +605,11 @@
         width: min(780px, calc(100vw - 2.4rem));
     }
 
+    .procedurePage .pcdf-dive-deeper {
+        right: 1.2rem;
+        bottom: 1rem;
+    }
+
     .procedurePage .procedure-footer {
         padding: 0.9rem 1.2rem 1rem;
     }
@@ -627,6 +675,11 @@
         width: calc(100vw - 2rem);
         padding: calc(1rem * var(--card-scale));
         border-radius: 1.1rem;
+    }
+
+    .procedurePage .pcdf-dive-deeper {
+        right: 1rem;
+        bottom: 1rem;
     }
 
     .procedurePage .procedure-hero-card-motion {
