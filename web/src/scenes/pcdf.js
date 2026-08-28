@@ -8,6 +8,7 @@ import { texture } from 'three/tsl';
 export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentScene, sceneControllerRef) {
     let disposed = false;
     const activeTimelines = new Set();
+    const sceneTimelines = new Map();
     const timeoutIds = new Set();
     const getPixelRatio = () => Math.min(window.devicePixelRatio || 1, window.innerWidth <= 768 ? 1.5 : 2);
     let renderFrameId = 0;
@@ -89,6 +90,25 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         orbitControls.update();
         scene.updateMatrixWorld(true);
         requestRender();
+    };
+
+    const prepareSceneForReverse = (currentState, previousState) => {
+        const currentMaterials = new Map();
+        currentState.objects.forEach(({ materials }) => {
+            materials.forEach((materialState) => {
+                currentMaterials.set(materialState.material, materialState);
+            });
+        });
+
+        previousState.objects.forEach(({ object, visible, materials }) => {
+            if (visible) object.visible = true;
+            materials.forEach(({ material, opacity }) => {
+                const currentMaterial = currentMaterials.get(material);
+                if (!currentMaterial || Math.abs(currentMaterial.opacity - opacity) < 0.0001) return;
+                material.transparent = true;
+                material.needsUpdate = true;
+            });
+        });
     };
 
     const render = () => {
@@ -320,32 +340,55 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
     const sceneController = {
         previous: () => {
             if (isAnimating || currentScene <= 0) return;
+            const departingScene = currentScene;
             const previousScene = currentScene - 1;
+            const currentState = canonicalSceneStates.get(departingScene);
             const previousState = canonicalSceneStates.get(previousScene);
-            if (!previousState) return;
+            const timeline = sceneTimelines.get(departingScene);
+            if (!currentState || !previousState || !timeline) return;
+
+            isAnimating = true;
+            orbitControls.enabled = false;
+            restoreSceneState(currentState);
+            prepareSceneForReverse(currentState, previousState);
             currentScene = previousScene;
-            restoreSceneState(previousState);
             setCurrentScene(currentScene);
+            activeTimelines.add(timeline);
+            timeline.eventCallback('onReverseComplete', () => {
+                activeTimelines.delete(timeline);
+                timeline.eventCallback('onReverseComplete', null);
+                restoreSceneState(previousState);
+                isAnimating = false;
+                orbitControls.enabled = true;
+                requestRender();
+            });
+            timeline.reverse();
         },
         next: () => {
             if (isAnimating || currentScene >= sceneCount - 1) return;
             isAnimating = true;
             currentScene++;
+            setCurrentScene(currentScene);
             transferScene(currentScene);
         },
     };
     if (sceneControllerRef) sceneControllerRef.current = sceneController;
 
-    function transferScene(currentScene) {
+    function transferScene(destinationScene) {
         orbitControls.enabled = false;
         cameraTarget.copy(orbitControls.target);
+        const previousTimeline = sceneTimelines.get(destinationScene);
+        if (previousTimeline) {
+            activeTimelines.delete(previousTimeline);
+            previousTimeline.kill();
+        }
         const tl = gsap.timeline({
             onComplete: () => {
                 activeTimelines.delete(tl);
                 isAnimating = false;
                 orbitControls.target.copy(cameraTarget);
                 orbitControls.update();
-                canonicalSceneStates.set(currentScene, captureSceneState());
+                canonicalSceneStates.set(destinationScene, captureSceneState());
                 orbitControls.enabled = true;
                 requestRender();
             }
@@ -356,10 +399,8 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
             render();
         });
         activeTimelines.add(tl);
-        tl.add(() => {
-            setCurrentScene(currentScene);
-        }, 0);
-        if (currentScene === 1) {
+        sceneTimelines.set(destinationScene, tl);
+        if (destinationScene === 1) {
             tl.to(camera.position, {
                 x: 0,
                 y: 0.4,
@@ -396,7 +437,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                     ease: 'power2.inOut'
                 }, 0);
             });
-        } else if (currentScene === 2) {
+        } else if (destinationScene === 2) {
             c5Structure.forEach((c5structure) => {
                 tl.to(c5structure.position, {
                     z: '+=1',
@@ -461,7 +502,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                     }
                 }, laminectomyStartTime);
             });
-        } else if (currentScene === 3) {
+        } else if (destinationScene === 3) {
             tl.to(camera.position, {
                 x: 0.2,
                 y: 0.2,
@@ -609,7 +650,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                     ease: 'power2.inOut'
                 }, kyphosisStartTime);
             }
-        } else if (currentScene === 4) {
+        } else if (destinationScene === 4) {
             tl.to(camera.position, {
                 x: 0,
                 y: 0.2,
@@ -844,7 +885,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                     );
                 });
             }
-        } else if (currentScene === 5) {
+        } else if (destinationScene === 5) {
             tl.to(camera.position, {
                 x: -0.2,
                 y: 0.2,
@@ -892,6 +933,8 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         timeoutIds.clear();
         activeTimelines.forEach((tl) => tl.kill());
         activeTimelines.clear();
+        sceneTimelines.forEach((tl) => tl.kill());
+        sceneTimelines.clear();
         if (renderFrameId) {
             window.cancelAnimationFrame(renderFrameId);
             renderFrameId = 0;
