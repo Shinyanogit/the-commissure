@@ -291,7 +291,7 @@ export function ProcedurePage({ page, initScene }) {
             <div ref={mountRef} className="canvas-mount"></div>
             <div className="procedure-atlas-glow glow-one"></div>
             <div className="procedure-atlas-glow glow-two"></div>
-            <ProcedureNav />
+            <ProcedureNav stowed={!isExplanationOpen} />
             <main ref={shellRef} className="procedure-shell">
                 <button
                     type="button"
