@@ -185,383 +185,6 @@
     box-sizing: border-box;
 }
 
-.procedurePage.pcdf-interactive .procedure-shell,
-.procedurePage.pcdf-interactive .procedure-footer {
-    pointer-events: none;
-}
-
-.procedurePage .procedure-hero-card {
-    --card-scale: 1;
-    position: fixed;
-    left: 2.5rem;
-    top: auto;
-    bottom: 6.5rem;
-    width: min(780px, 100%);
-    display: flex;
-    flex-direction: column;
-    gap: calc(1rem * var(--card-scale));
-    padding: calc(1rem * var(--card-scale)) calc(1.1rem * var(--card-scale)) calc(1.1rem * var(--card-scale));
-    background: linear-gradient(145deg, rgba(4, 9, 19, 0.8), rgba(4, 9, 19, 0.62));
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 1.2rem;
-    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
-    backdrop-filter: blur(18px);
-    max-height: calc(100dvh - 10.5rem);
-    min-height: 0;
-    will-change: transform;
-    touch-action: pan-y;
-    user-select: text;
-    overflow: hidden;
-    z-index: 35;
-    box-sizing: border-box;
-    transition: opacity 0.4s ease, visibility 0s linear, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-
-.procedurePage.pcdf-interactive .procedure-hero-card {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition-delay: 0s, 0.4s, 0s, 0s;
-}
-
-.procedurePage .pcdf-dive-deeper {
-    position: fixed;
-    right: 2.5rem;
-    bottom: 6.5rem;
-    z-index: 40;
-    border: 1px solid rgba(142, 221, 244, 0.42);
-    border-radius: 999px;
-    padding: 0.78rem 1.05rem;
-    background: rgba(4, 9, 19, 0.72);
-    color: #f4f7ff;
-    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(12px);
-    font: inherit;
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(0.75rem);
-    transition: opacity 0.4s ease, visibility 0s linear 0.4s, transform 0.4s ease, background 0.3s ease, border-color 0.3s ease;
-}
-
-.procedurePage .pcdf-dive-deeper.visible {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
-    transition-delay: 0s;
-}
-
-.procedurePage .pcdf-dive-deeper:hover,
-.procedurePage .pcdf-dive-deeper:focus-visible {
-    background: rgba(20, 40, 52, 0.88);
-    border-color: rgba(142, 221, 244, 0.72);
-    outline: none;
-}
-
-.procedurePage .procedure-hero-card[data-can-drag='true'] {
-    cursor: grab;
-}
-
-.procedurePage .procedure-hero-card[data-dragging='true'] {
-    cursor: grabbing;
-}
-
-.procedurePage .procedure-hero-card[data-dragging='true'],
-.procedurePage .procedure-hero-card[data-resizing='true'],
-.procedurePage .procedure-hero-card[data-pinching='true'] {
-    user-select: none;
-}
-
-.procedurePage .procedure-hero-card[data-resizing='true'] {
-    cursor: default;
-}
-
-.procedurePage .procedure-hero-card[data-pinching='true'] {
-    cursor: zoom-in;
-}
-
-.procedurePage .procedure-hero-card-motion {
-    display: flex;
-    flex-direction: column;
-    gap: calc(1rem * var(--card-scale));
-    min-width: 0;
-    min-height: 0;
-    height: 100%;
-}
-
-.procedurePage .procedure-hero-copy {
-    padding: calc(0.3rem * var(--card-scale)) calc(0.25rem * var(--card-scale)) calc(0.2rem * var(--card-scale));
-    min-width: 0;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.procedurePage .procedure-eyebrow {
-    display: inline-flex;
-    width: fit-content;
-    padding: calc(0.45rem * var(--card-scale)) calc(0.7rem * var(--card-scale));
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.06);
-    font-size: clamp(0.66rem, calc(0.74rem * var(--card-scale)), 1rem);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(244, 247, 255, 0.72);
-}
-
-.procedurePage .procedure-title-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: calc(1rem * var(--card-scale));
-    margin: calc(0.8rem * var(--card-scale)) 0 calc(1rem * var(--card-scale));
-    min-width: 0;
-    flex-wrap: wrap;
-}
-
-.procedurePage .procedure-title {
-    margin: 0;
-    font-size: clamp(1.3rem, calc(1.85rem * var(--card-scale)), 3rem);
-    line-height: 1.08;
-    letter-spacing: -0.03em;
-    color: #ffffff;
-    min-width: 0;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-
-.procedurePage .procedure-toggle {
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background: rgba(255, 255, 255, 0.06);
-    color: #f4f7ff;
-    padding: calc(0.55rem * var(--card-scale)) calc(0.8rem * var(--card-scale));
-    border-radius: 999px;
-    font-size: clamp(0.72rem, calc(0.8rem * var(--card-scale)), 1rem);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-    flex-shrink: 0;
-}
-
-.procedurePage .procedure-toggle:hover,
-.procedurePage .procedure-toggle:focus-visible {
-    transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.28);
-}
-
-.procedurePage .procedure-toggle.active {
-    background: linear-gradient(135deg, rgba(142, 221, 244, 0.18), rgba(123, 97, 255, 0.2));
-    border-color: rgba(142, 221, 244, 0.35);
-}
-
-.procedurePage .procedure-paragraph {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    font-size: clamp(0.88rem, calc(1rem * var(--card-scale)), 1.35rem);
-    line-height: calc(1.58 + (0.2 * var(--card-scale)));
-    color: rgba(244, 247, 255, 0.82);
-    box-sizing: border-box;
-    max-width: 100%;
-    overflow-x: hidden;
-    transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.35s ease;
-}
-
-.procedurePage .procedure-paragraph.open {
-    max-height: max(4rem, min(var(--procedure-panel-max-height), calc(var(--card-height, 332px) - (8.8rem * var(--card-scale)))));
-    opacity: 1;
-    margin-top: calc(0.2rem * var(--card-scale));
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding-right: calc(0.25rem * var(--card-scale));
-    -webkit-overflow-scrolling: touch;
-    scrollbar-gutter: stable;
-}
-
-.procedurePage .procedure-paragraph p {
-    margin: 0 0 calc(0.9rem * var(--card-scale));
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-
-.procedurePage .procedure-paragraph p:last-child {
-    margin-bottom: 0;
-}
-
-.procedurePage .procedure-paragraph ul {
-    margin: calc(0.4rem * var(--card-scale)) 0 0 calc(1.2rem * var(--card-scale));
-    padding: 0;
-    display: grid;
-    gap: calc(0.45rem * var(--card-scale));
-    overflow-wrap: anywhere;
-}
-
-.procedurePage .procedure-paragraph li {
-    color: rgba(244, 247, 255, 0.8);
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-
-.procedurePage .procedure-paragraph a {
-    color: #8eddf4;
-    text-decoration: none;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-
-.procedurePage .procedure-paragraph a:hover,
-.procedurePage .procedure-paragraph a:focus-visible {
-    text-decoration: underline;
-}
-
-.procedurePage .highlight-red {
-    color: #8eddf4;
-    font-weight: 600;
-}
-
-.procedurePage .procedure-resize-handle {
-    position: absolute;
-    z-index: 6;
-    border: 0;
-    padding: 0;
-    background: transparent;
-    touch-action: none;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='n'],
-.procedurePage .procedure-resize-handle[data-edge='s'] {
-    left: 0.9rem;
-    right: 0.9rem;
-    height: 0.72rem;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='n'] {
-    top: -0.25rem;
-    cursor: ns-resize;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='s'] {
-    bottom: -0.25rem;
-    cursor: ns-resize;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='e'],
-.procedurePage .procedure-resize-handle[data-edge='w'] {
-    top: 0.9rem;
-    bottom: 0.9rem;
-    width: 0.72rem;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='e'] {
-    right: -0.25rem;
-    cursor: ew-resize;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='w'] {
-    left: -0.25rem;
-    cursor: ew-resize;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='ne'],
-.procedurePage .procedure-resize-handle[data-edge='nw'],
-.procedurePage .procedure-resize-handle[data-edge='se'],
-.procedurePage .procedure-resize-handle[data-edge='sw'] {
-    width: clamp(1rem, calc(1.2rem * var(--card-scale)), 1.55rem);
-    height: clamp(1rem, calc(1.2rem * var(--card-scale)), 1.55rem);
-}
-
-.procedurePage .procedure-resize-handle[data-edge='ne'] {
-    top: -0.05rem;
-    right: -0.05rem;
-    cursor: nesw-resize;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='nw'] {
-    top: -0.05rem;
-    left: -0.05rem;
-    cursor: nwse-resize;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='sw'] {
-    left: -0.05rem;
-    bottom: -0.05rem;
-    cursor: nesw-resize;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='se'] {
-    right: 0.45rem;
-    bottom: 0.45rem;
-    border: 0;
-    border-radius: 0.5rem;
-    color: rgba(244, 247, 255, 0.68);
-    opacity: 0.6;
-    cursor: nwse-resize;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='se']::before {
-    content: '';
-    position: absolute;
-    right: 0.12rem;
-    bottom: 0.12rem;
-    width: 76%;
-    height: 76%;
-    border-right: 1.5px solid currentColor;
-    border-bottom: 1.5px solid currentColor;
-    border-bottom-right-radius: 0.45rem;
-    opacity: 0.85;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='se']::after {
-    content: '';
-    position: absolute;
-    right: 0.34rem;
-    bottom: 0.34rem;
-    width: 42%;
-    height: 42%;
-    border-right: 1px solid currentColor;
-    border-bottom: 1px solid currentColor;
-    border-bottom-right-radius: 0.35rem;
-    opacity: 0.75;
-}
-
-.procedurePage .procedure-resize-handle[data-edge='se']:hover,
-.procedurePage .procedure-resize-handle[data-edge='se']:focus-visible {
-    opacity: 0.95;
-    outline: none;
-}
-
-.procedurePage .procedure-hero-card[data-resizing='true'] .procedure-resize-handle[data-edge='se'] {
-    opacity: 1;
-}
-
-.procedurePage .procedure-footer {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 40;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2.5rem 1.2rem;
-    background: linear-gradient(180deg, transparent 0%, rgba(2, 4, 10, 0.72) 35%, rgba(2, 4, 10, 0.95) 100%);
-    backdrop-filter: blur(14px);
-}
-
-.procedurePage .indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
 .procedurePage .dot {
     width: 0.6rem;
     height: 0.6rem;
@@ -576,24 +199,6 @@
     background: linear-gradient(135deg, #1bc7d0, #0ea5c7);
 }
 
-.procedurePage .footer-meta {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.2rem;
-    color: rgba(244, 247, 255, 0.72);
-    font-size: 0.8rem;
-}
-
-.procedurePage .footer-label {
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-}
-
-.procedurePage .copyright {
-    opacity: 0.72;
-}
-
 @media (max-width: 900px) {
     .procedurePage .procedure-nav {
         height: 4.5rem;
@@ -603,30 +208,9 @@
         right: 1.2rem;
     }
 
-    .procedurePage .procedure-shell {
-        padding: 0;
-    }
-
-    .procedurePage .procedure-hero-card {
-        left: 1.2rem;
-        bottom: 5.5rem;
-        width: min(780px, calc(100vw - 2.4rem));
-    }
-
-    .procedurePage .pcdf-dive-deeper {
-        right: 1.2rem;
-    }
-
-    .procedurePage .procedure-footer {
-        padding: 0.9rem 1.2rem 1rem;
-    }
 }
 
 @media (max-width: 640px) {
-    .procedurePage {
-        --procedure-panel-max-height: calc(100dvh - 30rem);
-    }
-
     .procedurePage .canvas-mount canvas {
         filter: none;
     }
@@ -639,17 +223,6 @@
     .procedurePage .nav-list {
         backdrop-filter: blur(10px);
         box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
-    }
-
-    .procedurePage .procedure-hero-card {
-        backdrop-filter: blur(12px);
-        box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
-        max-height: calc(100dvh - 10.5rem);
-        touch-action: none;
-    }
-
-    .procedurePage .procedure-footer {
-        backdrop-filter: blur(8px);
     }
 
     .procedurePage .logo {
@@ -672,42 +245,259 @@
         transform: translate(-50%, 0);
     }
 
-    .procedurePage .procedure-shell {
-        padding: 0;
-    }
+}
 
+.procedurePage .procedure-shell {
+    pointer-events: none;
+}
+
+.procedurePage .procedure-hero-card {
+    padding: 1.25rem;
+    box-sizing: border-box;
+    background: linear-gradient(145deg, rgba(4, 9, 19, 0.94), rgba(4, 9, 19, 0.84));
+    box-shadow: -18px 0 48px rgba(0, 0, 0, 0.26);
+    backdrop-filter: blur(18px);
+    touch-action: pan-y;
+    overflow: hidden;
+    z-index: 35;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.35s ease, opacity 0.3s ease, visibility 0s linear 0.35s;
+}
+
+.procedurePage .procedure-hero-card.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+
+.procedurePage .procedure-hero-card-motion {
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.procedurePage .procedure-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.procedurePage .procedure-eyebrow {
+    width: fit-content;
+    padding: 0.42rem 0.65rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(244, 247, 255, 0.72);
+}
+
+.procedurePage .procedure-title {
+    margin: 0;
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    overflow-wrap: anywhere;
+}
+
+.procedurePage .procedure-paragraph,
+.procedurePage .procedure-paragraph.open {
+    flex: 1;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+    padding-right: 0.35rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    opacity: 1;
+    font-size: clamp(0.9rem, 1.05vw, 1.05rem);
+    line-height: 1.65;
+    color: rgba(244, 247, 255, 0.82);
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.procedurePage .procedure-paragraph p {
+    margin: 0 0 0.9rem;
+    overflow-wrap: anywhere;
+}
+
+.procedurePage .procedure-paragraph p:last-child {
+    margin-bottom: 0;
+}
+
+.procedurePage .procedure-paragraph ul {
+    margin: 0.4rem 0 0 1.2rem;
+    padding: 0;
+    display: grid;
+    gap: 0.45rem;
+}
+
+.procedurePage .procedure-paragraph li {
+    color: rgba(244, 247, 255, 0.8);
+}
+
+.procedurePage .procedure-paragraph a,
+.procedurePage .highlight-red {
+    color: #8eddf4;
+}
+
+.procedurePage .procedure-paragraph a {
+    text-decoration: none;
+}
+
+.procedurePage .procedure-paragraph a:hover,
+.procedurePage .procedure-paragraph a:focus-visible {
+    text-decoration: underline;
+}
+
+.procedurePage .highlight-red {
+    font-weight: 600;
+}
+
+.procedurePage .procedure-toggle,
+.procedurePage .procedure-explanation-trigger {
+    border: 1px solid rgba(142, 221, 244, 0.34);
+    border-radius: 999px;
+    background: rgba(4, 9, 19, 0.82);
+    color: #f4f7ff;
+    font: inherit;
+    cursor: pointer;
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.procedurePage .procedure-toggle,
+.procedurePage .procedure-explanation-trigger {
+    width: 2.35rem;
+    height: 2.35rem;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    flex: 0 0 auto;
+}
+
+.procedurePage .procedure-explanation-trigger {
+    pointer-events: auto;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(12px);
+}
+
+.procedurePage .procedure-toggle svg,
+.procedurePage .procedure-explanation-trigger svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.procedurePage .procedure-toggle:hover,
+.procedurePage .procedure-toggle:focus-visible,
+.procedurePage .procedure-explanation-trigger:hover,
+.procedurePage .procedure-explanation-trigger:focus-visible {
+    background: rgba(20, 40, 52, 0.94);
+    border-color: rgba(142, 221, 244, 0.68);
+    outline: none;
+}
+
+.procedurePage .procedure-panel-controls {
+    display: grid;
+    grid-template-columns: 2.75rem 1fr 2.75rem;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.procedurePage .procedure-panel-controls button {
+    width: 2.75rem;
+    height: 2.75rem;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid rgba(142, 221, 244, 0.28);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    color: #8eddf4;
+    cursor: pointer;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.procedurePage .procedure-panel-controls button:last-child {
+    justify-self: end;
+}
+
+.procedurePage .procedure-panel-controls button:hover:not(:disabled),
+.procedurePage .procedure-panel-controls button:focus-visible:not(:disabled) {
+    background: rgba(142, 221, 244, 0.14);
+    border-color: rgba(142, 221, 244, 0.62);
+    color: #ffffff;
+    outline: none;
+}
+
+.procedurePage .procedure-panel-controls button:disabled {
+    color: rgba(244, 247, 255, 0.24);
+    border-color: rgba(255, 255, 255, 0.08);
+    cursor: default;
+}
+
+.procedurePage .procedure-panel-controls svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.procedurePage .procedure-panel-indicator {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+@media (orientation: portrait) {
     .procedurePage .procedure-hero-card {
-        left: 1rem;
-        bottom: 5.5rem;
-        width: calc(100vw - 2rem);
-        padding: calc(1rem * var(--card-scale));
-        border-radius: 1.1rem;
+        box-shadow: 0 -18px 48px rgba(0, 0, 0, 0.28);
+    }
+}
+
+@media (max-width: 640px) {
+    .procedurePage .procedure-hero-card {
+        padding: 1rem;
+        backdrop-filter: blur(14px);
     }
 
-    .procedurePage .pcdf-dive-deeper {
-        right: 1rem;
+    .procedurePage .procedure-title {
+        font-size: 1.35rem;
+        padding-right: 3rem;
     }
 
     .procedurePage .procedure-hero-card-motion {
-        gap: calc(0.9rem * var(--card-scale));
+        gap: 0.65rem;
     }
 
-    .procedurePage .procedure-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.55rem;
+    .procedurePage .procedure-paragraph,
+    .procedurePage .procedure-paragraph.open {
+        font-size: 0.92rem;
+        line-height: 1.58;
     }
 
-    .procedurePage .footer-meta {
-        align-items: flex-start;
-    }
-
-    .procedurePage .procedure-resize-handle {
-        width: max(1.1rem, calc(1.25rem * var(--card-scale)));
-        height: max(1.1rem, calc(1.25rem * var(--card-scale)));
-    }
-
-    .procedurePage .procedure-resize-handle[data-edge='se'] {
-        opacity: 0.42;
+    .procedurePage .procedure-panel-controls {
+        padding-top: 0.55rem;
     }
 }
