@@ -42,7 +42,8 @@ Routes: `/`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
   height; the progress dots sit at the lower edge and the scroll content adds a
   matching end spacer. Carousel clipping occurs before inner spacing, so
   adjacent copy never leaks into view. The portrait toggle is a slim tab built
-  into the glass panel's top edge. The camera projection keeps the anatomy
+  into the glass panel's top edge, using a borderless low-contrast gradient so
+  it reads as part of the surface. The camera projection keeps the anatomy
   centered in the remaining space to the left or above the open panel and
   returns it to screen center when the panel closes.
 - Procedure routes do not render the global footer. The footer is reserved for
