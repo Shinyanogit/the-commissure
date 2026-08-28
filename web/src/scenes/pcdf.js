@@ -26,7 +26,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
 
     // Camera
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100 );
+    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.001, 100 );
     camera.up.set(0, 1, 0);
     camera.position.set( 0.2, 0.2, 0 );
     const cameraTarget = new THREE.Vector3(0, 0.2, 0);
@@ -301,6 +301,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
     let touchStartedInCard = false;
     const TOUCH_SWIPE_THRESHOLD = 40;
     const handleWheel = (event) => {
+        if (isInteractive) return;
         const now = performance.now();
         if (now - lastWheelTime < 2000) return;
         lastWheelTime = now;
@@ -318,6 +319,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         };
     };
     const handleTouchStart = (event) => {
+        if (isInteractive) return;
         touchStartedInCard = Boolean(event.target.closest('.procedure-hero-card'));
         if (touchStartedInCard) {
             touchStartY = null;
@@ -328,6 +330,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         touchStartY = event.touches[0].clientY;
     };
     const handleTouchEnd = (event) => {
+        if (isInteractive) return;
         if (touchStartedInCard) {
             touchStartedInCard = false;
             touchStartY = null;
