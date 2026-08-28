@@ -13,13 +13,16 @@ export function ProcedurePage({ page, initScene }) {
     const panelMotionRef = useRef(null);
     const sceneControllerRef = useRef(null);
     const swipeRef = useRef({ pointerId: null, startX: 0, startY: 0 });
+    const panelResizeRef = useRef(null);
+    const suppressToggleClickRef = useRef(false);
     const navigate = useNavigate();
 
     const data = procedureText[page];
     const [currentScene, setCurrentScene] = useState(0);
     const [isExplanationOpen, setIsExplanationOpen] = useState(true);
+    const [panelSize, setPanelSize] = useState({ width: null, height: null });
     const hasSceneNavigation = page === 'pcdf';
-    const panelPositionClasses = 'fixed top-20 right-0 bottom-0 left-auto w-[clamp(20rem,30vw,28rem)] max-h-none rounded-l-[1.2rem] rounded-r-none portrait:inset-x-0 portrait:top-auto portrait:bottom-0 portrait:h-[32dvh] portrait:w-full portrait:max-h-none portrait:rounded-t-[1.2rem] portrait:rounded-b-none';
+    const panelPositionClasses = 'fixed top-20 right-0 bottom-0 left-auto w-[var(--procedure-panel-width)] max-h-none rounded-l-[1.2rem] rounded-r-none portrait:inset-x-0 portrait:top-auto portrait:bottom-0 portrait:h-[var(--procedure-panel-height)] portrait:w-full portrait:max-h-none portrait:rounded-t-[1.2rem] portrait:rounded-b-none';
 
     useBodyClass('procedure-page');
 
@@ -80,6 +83,70 @@ export function ProcedurePage({ page, initScene }) {
         sceneControllerRef.current?.next();
     };
 
+    const handlePanelResizeStart = (event) => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+        const panel = event.currentTarget.closest('.procedure-hero-card');
+        if (!panel) return;
+
+        const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+        const bounds = panel.getBoundingClientRect();
+        panelResizeRef.current = {
+            pointerId: event.pointerId,
+            startX: event.clientX,
+            startY: event.clientY,
+            startSize: isPortrait ? bounds.height : bounds.width,
+            isPortrait,
+            dragged: false,
+        };
+        suppressToggleClickRef.current = false;
+        event.stopPropagation();
+
+        try {
+            event.currentTarget.setPointerCapture(event.pointerId);
+        } catch {
+            // Pointer capture is best effort.
+        }
+    };
+
+    const handlePanelResizeMove = (event) => {
+        const resize = panelResizeRef.current;
+        if (!resize || resize.pointerId !== event.pointerId) return;
+
+        const delta = resize.isPortrait
+            ? event.clientY - resize.startY
+            : event.clientX - resize.startX;
+        if (!resize.dragged && Math.abs(delta) < 4) return;
+
+        resize.dragged = true;
+        const maximum = resize.isPortrait
+            ? window.innerHeight * 0.55
+            : Math.min(window.innerWidth * 0.55, 640);
+        const minimum = Math.min(resize.isPortrait ? 180 : 280, maximum);
+        const nextSize = Math.min(Math.max(resize.startSize - delta, minimum), maximum);
+        const property = resize.isPortrait ? 'height' : 'width';
+        setPanelSize((current) => ({ ...current, [property]: nextSize }));
+        event.preventDefault();
+        event.stopPropagation();
+    };
+
+    const finishPanelResize = (event) => {
+        const resize = panelResizeRef.current;
+        if (!resize || resize.pointerId !== event.pointerId) return;
+
+        suppressToggleClickRef.current = resize.dragged;
+        panelResizeRef.current = null;
+        event.stopPropagation();
+    };
+
+    const hideExplanation = () => {
+        if (suppressToggleClickRef.current) {
+            suppressToggleClickRef.current = false;
+            return;
+        }
+        setIsExplanationOpen(false);
+    };
+
     const handlePanelPointerDown = (event) => {
         if (!hasSceneNavigation || event.target.closest('button, a')) return;
         if (event.pointerType === 'mouse' && event.button !== 0) return;
@@ -123,7 +190,7 @@ export function ProcedurePage({ page, initScene }) {
                 {!isExplanationOpen && (
                     <button
                         type="button"
-                        className="procedure-explanation-trigger fixed top-24 right-4 z-[36] portrait:top-auto portrait:right-3 portrait:bottom-3"
+                        className="procedure-explanation-trigger fixed top-1/2 right-3 z-[36] -translate-y-1/2 portrait:top-auto portrait:right-auto portrait:bottom-3 portrait:left-1/2 portrait:-translate-x-1/2 portrait:translate-y-0 portrait:rotate-90"
                         onClick={() => setIsExplanationOpen(true)}
                         aria-expanded="false"
                         aria-label="Show explanation"
@@ -135,25 +202,33 @@ export function ProcedurePage({ page, initScene }) {
                 )}
                 <aside
                     className={`procedure-hero-card ${panelPositionClasses} ${isExplanationOpen ? 'open translate-x-0 portrait:translate-y-0' : 'translate-x-full portrait:translate-x-0 portrait:translate-y-full'}`}
+                    style={{
+                        '--procedure-panel-width': panelSize.width ? `${panelSize.width}px` : 'clamp(20rem, 30vw, 28rem)',
+                        '--procedure-panel-height': panelSize.height ? `${panelSize.height}px` : '32dvh',
+                    }}
                     aria-hidden={!isExplanationOpen}
                     onPointerDown={handlePanelPointerDown}
                     onPointerUp={finishPanelSwipe}
                     onPointerCancel={finishPanelSwipe}
                 >
+                    <button
+                        type="button"
+                        className="procedure-toggle absolute top-1/2 left-0 z-[2] -translate-x-1/2 -translate-y-1/2 portrait:top-0 portrait:left-1/2 portrait:-translate-x-1/2 portrait:-translate-y-1/2 portrait:rotate-90"
+                        onPointerDown={handlePanelResizeStart}
+                        onPointerMove={handlePanelResizeMove}
+                        onPointerUp={finishPanelResize}
+                        onPointerCancel={finishPanelResize}
+                        onClick={hideExplanation}
+                        aria-expanded="true"
+                        aria-label="Hide explanation"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </button>
                     <div ref={panelMotionRef} className="procedure-hero-card-motion">
-                        <div className="procedure-panel-header max-sm:absolute max-sm:top-4 max-sm:right-4 max-sm:z-[1]">
+                        <div className="procedure-panel-header">
                             <span className="procedure-eyebrow inline-flex max-sm:hidden">spine surgical atlas</span>
-                            <button
-                                type="button"
-                                className="procedure-toggle portrait:rotate-90"
-                                onClick={() => setIsExplanationOpen(false)}
-                                aria-expanded="true"
-                                aria-label="Hide explanation"
-                            >
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="m9 18 6-6-6-6" />
-                                </svg>
-                            </button>
                         </div>
                         <h1 className="procedure-title">{data.scenes[currentScene].title}</h1>
                         <div

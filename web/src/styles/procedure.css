@@ -258,7 +258,7 @@
     box-shadow: -18px 0 48px rgba(0, 0, 0, 0.26);
     backdrop-filter: blur(18px);
     touch-action: pan-y;
-    overflow: hidden;
+    overflow: visible;
     z-index: 35;
     opacity: 0;
     visibility: hidden;
@@ -376,6 +376,11 @@
     transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
 
+.procedurePage .procedure-toggle {
+    cursor: ew-resize;
+    touch-action: none;
+}
+
 .procedurePage .procedure-toggle,
 .procedurePage .procedure-explanation-trigger {
     width: 2.35rem;
@@ -473,6 +478,10 @@
 @media (orientation: portrait) {
     .procedurePage .procedure-hero-card {
         box-shadow: 0 -18px 48px rgba(0, 0, 0, 0.28);
+    }
+
+    .procedurePage .procedure-toggle {
+        cursor: ns-resize;
     }
 }
 
