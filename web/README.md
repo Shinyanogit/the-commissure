@@ -48,7 +48,9 @@ Routes: `/`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
   returns it to screen center when the panel closes.
 - Once the 0.5-second panel close completes, the procedure logo and hamburger
   fade out. Reopening the panel restores them immediately; the reopen trigger
-  remains available while the panel is stowed.
+  remains available while the panel is stowed. Closing the menu, choosing a
+  procedure link, or stowing the panel always clears the menu's open state, so
+  its hidden surface remains transparent and non-interactive when restored.
 - Procedure routes do not render the global footer. The footer is reserved for
   the home route.
 
