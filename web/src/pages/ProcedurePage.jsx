@@ -11,10 +11,13 @@ export function ProcedurePage({ page, initScene }) {
     const rootRef = useRef(null);
     const shellRef = useRef(null);
     const panelMotionRef = useRef(null);
+    const explanationContentRef = useRef(null);
     const sceneControllerRef = useRef(null);
     const swipeRef = useRef({ pointerId: null, startX: 0, startY: 0 });
     const panelResizeRef = useRef(null);
     const suppressToggleClickRef = useRef(false);
+    const navigationDirectionRef = useRef(0);
+    const isPanelTransitioningRef = useRef(false);
     const navigate = useNavigate();
 
     const data = procedureText[page];
@@ -56,13 +59,25 @@ export function ProcedurePage({ page, initScene }) {
     }, []);
 
     useEffect(() => {
-        const panelMotion = panelMotionRef.current;
-        if (!panelMotion) return undefined;
+        const explanationContent = explanationContentRef.current;
+        if (!explanationContent) return undefined;
+
+        const direction = navigationDirectionRef.current;
+        const startX = direction > 0 ? 32 : direction < 0 ? -32 : 8;
 
         const tl = gsap.fromTo(
-            panelMotion,
-            { opacity: 0.35, x: 8 },
-            { opacity: 1, x: 0, duration: 0.35, ease: 'power3.out' },
+            explanationContent,
+            { opacity: 0, x: startX },
+            {
+                opacity: 1,
+                x: 0,
+                duration: direction === 0 ? 0.35 : 0.3,
+                ease: 'power3.out',
+                onComplete: () => {
+                    navigationDirectionRef.current = 0;
+                    isPanelTransitioningRef.current = false;
+                },
+            },
         );
 
         return () => tl.kill();
@@ -75,13 +90,39 @@ export function ProcedurePage({ page, initScene }) {
         navigate(link.getAttribute('href'));
     };
 
-    const goToPreviousScene = () => {
-        sceneControllerRef.current?.previous();
+    const changeScene = (direction) => {
+        const controller = sceneControllerRef.current;
+        const explanationContent = explanationContentRef.current;
+        if (!controller || !explanationContent || isPanelTransitioningRef.current) return;
+
+        isPanelTransitioningRef.current = true;
+        navigationDirectionRef.current = direction;
+        gsap.to(explanationContent, {
+            opacity: 0,
+            x: direction > 0 ? -32 : 32,
+            duration: 0.22,
+            ease: 'power2.in',
+            onComplete: () => {
+                const accepted = direction > 0 ? controller.next() : controller.previous();
+                if (accepted) return;
+
+                navigationDirectionRef.current = 0;
+                gsap.to(explanationContent, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.2,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        isPanelTransitioningRef.current = false;
+                    },
+                });
+            },
+        });
     };
 
-    const goToNextScene = () => {
-        sceneControllerRef.current?.next();
-    };
+    const goToPreviousScene = () => changeScene(-1);
+
+    const goToNextScene = () => changeScene(1);
 
     const handlePanelResizeStart = (event) => {
         if (event.pointerType === 'mouse' && event.button !== 0) return;
@@ -230,14 +271,18 @@ export function ProcedurePage({ page, initScene }) {
                         </svg>
                     </button>
                     <div ref={panelMotionRef} className="procedure-hero-card-motion">
-                        <div className="procedure-panel-header">
-                            <span className="procedure-eyebrow inline-flex max-sm:hidden">spine surgical atlas</span>
+                        <div className="procedure-explanation-viewport">
+                            <div ref={explanationContentRef} className="procedure-explanation-content">
+                                <div className="procedure-panel-header">
+                                    <span className="procedure-eyebrow inline-flex max-sm:hidden">spine surgical atlas</span>
+                                </div>
+                                <h1 className="procedure-title">{data.scenes[currentScene].title}</h1>
+                                <div
+                                    className="procedure-paragraph open"
+                                    dangerouslySetInnerHTML={{ __html: data.scenes[currentScene].paragraph }}
+                                />
+                            </div>
                         </div>
-                        <h1 className="procedure-title">{data.scenes[currentScene].title}</h1>
-                        <div
-                            className="procedure-paragraph open"
-                            dangerouslySetInnerHTML={{ __html: data.scenes[currentScene].paragraph }}
-                        />
                         {hasSceneNavigation && (
                             <div className="procedure-panel-controls" aria-label="Explanation navigation">
                                 <button

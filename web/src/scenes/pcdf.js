@@ -339,13 +339,13 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
 
     const sceneController = {
         previous: () => {
-            if (isAnimating || currentScene <= 0) return;
+            if (isAnimating || currentScene <= 0) return false;
             const departingScene = currentScene;
             const previousScene = currentScene - 1;
             const currentState = canonicalSceneStates.get(departingScene);
             const previousState = canonicalSceneStates.get(previousScene);
             const timeline = sceneTimelines.get(departingScene);
-            if (!currentState || !previousState || !timeline) return;
+            if (!currentState || !previousState || !timeline) return false;
 
             isAnimating = true;
             orbitControls.enabled = false;
@@ -363,13 +363,15 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                 requestRender();
             });
             timeline.reverse();
+            return true;
         },
         next: () => {
-            if (isAnimating || currentScene >= sceneCount - 1) return;
+            if (isAnimating || currentScene >= sceneCount - 1) return false;
             isAnimating = true;
             currentScene++;
             setCurrentScene(currentScene);
             transferScene(currentScene);
+            return true;
         },
     };
     if (sceneControllerRef) sceneControllerRef.current = sceneController;
