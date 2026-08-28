@@ -313,7 +313,7 @@ export function ProcedurePage({ page, initScene }) {
                     className={`procedure-hero-card ${panelPositionClasses} ${isExplanationOpen ? 'open translate-x-0 portrait:translate-y-0' : 'translate-x-full portrait:translate-x-0 portrait:translate-y-full'}`}
                     style={{
                         '--procedure-panel-width': panelSize.width ? `${panelSize.width}px` : 'clamp(20rem, 30vw, 28rem)',
-                        '--procedure-panel-height': panelSize.height ? `${panelSize.height}px` : '28dvh',
+                        '--procedure-panel-height': panelSize.height ? `${panelSize.height}px` : '40dvh',
                     }}
                     aria-hidden={!isExplanationOpen}
                     onPointerDown={handlePanelPointerDown}

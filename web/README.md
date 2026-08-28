@@ -37,7 +37,7 @@ Routes: `/`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
 - The panel docks on the right in landscape and at the absolute bottom in
   portrait. Its centered edge control both collapses the panel and resizes it by
   dragging; layout switching uses Tailwind orientation variants. The portrait
-  panel uses a translucent glass content surface, defaults to 28dvh, and is
+  panel uses a translucent glass content surface, defaults to 40dvh, and is
   capped at 42dvh. Its transparent arrow/progress overlay does not consume copy
   height; the progress dots sit at the lower edge and the scroll content adds a
   matching end spacer. Carousel clipping occurs before inner spacing, so
