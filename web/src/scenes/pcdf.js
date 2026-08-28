@@ -34,7 +34,9 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
     camera.lookAt(cameraTarget);
     const orbitControls = new OrbitControls(camera, renderer.domElement);
     orbitControls.target.copy(cameraTarget);
-    orbitControls.enablePan = false;
+    orbitControls.enablePan = true;
+    orbitControls.screenSpacePanning = true;
+    orbitControls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
     const canonicalSceneStates = new Map();
 
     const captureSceneState = () => {
