@@ -4,6 +4,7 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import gsap from 'gsap';
 import { texture } from 'three/tsl';
+import { updateProcedureCameraView } from './updateProcedureCameraView.js';
 
 export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentScene, sceneControllerRef) {
     let disposed = false;
@@ -367,7 +368,11 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         },
         next: () => {
             if (isAnimating || currentScene >= sceneCount - 1) return false;
+            const currentState = canonicalSceneStates.get(currentScene);
+            if (!currentState) return false;
             isAnimating = true;
+            orbitControls.enabled = false;
+            restoreSceneState(currentState);
             currentScene++;
             setCurrentScene(currentScene);
             transferScene(currentScene);
@@ -910,10 +915,12 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
         const pixelRatio = getPixelRatio();
-        if (viewportWidth === lastWidth && viewportHeight === lastHeight && pixelRatio === lastPixelRatio) return;
+        updateProcedureCameraView(camera, root);
+        if (viewportWidth === lastWidth && viewportHeight === lastHeight && pixelRatio === lastPixelRatio) {
+            requestRender();
+            return;
+        }
 
-        camera.aspect = viewportWidth / viewportHeight;
-        camera.updateProjectionMatrix();
         renderer.setSize(viewportWidth, viewportHeight);
         renderer.setPixelRatio(pixelRatio);
         lastWidth = viewportWidth;
@@ -923,11 +930,13 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         if (backgroundTexture) updateBackground(backgroundTexture)
     };
     window.addEventListener('resize', handleResize);
-    requestRender();
+    window.addEventListener('procedure-layout-change', handleResize);
+    handleResize();
 
     return () => {
         disposed = true;
         window.removeEventListener('resize', handleResize);
+        window.removeEventListener('procedure-layout-change', handleResize);
         orbitControls.removeEventListener('change', requestRender);
         orbitControls.dispose();
         if (sceneControllerRef?.current === sceneController) sceneControllerRef.current = null;

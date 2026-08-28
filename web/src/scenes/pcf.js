@@ -3,8 +3,11 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import gsap from 'gsap';
 import { texture } from 'three/tsl';
+import { createSceneNavigator } from './createSceneNavigator.js';
+import { createProcedureOrbitControls } from './createProcedureOrbitControls.js';
+import { updateProcedureCameraView } from './updateProcedureCameraView.js';
 
-export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentScene) {
+export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentScene, sceneControllerRef) {
     let disposed = false;
     const activeTimelines = new Set();
     const timeoutIds = new Set();
@@ -16,7 +19,7 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
 
     // Camera
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.01, 100 );
+    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.001, 100 );
     camera.up.set(0, 1, 0);
     camera.position.set( 0.2, 0.2, 0 );
     const cameraTarget = new THREE.Vector3(0, 0.2, 0);
@@ -32,7 +35,7 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
 
     const render = () => {
         if (disposed) return;
-        camera.lookAt(cameraTarget);
+        orbitController.syncTarget();
         renderer.render( scene, camera );
     };
 
@@ -43,6 +46,13 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
             render();
         });
     };
+
+    const orbitController = createProcedureOrbitControls({
+        camera,
+        domElement: renderer.domElement,
+        cameraTarget,
+        requestRender,
+    });
 
     // Light
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -208,82 +218,43 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
         });
         acdf.position.set(0, 0, 0);
         scene.add( acdf );
+        sceneNavigator.capture(0);
         requestRender();
     });
 
-    // Wheel + touch swipe support
-    let lastWheelTime = 0;
     let isAnimating = false;
-    let touchStartY = null;
-    let touchStartedInCard = false;
-    const TOUCH_SWIPE_THRESHOLD = 40;
-    const handleWheel = (event) => {
-        const now = performance.now();
-        if (now - lastWheelTime < 2000) return;
-        lastWheelTime = now;
-        if (event.target.closest(".procedure-paragraph.open")) return;
-        if (isAnimating) return;
-        isAnimating = true;
-        if (event.deltaY > 0) {
-            if (currentScene >= sceneCount - 1) {
-                isAnimating = false;
-                return;
-            } else {
-                currentScene++;
-            }
-            transferScene(currentScene);
-        };
-    };
-    const handleTouchStart = (event) => {
-        touchStartedInCard = Boolean(event.target.closest('.procedure-hero-card'));
-        if (touchStartedInCard) {
-            touchStartY = null;
-            return;
-        }
-        if (event.target.closest(".procedure-paragraph.open")) return;
-        if (event.touches.length !== 1) return;
-        touchStartY = event.touches[0].clientY;
-    };
-    const handleTouchEnd = (event) => {
-        if (touchStartedInCard) {
-            touchStartedInCard = false;
-            touchStartY = null;
-            return;
-        }
-        if (isAnimating || touchStartY === null) {
-            touchStartY = null;
-            return;
-        }
-        const touchEndY = event.changedTouches[0].clientY;
-        const deltaY = touchStartY - touchEndY;
-        touchStartY = null;
-        touchStartedInCard = false;
-        if (deltaY > TOUCH_SWIPE_THRESHOLD) {
-            isAnimating = true;
-            if (currentScene >= sceneCount - 1) {
-                isAnimating = false;
-                return;
-            } else {
-                currentScene++;
-            }
-            transferScene(currentScene);
-        };
-    };
-    window.addEventListener('wheel', handleWheel, { passive: true });
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    const sceneNavigator = createSceneNavigator({
+        scene,
+        camera,
+        cameraTarget,
+        sceneCount,
+        getCurrentScene: () => currentScene,
+        selectScene: (sceneIndex) => {
+            currentScene = sceneIndex;
+            setCurrentScene(sceneIndex);
+        },
+        getIsAnimating: () => isAnimating,
+        setIsAnimating: (value) => {
+            isAnimating = value;
+        },
+        playForward: transferScene,
+        requestRender,
+        orbitControls: orbitController.controls,
+    });
+    if (sceneControllerRef) sceneControllerRef.current = sceneNavigator.controller;
+
     function transferScene(currentScene) {
+        sceneNavigator.beginForward(currentScene);
         const tl = gsap.timeline({
             onComplete: () => {
                 activeTimelines.delete(tl);
+                sceneNavigator.completeForward(currentScene);
                 isAnimating = false;
             }
         });
         tl.eventCallback('onUpdate', render);
         activeTimelines.add(tl);
-        tl.add(() => {
-            setCurrentScene(currentScene);
-        }, 0);
+        sceneNavigator.track(currentScene, tl);
         if (currentScene === 1) {
             tl.to(camera.position, {
                 x: 0,
@@ -761,10 +732,12 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
         const pixelRatio = getPixelRatio();
-        if (viewportWidth === lastWidth && viewportHeight === lastHeight && pixelRatio === lastPixelRatio) return;
+        updateProcedureCameraView(camera, root);
+        if (viewportWidth === lastWidth && viewportHeight === lastHeight && pixelRatio === lastPixelRatio) {
+            requestRender();
+            return;
+        }
 
-        camera.aspect = viewportWidth / viewportHeight;
-        camera.updateProjectionMatrix();
         renderer.setSize(viewportWidth, viewportHeight);
         renderer.setPixelRatio(pixelRatio);
         lastWidth = viewportWidth;
@@ -774,14 +747,16 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
         if (backgroundTexture) updateBackground(backgroundTexture)
     };
     window.addEventListener('resize', handleResize);
-    requestRender();
+    window.addEventListener('procedure-layout-change', handleResize);
+    handleResize();
 
     return () => {
         disposed = true;
-        window.removeEventListener('wheel', handleWheel);
-        window.removeEventListener('touchstart', handleTouchStart, { passive: true });
-        window.removeEventListener('touchend', handleTouchEnd, { passive: true });
         window.removeEventListener('resize', handleResize);
+        window.removeEventListener('procedure-layout-change', handleResize);
+        orbitController.dispose();
+        if (sceneControllerRef?.current === sceneNavigator.controller) sceneControllerRef.current = null;
+        sceneNavigator.dispose();
         timeoutIds.forEach((id) => window.clearTimeout(id));
         timeoutIds.clear();
         activeTimelines.forEach((tl) => tl.kill());

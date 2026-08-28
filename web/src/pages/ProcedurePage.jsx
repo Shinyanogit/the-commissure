@@ -11,20 +11,20 @@ export function ProcedurePage({ page, initScene }) {
     const rootRef = useRef(null);
     const shellRef = useRef(null);
     const panelMotionRef = useRef(null);
-    const explanationContentRef = useRef(null);
+    const explanationTrackRef = useRef(null);
     const sceneControllerRef = useRef(null);
-    const swipeRef = useRef({ pointerId: null, startX: 0, startY: 0 });
+    const swipeRef = useRef({ pointerId: null, startX: 0, startY: 0, lastX: 0, lastY: 0, axis: null });
     const panelResizeRef = useRef(null);
     const suppressToggleClickRef = useRef(false);
-    const navigationDirectionRef = useRef(0);
-    const isPanelTransitioningRef = useRef(false);
+    const suppressPanelLinkClickRef = useRef(false);
+    const sceneRetryRef = useRef(null);
     const navigate = useNavigate();
 
     const data = procedureText[page];
     const [currentScene, setCurrentScene] = useState(0);
     const [isExplanationOpen, setIsExplanationOpen] = useState(true);
     const [panelSize, setPanelSize] = useState({ width: null, height: null });
-    const hasSceneNavigation = page === 'pcdf';
+    const hasSceneNavigation = data.scenes.length > 1;
     const panelPositionClasses = 'fixed top-20 right-0 bottom-0 left-auto w-[var(--procedure-panel-width)] max-h-none rounded-l-[1.2rem] rounded-r-none portrait:inset-x-0 portrait:top-auto portrait:bottom-0 portrait:h-[var(--procedure-panel-height)] portrait:w-full portrait:max-h-none portrait:rounded-t-[1.2rem] portrait:rounded-b-none';
 
     useBodyClass('procedure-page');
@@ -59,65 +59,52 @@ export function ProcedurePage({ page, initScene }) {
     }, []);
 
     useEffect(() => {
-        const explanationContent = explanationContentRef.current;
-        if (!explanationContent) return undefined;
+        const frameId = window.requestAnimationFrame(() => {
+            window.dispatchEvent(new Event('procedure-layout-change'));
+        });
+        return () => window.cancelAnimationFrame(frameId);
+    }, [isExplanationOpen, panelSize.width, panelSize.height]);
 
-        const direction = navigationDirectionRef.current;
-        const startX = direction > 0 ? 32 : direction < 0 ? -32 : 8;
-
-        const tl = gsap.fromTo(
-            explanationContent,
-            { opacity: 0, x: startX },
-            {
-                opacity: 1,
-                x: 0,
-                duration: direction === 0 ? 0.35 : 0.3,
-                ease: 'power3.out',
-                onComplete: () => {
-                    navigationDirectionRef.current = 0;
-                    isPanelTransitioningRef.current = false;
-                },
-            },
-        );
-
-        return () => tl.kill();
-    }, [currentScene]);
+    useEffect(() => () => {
+        if (sceneRetryRef.current) window.clearTimeout(sceneRetryRef.current);
+    }, []);
 
     const handleClick = (event) => {
         const link = event.target.closest('a[href^="/"]');
         if (!link || !rootRef.current?.contains(link)) return;
         event.preventDefault();
+        if (suppressPanelLinkClickRef.current) {
+            suppressPanelLinkClickRef.current = false;
+            return;
+        }
         navigate(link.getAttribute('href'));
     };
 
     const changeScene = (direction) => {
         const controller = sceneControllerRef.current;
-        const explanationContent = explanationContentRef.current;
-        if (!controller || !explanationContent || isPanelTransitioningRef.current) return;
+        if (!controller) return false;
+        const atBoundary = direction > 0
+            ? currentScene >= data.scenes.length - 1
+            : currentScene <= 0;
+        if (atBoundary) return false;
 
-        isPanelTransitioningRef.current = true;
-        navigationDirectionRef.current = direction;
-        gsap.to(explanationContent, {
-            opacity: 0,
-            x: direction > 0 ? -32 : 32,
-            duration: 0.22,
-            ease: 'power2.in',
-            onComplete: () => {
-                const accepted = direction > 0 ? controller.next() : controller.previous();
-                if (accepted) return;
+        const attemptChange = () => (
+            direction > 0 ? sceneControllerRef.current?.next() : sceneControllerRef.current?.previous()
+        );
+        if (attemptChange()) return true;
 
-                navigationDirectionRef.current = 0;
-                gsap.to(explanationContent, {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.2,
-                    ease: 'power2.out',
-                    onComplete: () => {
-                        isPanelTransitioningRef.current = false;
-                    },
-                });
-            },
-        });
+        if (sceneRetryRef.current) window.clearTimeout(sceneRetryRef.current);
+        let attempts = 0;
+        const retry = () => {
+            attempts += 1;
+            if (attemptChange() || attempts >= 50) {
+                sceneRetryRef.current = null;
+                return;
+            }
+            sceneRetryRef.current = window.setTimeout(retry, 100);
+        };
+        sceneRetryRef.current = window.setTimeout(retry, 100);
+        return false;
     };
 
     const goToPreviousScene = () => changeScene(-1);
@@ -189,13 +176,17 @@ export function ProcedurePage({ page, initScene }) {
     };
 
     const handlePanelPointerDown = (event) => {
-        if (!hasSceneNavigation || event.target.closest('button, a')) return;
+        if (!hasSceneNavigation || event.target.closest('button')) return;
+        if (event.pointerType === 'touch') return;
         if (event.pointerType === 'mouse' && event.button !== 0) return;
 
         swipeRef.current = {
             pointerId: event.pointerId,
             startX: event.clientX,
             startY: event.clientY,
+            lastX: event.clientX,
+            lastY: event.clientY,
+            axis: null,
         };
 
         try {
@@ -205,20 +196,90 @@ export function ProcedurePage({ page, initScene }) {
         }
     };
 
-    const finishPanelSwipe = (event) => {
+    const handlePanelPointerMove = (event) => {
         const swipe = swipeRef.current;
-        if (swipe.pointerId !== event.pointerId) return;
+        if (swipe.pointerId !== event.pointerId || !explanationTrackRef.current) return;
 
         const deltaX = event.clientX - swipe.startX;
         const deltaY = event.clientY - swipe.startY;
-        swipeRef.current = { pointerId: null, startX: 0, startY: 0 };
-
-        if (Math.abs(deltaX) < 48 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) return;
-        if (deltaX > 0) {
-            goToPreviousScene();
-        } else {
-            goToNextScene();
+        swipe.lastX = event.clientX;
+        swipe.lastY = event.clientY;
+        if (!swipe.axis) {
+            if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < 8) return;
+            swipe.axis = Math.abs(deltaX) > Math.abs(deltaY) * 1.15 ? 'horizontal' : 'vertical';
         }
+        if (swipe.axis !== 'horizontal') return;
+
+        explanationTrackRef.current.classList.add('dragging');
+        explanationTrackRef.current.style.setProperty('--procedure-swipe-offset', `${deltaX}px`);
+        event.preventDefault();
+    };
+
+    const finishPanelSwipe = (pointerId) => {
+        const swipe = swipeRef.current;
+        if (swipe.pointerId !== pointerId) return;
+
+        const deltaX = swipe.lastX - swipe.startX;
+        const deltaY = swipe.lastY - swipe.startY;
+        const isTouch = pointerId === 'touch';
+        const isHorizontalSwipe = swipe.axis === 'horizontal'
+            && Math.abs(deltaX) >= (isTouch ? 18 : 28)
+            && Math.abs(deltaX) > Math.abs(deltaY) * (isTouch ? 0.75 : 1.2);
+        const track = explanationTrackRef.current;
+        swipeRef.current = { pointerId: null, startX: 0, startY: 0, lastX: 0, lastY: 0, axis: null };
+
+        if (!track || !track.classList.contains('dragging')) return;
+        suppressPanelLinkClickRef.current = true;
+        window.setTimeout(() => {
+            suppressPanelLinkClickRef.current = false;
+        }, 120);
+        const frozenTransform = window.getComputedStyle(track).transform;
+        track.style.transform = frozenTransform;
+        track.classList.remove('dragging');
+        track.style.removeProperty('--procedure-swipe-offset');
+
+        if (isHorizontalSwipe) {
+            changeScene(deltaX > 0 ? -1 : 1);
+        }
+        window.requestAnimationFrame(() => {
+            track.style.removeProperty('transform');
+        });
+    };
+
+    const handlePanelTouchStart = (event) => {
+        if (!hasSceneNavigation || event.target.closest('button')) return;
+        if (event.touches.length !== 1) return;
+
+        const touch = event.touches[0];
+        swipeRef.current = {
+            pointerId: 'touch',
+            startX: touch.clientX,
+            startY: touch.clientY,
+            lastX: touch.clientX,
+            lastY: touch.clientY,
+            axis: null,
+        };
+    };
+
+    const handlePanelTouchMove = (event) => {
+        const swipe = swipeRef.current;
+        if (swipe.pointerId !== 'touch' || event.touches.length !== 1 || !explanationTrackRef.current) return;
+
+        const touch = event.touches[0];
+        const deltaX = touch.clientX - swipe.startX;
+        const deltaY = touch.clientY - swipe.startY;
+        swipe.lastX = touch.clientX;
+        swipe.lastY = touch.clientY;
+
+        if (!swipe.axis) {
+            if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < 6) return;
+            swipe.axis = Math.abs(deltaX) > Math.abs(deltaY) * 0.75 ? 'horizontal' : 'vertical';
+        }
+        if (swipe.axis !== 'horizontal') return;
+
+        explanationTrackRef.current.classList.add('dragging');
+        explanationTrackRef.current.style.setProperty('--procedure-swipe-offset', `${deltaX}px`);
+        event.preventDefault();
     };
 
     return (
@@ -252,8 +313,13 @@ export function ProcedurePage({ page, initScene }) {
                     }}
                     aria-hidden={!isExplanationOpen}
                     onPointerDown={handlePanelPointerDown}
-                    onPointerUp={finishPanelSwipe}
-                    onPointerCancel={finishPanelSwipe}
+                    onPointerMove={handlePanelPointerMove}
+                    onPointerUp={(event) => finishPanelSwipe(event.pointerId)}
+                    onPointerCancel={(event) => finishPanelSwipe(event.pointerId)}
+                    onTouchStart={handlePanelTouchStart}
+                    onTouchMove={handlePanelTouchMove}
+                    onTouchEnd={() => finishPanelSwipe('touch')}
+                    onTouchCancel={() => finishPanelSwipe('touch')}
                 >
                     <button
                         type="button"
@@ -272,15 +338,30 @@ export function ProcedurePage({ page, initScene }) {
                     </button>
                     <div ref={panelMotionRef} className="procedure-hero-card-motion">
                         <div className="procedure-explanation-viewport">
-                            <div ref={explanationContentRef} className="procedure-explanation-content">
-                                <div className="procedure-panel-header">
-                                    <span className="procedure-eyebrow inline-flex max-sm:hidden">spine surgical atlas</span>
-                                </div>
-                                <h1 className="procedure-title">{data.scenes[currentScene].title}</h1>
-                                <div
-                                    className="procedure-paragraph open"
-                                    dangerouslySetInnerHTML={{ __html: data.scenes[currentScene].paragraph }}
-                                />
+                            <div
+                                ref={explanationTrackRef}
+                                className="procedure-explanation-track"
+                                style={{ '--procedure-track-position': `${currentScene * -100}%` }}
+                            >
+                                {data.scenes.map((scene, index) => (
+                                    <section
+                                        key={scene.title}
+                                        className="procedure-explanation-slide"
+                                        aria-hidden={index !== currentScene}
+                                        inert={index !== currentScene}
+                                    >
+                                        {/*
+                                        <div className="procedure-panel-header">
+                                            <span className="procedure-eyebrow inline-flex max-sm:hidden">spine surgical atlas</span>
+                                        </div>
+                                        */}
+                                        <h1 className="procedure-title">{scene.title}</h1>
+                                        <div
+                                            className="procedure-paragraph open"
+                                            dangerouslySetInnerHTML={{ __html: scene.paragraph }}
+                                        />
+                                    </section>
+                                ))}
                             </div>
                         </div>
                         {hasSceneNavigation && (
