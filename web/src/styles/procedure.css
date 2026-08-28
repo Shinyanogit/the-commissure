@@ -522,28 +522,44 @@
 
 @media (orientation: portrait) {
     .procedurePage .procedure-hero-card {
-        background: linear-gradient(
-            180deg,
-            rgba(4, 9, 19, 0.62) 0%,
-            rgba(4, 9, 19, 0.76) 54%,
-            rgba(4, 9, 19, 0.88) 100%
-        );
-        box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(12px) saturate(1.08);
-        -webkit-backdrop-filter: blur(12px) saturate(1.08);
+        padding: 0.75rem 0.5rem 0.65rem;
+        background: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
 
     .procedurePage .procedure-toggle {
         cursor: ns-resize;
     }
+
+    .procedurePage .procedure-hero-card-motion {
+        gap: 0.45rem;
+    }
+
+    .procedurePage .procedure-explanation-viewport {
+        padding: 0.85rem 0.9rem 0.75rem;
+        box-sizing: border-box;
+        border: 1px solid rgba(142, 221, 244, 0.14);
+        border-radius: 1rem;
+        background: linear-gradient(
+            180deg,
+            rgba(4, 9, 19, 0.56) 0%,
+            rgba(4, 9, 19, 0.72) 100%
+        );
+        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.14);
+        backdrop-filter: blur(10px) saturate(1.06);
+        -webkit-backdrop-filter: blur(10px) saturate(1.06);
+    }
+
+    .procedurePage .procedure-panel-controls {
+        margin: 0;
+        padding: 0 0.35rem;
+        background: transparent;
+    }
 }
 
 @media (max-width: 640px) {
-    .procedurePage .procedure-hero-card {
-        padding: 1rem;
-        backdrop-filter: blur(14px);
-    }
-
     .procedurePage .procedure-title {
         font-size: 1.35rem;
         padding-right: 3rem;
