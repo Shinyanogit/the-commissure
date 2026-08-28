@@ -185,7 +185,8 @@
     box-sizing: border-box;
 }
 
-.procedurePage.pcdf-interactive .procedure-shell {
+.procedurePage.pcdf-interactive .procedure-shell,
+.procedurePage.pcdf-interactive .procedure-footer {
     pointer-events: none;
 }
 
@@ -213,14 +214,14 @@
     overflow: hidden;
     z-index: 35;
     box-sizing: border-box;
-    transition: opacity 0.4s ease, visibility 0s linear 0.4s, box-shadow 0.25s ease, border-color 0.25s ease;
+    transition: opacity 0.4s ease, visibility 0s linear, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .procedurePage.pcdf-interactive .procedure-hero-card {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition-delay: 0s;
+    transition-delay: 0s, 0.4s, 0s, 0s;
 }
 
 .procedurePage .pcdf-dive-deeper {
@@ -241,15 +242,18 @@
     text-transform: uppercase;
     cursor: pointer;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
     transform: translateY(0.75rem);
-    transition: opacity 0.4s ease, transform 0.4s ease, background 0.3s ease, border-color 0.3s ease;
+    transition: opacity 0.4s ease, visibility 0s linear 0.4s, transform 0.4s ease, background 0.3s ease, border-color 0.3s ease;
 }
 
 .procedurePage .pcdf-dive-deeper.visible {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
     transform: translateY(0);
+    transition-delay: 0s;
 }
 
 .procedurePage .pcdf-dive-deeper:hover,
@@ -611,7 +615,6 @@
 
     .procedurePage .pcdf-dive-deeper {
         right: 1.2rem;
-        bottom: 1rem;
     }
 
     .procedurePage .procedure-footer {
@@ -683,7 +686,6 @@
 
     .procedurePage .pcdf-dive-deeper {
         right: 1rem;
-        bottom: 1rem;
     }
 
     .procedurePage .procedure-hero-card-motion {

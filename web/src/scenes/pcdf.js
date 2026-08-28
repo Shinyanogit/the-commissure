@@ -66,12 +66,11 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
     };
 
     const enterInteractiveMode = () => {
-        if (orbitControls || currentScene !== 5) return;
+        if (orbitControls || currentScene !== sceneCount - 1) return;
         isInteractive = true;
         root.classList.add('pcdf-interactive');
         orbitControls = new OrbitControls(camera, renderer.domElement);
         orbitControls.target.copy(cameraTarget);
-        orbitControls.enableDamping = false;
         orbitControls.addEventListener('change', requestRender);
         orbitControls.update();
         diveDeeperButton.textContent = 'Exit interactive mode';
