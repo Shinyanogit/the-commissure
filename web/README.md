@@ -26,7 +26,9 @@ Routes: `/`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
 - One-finger drag orbits. Two-finger touch combines pinch zoom with screen-space
   panning so the anatomy can be repositioned horizontally and vertically.
 - Changing explanations restores the authored scene view. Forward scene motion
-  is replayed in reverse when navigating backward.
+  is replayed in reverse when navigating backward. Scene motion starts after
+  the 0.5-second explanation snap completes, so rejected or unfinished swipes
+  never move the anatomy.
 - Explanation steps form one horizontal carousel. Dragging follows the pointer,
   then always snaps to the adjacent step or back to the current step on release.
   Swipes can begin on linked body copy, and icon-only arrow controls provide the
@@ -35,10 +37,11 @@ Routes: `/`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
 - The panel docks on the right in landscape and at the absolute bottom in
   portrait. Its centered edge control both collapses the panel and resizes it by
   dragging; layout switching uses Tailwind orientation variants. The portrait
-  panel uses a translucent glass gradient, defaults to 28dvh, and is capped at
-  42dvh. The camera projection keeps the anatomy centered in the remaining
-  space to the left or above the open panel and returns it to screen center when
-  the panel closes.
+  panel uses a translucent glass content surface, defaults to 28dvh, and is
+  capped at 42dvh. Its arrow/progress row floats on a transparent outer surface
+  below the independently scrolling copy instead of covering it. The camera
+  projection keeps the anatomy centered in the remaining space to the left or
+  above the open panel and returns it to screen center when the panel closes.
 - Procedure routes do not render the global footer. The footer is reserved for
   the home route.
 
