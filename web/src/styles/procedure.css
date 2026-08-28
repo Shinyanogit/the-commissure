@@ -185,6 +185,10 @@
     box-sizing: border-box;
 }
 
+.procedurePage.pcdf-interactive .procedure-shell {
+    pointer-events: none;
+}
+
 .procedurePage .procedure-hero-card {
     --card-scale: 1;
     position: fixed;
