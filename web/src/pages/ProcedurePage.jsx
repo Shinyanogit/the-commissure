@@ -187,19 +187,22 @@ export function ProcedurePage({ page, initScene }) {
             <div className="procedure-atlas-glow glow-two"></div>
             <ProcedureNav />
             <main ref={shellRef} className="procedure-shell">
-                {!isExplanationOpen && (
-                    <button
-                        type="button"
-                        className="procedure-explanation-trigger fixed top-1/2 right-3 z-[36] -translate-y-1/2 portrait:top-auto portrait:right-auto portrait:bottom-3 portrait:left-1/2 portrait:-translate-x-1/2 portrait:translate-y-0 portrait:rotate-90"
-                        onClick={() => setIsExplanationOpen(true)}
-                        aria-expanded="false"
-                        aria-label="Show explanation"
-                    >
-                        <svg className="portrait:rotate-90" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="m15 18-6-6 6-6" />
-                        </svg>
-                    </button>
-                )}
+                <button
+                    type="button"
+                    className={`procedure-explanation-trigger fixed top-1/2 right-3 z-[36] -translate-y-1/2 portrait:top-auto portrait:right-auto portrait:bottom-3 portrait:left-1/2 portrait:-translate-x-1/2 portrait:translate-y-0 ${isExplanationOpen ? '' : 'visible'}`}
+                    onClick={() => setIsExplanationOpen(true)}
+                    aria-expanded="false"
+                    aria-label="Show explanation"
+                    aria-hidden={isExplanationOpen}
+                    tabIndex={isExplanationOpen ? -1 : 0}
+                >
+                    <svg className="portrait:hidden" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m15 18-6-6 6-6" />
+                    </svg>
+                    <svg className="hidden portrait:block" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m18 15-6-6-6 6" />
+                    </svg>
+                </button>
                 <aside
                     className={`procedure-hero-card ${panelPositionClasses} ${isExplanationOpen ? 'open translate-x-0 portrait:translate-y-0' : 'translate-x-full portrait:translate-x-0 portrait:translate-y-full'}`}
                     style={{
