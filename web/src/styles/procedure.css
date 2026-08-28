@@ -532,16 +532,32 @@
     .procedurePage .procedure-toggle {
         top: 0.75rem;
         left: 50%;
-        width: 2.75rem;
-        height: 1.4rem;
-        border-top: 0;
-        border-radius: 0 0 0.8rem 0.8rem;
-        background: rgba(4, 9, 19, 0.72);
+        width: 3.15rem;
+        height: 1.6rem;
+        border: 0;
+        border-radius: 0 0 1rem 1rem;
+        background: linear-gradient(
+            180deg,
+            rgba(142, 221, 244, 0.025),
+            rgba(142, 221, 244, 0.075)
+        );
         box-shadow: none;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
         translate: none;
         rotate: 0deg;
         transform: translateX(-50%);
         cursor: ns-resize;
+    }
+
+    .procedurePage .procedure-toggle:hover,
+    .procedurePage .procedure-toggle:focus-visible {
+        border-color: transparent;
+        background: linear-gradient(
+            180deg,
+            rgba(142, 221, 244, 0.045),
+            rgba(142, 221, 244, 0.11)
+        );
     }
 
     .procedurePage .procedure-toggle svg {
@@ -553,7 +569,7 @@
     .procedurePage .procedure-hero-card-motion {
         position: relative;
         gap: 0;
-        padding: 1.65rem 0.9rem 0.75rem;
+        padding: 1.8rem 0.9rem 0.75rem;
         box-sizing: border-box;
         overflow: hidden;
         border: 1px solid rgba(142, 221, 244, 0.14);
