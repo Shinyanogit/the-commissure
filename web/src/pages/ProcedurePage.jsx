@@ -283,7 +283,11 @@ export function ProcedurePage({ page, initScene }) {
     };
 
     return (
-        <div className="procedurePage" ref={rootRef} onClick={handleClick}>
+        <div
+            className={`procedurePage${isExplanationOpen ? '' : ' explanation-stowed'}`}
+            ref={rootRef}
+            onClick={handleClick}
+        >
             <div ref={mountRef} className="canvas-mount"></div>
             <div className="procedure-atlas-glow glow-one"></div>
             <div className="procedure-atlas-glow glow-two"></div>

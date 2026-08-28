@@ -135,6 +135,16 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     box-sizing: border-box;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s ease, visibility 0s linear;
+}
+
+.procedurePage.explanation-stowed .procedure-nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition-delay: 0.5s, 0.7s;
 }
 
 .procedurePage .nav-list.active {
