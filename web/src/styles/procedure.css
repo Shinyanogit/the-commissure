@@ -522,7 +522,15 @@
 
 @media (orientation: portrait) {
     .procedurePage .procedure-hero-card {
-        box-shadow: 0 -18px 48px rgba(0, 0, 0, 0.28);
+        background: linear-gradient(
+            180deg,
+            rgba(4, 9, 19, 0.62) 0%,
+            rgba(4, 9, 19, 0.76) 54%,
+            rgba(4, 9, 19, 0.88) 100%
+        );
+        box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(12px) saturate(1.08);
+        -webkit-backdrop-filter: blur(12px) saturate(1.08);
     }
 
     .procedurePage .procedure-toggle {

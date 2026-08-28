@@ -25,7 +25,7 @@ export function ProcedurePage({ page, initScene }) {
     const [isExplanationOpen, setIsExplanationOpen] = useState(true);
     const [panelSize, setPanelSize] = useState({ width: null, height: null });
     const hasSceneNavigation = data.scenes.length > 1;
-    const panelPositionClasses = 'fixed top-20 right-0 bottom-0 left-auto w-[var(--procedure-panel-width)] max-h-none rounded-l-[1.2rem] rounded-r-none portrait:inset-x-0 portrait:top-auto portrait:bottom-0 portrait:h-[var(--procedure-panel-height)] portrait:w-full portrait:max-h-none portrait:rounded-t-[1.2rem] portrait:rounded-b-none';
+    const panelPositionClasses = 'fixed top-20 right-0 bottom-0 left-auto w-[var(--procedure-panel-width)] max-h-none rounded-l-[1.2rem] rounded-r-none portrait:inset-x-0 portrait:top-auto portrait:bottom-0 portrait:h-[var(--procedure-panel-height)] portrait:w-full portrait:max-h-[42dvh] portrait:rounded-t-[1.2rem] portrait:rounded-b-none';
 
     useBodyClass('procedure-page');
 
@@ -148,7 +148,7 @@ export function ProcedurePage({ page, initScene }) {
 
         resize.dragged = true;
         const maximum = resize.isPortrait
-            ? window.innerHeight * 0.55
+            ? window.innerHeight * 0.42
             : Math.min(window.innerWidth * 0.55, 640);
         const minimum = Math.min(resize.isPortrait ? 180 : 280, maximum);
         const nextSize = Math.min(Math.max(resize.startSize - delta, minimum), maximum);
@@ -309,7 +309,7 @@ export function ProcedurePage({ page, initScene }) {
                     className={`procedure-hero-card ${panelPositionClasses} ${isExplanationOpen ? 'open translate-x-0 portrait:translate-y-0' : 'translate-x-full portrait:translate-x-0 portrait:translate-y-full'}`}
                     style={{
                         '--procedure-panel-width': panelSize.width ? `${panelSize.width}px` : 'clamp(20rem, 30vw, 28rem)',
-                        '--procedure-panel-height': panelSize.height ? `${panelSize.height}px` : '32dvh',
+                        '--procedure-panel-height': panelSize.height ? `${panelSize.height}px` : '28dvh',
                     }}
                     aria-hidden={!isExplanationOpen}
                     onPointerDown={handlePanelPointerDown}
