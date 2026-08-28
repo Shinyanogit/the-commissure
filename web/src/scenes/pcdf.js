@@ -16,6 +16,13 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
     let lastWidth = 0;
     let lastHeight = 0;
     let lastPixelRatio = 0;
+    const afterExplanationTransition = (callback) => {
+        const timeoutId = window.setTimeout(() => {
+            timeoutIds.delete(timeoutId);
+            if (!disposed) callback();
+        }, 500);
+        timeoutIds.add(timeoutId);
+    };
 
     // Camera
     const scene = new THREE.Scene();
@@ -350,20 +357,22 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
 
             isAnimating = true;
             orbitControls.enabled = false;
-            restoreSceneState(currentState);
-            prepareSceneForReverse(currentState, previousState);
             currentScene = previousScene;
             setCurrentScene(currentScene);
-            activeTimelines.add(timeline);
-            timeline.eventCallback('onReverseComplete', () => {
-                activeTimelines.delete(timeline);
-                timeline.eventCallback('onReverseComplete', null);
-                restoreSceneState(previousState);
-                isAnimating = false;
-                orbitControls.enabled = true;
-                requestRender();
+            afterExplanationTransition(() => {
+                restoreSceneState(currentState);
+                prepareSceneForReverse(currentState, previousState);
+                activeTimelines.add(timeline);
+                timeline.eventCallback('onReverseComplete', () => {
+                    activeTimelines.delete(timeline);
+                    timeline.eventCallback('onReverseComplete', null);
+                    restoreSceneState(previousState);
+                    isAnimating = false;
+                    orbitControls.enabled = true;
+                    requestRender();
+                });
+                timeline.reverse();
             });
-            timeline.reverse();
             return true;
         },
         next: () => {
@@ -372,10 +381,13 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
             if (!currentState) return false;
             isAnimating = true;
             orbitControls.enabled = false;
-            restoreSceneState(currentState);
             currentScene++;
             setCurrentScene(currentScene);
-            transferScene(currentScene);
+            const destinationScene = currentScene;
+            afterExplanationTransition(() => {
+                restoreSceneState(currentState);
+                transferScene(destinationScene);
+            });
             return true;
         },
     };

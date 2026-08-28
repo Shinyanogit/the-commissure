@@ -13,6 +13,15 @@ export function createSceneNavigator({
 }) {
     const sceneStates = new Map();
     const sceneTimelines = new Map();
+    let transitionTimeoutId = null;
+
+    const afterExplanationTransition = (callback) => {
+        if (transitionTimeoutId) window.clearTimeout(transitionTimeoutId);
+        transitionTimeoutId = window.setTimeout(() => {
+            transitionTimeoutId = null;
+            callback();
+        }, 500);
+    };
 
     const captureState = () => {
         const objects = [];
@@ -98,17 +107,19 @@ export function createSceneNavigator({
 
             setIsAnimating(true);
             if (orbitControls) orbitControls.enabled = false;
-            restoreState(currentState);
-            prepareReverse(currentState, previousState);
             selectScene(previousScene);
-            timeline.eventCallback('onReverseComplete', () => {
-                timeline.eventCallback('onReverseComplete', null);
-                restoreState(previousState);
-                setIsAnimating(false);
-                if (orbitControls) orbitControls.enabled = true;
-                requestRender();
+            afterExplanationTransition(() => {
+                restoreState(currentState);
+                prepareReverse(currentState, previousState);
+                timeline.eventCallback('onReverseComplete', () => {
+                    timeline.eventCallback('onReverseComplete', null);
+                    restoreState(previousState);
+                    setIsAnimating(false);
+                    if (orbitControls) orbitControls.enabled = true;
+                    requestRender();
+                });
+                timeline.reverse();
             });
-            timeline.reverse();
             return true;
         },
         next: () => {
@@ -120,9 +131,11 @@ export function createSceneNavigator({
             const nextScene = currentScene + 1;
             setIsAnimating(true);
             if (orbitControls) orbitControls.enabled = false;
-            restoreState(sceneStates.get(currentScene));
             selectScene(nextScene);
-            playForward(nextScene);
+            afterExplanationTransition(() => {
+                restoreState(sceneStates.get(currentScene));
+                playForward(nextScene);
+            });
             return true;
         },
     };
@@ -145,6 +158,8 @@ export function createSceneNavigator({
             if (orbitControls) orbitControls.enabled = true;
         },
         dispose() {
+            if (transitionTimeoutId) window.clearTimeout(transitionTimeoutId);
+            transitionTimeoutId = null;
             sceneTimelines.forEach((timeline) => timeline.kill());
             sceneTimelines.clear();
             sceneStates.clear();
