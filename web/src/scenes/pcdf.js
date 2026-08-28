@@ -1,22 +1,32 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import gsap from 'gsap';
 import { texture } from 'three/tsl';
+import { updateProcedureCameraView } from './updateProcedureCameraView.js';
 
-export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentScene) {
+export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentScene, sceneControllerRef) {
     let disposed = false;
     const activeTimelines = new Set();
+    const sceneTimelines = new Map();
     const timeoutIds = new Set();
     const getPixelRatio = () => Math.min(window.devicePixelRatio || 1, window.innerWidth <= 768 ? 1.5 : 2);
     let renderFrameId = 0;
     let lastWidth = 0;
     let lastHeight = 0;
     let lastPixelRatio = 0;
+    const afterExplanationTransition = (callback) => {
+        const timeoutId = window.setTimeout(() => {
+            timeoutIds.delete(timeoutId);
+            if (!disposed) callback();
+        }, 500);
+        timeoutIds.add(timeoutId);
+    };
 
     // Camera
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100 );
+    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.001, 100 );
     camera.up.set(0, 1, 0);
     camera.position.set( 0.2, 0.2, 0 );
     const cameraTarget = new THREE.Vector3(0, 0.2, 0);
@@ -30,9 +40,87 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
     lastHeight = window.innerHeight;
     lastPixelRatio = getPixelRatio();
 
+    camera.lookAt(cameraTarget);
+    const orbitControls = new OrbitControls(camera, renderer.domElement);
+    orbitControls.target.copy(cameraTarget);
+    orbitControls.enablePan = true;
+    orbitControls.screenSpacePanning = true;
+    orbitControls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
+    const canonicalSceneStates = new Map();
+
+    const captureSceneState = () => {
+        const objects = [];
+        scene.traverse((object) => {
+            const materials = Array.isArray(object.material)
+                ? object.material
+                : object.material ? [object.material] : [];
+            objects.push({
+                object,
+                position: object.position.clone(),
+                quaternion: object.quaternion.clone(),
+                scale: object.scale.clone(),
+                visible: object.visible,
+                materials: materials.map((material) => ({
+                    material,
+                    opacity: material.opacity,
+                    transparent: material.transparent,
+                })),
+            });
+        });
+
+        return {
+            objects,
+            cameraPosition: camera.position.clone(),
+            cameraUp: camera.up.clone(),
+            cameraTarget: cameraTarget.clone(),
+            cameraFov: camera.fov,
+        };
+    };
+
+    const restoreSceneState = (state) => {
+        state.objects.forEach(({ object, position, quaternion, scale, visible, materials }) => {
+            object.position.copy(position);
+            object.quaternion.copy(quaternion);
+            object.scale.copy(scale);
+            object.visible = visible;
+            materials.forEach(({ material, opacity, transparent }) => {
+                material.opacity = opacity;
+                material.transparent = transparent;
+                material.needsUpdate = true;
+            });
+        });
+        camera.position.copy(state.cameraPosition);
+        camera.up.copy(state.cameraUp);
+        cameraTarget.copy(state.cameraTarget);
+        camera.fov = state.cameraFov;
+        camera.updateProjectionMatrix();
+        orbitControls.target.copy(cameraTarget);
+        orbitControls.update();
+        scene.updateMatrixWorld(true);
+        requestRender();
+    };
+
+    const prepareSceneForReverse = (currentState, previousState) => {
+        const currentMaterials = new Map();
+        currentState.objects.forEach(({ materials }) => {
+            materials.forEach((materialState) => {
+                currentMaterials.set(materialState.material, materialState);
+            });
+        });
+
+        previousState.objects.forEach(({ object, visible, materials }) => {
+            if (visible) object.visible = true;
+            materials.forEach(({ material, opacity }) => {
+                const currentMaterial = currentMaterials.get(material);
+                if (!currentMaterial || Math.abs(currentMaterial.opacity - opacity) < 0.0001) return;
+                material.transparent = true;
+                material.needsUpdate = true;
+            });
+        });
+    };
+
     const render = () => {
         if (disposed) return;
-        camera.lookAt(cameraTarget);
         renderer.render( scene, camera );
     };
 
@@ -43,6 +131,9 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
             render();
         });
     };
+
+    orbitControls.addEventListener('change', requestRender);
+    orbitControls.update();
 
     // Light
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -248,83 +339,87 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         });
         pcdf.position.set(0, 0, 0);
         scene.add( pcdf );
+        canonicalSceneStates.set(0, captureSceneState());
         requestRender();
     });
 
-    // Wheel + touch swipe support
-    let lastWheelTime = 0;
     let isAnimating = false;
-    let touchStartY = null;
-    let touchStartedInCard = false;
-    const TOUCH_SWIPE_THRESHOLD = 40;
-    const handleWheel = (event) => {
-        const now = performance.now();
-        if (now - lastWheelTime < 2000) return;
-        lastWheelTime = now;
-        if (event.target.closest(".procedure-paragraph.open")) return;
-        if (isAnimating) return;
-        isAnimating = true;
-        if (event.deltaY > 0) {
-            if (currentScene >= sceneCount - 1) {
-                isAnimating = false;
-                return;
-            } else {
-                currentScene++;
-            }
-            transferScene(currentScene);
-        };
-    };
-    const handleTouchStart = (event) => {
-        touchStartedInCard = Boolean(event.target.closest('.procedure-hero-card'));
-        if (touchStartedInCard) {
-            touchStartY = null;
-            return;
-        }
-        if (event.target.closest(".procedure-paragraph.open")) return;
-        if (event.touches.length !== 1) return;
-        touchStartY = event.touches[0].clientY;
-    };
-    const handleTouchEnd = (event) => {
-        if (touchStartedInCard) {
-            touchStartedInCard = false;
-            touchStartY = null;
-            return;
-        }
-        if (isAnimating || touchStartY === null) {
-            touchStartY = null;
-            return;
-        }
-        const touchEndY = event.changedTouches[0].clientY;
-        const deltaY = touchStartY - touchEndY;
-        touchStartY = null;
-        touchStartedInCard = false;
-        if (deltaY > TOUCH_SWIPE_THRESHOLD) {
+
+    const sceneController = {
+        previous: () => {
+            if (isAnimating || currentScene <= 0) return false;
+            const departingScene = currentScene;
+            const previousScene = currentScene - 1;
+            const currentState = canonicalSceneStates.get(departingScene);
+            const previousState = canonicalSceneStates.get(previousScene);
+            const timeline = sceneTimelines.get(departingScene);
+            if (!currentState || !previousState || !timeline) return false;
+
             isAnimating = true;
-            if (currentScene >= sceneCount - 1) {
-                isAnimating = false;
-                return;
-            } else {
-                currentScene++;
-            }
-            transferScene(currentScene);
-        };
+            orbitControls.enabled = false;
+            currentScene = previousScene;
+            setCurrentScene(currentScene);
+            afterExplanationTransition(() => {
+                restoreSceneState(currentState);
+                prepareSceneForReverse(currentState, previousState);
+                activeTimelines.add(timeline);
+                timeline.eventCallback('onReverseComplete', () => {
+                    activeTimelines.delete(timeline);
+                    timeline.eventCallback('onReverseComplete', null);
+                    restoreSceneState(previousState);
+                    isAnimating = false;
+                    orbitControls.enabled = true;
+                    requestRender();
+                });
+                timeline.reverse();
+            });
+            return true;
+        },
+        next: () => {
+            if (isAnimating || currentScene >= sceneCount - 1) return false;
+            const currentState = canonicalSceneStates.get(currentScene);
+            if (!currentState) return false;
+            isAnimating = true;
+            orbitControls.enabled = false;
+            currentScene++;
+            setCurrentScene(currentScene);
+            const destinationScene = currentScene;
+            afterExplanationTransition(() => {
+                restoreSceneState(currentState);
+                transferScene(destinationScene);
+            });
+            return true;
+        },
     };
-    window.addEventListener('wheel', handleWheel, { passive: true });
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchend', handleTouchEnd, { passive: true });
-    function transferScene(currentScene) {
+    if (sceneControllerRef) sceneControllerRef.current = sceneController;
+
+    function transferScene(destinationScene) {
+        orbitControls.enabled = false;
+        cameraTarget.copy(orbitControls.target);
+        const previousTimeline = sceneTimelines.get(destinationScene);
+        if (previousTimeline) {
+            activeTimelines.delete(previousTimeline);
+            previousTimeline.kill();
+        }
         const tl = gsap.timeline({
             onComplete: () => {
                 activeTimelines.delete(tl);
                 isAnimating = false;
+                orbitControls.target.copy(cameraTarget);
+                orbitControls.update();
+                canonicalSceneStates.set(destinationScene, captureSceneState());
+                orbitControls.enabled = true;
+                requestRender();
             }
         });
-        tl.eventCallback('onUpdate', render);
+        tl.eventCallback('onUpdate', () => {
+            orbitControls.target.copy(cameraTarget);
+            orbitControls.update();
+            render();
+        });
         activeTimelines.add(tl);
-        tl.add(() => {
-            setCurrentScene(currentScene);
-        }, 0);
-        if (currentScene === 1) {
+        sceneTimelines.set(destinationScene, tl);
+        if (destinationScene === 1) {
             tl.to(camera.position, {
                 x: 0,
                 y: 0.4,
@@ -361,7 +456,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                     ease: 'power2.inOut'
                 }, 0);
             });
-        } else if (currentScene === 2) {
+        } else if (destinationScene === 2) {
             c5Structure.forEach((c5structure) => {
                 tl.to(c5structure.position, {
                     z: '+=1',
@@ -426,7 +521,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                     }
                 }, laminectomyStartTime);
             });
-        } else if (currentScene === 3) {
+        } else if (destinationScene === 3) {
             tl.to(camera.position, {
                 x: 0.2,
                 y: 0.2,
@@ -574,7 +669,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                     ease: 'power2.inOut'
                 }, kyphosisStartTime);
             }
-        } else if (currentScene === 4) {
+        } else if (destinationScene === 4) {
             tl.to(camera.position, {
                 x: 0,
                 y: 0.2,
@@ -809,7 +904,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
                     );
                 });
             }
-        } else if (currentScene === 5) {
+        } else if (destinationScene === 5) {
             tl.to(camera.position, {
                 x: -0.2,
                 y: 0.2,
@@ -832,10 +927,12 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
         const pixelRatio = getPixelRatio();
-        if (viewportWidth === lastWidth && viewportHeight === lastHeight && pixelRatio === lastPixelRatio) return;
+        updateProcedureCameraView(camera, root);
+        if (viewportWidth === lastWidth && viewportHeight === lastHeight && pixelRatio === lastPixelRatio) {
+            requestRender();
+            return;
+        }
 
-        camera.aspect = viewportWidth / viewportHeight;
-        camera.updateProjectionMatrix();
         renderer.setSize(viewportWidth, viewportHeight);
         renderer.setPixelRatio(pixelRatio);
         lastWidth = viewportWidth;
@@ -845,18 +942,22 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         if (backgroundTexture) updateBackground(backgroundTexture)
     };
     window.addEventListener('resize', handleResize);
-    requestRender();
+    window.addEventListener('procedure-layout-change', handleResize);
+    handleResize();
 
     return () => {
         disposed = true;
-        window.removeEventListener('wheel', handleWheel);
-        window.removeEventListener('touchstart', handleTouchStart, { passive: true });
-        window.removeEventListener('touchend', handleTouchEnd, { passive: true });
         window.removeEventListener('resize', handleResize);
+        window.removeEventListener('procedure-layout-change', handleResize);
+        orbitControls.removeEventListener('change', requestRender);
+        orbitControls.dispose();
+        if (sceneControllerRef?.current === sceneController) sceneControllerRef.current = null;
         timeoutIds.forEach((id) => window.clearTimeout(id));
         timeoutIds.clear();
         activeTimelines.forEach((tl) => tl.kill());
         activeTimelines.clear();
+        sceneTimelines.forEach((tl) => tl.kill());
+        sceneTimelines.clear();
         if (renderFrameId) {
             window.cancelAnimationFrame(renderFrameId);
             renderFrameId = 0;
