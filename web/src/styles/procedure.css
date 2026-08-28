@@ -530,12 +530,30 @@
     }
 
     .procedurePage .procedure-toggle {
+        top: 0.75rem;
+        left: 50%;
+        width: 2.75rem;
+        height: 1.4rem;
+        border-top: 0;
+        border-radius: 0 0 0.8rem 0.8rem;
+        background: rgba(4, 9, 19, 0.72);
+        box-shadow: none;
+        translate: none;
+        rotate: 0deg;
+        transform: translateX(-50%);
         cursor: ns-resize;
     }
 
+    .procedurePage .procedure-toggle svg {
+        width: 0.95rem;
+        height: 0.95rem;
+        transform: rotate(90deg);
+    }
+
     .procedurePage .procedure-hero-card-motion {
-        gap: 0.45rem;
-        padding: 0.85rem 0.9rem 0.75rem;
+        position: relative;
+        gap: 0;
+        padding: 1.65rem 0.9rem 0.75rem;
         box-sizing: border-box;
         overflow: hidden;
         border: 1px solid rgba(142, 221, 244, 0.14);
@@ -561,9 +579,40 @@
     }
 
     .procedurePage .procedure-panel-controls {
+        position: absolute;
+        inset: 0;
+        display: block;
         margin: 0;
         padding: 0;
         background: transparent;
+        pointer-events: none;
+    }
+
+    .procedurePage .procedure-panel-controls button {
+        position: absolute;
+        bottom: 0.1rem;
+        pointer-events: auto;
+    }
+
+    .procedurePage .procedure-panel-controls button:first-child {
+        left: 0.1rem;
+    }
+
+    .procedurePage .procedure-panel-controls button:last-child {
+        right: 0.1rem;
+    }
+
+    .procedurePage .procedure-panel-indicator {
+        position: absolute;
+        bottom: 0.55rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .procedurePage .procedure-paragraph::after {
+        content: '';
+        display: block;
+        height: 2.75rem;
     }
 }
 
