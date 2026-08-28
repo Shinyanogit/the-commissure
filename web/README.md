@@ -38,12 +38,13 @@ Routes: `/`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
   portrait. Its centered edge control both collapses the panel and resizes it by
   dragging; layout switching uses Tailwind orientation variants. The portrait
   panel uses a translucent glass content surface, defaults to 28dvh, and is
-  capped at 42dvh. Its independently scrolling copy and arrow/progress row are
-  separate, non-overlapping regions inside the same glass surface. Carousel
-  clipping occurs before inner spacing, so adjacent copy never leaks into view.
-  The camera projection keeps the anatomy centered in the remaining space to
-  the left or above the open panel and returns it to screen center when the
-  panel closes.
+  capped at 42dvh. Its transparent arrow/progress overlay does not consume copy
+  height; the progress dots sit at the lower edge and the scroll content adds a
+  matching end spacer. Carousel clipping occurs before inner spacing, so
+  adjacent copy never leaks into view. The portrait toggle is a slim tab built
+  into the glass panel's top edge. The camera projection keeps the anatomy
+  centered in the remaining space to the left or above the open panel and
+  returns it to screen center when the panel closes.
 - Procedure routes do not render the global footer. The footer is reserved for
   the home route.
 
