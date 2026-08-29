@@ -19,6 +19,16 @@ Routes: `/`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
 - `public/` contains the shipped Web models, images, fonts, and Draco decoder.
 - `script/` contains the existing editorial DOCX sources and is not deployed.
 
+## Home and editorial updates
+
+- The "Updates from the editorial team" list records shipped product and
+  editorial changes in reverse chronological order. It includes the responsive
+  procedure interaction redesign, branded scene preparation, and author-profile
+  links alongside newly published procedure articles.
+- Shinya Yamaguchi's author card opens his public portfolio at
+  `https://shinyanogit.github.io/`. Other author cards remain non-navigating
+  until their own durable profile destination is supplied.
+
 ## Procedure interaction contract
 
 - A procedure route mounts its page and Three.js scene immediately behind a
@@ -58,6 +68,9 @@ Routes: `/`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
   its hidden surface remains transparent and non-interactive when restored.
 - Procedure routes do not render the global footer. The footer is reserved for
   the home route.
+
+Completed Web changes are recorded in [`../docs/CHANGELOG.md`](../docs/CHANGELOG.md)
+in the same change that updates this behavior contract.
 
 Vercel must use `web/` as its Root Directory. `vercel.json` deliberately runs
 both build and smoke tests before a deployment can become ready.
