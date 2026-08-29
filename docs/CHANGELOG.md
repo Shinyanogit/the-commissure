@@ -7,6 +7,9 @@ its source-of-truth documentation are ready in the same pull request.
 
 ### Web
 
+- Limited the initial editorial update list to the five newest entries and
+  added an accessible control to reveal all entries or return to the latest
+  five.
 - Added route-specific search metadata, canonical URLs, social previews, and
   Schema.org data for the home page, article index, and all five procedure
   guides.
