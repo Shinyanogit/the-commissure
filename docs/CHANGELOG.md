@@ -7,6 +7,9 @@ its source-of-truth documentation are ready in the same pull request.
 
 ### Web
 
+- Removed repeated name, training stage, and affiliation introductions from all
+  three author biographies because those details already appear in each card
+  header.
 - Limited the initial editorial update list to the five newest entries and
   added an accessible control to reveal all entries or return to the latest
   five.

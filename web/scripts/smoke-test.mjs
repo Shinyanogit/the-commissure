@@ -58,6 +58,16 @@ const REQUIRED_EDITORIAL_UPDATES = [
   "Procedure models now support orbit, zoom, pan, and synchronized reversible step transitions",
   "https://shinyanogit.github.io/",
 ];
+const REQUIRED_AUTHOR_BIOGRAPHY_OPENINGS = [
+  "I am dedicated to eliminating preventable trauma deaths",
+  "My interests lie in diagnostic radiology and medical imaging",
+  "I aspire to become a neurosurgeon-scientist",
+];
+const FORBIDDEN_AUTHOR_BIOGRAPHY_INTRODUCTIONS = [
+  "Hello, my name is Rintaro Imada",
+  "Hello, my name is Shinya Yamaguchi",
+  "Hello, my name is Koki Tokida",
+];
 const REQUIRED_EDITORIAL_UPDATE_CONTROLS = [
   "editorial-updates-list",
   "View all updates",
@@ -126,6 +136,16 @@ if (!existsSync(DIST)) {
       builtSource.includes(update)
         ? pass(`editorial update: ${update}`)
         : fail(`missing editorial update: ${update}`);
+    }
+    for (const opening of REQUIRED_AUTHOR_BIOGRAPHY_OPENINGS) {
+      builtSource.includes(opening)
+        ? pass(`author biography opening: ${opening}`)
+        : fail(`missing author biography opening: ${opening}`);
+    }
+    for (const introduction of FORBIDDEN_AUTHOR_BIOGRAPHY_INTRODUCTIONS) {
+      !builtSource.includes(introduction)
+        ? pass(`removed redundant author introduction: ${introduction}`)
+        : fail(`redundant author introduction remains: ${introduction}`);
     }
     for (const control of REQUIRED_EDITORIAL_UPDATE_CONTROLS) {
       builtSource.includes(control)
