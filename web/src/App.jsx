@@ -7,6 +7,7 @@ import { Home } from './pages/Home.jsx';
 import { Pcdf } from './pages/Pcdf.jsx';
 import { Pcf } from './pages/Pcf.jsx';
 import { Pcl_open } from './pages/Pcl_open.jsx';
+import { Seo } from './components/Seo.jsx';
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -22,6 +23,7 @@ export function App() {
     return (
         <>
             <ScrollToTop />
+            <Seo />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/articles" element={<Articles />} />

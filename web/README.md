@@ -9,7 +9,7 @@ npm run build
 npm test
 ```
 
-Routes: `/`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
+Routes: `/`, `/articles`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
 
 - `src/pages/` owns React route pages.
 - `src/components/` owns shared Web chrome.
@@ -68,6 +68,19 @@ Routes: `/`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
   its hidden surface remains transparent and non-interactive when restored.
 - Procedure routes do not render the global footer. The footer is reserved for
   the home route.
+
+## Search discovery contract
+
+- Production builds generate a distinct HTML entry document for every public
+  route so its title, description, canonical URL, social preview, and
+  structured data are present before JavaScript runs.
+- Client-side navigation updates the same metadata without creating duplicate
+  canonical tags.
+- `robots.txt` declares the canonical sitemap, which lists the home page,
+  article index, and all five procedure guides.
+- The canonical origin, maintenance steps, automated checks, and manual Search
+  Console handoff are defined in
+  [`../docs/WEB_SEARCH_DISCOVERY.md`](../docs/WEB_SEARCH_DISCOVERY.md).
 
 Completed Web changes are recorded in [`../docs/CHANGELOG.md`](../docs/CHANGELOG.md)
 in the same change that updates this behavior contract.
