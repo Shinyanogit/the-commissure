@@ -25,6 +25,9 @@ its source-of-truth documentation are ready in the same pull request.
 - Added the portfolio link, branded scene preparation, responsive procedure
   control redesign, and interactive model behavior to "Updates from the
   editorial team".
+- Made the About us and Authors links move to their home-page sections from
+  both the home page and internal routes, accounting for the fixed navigation
+  bar and reduced-motion preferences.
 
 ### Documentation
 

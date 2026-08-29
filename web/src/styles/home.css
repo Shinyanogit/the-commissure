@@ -320,6 +320,11 @@
     margin-top: 1.4rem;
 }
 
+.homePage #about,
+.homePage #authors {
+    scroll-margin-top: 5.75rem;
+}
+
 .homePage .article::before,
 .homePage .news::before,
 .homePage .about::before,

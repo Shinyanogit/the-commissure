@@ -63,6 +63,12 @@ const REQUIRED_EDITORIAL_UPDATE_CONTROLS = [
   "View all updates",
   "Show latest five",
 ];
+const REQUIRED_HOME_SECTION_NAVIGATION = [
+  "/#about",
+  "/#authors",
+  "scrollTo",
+  "prefers-reduced-motion: reduce",
+];
 const HOST = "127.0.0.1";
 
 let failed = false;
@@ -125,6 +131,11 @@ if (!existsSync(DIST)) {
       builtSource.includes(control)
         ? pass(`editorial update control: ${control}`)
         : fail(`missing editorial update control: ${control}`);
+    }
+    for (const navigationContract of REQUIRED_HOME_SECTION_NAVIGATION) {
+      builtSource.includes(navigationContract)
+        ? pass(`home section navigation: ${navigationContract}`)
+        : fail(`missing home section navigation: ${navigationContract}`);
     }
   }
 

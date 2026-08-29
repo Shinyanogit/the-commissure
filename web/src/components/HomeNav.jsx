@@ -5,6 +5,7 @@ export function HomeNav() {
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const tickingRef = useRef(false);
+    const closeMenu = () => setOpen(false);
 
     useEffect(() => {
         const updateScrolled = () => {
@@ -32,7 +33,7 @@ export function HomeNav() {
 
     return (
         <nav className={`home-nav${scrolled ? ' scrolled' : ''}`}>
-            <Link to="/" className="nav-logo-link">
+            <Link to="/" className="nav-logo-link" onClick={closeMenu}>
                 <img src="/logo.png" className="logo" alt="The Commissure" />
             </Link>
             <div
@@ -45,9 +46,9 @@ export function HomeNav() {
                 <span></span>
             </div>
             <ul className={`nav-list${open ? ' active' : ''}`}>
-                <li><Link to="/articles">Articles</Link></li>
-                <li><Link to="/#about">About us</Link></li>
-                <li><Link to="/#authors">Authors</Link></li>
+                <li><Link to="/articles" onClick={closeMenu}>Articles</Link></li>
+                <li><Link to="/#about" onClick={closeMenu}>About us</Link></li>
+                <li><Link to="/#authors" onClick={closeMenu}>Authors</Link></li>
             </ul>
         </nav>
     );
