@@ -39,11 +39,19 @@ export function Seo() {
         upsertMeta('meta[property="og:url"]', { property: 'og:url', content: metadata.canonical });
         upsertMeta('meta[property="og:image"]', { property: 'og:image', content: metadata.image });
         upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt', content: metadata.imageAlt });
+        upsertMeta('meta[property="og:image:width"]', { property: 'og:image:width', content: metadata.imageWidth });
+        upsertMeta('meta[property="og:image:height"]', { property: 'og:image:height', content: metadata.imageHeight });
         upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
         upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: metadata.title });
         upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: metadata.description });
         upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: metadata.image });
         upsertLink('link[rel="canonical"]', { rel: 'canonical', href: metadata.canonical });
+
+        document.head.querySelectorAll('meta[property^="article:"]').forEach((element) => element.remove());
+        if (metadata.datePublished) {
+            upsertMeta('meta[property="article:published_time"]', { property: 'article:published_time', content: metadata.datePublished });
+            upsertMeta('meta[property="article:modified_time"]', { property: 'article:modified_time', content: metadata.datePublished });
+        }
 
         let structuredData = document.head.querySelector('#route-structured-data');
         const payload = createStructuredData(metadata);

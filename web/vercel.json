@@ -5,6 +5,30 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/articles",
+      "destination": "/articles.html"
+    },
+    {
+      "source": "/acdf",
+      "destination": "/acdf.html"
+    },
+    {
+      "source": "/accf",
+      "destination": "/accf.html"
+    },
+    {
+      "source": "/pcdf",
+      "destination": "/pcdf.html"
+    },
+    {
+      "source": "/pcf",
+      "destination": "/pcf.html"
+    },
+    {
+      "source": "/pcl_open",
+      "destination": "/pcl_open.html"
+    },
+    {
       "source": "/((?!.*\\.).*)",
       "destination": "/index.html"
     }

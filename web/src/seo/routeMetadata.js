@@ -61,6 +61,8 @@ const procedureMetadata = Object.fromEntries(PROCEDURES.map((procedure) => [
         canonical: absoluteUrl(procedure.path),
         image: absoluteUrl(procedure.image),
         imageAlt: `${procedure.name} interactive 3D guide`,
+        imageWidth: 2880,
+        imageHeight: 1692,
         type: 'article',
     },
 ]));
@@ -73,6 +75,8 @@ export const ROUTE_METADATA = {
         canonical: `${SITE_URL}/`,
         image: absoluteUrl('/pcdfsnap.webp'),
         imageAlt: 'Interactive cervical spine surgery model from The Commissure',
+        imageWidth: 2880,
+        imageHeight: 1692,
         type: 'website',
     },
     '/articles': {
@@ -82,6 +86,8 @@ export const ROUTE_METADATA = {
         canonical: absoluteUrl('/articles'),
         image: absoluteUrl('/about.webp'),
         imageAlt: 'Cervical spine surgery articles from The Commissure',
+        imageWidth: 2249,
+        imageHeight: 1616,
         type: 'website',
     },
     ...procedureMetadata,
@@ -103,6 +109,8 @@ export function getRouteMetadata(pathname) {
         canonical: absoluteUrl(normalizedPath),
         image: absoluteUrl('/pcdfsnap.webp'),
         imageAlt: 'The Commissure',
+        imageWidth: 2880,
+        imageHeight: 1692,
         type: 'website',
         noindex: true,
     };
