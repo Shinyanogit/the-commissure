@@ -26,12 +26,18 @@ Routes: `/`, `/articles`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
   procedure interaction redesign, branded scene preparation, author-profile
   links, and search-discovery release alongside newly published procedure
   articles.
+- The list initially renders the five newest entries. Its button reveals the
+  complete history and can restore the five-entry view; `aria-expanded` and
+  `aria-controls` expose the same state to assistive technology.
 - Shinya Yamaguchi's author card opens his public portfolio at
   `https://shinyanogit.github.io/`. Other author cards remain non-navigating
   until their own durable profile destination is supplied.
 - Author card headers own each person's name and affiliation. Biography copy
   begins with substantive interests, work, or goals and does not repeat those
   header details as a greeting.
+- The top navigation and footer About us and Authors links work from every
+  route, place the destination below the fixed navigation bar, and close the
+  mobile menu after selection.
 
 ## Procedure interaction contract
 

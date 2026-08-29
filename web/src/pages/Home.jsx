@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,6 +12,66 @@ import '../styles/home.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const INITIAL_EDITORIAL_UPDATE_COUNT = 5;
+const editorialUpdates = [
+    {
+        label: 'Search metadata and a sitemap were added for all published procedure guides',
+        date: 'Aug 29, 2026',
+        to: '/articles',
+    },
+    {
+        label: "Shinya Yamaguchi's author profile now links to his portfolio",
+        date: 'Aug 29, 2026',
+        href: 'https://shinyanogit.github.io/',
+        external: true,
+    },
+    {
+        label: 'Procedure pages now show a branded transition while each 3D scene prepares',
+        date: 'Aug 29, 2026',
+        to: '/acdf',
+    },
+    {
+        label: 'Procedure navigation and explanation controls were redesigned for desktop and mobile',
+        date: 'Aug 29, 2026',
+        to: '/pcdf',
+    },
+    {
+        label: 'Procedure models now support orbit, zoom, pan, and synchronized reversible step transitions',
+        date: 'Aug 29, 2026',
+        to: '/pcdf',
+    },
+    {
+        label: 'Article on Open Door Posterior Cervical Laminoplasty (Open-door PCL) is now available',
+        date: 'Aug 15, 2026',
+        to: '/pcl_open',
+    },
+    {
+        label: 'Koki Tokida joined the editorial board',
+        date: 'Jun 27, 2026',
+        href: '',
+    },
+    {
+        label: 'Article on Anterior Cervical Corpectomy and Fusion (ACCF) is now available',
+        date: 'Jun 27, 2026',
+        to: '/accf',
+    },
+    {
+        label: 'Shinya Yamaguchi joined the editorial board',
+        date: 'Jun 26, 2026',
+        href: '',
+    },
+    {
+        label: 'Article on Posterior Cervical Foraminotomy (PCF) is now available',
+        date: 'Jun 18, 2026',
+        to: '/pcf',
+    },
+    {
+        label: 'Article on Anterior Cervical Discectomy and Fusion (ACDF) is now available',
+        date: 'May 24, 2026',
+        to: '/acdf',
+    },
+];
+
 export function Home() {
     const pageRef = useRef(null);
     const mountRef = useRef(null);
@@ -22,6 +82,10 @@ export function Home() {
     const secondaryCtaRef = useRef(null);
     const indicatorRef = useRef(null);
     const sectionsRef = useRef([]);
+    const [showAllEditorialUpdates, setShowAllEditorialUpdates] = useState(false);
+    const visibleEditorialUpdates = showAllEditorialUpdates
+        ? editorialUpdates
+        : editorialUpdates.slice(0, INITIAL_EDITORIAL_UPDATE_COUNT);
 
     useBodyClass('home-page');
 
@@ -155,52 +219,41 @@ export function Home() {
                     <div className="eyebrow">Latest news</div>
                     <div className="title">Updates from the editorial team</div>
                 </div>
-                <ul className="news-list">
-                    <li>
-                        <span className="header"><Link to="/articles">Search metadata and a sitemap were added for all published procedure guides</Link></span>
-                        <span className="date">Aug 29, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><a href="https://shinyanogit.github.io/" target="_blank" rel="noreferrer">Shinya Yamaguchi's author profile now links to his portfolio</a></span>
-                        <span className="date">Aug 29, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/acdf">Procedure pages now show a branded transition while each 3D scene prepares</Link></span>
-                        <span className="date">Aug 29, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/pcdf">Procedure navigation and explanation controls were redesigned for desktop and mobile</Link></span>
-                        <span className="date">Aug 29, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/pcdf">Procedure models now support orbit, zoom, pan, and synchronized reversible step transitions</Link></span>
-                        <span className="date">Aug 29, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/pcl_open">Article on Open Door Posterior Cervical Laminoplasty (Open-door PCL) is now available</Link></span>
-                        <span className="date">Aug 15, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><a href="">Koki Tokida joined the editorial board</a></span>
-                        <span className="date">Jun 27, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/accf">Article on Anterior Cervical Corpectomy and Fusion (ACCF) is now available</Link></span>
-                        <span className="date">Jun 27, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><a href="">Shinya Yamaguchi joined the editorial board</a></span>
-                        <span className="date">Jun 26, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/pcf">Article on Posterior Cervical Foraminotomy (PCF) is now available</Link></span>
-                        <span className="date">Jun 18, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/acdf">Article on Anterior Cervical Discectomy and Fusion (ACDF) is now available</Link></span>
-                        <span className="date">May 24, 2026</span>
-                    </li>
+                <ul className="news-list" id="editorial-updates-list">
+                    {visibleEditorialUpdates.map((update, index) => (
+                        <li
+                            key={update.label}
+                            className={index >= INITIAL_EDITORIAL_UPDATE_COUNT ? 'news-extra' : undefined}
+                        >
+                            <span className="header">
+                                {update.to ? (
+                                    <Link to={update.to}>{update.label}</Link>
+                                ) : (
+                                    <a
+                                        href={update.href}
+                                        target={update.external ? '_blank' : undefined}
+                                        rel={update.external ? 'noreferrer' : undefined}
+                                    >
+                                        {update.label}
+                                    </a>
+                                )}
+                            </span>
+                            <span className="date">{update.date}</span>
+                        </li>
+                    ))}
                 </ul>
+                <div className="news-toggle-wrap">
+                    <button
+                        type="button"
+                        className="news-toggle"
+                        aria-expanded={showAllEditorialUpdates}
+                        aria-controls="editorial-updates-list"
+                        onClick={() => setShowAllEditorialUpdates((isExpanded) => !isExpanded)}
+                    >
+                        <span>{showAllEditorialUpdates ? 'Show latest five' : 'View all updates'}</span>
+                        <span className="news-toggle-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
             </div>
             <div ref={(node) => { sectionsRef.current[2] = node; }} className="content about" id="about">
                 <ul className="about-list">

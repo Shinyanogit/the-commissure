@@ -10,6 +10,9 @@ its source-of-truth documentation are ready in the same pull request.
 - Removed repeated name, training stage, and affiliation introductions from all
   three author biographies because those details already appear in each card
   header.
+- Limited the initial editorial update list to the five newest entries and
+  added an accessible control to reveal all entries or return to the latest
+  five.
 - Added route-specific search metadata, canonical URLs, social previews, and
   Schema.org data for the home page, article index, and all five procedure
   guides.
@@ -25,6 +28,9 @@ its source-of-truth documentation are ready in the same pull request.
 - Added the portfolio link, branded scene preparation, responsive procedure
   control redesign, and interactive model behavior to "Updates from the
   editorial team".
+- Made the About us and Authors links move to their home-page sections from
+  both the home page and internal routes, accounting for the fixed navigation
+  bar and reduced-motion preferences.
 
 ### Documentation
 

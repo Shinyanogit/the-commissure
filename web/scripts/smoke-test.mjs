@@ -68,6 +68,17 @@ const FORBIDDEN_AUTHOR_BIOGRAPHY_INTRODUCTIONS = [
   "Hello, my name is Shinya Yamaguchi",
   "Hello, my name is Koki Tokida",
 ];
+const REQUIRED_EDITORIAL_UPDATE_CONTROLS = [
+  "editorial-updates-list",
+  "View all updates",
+  "Show latest five",
+];
+const REQUIRED_HOME_SECTION_NAVIGATION = [
+  "/#about",
+  "/#authors",
+  "scrollTo",
+  "prefers-reduced-motion: reduce",
+];
 const HOST = "127.0.0.1";
 
 let failed = false;
@@ -135,6 +146,16 @@ if (!existsSync(DIST)) {
       !builtSource.includes(introduction)
         ? pass(`removed redundant author introduction: ${introduction}`)
         : fail(`redundant author introduction remains: ${introduction}`);
+    }
+    for (const control of REQUIRED_EDITORIAL_UPDATE_CONTROLS) {
+      builtSource.includes(control)
+        ? pass(`editorial update control: ${control}`)
+        : fail(`missing editorial update control: ${control}`);
+    }
+    for (const navigationContract of REQUIRED_HOME_SECTION_NAVIGATION) {
+      builtSource.includes(navigationContract)
+        ? pass(`home section navigation: ${navigationContract}`)
+        : fail(`missing home section navigation: ${navigationContract}`);
     }
   }
 
