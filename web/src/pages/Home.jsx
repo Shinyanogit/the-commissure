@@ -228,7 +228,6 @@ export function Home() {
                         name="Rintaro Imada"
                         university="Kyoto Prefectural University of Medicine, Kyoto, Japan"
                     >
-                        Hello, my name is Rintaro Imada, and I am a fifth-year medical student from Japan.
                         I am dedicated to eliminating preventable trauma deaths from the modern trauma care system.
                         At The Commissure, I am responsible for designing 3D anatomical models and writing articles on spinal disorders and their surgical treatments. 
                         I hope that my work helps readers gain a deeper understanding of spine surgery.
@@ -239,7 +238,6 @@ export function Home() {
                         university="The University of Tokyo, Tokyo, Japan"
                         href="https://shinyanogit.github.io/"
                     >
-                        Hello, my name is Shinya Yamaguchi, and I am a sixth-year medical student at the University of Tokyo.
                         My interests lie in diagnostic radiology and medical imaging, and I have carried out imaging research during a research experience at the University of Pennsylvania.
                         At The Commissure, I help bring the project online and share its mission of making accurate, accessible information about spine surgery available to everyone.
                     </AuthorCard>
@@ -248,7 +246,6 @@ export function Home() {
                         name="Koki Tokida"
                         university="Tohoku University, Sendai, Japan"
                     >
-                        Hello, my name is Koki Tokida, and I am a sixth-year medical student at Tohoku University in Japan. 
                         I aspire to become a neurosurgeon-scientist with a special focus on skull base surgery, neurosurgical oncology, and translational research. 
                         I have several years of research experience in brain tumor biology and have observed neurosurgical practice, including a wide range of spinal surgeries, both in Japan and overseas. 
                         At The Commissure, I contribute to developing educational content on spine surgery and anatomy. 
