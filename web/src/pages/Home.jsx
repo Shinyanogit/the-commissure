@@ -217,6 +217,7 @@ export function Home() {
                         image="/shinyayamaguchi.webp"
                         name="Shinya Yamaguchi"
                         university="The University of Tokyo, Tokyo, Japan"
+                        href="https://shinyanogit.github.io/"
                     >
                         Hello, my name is Shinya Yamaguchi, and I am a sixth-year medical student at the University of Tokyo.
                         My interests lie in diagnostic radiology and medical imaging, and I have carried out imaging research during a research experience at the University of Pennsylvania.
