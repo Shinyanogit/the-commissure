@@ -51,6 +51,7 @@ const REQUIRED_RUNTIME_ASSETS = [
   "draco/draco_wasm_wrapper.js",
 ];
 const REQUIRED_EDITORIAL_UPDATES = [
+  "Search metadata and a sitemap were added for all published procedure guides",
   "Shinya Yamaguchi's author profile now links to his portfolio",
   "Procedure pages now show a branded transition while each 3D scene prepares",
   "Procedure navigation and explanation controls were redesigned for desktop and mobile",

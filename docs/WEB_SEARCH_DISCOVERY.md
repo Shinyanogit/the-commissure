@@ -79,4 +79,5 @@ rewrite, and smoke-test expectation in the same pull request.
 
 - 2026-08-29: Added route-level metadata, static route documents, canonical
   URLs, structured data, crawler entry points, automated checks, and the
-  Search Console handoff.
+  Search Console handoff; recorded the release in the home-page editorial
+  updates.

@@ -23,8 +23,9 @@ Routes: `/`, `/articles`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
 
 - The "Updates from the editorial team" list records shipped product and
   editorial changes in reverse chronological order. It includes the responsive
-  procedure interaction redesign, branded scene preparation, and author-profile
-  links alongside newly published procedure articles.
+  procedure interaction redesign, branded scene preparation, author-profile
+  links, and search-discovery release alongside newly published procedure
+  articles.
 - Shinya Yamaguchi's author card opens his public portfolio at
   `https://shinyanogit.github.io/`. Other author cards remain non-navigating
   until their own durable profile destination is supplied.
