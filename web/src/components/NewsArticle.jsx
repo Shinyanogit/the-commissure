@@ -22,7 +22,10 @@ export function NewsArticle({ article }) {
                         </div>
                     </header>
 
-                    <p className="news-summary">{article.summary}</p>
+                    <section className="news-summary-section">
+                        <h2 className="news-summary-heading">Summary</h2>
+                        <p className="news-summary">{article.summary}</p>
+                    </section>
 
                     <div className="news-article-body">
                         {article.content.map((paragraph) => (
