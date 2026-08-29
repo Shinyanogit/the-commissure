@@ -7,6 +7,11 @@ its source-of-truth documentation are ready in the same pull request.
 
 ### Web
 
+- Added route-specific search metadata, canonical URLs, social previews, and
+  Schema.org data for the home page, article index, and all five procedure
+  guides.
+- Added crawlable HTML entry documents, `robots.txt`, and `sitemap.xml` while
+  keeping client-side metadata synchronized after in-app navigation.
 - Linked Shinya Yamaguchi's author card to his public portfolio.
 - Added a full-screen procedure transition using the existing logo and dark
   concept palette. Procedure content and the Three.js scene mount behind it;
@@ -18,6 +23,8 @@ its source-of-truth documentation are ready in the same pull request.
 
 ### Documentation
 
+- Added the Web search-discovery contract and post-deployment Search Console
+  checklist.
 - Added the author-profile and editorial-update contracts to `web/README.md`.
 - Established this changelog as the completion record for Web features.
 

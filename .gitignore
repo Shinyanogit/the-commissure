@@ -42,6 +42,7 @@ blender/
 docs/*
 !docs/DESIGN_CONCEPT.md
 !docs/CHANGELOG.md
+!docs/WEB_SEARCH_DISCOVERY.md
 !docs/ios/
 !docs/ios/**
 

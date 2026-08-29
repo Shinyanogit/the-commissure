@@ -12,6 +12,7 @@ SwiftUI/RealityKit App Store implementation in explicit, independent roots.
 - `tooling/` — content validation and asset conversion tools
 - `docs/DESIGN_CONCEPT.md` — shared visual and interaction contract
 - `docs/CHANGELOG.md` — dated Web and native product changes
+- `docs/WEB_SEARCH_DISCOVERY.md` — Web search metadata and indexing contract
 - `docs/ios/` — native product, architecture, delivery, and release contracts
 
 Web source, native source, shared content, and tooling must not be mixed across
