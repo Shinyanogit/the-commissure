@@ -12,6 +12,8 @@ its source-of-truth documentation are ready in the same pull request.
   guides.
 - Added crawlable HTML entry documents, `robots.txt`, and `sitemap.xml` while
   keeping client-side metadata synchronized after in-app navigation.
+- Added the search-discovery release to "Updates from the editorial team" in
+  the same isolated SEO pull request.
 - Linked Shinya Yamaguchi's author card to his public portfolio.
 - Added a full-screen procedure transition using the existing logo and dark
   concept palette. Procedure content and the Three.js scene mount behind it;

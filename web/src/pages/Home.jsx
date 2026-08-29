@@ -157,6 +157,10 @@ export function Home() {
                 </div>
                 <ul className="news-list">
                     <li>
+                        <span className="header"><Link to="/articles">Search metadata and a sitemap were added for all published procedure guides</Link></span>
+                        <span className="date">Aug 29, 2026</span>
+                    </li>
+                    <li>
                         <span className="header"><a href="https://shinyanogit.github.io/" target="_blank" rel="noreferrer">Shinya Yamaguchi's author profile now links to his portfolio</a></span>
                         <span className="date">Aug 29, 2026</span>
                     </li>
