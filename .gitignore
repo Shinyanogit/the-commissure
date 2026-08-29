@@ -41,6 +41,7 @@ blender/
 # native iOS specifications below are intentionally versioned for collaborators.
 docs/*
 !docs/DESIGN_CONCEPT.md
+!docs/CHANGELOG.md
 !docs/ios/
 !docs/ios/**
 

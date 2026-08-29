@@ -157,6 +157,22 @@ export function Home() {
                 </div>
                 <ul className="news-list">
                     <li>
+                        <span className="header"><a href="https://shinyanogit.github.io/" target="_blank" rel="noreferrer">Shinya Yamaguchi's author profile now links to his portfolio</a></span>
+                        <span className="date">Aug 29, 2026</span>
+                    </li>
+                    <li>
+                        <span className="header"><Link to="/acdf">Procedure pages now show a branded transition while each 3D scene prepares</Link></span>
+                        <span className="date">Aug 29, 2026</span>
+                    </li>
+                    <li>
+                        <span className="header"><Link to="/pcdf">Procedure navigation and explanation controls were redesigned for desktop and mobile</Link></span>
+                        <span className="date">Aug 29, 2026</span>
+                    </li>
+                    <li>
+                        <span className="header"><Link to="/pcdf">Procedure models now support orbit, zoom, pan, and synchronized reversible step transitions</Link></span>
+                        <span className="date">Aug 29, 2026</span>
+                    </li>
+                    <li>
                         <span className="header"><Link to="/pcl_open">Article on Open Door Posterior Cervical Laminoplasty (Open-door PCL) is now available</Link></span>
                         <span className="date">Aug 15, 2026</span>
                     </li>

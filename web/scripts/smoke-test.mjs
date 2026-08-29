@@ -13,6 +13,13 @@ const REQUIRED_RUNTIME_ASSETS = [
   "draco/draco_decoder.wasm",
   "draco/draco_wasm_wrapper.js",
 ];
+const REQUIRED_EDITORIAL_UPDATES = [
+  "Shinya Yamaguchi's author profile now links to his portfolio",
+  "Procedure pages now show a branded transition while each 3D scene prepares",
+  "Procedure navigation and explanation controls were redesigned for desktop and mobile",
+  "Procedure models now support orbit, zoom, pan, and synchronized reversible step transitions",
+  "https://shinyanogit.github.io/",
+];
 const HOST = "127.0.0.1";
 
 let failed = false;
@@ -62,6 +69,15 @@ if (!existsSync(DIST)) {
     builtJs.length > 0
       ? pass(`built JS bundle (${builtJs.length})`)
       : fail("missing built JS bundle");
+
+    const builtSource = builtJs
+      .map((file) => readFileSync(join(assetsDir, file), "utf8"))
+      .join("\n");
+    for (const update of REQUIRED_EDITORIAL_UPDATES) {
+      builtSource.includes(update)
+        ? pass(`editorial update: ${update}`)
+        : fail(`missing editorial update: ${update}`);
+    }
   }
 
   const requiredGlb = readdirSync(PUBLIC)
