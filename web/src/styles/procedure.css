@@ -17,6 +17,8 @@
     color: #0000;
     -webkit-text-stroke: 1px #000;
     background: conic-gradient(#000 0 0) 0 / 0% 100% no-repeat text;
+    -webkit-background-clip: text;
+    background-clip: text;
     animation: procedure-loading-fill 1s linear infinite;
 }
 
@@ -27,6 +29,15 @@
 @keyframes procedure-loading-fill {
     to {
         background-size: 120% 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .procedure-loading-screen .loader {
+        color: #000;
+        -webkit-text-stroke: 0;
+        background: none;
+        animation: none;
     }
 }
 
