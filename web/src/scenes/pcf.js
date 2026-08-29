@@ -7,7 +7,7 @@ import { createSceneNavigator } from './createSceneNavigator.js';
 import { createProcedureOrbitControls } from './createProcedureOrbitControls.js';
 import { updateProcedureCameraView } from './updateProcedureCameraView.js';
 
-export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentScene, sceneControllerRef) {
+export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentScene, sceneControllerRef, onSceneReady) {
     let disposed = false;
     const activeTimelines = new Set();
     const timeoutIds = new Set();
@@ -220,6 +220,7 @@ export function initPcfScene(mount, root, sceneCount, currentScene, setCurrentSc
         scene.add( acdf );
         sceneNavigator.capture(0);
         requestRender();
+        onSceneReady?.();
     });
 
     let isAnimating = false;

@@ -21,6 +21,11 @@ Routes: `/`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
 
 ## Procedure interaction contract
 
+- A procedure route mounts its page and Three.js scene immediately behind a
+  full-screen, dark branded loading overlay that reveals the existing site
+  logo. The overlay stays visible for at least 500 ms, closes when the initial
+  model is ready, and has a 1,500 ms fallback so it never blocks the page
+  indefinitely.
 - Orbit, zoom, and pan are always available on every procedure route; there is
   no separate interactive mode.
 - One-finger drag orbits. Two-finger touch combines pinch zoom with screen-space

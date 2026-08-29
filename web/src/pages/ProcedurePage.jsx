@@ -1,10 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 import { useNavigate } from 'react-router-dom';
+import { ProcedureLoadingScreen } from '../components/ProcedureLoadingScreen.jsx';
 import { ProcedureNav } from '../components/ProcedureNav.jsx';
 import { useBodyClass } from '../components/useBodyClass.js';
 import { procedureText } from '../content/procedureText.js';
 import '../styles/procedure.css';
+
+const LOADER_MINIMUM_DURATION_MS = 500;
+const LOADER_MAXIMUM_DURATION_MS = 1500;
 
 export function ProcedurePage({ page, initScene }) {
     const mountRef = useRef(null);
@@ -18,16 +22,58 @@ export function ProcedurePage({ page, initScene }) {
     const suppressToggleClickRef = useRef(false);
     const suppressPanelLinkClickRef = useRef(false);
     const sceneRetryRef = useRef(null);
+    const loadingStartedAtRef = useRef(Date.now());
+    const loaderReadyTimerRef = useRef(null);
+    const loaderFallbackTimerRef = useRef(null);
     const navigate = useNavigate();
 
     const data = procedureText[page];
     const [currentScene, setCurrentScene] = useState(0);
     const [isExplanationOpen, setIsExplanationOpen] = useState(true);
     const [panelSize, setPanelSize] = useState({ width: null, height: null });
+    const [isLoading, setIsLoading] = useState(true);
     const hasSceneNavigation = data.scenes.length > 1;
     const panelPositionClasses = 'fixed top-20 right-0 bottom-0 left-auto w-[var(--procedure-panel-width)] max-h-none rounded-l-[1.2rem] rounded-r-none portrait:inset-x-0 portrait:top-auto portrait:bottom-0 portrait:h-[var(--procedure-panel-height)] portrait:w-full portrait:max-h-[42dvh] portrait:rounded-t-[1.2rem] portrait:rounded-b-none';
 
     useBodyClass('procedure-page');
+
+    const hideLoader = useCallback(() => {
+        if (loaderReadyTimerRef.current) {
+            window.clearTimeout(loaderReadyTimerRef.current);
+            loaderReadyTimerRef.current = null;
+        }
+        if (loaderFallbackTimerRef.current) {
+            window.clearTimeout(loaderFallbackTimerRef.current);
+            loaderFallbackTimerRef.current = null;
+        }
+        setIsLoading(false);
+    }, []);
+
+    const handleSceneReady = useCallback(() => {
+        if (loaderReadyTimerRef.current) return;
+
+        const elapsed = Date.now() - loadingStartedAtRef.current;
+        const remaining = Math.max(0, LOADER_MINIMUM_DURATION_MS - elapsed);
+        loaderReadyTimerRef.current = window.setTimeout(hideLoader, remaining);
+    }, [hideLoader]);
+
+    useEffect(() => {
+        loaderFallbackTimerRef.current = window.setTimeout(
+            hideLoader,
+            LOADER_MAXIMUM_DURATION_MS,
+        );
+
+        return () => {
+            if (loaderReadyTimerRef.current) {
+                window.clearTimeout(loaderReadyTimerRef.current);
+                loaderReadyTimerRef.current = null;
+            }
+            if (loaderFallbackTimerRef.current) {
+                window.clearTimeout(loaderFallbackTimerRef.current);
+                loaderFallbackTimerRef.current = null;
+            }
+        };
+    }, [hideLoader]);
 
     useEffect(() => {
         if (!mountRef.current || !rootRef.current) return undefined;
@@ -38,8 +84,9 @@ export function ProcedurePage({ page, initScene }) {
             currentScene,
             setCurrentScene,
             sceneControllerRef,
+            handleSceneReady,
         );
-    }, [initScene]);
+    }, [initScene, handleSceneReady]);
 
     useEffect(() => {
         if (!rootRef.current) return undefined;
@@ -287,7 +334,9 @@ export function ProcedurePage({ page, initScene }) {
             className={`procedurePage${isExplanationOpen ? '' : ' explanation-stowed'}`}
             ref={rootRef}
             onClick={handleClick}
+            aria-busy={isLoading}
         >
+            {isLoading && <ProcedureLoadingScreen />}
             <div ref={mountRef} className="canvas-mount"></div>
             <div className="procedure-atlas-glow glow-one"></div>
             <div className="procedure-atlas-glow glow-two"></div>

@@ -7,7 +7,7 @@ import { createSceneNavigator } from './createSceneNavigator.js';
 import { createProcedureOrbitControls } from './createProcedureOrbitControls.js';
 import { updateProcedureCameraView } from './updateProcedureCameraView.js';
 
-export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurrentScene, sceneControllerRef) {
+export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurrentScene, sceneControllerRef, onSceneReady) {
     let disposed = false;
     const activeTimelines = new Set();
     const timeoutIds = new Set();
@@ -284,6 +284,7 @@ export function initPcl_openScene(mount, root, sceneCount, currentScene, setCurr
         scene.add( pcl_open );
         sceneNavigator.capture(0);
         requestRender();
+        onSceneReady?.();
     });
 
     let isAnimating = false;
