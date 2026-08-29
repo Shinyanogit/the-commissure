@@ -4,6 +4,8 @@ import { Accf } from './pages/Accf.jsx';
 import { Acdf } from './pages/Acdf.jsx';
 import { Articles } from './pages/Articles.jsx';
 import { Home } from './pages/Home.jsx';
+import { NewsPage } from './pages/NewsPage.jsx';
+import { NewsArticlePage } from './pages/NewsArticlePage.jsx';
 import { Pcdf } from './pages/Pcdf.jsx';
 import { Pcf } from './pages/Pcf.jsx';
 import { Pcl_open } from './pages/Pcl_open.jsx';
@@ -52,6 +54,8 @@ export function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/articles" element={<Articles />} />
+                <Route path="/news" element={<NewsPage />} />
+                <Route path="/news/:slug" element={<NewsArticlePage />} />
                 <Route path="/acdf" element={<Acdf />} />
                 <Route path="/accf" element={<Accf />} />
                 <Route path="/pcdf" element={<Pcdf />} />

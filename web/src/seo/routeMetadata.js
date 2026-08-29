@@ -8,6 +8,23 @@ const ORGANIZATION = {
     url: SITE_URL,
 };
 
+const NEWS_ARTICLES = [
+    {
+        path: '/news',
+        name: 'The Commissure News',
+        image: '/about.webp',
+        datePublished: '2026-08-29',
+        description: 'Read updates and announcements from The Commissure, including the project presentation at the 25th Annual Meeting of the Japanese Society for Medical VR.',
+    },
+    {
+        path: '/news/jsmvr',
+        name: 'The Commissure Presented at the 25th Annual Meeting of the Japanese Society for Medical VR',
+        image: '/about.webp',
+        datePublished: '2026-08-29',
+        description: 'The Commissure was presented at the 25th Annual Meeting of the Japanese Society for Medical VR as both a Podium Oral Presentation and a Student Ideathon presentation.',
+    },
+];
+
 const PROCEDURES = [
     {
         path: '/pcdf',
@@ -67,6 +84,22 @@ const procedureMetadata = Object.fromEntries(PROCEDURES.map((procedure) => [
     },
 ]));
 
+const newsMetadata = Object.fromEntries(NEWS_ARTICLES.map((article) => [
+    article.path,
+    {
+        ...article,
+        title: article.path === '/news'
+            ? `The Commissure News | ${SITE_NAME}`
+            : `${article.name} | ${SITE_NAME}`,
+        canonical: absoluteUrl(article.path),
+        image: absoluteUrl(article.image),
+        imageAlt: article.name,
+        imageWidth: 2249,
+        imageHeight: 1616,
+        type: 'article',
+    },
+]));
+
 export const ROUTE_METADATA = {
     '/': {
         path: '/',
@@ -90,6 +123,7 @@ export const ROUTE_METADATA = {
         imageHeight: 1616,
         type: 'website',
     },
+    ...newsMetadata,
     ...procedureMetadata,
 };
 
