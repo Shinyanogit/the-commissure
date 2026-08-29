@@ -29,6 +29,9 @@ Routes: `/`, `/articles`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
 - Shinya Yamaguchi's author card opens his public portfolio at
   `https://shinyanogit.github.io/`. Other author cards remain non-navigating
   until their own durable profile destination is supplied.
+- Author card headers own each person's name and affiliation. Biography copy
+  begins with substantive interests, work, or goals and does not repeat those
+  header details as a greeting.
 
 ## Procedure interaction contract
 

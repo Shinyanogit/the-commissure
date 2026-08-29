@@ -7,6 +7,9 @@ its source-of-truth documentation are ready in the same pull request.
 
 ### Web
 
+- Removed repeated name, training stage, and affiliation introductions from all
+  three author biographies because those details already appear in each card
+  header.
 - Added route-specific search metadata, canonical URLs, social previews, and
   Schema.org data for the home page, article index, and all five procedure
   guides.
