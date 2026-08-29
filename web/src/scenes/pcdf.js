@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import { texture } from 'three/tsl';
 import { updateProcedureCameraView } from './updateProcedureCameraView.js';
 
-export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentScene, sceneControllerRef) {
+export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentScene, sceneControllerRef, onSceneReady) {
     let disposed = false;
     const activeTimelines = new Set();
     const sceneTimelines = new Map();
@@ -341,6 +341,7 @@ export function initPcdfScene(mount, root, sceneCount, currentScene, setCurrentS
         scene.add( pcdf );
         canonicalSceneStates.set(0, captureSceneState());
         requestRender();
+        onSceneReady?.();
     });
 
     let isAnimating = false;
