@@ -1,5 +1,5 @@
-import { readFile, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
 import {
     INDEXABLE_ROUTES,
     createStructuredData,
@@ -66,6 +66,8 @@ for (const route of INDEXABLE_ROUTES) {
     const metadata = getRouteMetadata(route);
     const html = shell.replace(METADATA_BLOCK, renderRouteMetadata(metadata));
     const filename = routeFilename(route);
-    await writeFile(join(DIST_DIRECTORY, filename), html);
+    const destination = join(DIST_DIRECTORY, filename);
+    await mkdir(dirname(destination), { recursive: true });
+    await writeFile(destination, html);
     console.log(`Generated ${filename} for ${route}`);
 }

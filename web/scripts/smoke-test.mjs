@@ -20,6 +20,16 @@ const ROUTE_EXPECTATIONS = [
     title: "Cervical Spine Surgery Articles | The Commissure",
   },
   {
+    route: "/news",
+    filename: "news.html",
+    title: "The Commissure News | The Commissure",
+  },
+  {
+    route: "/news/jsmvr",
+    filename: "news/jsmvr.html",
+    title: "The Commissure Presented at the 25th Annual Meeting of the Japanese Society for Medical VR | The Commissure",
+  },
+  {
     route: "/acdf",
     filename: "acdf.html",
     title: "ACDF Interactive 3D Guide | The Commissure",
@@ -51,6 +61,7 @@ const REQUIRED_RUNTIME_ASSETS = [
   "draco/draco_wasm_wrapper.js",
 ];
 const REQUIRED_EDITORIAL_UPDATES = [
+  "The Commissure Presented at the 25th Annual Meeting of the Japanese Society for Medical VR",
   "Search metadata and a sitemap were added for all published procedure guides",
   "Shinya Yamaguchi's author profile now links to his portfolio",
   "Procedure pages now show a branded transition while each 3D scene prepares",

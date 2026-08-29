@@ -17,7 +17,7 @@ const editorialUpdates = [
     {
         label: 'The Commissure Presented at the 25th Annual Meeting of the Japanese Society for Medical VR',
         date: 'Aug 29, 2026',
-        href: '',
+        to: '/news/jsmvr',
     },
     {
         label: 'Search metadata and a sitemap were added for all published procedure guides',

@@ -47,6 +47,7 @@ export function HomeNav() {
             </div>
             <ul className={`nav-list${open ? ' active' : ''}`}>
                 <li><Link to="/articles" onClick={closeMenu}>Articles</Link></li>
+                <li><Link to="/news" onClick={closeMenu}>News</Link></li>
                 <li><Link to="/#about" onClick={closeMenu}>About us</Link></li>
                 <li><Link to="/#authors" onClick={closeMenu}>Authors</Link></li>
             </ul>

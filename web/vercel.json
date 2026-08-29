@@ -9,6 +9,14 @@
       "destination": "/articles.html"
     },
     {
+      "source": "/news",
+      "destination": "/news.html"
+    },
+    {
+      "source": "/news/jsmvr",
+      "destination": "/news/jsmvr.html"
+    },
+    {
       "source": "/acdf",
       "destination": "/acdf.html"
     },

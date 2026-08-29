@@ -8,6 +8,7 @@ export function Footer() {
             </Link>
             <ul className="footer-list">
                 <li><Link to="/articles">Articles</Link></li>
+                <li><Link to="/news">News</Link></li>
                 <li><Link to="/#about">About us</Link></li>
                 <li><Link to="/#authors">Authors</Link></li>
             </ul>
