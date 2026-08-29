@@ -58,6 +58,11 @@ const REQUIRED_EDITORIAL_UPDATES = [
   "Procedure models now support orbit, zoom, pan, and synchronized reversible step transitions",
   "https://shinyanogit.github.io/",
 ];
+const REQUIRED_EDITORIAL_UPDATE_CONTROLS = [
+  "editorial-updates-list",
+  "View all updates",
+  "Show latest five",
+];
 const HOST = "127.0.0.1";
 
 let failed = false;
@@ -115,6 +120,11 @@ if (!existsSync(DIST)) {
       builtSource.includes(update)
         ? pass(`editorial update: ${update}`)
         : fail(`missing editorial update: ${update}`);
+    }
+    for (const control of REQUIRED_EDITORIAL_UPDATE_CONTROLS) {
+      builtSource.includes(control)
+        ? pass(`editorial update control: ${control}`)
+        : fail(`missing editorial update control: ${control}`);
     }
   }
 
