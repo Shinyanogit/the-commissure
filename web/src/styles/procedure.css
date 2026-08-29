@@ -1,3 +1,35 @@
+.procedure-loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    background: #f6f7fb;
+}
+
+.procedure-loading-screen .loader {
+    width: fit-content;
+    font-size: 40px;
+    font-family: system-ui, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #0000;
+    -webkit-text-stroke: 1px #000;
+    background: conic-gradient(#000 0 0) 0 / 0% 100% no-repeat text;
+    animation: procedure-loading-fill 1s linear infinite;
+}
+
+.procedure-loading-screen .loader::before {
+    content: "Loading";
+}
+
+@keyframes procedure-loading-fill {
+    to {
+        background-size: 120% 100%;
+    }
+}
+
 .procedurePage {
     position: relative;
     min-height: 100dvh;
