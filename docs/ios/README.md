@@ -36,4 +36,9 @@ evidence and next gate in [`ROADMAP.md`](ROADMAP.md).
 Phase 5A adds the native presentation shell under the same boundary. Its views
 consume Codex-owned `ViewState` projections and do not perform content, file,
 network, or RealityKit lookup. The shell is a machine-gated implementation
-checkpoint, not final visual, medical-copy, or App Store acceptance.
+checkpoint, not final visual, medical-copy, or App Store acceptance. The owner
+has rejected the shell's visual composition as a release baseline, so Phase 5R
+restarts composition in Claude Design/Figma before Opus 5 writes replacement
+SwiftUI. A human-selected static direction and disposable interaction prototype
+are required before production visual implementation. The existing native
+contracts and Web/content boundary remain intact.
