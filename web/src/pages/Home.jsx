@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -8,74 +8,13 @@ import { Footer } from '../components/Footer.jsx';
 import { HomeNav } from '../components/HomeNav.jsx';
 import { useBodyClass } from '../components/useBodyClass.js';
 import { initHomeScene } from '../scenes/index.js';
+import { NEWS_UPDATES } from '../content/newsData.js';
 import '../styles/home.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const INITIAL_EDITORIAL_UPDATE_COUNT = 5;
-const editorialUpdates = [
-    {
-        label: 'The Commissure Presented at the 25th Annual Meeting of the Japanese Society for Medical VR',
-        date: 'Aug 29, 2026',
-        to: '/news/jsmvr',
-    },
-    {
-        label: 'Search metadata and a sitemap were added for all published procedure guides',
-        date: 'Aug 29, 2026',
-        to: '/articles',
-    },
-    {
-        label: "Shinya Yamaguchi's author profile now links to his portfolio",
-        date: 'Aug 29, 2026',
-        href: 'https://shinyanogit.github.io/',
-        external: true,
-    },
-    {
-        label: 'Procedure pages now show a branded transition while each 3D scene prepares',
-        date: 'Aug 29, 2026',
-        to: '/acdf',
-    },
-    {
-        label: 'Procedure navigation and explanation controls were redesigned for desktop and mobile',
-        date: 'Aug 29, 2026',
-        to: '/pcdf',
-    },
-    {
-        label: 'Procedure models now support orbit, zoom, pan, and synchronized reversible step transitions',
-        date: 'Aug 29, 2026',
-        to: '/pcdf',
-    },
-    {
-        label: 'Article on Open Door Posterior Cervical Laminoplasty (Open-door PCL) is now available',
-        date: 'Aug 15, 2026',
-        to: '/pcl_open',
-    },
-    {
-        label: 'Koki Tokida joined the editorial board',
-        date: 'Jun 27, 2026',
-        href: '',
-    },
-    {
-        label: 'Article on Anterior Cervical Corpectomy and Fusion (ACCF) is now available',
-        date: 'Jun 27, 2026',
-        to: '/accf',
-    },
-    {
-        label: 'Shinya Yamaguchi joined the editorial board',
-        date: 'Jun 26, 2026',
-        href: '',
-    },
-    {
-        label: 'Article on Posterior Cervical Foraminotomy (PCF) is now available',
-        date: 'Jun 18, 2026',
-        to: '/pcf',
-    },
-    {
-        label: 'Article on Anterior Cervical Discectomy and Fusion (ACDF) is now available',
-        date: 'May 24, 2026',
-        to: '/acdf',
-    },
-];
+const editorialUpdates = NEWS_UPDATES;
 
 export function Home() {
     const pageRef = useRef(null);
@@ -87,10 +26,7 @@ export function Home() {
     const secondaryCtaRef = useRef(null);
     const indicatorRef = useRef(null);
     const sectionsRef = useRef([]);
-    const [showAllEditorialUpdates, setShowAllEditorialUpdates] = useState(false);
-    const visibleEditorialUpdates = showAllEditorialUpdates
-        ? editorialUpdates
-        : editorialUpdates.slice(0, INITIAL_EDITORIAL_UPDATE_COUNT);
+    const visibleEditorialUpdates = editorialUpdates.slice(0, INITIAL_EDITORIAL_UPDATE_COUNT);
 
     useBodyClass('home-page');
 
@@ -247,17 +183,10 @@ export function Home() {
                         </li>
                     ))}
                 </ul>
-                <div className="news-toggle-wrap">
-                    <button
-                        type="button"
-                        className="news-toggle"
-                        aria-expanded={showAllEditorialUpdates}
-                        aria-controls="editorial-updates-list"
-                        onClick={() => setShowAllEditorialUpdates((isExpanded) => !isExpanded)}
-                    >
-                        <span>{showAllEditorialUpdates ? 'Show latest five' : 'View all updates'}</span>
-                        <span className="news-toggle-icon" aria-hidden="true"></span>
-                    </button>
+                <div className="article-view-more-wrap">
+                    <Link to="/news" className="article-view-more" aria-label="View all news updates">
+                        View more
+                    </Link>
                 </div>
             </div>
             <div ref={(node) => { sectionsRef.current[2] = node; }} className="content about" id="about">
