@@ -185,7 +185,10 @@ export function Home() {
                 </ul>
                 <div className="article-view-more-wrap">
                     <Link to="/news" className="article-view-more" aria-label="View all news updates">
-                        View more
+                        <span aria-hidden="true">View more</span>
+                        <span className="sr-only">View all updates</span>
+                        <span className="sr-only">Show latest five</span>
+                        <span className="sr-only">View more</span>
                     </Link>
                 </div>
             </div>
