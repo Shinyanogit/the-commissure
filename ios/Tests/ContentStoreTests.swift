@@ -5,7 +5,7 @@ import XCTest
 
 final class ContentStoreTests: XCTestCase {
   func testBundledLibraryLoadsWithoutNetworkInBothLocales() async throws {
-    let store = ContentStore(contentRoot: repositoryContentRoot())
+    let store = ContentStore(contentRoot: testContentRoot())
     let english = try await store.library(locale: "en")
     let japanese = try await store.library(locale: "ja")
 
@@ -16,7 +16,7 @@ final class ContentStoreTests: XCTestCase {
   }
 
   func testAllBundledProceduresDecodeAndResolve() async throws {
-    let store = ContentStore(contentRoot: repositoryContentRoot())
+    let store = ContentStore(contentRoot: testContentRoot())
     for id in ["acdf", "accf", "pcdf", "pcf"] {
       let bundle = try await store.procedure(id: id, locale: "en")
       XCTAssertEqual(bundle.procedure.id, id)
@@ -25,7 +25,7 @@ final class ContentStoreTests: XCTestCase {
   }
 
   func testLocaleProjectionDoesNotChangeSessionIdentityOrStep() async throws {
-    let store = ContentStore(contentRoot: repositoryContentRoot())
+    let store = ContentStore(contentRoot: testContentRoot())
     let english = try await store.procedure(id: "acdf", locale: "en")
     var session = ProcedureSession(procedure: english.procedure, contentReady: true)
     XCTAssertTrue(session.send(.selectStep("acdf_cage_implantation")))
@@ -58,7 +58,7 @@ final class ContentStoreTests: XCTestCase {
     let preferences = AppPreferences(defaults: defaults)
     preferences.language = .english
     let model = FoundationAppModel(
-      contentStore: ContentStore(contentRoot: repositoryContentRoot()),
+      contentStore: ContentStore(contentRoot: testContentRoot()),
       preferences: preferences
     )
 
@@ -77,12 +77,4 @@ final class ContentStoreTests: XCTestCase {
     }
     XCTFail("Changing language should reproject the active library")
   }
-}
-
-private func repositoryContentRoot() -> URL {
-  URL(fileURLWithPath: #filePath)
-    .deletingLastPathComponent()
-    .deletingLastPathComponent()
-    .deletingLastPathComponent()
-    .appendingPathComponent("content", isDirectory: true)
 }

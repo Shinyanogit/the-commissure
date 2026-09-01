@@ -34,15 +34,15 @@ enum PreviewFixtures {
       .init(
         id: "acdf", title: "前方頸椎椎間板切除固定術", summary: "椎間板を切除し、頸椎のアライメントを整えます。", stepCount: 7,
         stepCountLabel: "7ステップ", availability: .bundled,
-        availabilityLabel: "このデバイスで利用可能"),
+        availabilityLabel: "この端末で利用できます"),
       .init(
         id: "accf", title: "前方頸椎椎体切除固定術", summary: "椎体切除により頸髄を除圧します。", stepCount: 7,
         stepCountLabel: "7ステップ", availability: .bundled,
-        availabilityLabel: "このデバイスで利用可能"),
+        availabilityLabel: "この端末で利用できます"),
       .init(
         id: "pcdf", title: "後方頸椎除圧固定術", summary: "後方から頸椎を除圧し安定化します。", stepCount: 6,
         stepCountLabel: "6ステップ", availability: .cached,
-        availabilityLabel: "キャッシュから利用可能"),
+        availabilityLabel: "キャッシュからすぐ使えます"),
       .init(
         id: "pcf", title: "後方頸椎椎間孔拡大術", summary: "可動性を保ちながら椎間孔を開放します。", stepCount: 6,
         stepCountLabel: "6ステップ", availability: .availableToDownload(sizeBytes: 6_171_993),

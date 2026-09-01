@@ -4,12 +4,13 @@ Status: implementation contract
 Stack: Swift 6.2, SwiftUI, RealityKit, structured concurrency
 Minimum deployment: iOS/iPadOS 18
 
-Phase 5A implementation status (2026-08-02, merged in PR #56 as `fece5e8`): the
+Phase 5B implementation status (candidate branch `feat/ios-phase5b-visual-refinement`;
+Phase 5A merged in PR #56 as `fece5e8`): the
 tracked Xcode project and local pure-Foundation package implement the ownership
 graph below. The SwiftUI shell
 now consumes immutable presentation projections for Library, Theater, Bottom
 Step Tray, Colophon, and Settings. The scene slot and transfer states remain
-explicit placeholders until Phase 5B/6; domain, RealityKit, and I/O ownership
+explicit placeholders until Phase 6; domain, RealityKit, and I/O ownership
 remain outside the visual allowlist.
 
 ## 1. Architecture goals
@@ -397,6 +398,30 @@ bundle even when the key is resolved from a presentation projection rather than
 directly in a SwiftUI body. The visible theater uses `.preparing` until the Phase
 6 RealityKit adapter binds the verified scene; the placeholder is not release
 evidence.
+
+### Phase 5B visual refinement candidate (2026-08-02)
+
+- Library layout is responsive by size class: one column on compact-width iPhone
+  layouts and two equal columns on regular-width iPad layouts. The view owns the
+  brand lockup and procedure section; cards do not duplicate destination controls
+  or expose a second navigation bar.
+- Cards retain immutable `LibraryCardViewState` inputs and only change visual
+  composition: procedure identifier, bounded title/summary, one availability
+  affordance, and step count. Download/cache semantics remain in the model and
+  are not inferred by the view.
+- `ProcedureTheaterView` uses Foundation's restricted Markdown parser for the
+  existing content strings and bounds the explanation surface with an internal
+  scroll region. This is presentation-only; content schemas, provenance, and
+  scene state are unchanged.
+- Bottom Step Tray progress now exposes its density state with a chevron and a
+  selected-step marker. All controls still dispatch the existing exhaustive
+  `AppAction` values, preserving the gesture/accessibility extension point.
+- This candidate has no file/network/RealityKit access and does not alter the Web
+  tree or shared content. The signed candidate installs and launches on the
+  connected iPad, and the full device test scheme passes. Test fixtures resolve
+  the app-bundled `content/` before the source-tree fallback so physical tests
+  remain independent of the Mac filesystem. Screenshot-led visual acceptance
+  remains the human gate.
 
 ## 12. Phase 4 executable evidence
 

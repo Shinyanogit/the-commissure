@@ -6,7 +6,7 @@ final class TheCommissureUITests: XCTestCase {
     app.launchArguments = ["-AppleLanguages", "(en)"]
     app.launch()
 
-    XCTAssertTrue(app.navigationBars["The Commissure"].waitForExistence(timeout: 5))
+    XCTAssertTrue(app.staticTexts["The Commissure"].waitForExistence(timeout: 5))
     XCTAssertTrue(
       app.staticTexts["Anterior Cervical Discectomy and Fusion (ACDF)"].waitForExistence(timeout: 5)
     )
@@ -29,7 +29,7 @@ final class TheCommissureUITests: XCTestCase {
     ]
     app.launch()
 
-    XCTAssertTrue(app.staticTexts["このデバイスで利用可能"].waitForExistence(timeout: 5))
+    XCTAssertTrue(app.staticTexts["この端末で利用できます"].waitForExistence(timeout: 5))
     XCTAssertTrue(app.staticTexts["7ステップ"].waitForExistence(timeout: 5))
   }
 }

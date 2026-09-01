@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0DFCEC35A537BA27019C5E85 /* ProcedureSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE5846148DDD4C89F1502D2 /* ProcedureSessionController.swift */; };
+		164FE651487D1AD24C31EF38 /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F587E67F8B5A762385CB57C /* TestSupport.swift */; };
 		16DEF61853AE1C032EFEFCFC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 71611655A19D25D9A11E7D32 /* Localizable.xcstrings */; };
 		171D8F640E3BB3FCBFA3FFD1 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49B0C193B6316F0433C2F55 /* AppAction.swift */; };
 		361F1ACC981B61F5A33D91C1 /* IconActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B46F3D876FB2ED02774B322 /* IconActionButton.swift */; };
@@ -65,6 +66,7 @@
 		3CE1AB11DD8754F8D48DA67E /* TheCommissureUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TheCommissureUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5CC454D82ADE59BE7183CC /* content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = content; path = ../content; sourceTree = SOURCE_ROOT; };
 		3E846B60F7CE36295B6A6F99 /* ContentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStore.swift; sourceTree = "<group>"; };
+		3F587E67F8B5A762385CB57C /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupport.swift; sourceTree = "<group>"; };
 		5262F1801362297CD50485FB /* Diagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diagnostics.swift; sourceTree = "<group>"; };
 		58F10BB39097F9B9281FA78A /* TheCommissureTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TheCommissureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B316A8E5350890D4DE7DBF6 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				EBD28445F49D9B8793115BF2 /* ContentStoreTests.swift */,
 				16016DD93A2D4A3AC41D4168 /* PresentationProjectionTests.swift */,
 				21B8BE2BC69232CF709E4DA1 /* SceneAdapterTests.swift */,
+				3F587E67F8B5A762385CB57C /* TestSupport.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -381,13 +384,16 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					08B7971C427429A9239517CA = {
+						DevelopmentTeam = 8WSQBQX6C5;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 79AA87D1197F0AD9C5D7F64C;
 					};
 					79AA87D1197F0AD9C5D7F64C = {
+						DevelopmentTeam = 8WSQBQX6C5;
 						ProvisioningStyle = Automatic;
 					};
 					CD882744820C5FFBA4F966DD = {
+						DevelopmentTeam = 8WSQBQX6C5;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -464,6 +470,7 @@
 				AD511A2F6C80B603D287A2AF /* ContentStoreTests.swift in Sources */,
 				AB913F11BB8BB6DA70ECD640 /* PresentationProjectionTests.swift in Sources */,
 				70CA9323CF357DD44BE80E1F /* SceneAdapterTests.swift in Sources */,
+				164FE651487D1AD24C31EF38 /* TestSupport.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +586,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 8WSQBQX6C5;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -658,6 +666,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 8WSQBQX6C5;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;

@@ -193,6 +193,12 @@
         "ja" : { "stringUnit" : { "state" : "translated", "value" : "The Commissure" } }
       }
     },
+    "app.kicker" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "ANATOMY LEARNING THEATER" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "解剖学習シアター" } }
+      }
+    },
     "colophon.body" : {
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "The Commissure is a focused anatomy-learning theater. It presents versioned educational content with a calm, offline-first interface." } },
@@ -253,16 +259,22 @@
         "ja" : { "stringUnit" : { "state" : "translated", "value" : "バンドル済みコンテンツはネットワークなしでも利用できます。" } }
       }
     },
+    "library.section.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Procedures" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "手技" } }
+      }
+    },
     "library.status.bundled" : {
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Ready on this device" } },
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "このデバイスで利用可能" } }
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "この端末で利用できます" } }
       }
     },
     "library.status.cached" : {
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Ready from cache" } },
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "キャッシュから利用可能" } }
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "キャッシュからすぐ使えます" } }
       }
     },
     "library.status.download" : {
@@ -298,7 +310,7 @@
     "library.subtitle" : {
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Anatomy, one deliberate step at a time." } },
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "解剖を、一つずつ確かなステップで。" } }
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "解剖を、ひとつずつ丁寧に。" } }
       }
     },
     "theater.scene.accessibility" : {
