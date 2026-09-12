@@ -1,6 +1,7 @@
 # Asset Delivery, Cache, and Content Update Specification
 
-Status: optimized ACDF/PCDF current-device gate passed; floor-device/App Thinning gates remain
+Status: four optimized USDZ assets pass conversion and size hard gates; device,
+App Thinning, rights, and medical-review gates remain
 Goal: low initial weight, instant cached reuse, zero-backend core operation
 
 ## 1. What “download” means
@@ -36,22 +37,52 @@ and motion applied by JavaScript. USDZ does not inherit the current compression
 ratio, so converted size, decode time, GPU load, and peak memory—not current GLB
 transfer size—determine the shipping split.
 
-### Phase 2 optimized native fixtures (2026-08-02)
+### Optimized native assets
 
-| Procedure | Semantic entities | Triangles | USDZ bytes | Pack target |
+| Procedure | Semantic entities | Triangles | USDZ bytes | Individual target |
 |---|---:|---:|---:|---|
 | ACDF | 39 | 159,465 | 7,424,303 | pass |
+| ACCF | 45 | 178,998 | 7,552,281 | pass |
 | PCDF | 68 | 144,556 | 6,171,993 | pass |
-| **Measured subtotal** | **107** | **304,021** | **13,596,296 (12.97 MiB)** | **pass** |
+| PCF | 37 | 113,998 | 5,204,619 | pass |
+| **Four procedures** | **189** | **597,017** | **26,353,196 (25.13 MiB)** | **pass** |
 
-The converter uses the tracked Draco GLB, an exact source-inventory manifest,
-explicit semantic IDs/material roles, selective decimation, canonical USD
-flattening, normalized archive timestamps, and strict `usdchecker --arkit`
-validation. Repeated exports with the pinned toolchain are byte-identical.
-ACDF and the pre-optimization worst case PCDF both pass the 8 MB and 250,000
-triangle targets. This evidence retains bundle-all as the 1.0 delivery path;
-it does not yet close total four-pack, App Thinning, or oldest-supported-device
-gates.
+The 2026-09-12 production conversion completed ACCF and PCF while retaining the
+accepted ACDF and PCDF outputs. The converter uses each tracked Draco GLB, its
+digest-bound source-entity inventory, the corresponding iOS scene bindings,
+explicit semantic IDs and material roles, selective decimation, canonical USD
+flattening, normalized archive timestamps, and strict `usdchecker --arkit
+--strict` validation. Every scene `entityPath` is present in the finished USDZ.
+Repeated exports in the same checkout with the pinned toolchain are byte-identical; ACDF and PCDF
+retain their accepted Phase 2 hashes, and ACCF and PCF repeated with identical
+hashes during this production run. Independent QC subsequently found that
+flattened USD documentation embeds the absolute checkout path. Cross-checkout
+byte determinism is therefore **not yet satisfied**. Strip the source-file
+comment during flattening and prove matching hashes in two different temporary
+checkout paths before claiming a reproducible production artifact.
+
+All four individual assets pass the 8 MB target and 20 MB hard limit, and each
+is below 250,000 triangles. The combined payload is 25.13 MiB, so it misses the
+20 MB target but passes the 35 MB hard limit. This preserves bundle-all for 1.0.
+The generated resources do not constitute medical or rights approval. ACCF and
+PCF still need device decode, frame, memory, and thermal measurements; all four
+need the release reviews in section 10 and `RELEASE_READINESS.md`.
+
+The reproducible bundle contract is generated under the ignored
+`ios/Resources/NativeAssets/` directory:
+
+```text
+NativeAssets/
+├── manifest.json
+├── acdf/model.usdz
+├── accf/model.usdz
+├── pcdf/model.usdz
+└── pcf/model.usdz
+```
+
+The manifest records the pinned toolchain and, for each exact procedure ID, the
+relative filename, SHA-256, byte count, triangle count, entity count, and full
+sorted entity paths. Runtime lookup uses those exact IDs and paths.
 
 ### Phase 2 physical measurements (2026-08-02)
 
@@ -88,7 +119,7 @@ updates. The app always bundles:
 - all four fully working procedure packs when the conversion gate below passes;
 - all code needed to render every supported schema feature.
 
-The ACDF/PCDF conversion spikes and App Thinning report must satisfy all hard gates:
+The four-procedure conversion output and App Thinning report must satisfy all hard gates:
 
 - Executable and UI resources excluding procedure packs: target 12 MB compressed,
   hard 20 MB.
@@ -343,8 +374,9 @@ serves as the worst-case triangle/memory gate: it fell from 996,503 to 144,556
 triangles after semantic selective decimation and now passes the geometry
 target. Bundle-all remains selected because both measured fixtures also pass
 the individual-pack target. Total four-pack and device performance acceptance
-remain conditional until ACCF/PCF conversion, App Thinning, and the
-oldest-supported-device suite. The representative M1 iPad physical gate passed,
+remain conditional on App Thinning and the oldest-supported-device suite;
+ACCF/PCF conversion is complete. The earlier Phase 2 representative M1 iPad
+spike passed (this is not the current full native application),
 including a 15-minute continuous interaction test with nominal worst thermal
 state. Sustained serious thermal state remains a release failure; critical
 thermal state is stop-ship.

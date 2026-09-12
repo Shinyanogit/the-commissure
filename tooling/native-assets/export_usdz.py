@@ -28,6 +28,53 @@ def load_manifest(path: Path) -> dict:
         return json.load(handle)
 
 
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def validate_source_contracts(repo_root: Path, manifest: dict) -> None:
+    source_path = (repo_root / manifest["sourceInventory"]).resolve()
+    scene_path = (repo_root / manifest["sceneContract"]).resolve()
+    if repo_root not in source_path.parents or repo_root not in scene_path.parents:
+        raise RuntimeError("source contracts must stay within the repository")
+
+    source = load_manifest(source_path)
+    scene = load_manifest(scene_path)
+    procedure = manifest["procedure"]
+    canonical_root = f"procedure_{procedure}"
+    if source["procedureId"] != procedure or scene["procedureId"] != procedure:
+        raise RuntimeError("procedure ID disagrees with source contracts")
+    if source["assetPath"] != manifest["input"]:
+        raise RuntimeError("input path disagrees with source inventory")
+    input_path = repo_root / manifest["input"]
+    if sha256(input_path) != source["assetSha256"]:
+        raise RuntimeError("input digest disagrees with source inventory")
+    if manifest["rootEntity"] != canonical_root:
+        raise RuntimeError(f"rootEntity must be {canonical_root}")
+    if scene["rootEntityPath"] != f"/root/{canonical_root}":
+        raise RuntimeError("scene root path disagrees with conversion root")
+    if set(manifest["bindings"]) != set(source["entities"]):
+        raise RuntimeError("manifest bindings disagree with source entity inventory")
+
+    seen_paths = set()
+    for source_name, binding in manifest["bindings"].items():
+        entity_path = (
+            f"/root/{canonical_root}/{binding['group']}/{binding['id']}"
+        )
+        if entity_path in seen_paths:
+            raise RuntimeError(f"duplicate manifest entity path: {entity_path}")
+        seen_paths.add(entity_path)
+    for part in scene["parts"]:
+        binding = manifest["bindings"].get(part["sourceEntity"])
+        if binding is None:
+            raise RuntimeError(f"scene source is not mapped: {part['sourceEntity']}")
+        entity_path = (
+            f"/root/{canonical_root}/{binding['group']}/{binding['id']}"
+        )
+        if binding["id"] != part["id"] or entity_path != part["entityPath"]:
+            raise RuntimeError(f"scene binding disagrees for {part['sourceEntity']}")
+
+
 def material_for(role: str, palette: dict[str, dict]) -> bpy.types.Material:
     definition = palette[role]
     material = bpy.data.materials.get(f"material_{role}")
@@ -153,6 +200,7 @@ def main() -> None:
         raise RuntimeError("input must stay within the repository")
     if not input_path.is_file():
         raise FileNotFoundError(input_path)
+    validate_source_contracts(repo_root, manifest)
 
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
@@ -191,6 +239,7 @@ def main() -> None:
 
     before_triangles = 0
     records = []
+    export_objects = []
     for source_name in sorted(bindings):
         binding = bindings[source_name]
         source = by_name[source_name]
@@ -206,9 +255,10 @@ def main() -> None:
         after = triangle_count(obj)
 
         semantic_id = binding["id"]
-        obj.name = semantic_id
-        obj.data.name = f"mesh_{semantic_id}"
+        obj.name = f"__commissure_export_{len(export_objects):03d}"
+        obj.data.name = f"__commissure_mesh_{len(export_objects):03d}"
         attach_preserving_world(obj, anatomy if binding["group"] == "anatomy" else implants)
+        export_objects.append((obj, semantic_id))
         records.append(
             {
                 "sourceName": source_name,
@@ -222,6 +272,9 @@ def main() -> None:
 
     for source in imported:
         bpy.data.objects.remove(source, do_unlink=True)
+    for obj, semantic_id in export_objects:
+        obj.name = semantic_id
+        obj.data.name = f"mesh_{semantic_id}"
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     intermediate_path = output_path.with_suffix(".usdc")
@@ -267,7 +320,7 @@ def main() -> None:
     report = {
         "procedure": manifest["procedure"],
         "input": manifest["input"],
-        "inputSHA256": hashlib.sha256(input_path.read_bytes()).hexdigest(),
+        "inputSHA256": sha256(input_path),
         "blenderVersion": bpy.app.version_string,
         "blenderBuildHash": bpy.app.build_hash.decode(),
         "entityCount": len(records),

@@ -56,3 +56,13 @@ FOR*.md
 *.p8
 *.p12
 *.mobileprovision
+
+# Native generated delivery and local execution evidence
+ios/Resources/NativeAssets/
+ios/fastlane/report.xml
+ios/fastlane/Preview.html
+*.xcresult/
+.playwright-mcp/
+
+__pycache__/
+*.pyc
