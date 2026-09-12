@@ -4,6 +4,8 @@ The owner requested winding down to documentation and local commits at about
 2% weekly remaining. No phase exit, independent QC success, release readiness,
 new deployment, remote push or App Store submission is claimed.
 
+Next UI entry points and acceptance evidence: [Web UI parity plan](WEB_UI_PARITY_PLAN.md).
+
 ## Latest order of work
 
 1. **First reproduce the existing Web UI faithfully**, including actual layout,

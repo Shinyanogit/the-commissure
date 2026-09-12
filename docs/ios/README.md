@@ -51,3 +51,5 @@ restarts composition in Claude Design/Figma before Opus 5 writes replacement
 SwiftUI. A human-selected static direction and disposable interaction prototype
 are required before production visual implementation. The existing native
 contracts and Web/content boundary remain intact.
+
+The next UI implementation starts from [the Web parity map](WEB_UI_PARITY_PLAN.md), including panel-driven camera framing.
