@@ -1,0 +1,126 @@
+name: Content Publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "ios/Resources/NativeAssets/**"
+      - "tooling/content/**"
+      - "tooling/content-publish/**"
+      - "tooling/native-assets/**"
+      - ".github/workflows/content-publish.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: content-production
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 45
+    environment: content-production
+    permissions:
+      contents: read
+    env:
+      CONTENT_BASE_URL: ${{ vars.CONTENT_BASE_URL }}
+      CONTENT_SIGNING_PRIVATE_KEY_BASE64: ${{ secrets.CONTENT_SIGNING_PRIVATE_KEY_BASE64 }}
+      CONTENT_SIGNING_PUBLIC_KEY_BASE64: ${{ vars.CONTENT_SIGNING_PUBLIC_KEY_BASE64 }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: tooling/content/package-lock.json
+
+      - name: Require protected publication configuration
+        run: |
+          test -n "$CONTENT_BASE_URL" || { echo "Missing content-production variable CONTENT_BASE_URL" >&2; exit 1; }
+          test -n "$CONTENT_SIGNING_PRIVATE_KEY_BASE64" || { echo "Missing content-production secret CONTENT_SIGNING_PRIVATE_KEY_BASE64" >&2; exit 1; }
+          test -n "$CONTENT_SIGNING_PUBLIC_KEY_BASE64" || { echo "Missing content-production variable CONTENT_SIGNING_PUBLIC_KEY_BASE64" >&2; exit 1; }
+
+      - name: Validate source content
+        working-directory: tooling/content
+        run: |
+          npm ci
+          npm run migrate
+          git diff --exit-code -- ../../content
+          npm run validate
+          npm test
+
+      - name: Test publication tooling
+        working-directory: tooling/content-publish
+        run: npm test
+
+      - name: Install pinned native converter
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+        run: brew install --cask blender
+
+      - name: Rebuild and verify all native models
+        run: |
+          tooling/native-assets/build-all.sh
+          python3 tooling/native-assets/test_integrity.py
+
+      - name: Hydrate and verify retained immutable packs
+        run: >-
+          node tooling/content-publish/hydrate-previous.mjs
+          --url "$CONTENT_BASE_URL"
+          --output "$RUNNER_TEMP/previous-content-site"
+
+      - name: Select monotonic generation
+        id: generation
+        run: |
+          args=(--github-output "$GITHUB_OUTPUT")
+          if test -f "$RUNNER_TEMP/previous-content-site/manifest.json"; then
+            args+=(--previous-manifest "$RUNNER_TEMP/previous-content-site/manifest.json")
+          fi
+          node tooling/content-publish/next-generation.mjs "${args[@]}"
+
+      - name: Build and verify signed immutable publication
+        env:
+          GENERATION: ${{ steps.generation.outputs.generation }}
+        run: |
+          args=(
+            --root "$GITHUB_WORKSPACE"
+            --output "$RUNNER_TEMP/content-site"
+            --generation "$GENERATION"
+            --published-at "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            --asset-base-url "$CONTENT_BASE_URL"
+          )
+          if test -f "$RUNNER_TEMP/previous-content-site/manifest.json"; then
+            args+=(
+              --previous-manifest "$RUNNER_TEMP/previous-content-site/manifest.json"
+              --previous-site "$RUNNER_TEMP/previous-content-site"
+            )
+          fi
+          node tooling/content-publish/build.mjs "${args[@]}"
+          node tooling/content-publish/verify.mjs \
+            --site "$RUNNER_TEMP/content-site" \
+            --public-key "$RUNNER_TEMP/content-site/public-key.raw"
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload verified Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ${{ runner.temp }}/content-site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy complete publication atomically
+        id: deployment
+        uses: actions/deploy-pages@v5

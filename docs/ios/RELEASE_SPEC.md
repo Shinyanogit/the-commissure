@@ -265,3 +265,29 @@ The release is done only when:
 - Archive, metadata, screenshots, URLs, and remote/bundled manifests validate.
 - Fastlane completes submission and App Store Connect shows **Submitted for
   Review**.
+
+## 13. Implemented release interfaces
+
+The runnable Phase 8 and Phase 9 interfaces, required environment configuration,
+evidence schema, and currently open gates are recorded in
+[RELEASE_READINESS.md](RELEASE_READINESS.md).
+
+The production content manifest v1 is signed as exact bytes with Ed25519. Its
+detached `manifest.sig` is 64 raw bytes, while the app pins a 32-byte raw public
+key. Each manifest entry requires the fixed data-only roles `procedure`, `scene`,
+`localization-en`, `localization-ja`, `provenance`, `model`, and
+`pack-metadata`. A signed retention inventory preserves prior immutable packs so
+a new higher manifest generation can safely select a prior pack for rollback.
+
+The `beta`, `release_candidate`, and `submit` Fastlane lanes consume an existing
+signed IPA. They do not rebuild source. Every upload is preceded by local
+candidate validation that binds the IPA, content manifest, gate reports, commit,
+and tag by hash. `submit` selects the already uploaded build and skips binary
+upload.
+
+### Clean asset generation in CI
+
+Both iOS CI and content publication rebuild the ignored native asset folder on
+macOS before packaging. The converter rejects Blender or Apple USD toolchain
+drift. The hosted runner has not yet executed this branch; local generation and
+unsigned archive results are the available evidence.

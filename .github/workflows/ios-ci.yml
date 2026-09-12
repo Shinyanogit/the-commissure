@@ -5,12 +5,20 @@ on:
     paths:
       - "ios/**"
       - "content/**"
+      - "tooling/native-assets/**"
+      - "tooling/content/**"
+      - "tooling/content-publish/**"
+      - "tooling/release/**"
       - ".github/workflows/ios-ci.yml"
   push:
     branches: [main]
     paths:
       - "ios/**"
       - "content/**"
+      - "tooling/native-assets/**"
+      - "tooling/content/**"
+      - "tooling/content-publish/**"
+      - "tooling/release/**"
       - ".github/workflows/ios-ci.yml"
 
 permissions:
@@ -24,6 +32,23 @@ jobs:
       - uses: actions/checkout@v4
       - name: Report Xcode
         run: xcodebuild -version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate content and fail-closed delivery gates
+        run: |
+          node tooling/content/validate-content.mjs
+          node tooling/content/test-validator.mjs
+          npm test --prefix tooling/content-publish
+          npm test --prefix tooling/release
+      - name: Install native asset converter
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+        run: brew install --cask blender
+      - name: Build verified native assets
+        run: |
+          tooling/native-assets/build-all.sh
+          python3 tooling/native-assets/test_integrity.py
       - name: Lint Swift formatting
         run: swift format lint --strict --recursive ios/App ios/Packages/CommissureCore/Sources ios/Packages/CommissureCore/Tests ios/Tests ios/UITests
       - name: Test pure core

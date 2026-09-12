@@ -1,0 +1,143 @@
+require "shellwords"
+require "json"
+
+default_platform(:ios)
+
+REPOSITORY_ROOT = File.expand_path("../..", __dir__)
+PROJECT_PATH = File.join(REPOSITORY_ROOT, "ios", "TheCommissure.xcodeproj")
+
+def required_env!(name)
+  value = ENV[name]
+  UI.user_error!("Missing required environment variable #{name}") if value.nil? || value.empty?
+  value
+end
+
+def connect_api_key
+  app_store_connect_api_key(
+    key_id: required_env!("APP_STORE_CONNECT_KEY_ID"),
+    issuer_id: required_env!("APP_STORE_CONNECT_ISSUER_ID"),
+    key_content: required_env!("APP_STORE_CONNECT_API_KEY_BASE64"),
+    is_key_content_base64: true,
+    duration: 1_200,
+    in_house: false
+  )
+end
+
+def validate_candidate!(stage)
+  ipa = File.expand_path(required_env!("IPA_PATH"))
+  evidence = File.expand_path(required_env!("RELEASE_EVIDENCE_PATH"))
+  UI.user_error!("IPA_PATH does not exist: #{ipa}") unless File.file?(ipa)
+  UI.user_error!("RELEASE_EVIDENCE_PATH does not exist: #{evidence}") unless File.file?(evidence)
+  command = [
+    "node",
+    File.join(REPOSITORY_ROOT, "tooling", "release", "validate-release.mjs"),
+    "--root", REPOSITORY_ROOT,
+    "--evidence", evidence,
+    "--artifact", ipa
+  ].map { |argument| Shellwords.escape(argument) }.join(" ")
+  sh(command)
+  evidence_stage = JSON.parse(File.read(evidence)).fetch("stage")
+  UI.user_error!("Release evidence stage #{evidence_stage} does not equal #{stage}") unless evidence_stage == stage
+  ipa
+end
+
+platform :ios do
+  desc "Run the release unit and UI test plan"
+  lane :test do
+    scan(
+      project: PROJECT_PATH,
+      scheme: "TheCommissure",
+      devices: [ENV.fetch("TEST_DEVICE", "iPhone 17 Pro")],
+      clean: true,
+      result_bundle: true,
+      output_directory: ENV.fetch("TEST_OUTPUT_DIRECTORY", File.join(REPOSITORY_ROOT, "ios", "fastlane", "test_output"))
+    )
+  end
+
+  desc "Create and export a signed archive without uploading it"
+  lane :archive do
+    export_options = File.expand_path(required_env!("EXPORT_OPTIONS_PLIST"))
+    UI.user_error!("EXPORT_OPTIONS_PLIST does not exist: #{export_options}") unless File.file?(export_options)
+    build_app(
+      project: PROJECT_PATH,
+      scheme: "TheCommissure",
+      configuration: "Release",
+      clean: true,
+      archive_path: File.expand_path(required_env!("ARCHIVE_PATH")),
+      output_directory: File.expand_path(required_env!("IPA_OUTPUT_DIRECTORY")),
+      output_name: ENV.fetch("IPA_OUTPUT_NAME", "TheCommissure.ipa"),
+      export_options: export_options
+    )
+  end
+
+  desc "Capture localized screenshots from release fixtures"
+  lane :screenshots do
+    capture_ios_screenshots(
+      project: PROJECT_PATH,
+      scheme: ENV.fetch("SCREENSHOT_SCHEME", "TheCommissure"),
+      languages: ["en-US", "ja"],
+      devices: [
+        ENV.fetch("SCREENSHOT_IPHONE", "iPhone 17 Pro Max"),
+        ENV.fetch("SCREENSHOT_IPAD", "iPad Pro 13-inch (M5)")
+      ],
+      output_directory: File.expand_path(required_env!("SCREENSHOTS_OUTPUT_DIRECTORY")),
+      clean: true,
+      erase_simulator: true
+    )
+  end
+
+  desc "Validate and upload localized metadata without a binary"
+  lane :metadata do
+    deliver(
+      api_key: connect_api_key,
+      app_identifier: ENV.fetch("APP_STORE_BUNDLE_ID", "app.thecommissure.ios"),
+      app_version: required_env!("APP_VERSION"),
+      metadata_path: File.expand_path(required_env!("METADATA_PATH")),
+      screenshots_path: File.expand_path(required_env!("SCREENSHOTS_PATH")),
+      skip_binary_upload: true,
+      submit_for_review: false,
+      force: false
+    )
+  end
+
+  desc "Upload an already signed and validated IPA to TestFlight"
+  lane :beta do
+    stage = ENV.fetch("RELEASE_STAGE", "internal-testflight")
+    UI.user_error!("RELEASE_STAGE must be internal-testflight or external-testflight") unless ["internal-testflight", "external-testflight"].include?(stage)
+    ipa = validate_candidate!(stage)
+    external = stage == "external-testflight"
+    groups = external ? required_env!("TESTFLIGHT_EXTERNAL_GROUPS").split(",").map(&:strip) : nil
+    upload_to_testflight(
+      api_key: connect_api_key,
+      ipa: ipa,
+      changelog: required_env!("TESTFLIGHT_CHANGELOG"),
+      distribute_external: external,
+      groups: groups,
+      skip_submission: !external,
+      skip_waiting_for_build_processing: !external
+    )
+  end
+
+  desc "Validate and upload the existing signed release candidate"
+  lane :release_candidate do
+    beta
+  end
+
+  desc "Submit an already uploaded and validated build for review"
+  lane :submit do
+    validate_candidate!("app-store")
+    deliver(
+      api_key: connect_api_key,
+      app_identifier: ENV.fetch("APP_STORE_BUNDLE_ID", "app.thecommissure.ios"),
+      app_version: required_env!("APP_VERSION"),
+      build_number: required_env!("BUILD_NUMBER"),
+      metadata_path: File.expand_path(required_env!("METADATA_PATH")),
+      screenshots_path: File.expand_path(required_env!("SCREENSHOTS_PATH")),
+      skip_binary_upload: true,
+      submit_for_review: true,
+      automatic_release: false,
+      phased_release: true,
+      force: false
+    )
+  end
+end

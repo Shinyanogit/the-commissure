@@ -1,0 +1,12 @@
+{
+  "name": "the-commissure-release-tooling",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node validate-release.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
