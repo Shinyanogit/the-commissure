@@ -3,6 +3,25 @@
 User-visible changes are recorded when the implementation, verification, and
 its source-of-truth documentation are ready in the same pull request.
 
+## 2026-09-12 — local iOS WIP checkpoint
+
+- Added native conversion and integrity checks for all four native
+  USDZ models, totaling 25.13 MiB, with semantic entity paths.
+- Connected SwiftUI to RealityKit for all 26 canonical steps with reversible,
+  interruptible state changes, orbit/zoom/reset, bilingual projection and
+  persistent progress. Presentation remains replaceable without rewriting the
+  scene or delivery layers; the current UI is provisional.
+- Added exact-byte signed catalog verification, immutable-version enforcement,
+  verified cache installation, cancellation, retained versions and fallback.
+- Added local publication/release validators, protected workflow definitions,
+  Fastlane preparation and privacy manifest. No workflow was published or run
+  remotely, and no TestFlight or App Store upload occurred.
+- Passed 42 native app tests and four UI tests on iPhone 17 Pro Simulator.
+  Physical-device, rights, medical, final visual and signed release gates remain
+  open. Asset QC found a checkout-path determinism issue; app QC is incomplete.
+  The owner rejected the provisional UI and requires faithful Web UI reproduction
+  next. This checkpoint does not modify the Web runtime.
+
 ## 2026-08-29
 
 ### Web

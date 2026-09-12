@@ -1,5 +1,11 @@
 # Claude Design Brief — The Sterile Field (iOS)
 
+> Latest owner direction: reproduce the Web UI first; the temporary native UI is not accepted. See [the WIP handoff](SESSION_HANDOFF_2026-09-12.md).
+
+> 2026-09-12 owner update: temporary UI is authorized to unblock native
+> functional implementation. See `IMPLEMENTATION_STATUS.md` for the sequencing override and current evidence.
+> Final visual and release gates remain separate.
+
 Status: Phase 5R v2 reset brief, Codex-frozen for static/interactive reference generation
 Date: 2026-08-02
 Authority: [`DESIGN_CONCEPT.md`](../DESIGN_CONCEPT.md)

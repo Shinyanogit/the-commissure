@@ -1,5 +1,11 @@
 # Phase 5R — Greenfield UI/UX Reset Decision
 
+> Latest owner direction: reproduce the Web UI first; the temporary native UI is not accepted. See [the WIP handoff](../SESSION_HANDOFF_2026-09-12.md).
+
+> 2026-09-12 owner update: temporary UI is authorized to unblock native
+> functional implementation. See `../IMPLEMENTATION_STATUS.md` for the sequencing override and current evidence.
+> Final visual and release gates remain separate.
+
 Status: accepted decision; 5R0/5R1A docs gate complete, design exploration not started
 Date: 2026-08-02
 Branch: `docs/ios-phase5r-design-reset`

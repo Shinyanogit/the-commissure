@@ -1,5 +1,9 @@
 # Native iOS Architecture
 
+> 2026-09-12 owner update: temporary UI is authorized to unblock native
+> functional implementation. See `IMPLEMENTATION_STATUS.md` for the sequencing override and current evidence.
+> Final visual and release gates remain separate.
+
 Status: implementation contract
 Stack: Swift 6.2, SwiftUI, RealityKit, structured concurrency
 Minimum deployment: iOS/iPadOS 18
@@ -442,3 +446,20 @@ schemas, cache/download invariants, localization keys, or gesture resolution.
   the active library when the language changes. Fresh simulator execution remains
   environment-limited after worker startup (`NSMachErrorDomain -308`); this does
   not change the compile/archive or prior successful runtime evidence.
+
+## Functional integration and future UI revision
+
+The temporary shell consumes immutable `LibraryViewState` / `TheaterViewState`
+and sends `AppAction` values. `FoundationAppModel` owns projection and session
+lifetime. `ProcedureSceneRuntime` owns model loading, gesture dispatch and frame
+updates; `RealitySceneAdapter` owns exact bindings, immutable archive baselines,
+absolute target composition, opacity and interruptible interpolation.
+`NativeAssetStore` verifies native manifests and model hashes off MainActor.
+`AppPreferences` owns version-compatible progress and disclosure preferences.
+
+Views must not copy presentation fields into local state. Temporary UI choices
+do not redefine domain contracts. Later visual revisions replace layouts,
+tokens and view components while preserving these action/state boundaries and
+functional tests. Any necessary state addition is made in the projection first.
+The runtime RealityView surface is injected into the Theater; a layout change
+must not recreate its session or reload the model.

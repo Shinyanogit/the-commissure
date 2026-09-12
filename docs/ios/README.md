@@ -1,5 +1,7 @@
 # Native iOS Documentation Map
 
+> Start here next session: [2026-09-12 WIP handoff](SESSION_HANDOFF_2026-09-12.md). Web UI reproduction comes first; engineering and release gates remain open.
+
 > Latest owner goal and operating boundaries: [App Store pre-submission plan](PRE_SUBMISSION_PLAN.md) (2026-09-12). Local iOS commits only; no push or submission. The separately authorized Vercel support site is documented in that plan.
 
 
