@@ -3,6 +3,7 @@ import SwiftUI
 struct LibraryView: View {
   let state: LibraryViewState
   let onAction: (AppAction) -> Void
+  @State private var pendingUpdate: String?
 
   var body: some View {
     ZStack {
@@ -31,7 +32,7 @@ struct LibraryView: View {
   private var header: some View {
     HStack(alignment: .top, spacing: DesignTokens.Spacing.regular) {
       Image(systemName: "waveform.path.ecg")
-        .foregroundStyle(DesignTokens.Color.cyan)
+        .foregroundStyle(DesignTokens.Color.textSecondary)
         .accessibilityHidden(true)
       Text("library.subtitle")
         .font(.headline)
@@ -82,12 +83,46 @@ struct LibraryView: View {
   private var cards: some View {
     LazyVStack(spacing: DesignTokens.Spacing.regular) {
       ForEach(state.cards) { card in
-        Button {
-          onAction(primaryAction(for: card))
-        } label: {
-          LibraryCardView(state: card)
+        VStack(spacing: 0) {
+          Button {
+            onAction(primaryAction(for: card))
+          } label: {
+            LibraryCardView(state: card)
+          }
+          .buttonStyle(.plain)
+          .accessibilityIdentifier("procedure-\(card.id)")
+          if card.isUpdating {
+            HStack {
+              ProgressView().tint(DesignTokens.Color.cyan)
+              Spacer()
+              IconActionButton(.cancelDownload(card.id), onAction: onAction)
+            }.padding(.horizontal)
+          } else if let bytes = card.updateBytes {
+            Button {
+              pendingUpdate = card.id
+            } label: {
+              Label(
+                "\(String(localized: "content.update")) · \(ByteCountFormatter.string(fromByteCount: Int64(bytes), countStyle: .file))",
+                systemImage: card.updateFailed ? "arrow.clockwise" : "arrow.down.circle"
+              )
+              .font(.caption)
+              .foregroundStyle(DesignTokens.Color.cyan)
+              .frame(maxWidth: .infinity, minHeight: 44, alignment: .trailing)
+            }
+          }
         }
-        .buttonStyle(.plain)
+        .confirmationDialog(
+          "content.update",
+          isPresented: Binding(
+            get: { pendingUpdate == card.id },
+            set: { if !$0 { pendingUpdate = nil } }), titleVisibility: .visible
+        ) {
+          Button("action.download") {
+            onAction(.download(card.id))
+            pendingUpdate = nil
+          }
+        }
+
       }
     }
   }
@@ -99,9 +134,7 @@ struct LibraryView: View {
       Text("library.loading")
         .font(.headline)
         .foregroundStyle(DesignTokens.Color.textPrimary)
-      Text("library.loading.detail")
-        .font(.subheadline)
-        .foregroundStyle(DesignTokens.Color.textSecondary)
+
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(DesignTokens.Spacing.spacious)
@@ -121,10 +154,7 @@ struct LibraryView: View {
       Text("content.unavailable")
         .font(.headline)
         .foregroundStyle(DesignTokens.Color.textPrimary)
-      Text("library.loading.detail")
-        .font(.subheadline)
-        .foregroundStyle(DesignTokens.Color.textSecondary)
-        .fixedSize(horizontal: false, vertical: true)
+
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(DesignTokens.Spacing.spacious)
@@ -159,14 +189,12 @@ private struct LibraryCardView: View {
   var body: some View {
     VStack(alignment: .leading, spacing: DesignTokens.Spacing.regular) {
       HStack(alignment: .top, spacing: DesignTokens.Spacing.regular) {
-        Image(systemName: "figure.stand")
-          .font(.system(size: 24, weight: .medium))
-          .foregroundStyle(DesignTokens.Color.bone)
-          .frame(width: 52, height: 52)
-          .background(
-            DesignTokens.Color.teal.opacity(0.42),
-            in: RoundedRectangle(cornerRadius: DesignTokens.Radius.control)
-          )
+        Image(state.id)
+          .resizable()
+          .aspectRatio(contentMode: .fill)
+          .frame(width: 84, height: 84)
+          .clipped()
+          .clipShape(RoundedRectangle(cornerRadius: DesignTokens.Radius.control))
           .accessibilityHidden(true)
 
         VStack(alignment: .leading, spacing: DesignTokens.Spacing.compact) {
@@ -228,8 +256,8 @@ private struct LibraryCardView: View {
 
   private var availabilityTint: SwiftUI.Color {
     switch state.availability {
-    case .bundled, .cached: DesignTokens.Color.cyan
-    case .availableToDownload, .downloading, .verifying: DesignTokens.Color.bone
+    case .bundled, .cached: DesignTokens.Color.textSecondary
+    case .availableToDownload, .downloading, .verifying: DesignTokens.Color.cyan
     case .unavailableOffline, .failed: DesignTokens.Color.textSecondary
     }
   }

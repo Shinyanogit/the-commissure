@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct SettingsView: View {
+  @State private var confirmsClear = false
+  @State private var confirmsReset = false
+  var canClearDownloads = true
   let onAction: (AppAction) -> Void
 
   var body: some View {
@@ -48,6 +51,19 @@ struct SettingsView: View {
           .accessibilityHint(Text("action.language.hint"))
         }
 
+        Button("action.resetProgress", role: .destructive) { confirmsReset = true }
+          .confirmationDialog(
+            "action.resetProgress.detail", isPresented: $confirmsReset, titleVisibility: .visible
+          ) {
+            Button("action.resetProgress", role: .destructive) { onAction(.resetProgress) }
+          }
+        Button("action.clearDownloads", role: .destructive) { confirmsClear = true }
+          .disabled(!canClearDownloads)
+          .confirmationDialog(
+            "action.clearDownloads.detail", isPresented: $confirmsClear, titleVisibility: .visible
+          ) {
+            Button("action.clearDownloads", role: .destructive) { onAction(.clearDownloads) }
+          }
         Spacer()
       }
       .padding(.horizontal, DesignTokens.Spacing.edge)

@@ -175,6 +175,25 @@ final class AssetStoreTests: XCTestCase {
     XCTAssertNil(cached)
   }
 
+  func testCorruptCachedVersionCanBeAtomicallyRepaired() async throws {
+    let data = Data("model".utf8)
+    let pack = makePack(id: "accf", version: "1.1.1", data: data)
+    let root = makeRoot()
+    let source = CountingSource(payloads: [pack.key: .init(files: ["model.usdz": data])])
+    let store = AssetStore(rootURL: root, source: source, safetyReserve: 0) { _ in .max }
+    let installed = try await store.acquire(pack)
+    try Data("MODEL".utf8).write(to: installed.directory.appendingPathComponent("model.usdz"))
+
+    let repaired = try await store.acquire(pack)
+
+    XCTAssertEqual(
+      try Data(contentsOf: repaired.directory.appendingPathComponent("model.usdz")),
+      data
+    )
+    let callCount = await source.callCount
+    XCTAssertEqual(callCount, 2)
+  }
+
   func testUnexpectedCachedFileIsNotReusedOffline() async throws {
     let data = Data("model".utf8)
     let pack = makePack(id: "accf", version: "1.2.0", data: data)
@@ -250,6 +269,38 @@ final class AssetStoreTests: XCTestCase {
 
     let maximum = await source.maximumConcurrentCalls
     XCTAssertEqual(maximum, 1)
+  }
+
+  func testQueuedPackCancellationDoesNotWaitForActiveTransfer() async throws {
+    let data = Data("model".utf8)
+    let active = makePack(id: "acdf", version: "2.1.0", data: data)
+    let queued = makePack(id: "pcdf", version: "2.1.0", data: data)
+    let source = CountingSource(
+      payloads: [
+        active.key: .init(files: ["model.usdz": data]),
+        queued.key: .init(files: ["model.usdz": data]),
+      ],
+      delay: 2_000_000_000
+    )
+    let store = makeStore(source: source)
+    let activeRequest = Task { try await store.acquire(active) }
+    try await Task.sleep(nanoseconds: 50_000_000)
+    let queuedRequest = Task { try await store.acquire(queued) }
+    try await Task.sleep(nanoseconds: 50_000_000)
+
+    let clock = ContinuousClock()
+    let started = clock.now
+    await store.cancel(queued.key)
+    do {
+      _ = try await queuedRequest.value
+      XCTFail("Queued cancellation must fail")
+    } catch {
+      XCTAssertEqual(error as? AssetFailure, .cancelled)
+    }
+    XCTAssertLessThan(started.duration(to: clock.now), .milliseconds(500))
+
+    await store.cancel(active.key)
+    _ = try? await activeRequest.value
   }
 
   func testProtectedPackCannotBeEvicted() async throws {

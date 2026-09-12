@@ -1,6 +1,8 @@
 import Foundation
 
 enum AppAction: Hashable, Sendable {
+  case zoomIn, zoomOut, orbitLeft, orbitRight, orbitUp, orbitDown
+  case expandExplanation, collapseExplanation, resetProgress, clearDownloads
   case back
   case resetView
   case previousStep

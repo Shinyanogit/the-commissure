@@ -33,3 +33,32 @@ final class TheCommissureUITests: XCTestCase {
     XCTAssertTrue(app.staticTexts["7ステップ"].waitForExistence(timeout: 5))
   }
 }
+
+extension TheCommissureUITests {
+  func testNativeWalkthroughForwardReverseLocaleAndPersistedReopen() {
+    let app = XCUIApplication()
+    app.launchArguments = ["-appLanguage", "english"]
+    app.launch()
+    let acdf = app.buttons["procedure-acdf"]
+    XCTAssertTrue(acdf.waitForExistence(timeout: 10))
+    acdf.tap()
+    XCTAssertTrue(app.otherElements["reality-field-ready"].waitForExistence(timeout: 20))
+    let progress = app.buttons["step-progress"]
+    XCTAssertTrue(progress.waitForExistence(timeout: 5))
+    let initial = progress.value as? String
+    let next = app.buttons["action.next"]
+    if next.isEnabled {
+      next.tap()
+      XCTAssertTrue(app.otherElements["reality-field-ready"].waitForExistence(timeout: 5))
+      XCTAssertNotEqual(progress.value as? String, initial)
+      app.buttons["action.previous"].tap()
+      XCTAssertTrue(app.otherElements["reality-field-ready"].waitForExistence(timeout: 5))
+      XCTAssertEqual(progress.value as? String, initial)
+    }
+    app.buttons["action.back"].tap()
+    XCTAssertTrue(acdf.waitForExistence(timeout: 5))
+    acdf.tap()
+    XCTAssertTrue(app.otherElements["reality-field-ready"].waitForExistence(timeout: 20))
+    XCTAssertEqual(progress.value as? String, initial)
+  }
+}

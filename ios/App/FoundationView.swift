@@ -13,8 +13,19 @@ struct FoundationView: View {
     NavigationStack {
       Group {
         if let theater = model.theaterViewState {
-          ProcedureTheaterView(state: theater, onAction: dispatch)
-            .toolbar(.hidden, for: .navigationBar)
+          ProcedureTheaterView(
+            state: theater,
+            scene: AnyView(
+              Group {
+                if let runtime = model.sceneRuntime {
+                  ProcedureSceneView(
+                    runtime: runtime, summary: theater.accessibilitySummary, onAction: dispatch
+                  )
+                  .id(runtime.id)
+                }
+              }), onAction: dispatch
+          )
+          .toolbar(.hidden, for: .navigationBar)
         } else {
           LibraryView(state: model.libraryViewState, onAction: dispatch)
             .navigationTitle("app.title")
@@ -31,7 +42,11 @@ struct FoundationView: View {
       }
     }
     .sheet(isPresented: $isSettingsPresented) {
-      SettingsView(onAction: settingsDispatch)
+      SettingsView(
+        canClearDownloads: model.sceneRuntime == nil
+          && model.delivery?.updating.isEmpty != false
+          && model.delivery?.isClearingDownloads != true,
+        onAction: settingsDispatch)
     }
     .task { await model.loadBundledContent() }
   }
@@ -48,11 +63,8 @@ struct FoundationView: View {
       isSettingsPresented = true
     case .changeLanguage(let language):
       model.setLanguage(language)
-    case .resetView, .previousStep, .nextStep, .selectStep(_),
-      .download(_), .cancelDownload(_), .retry(_):
+    default:
       model.send(action)
-    case .expandTray, .collapseTray:
-      break
     }
   }
 

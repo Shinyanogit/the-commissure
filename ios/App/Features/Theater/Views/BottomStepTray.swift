@@ -61,6 +61,8 @@ struct BottomStepTray: View {
       Text(LocalizedStringKey(density == .expanded ? "action.collapse" : "action.expand"))
     )
     .accessibilityHint(Text("action.tray.hint"))
+    .accessibilityIdentifier("step-progress")
+    .accessibilityValue("\(state.currentStep) / \(state.totalSteps)")
   }
 
   private var stepSelection: some View {
@@ -88,6 +90,7 @@ struct BottomStepTray: View {
               in: RoundedRectangle(cornerRadius: DesignTokens.Radius.control))
           }
           .buttonStyle(.plain)
+          .accessibilityIdentifier("step-\(id)")
           .accessibilityLabel(Text(state.stepLabels[safe: index] ?? ""))
           .accessibilityAddTraits(index + 1 == state.currentStep ? .isSelected : [])
         }

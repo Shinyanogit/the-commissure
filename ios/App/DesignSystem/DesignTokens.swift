@@ -44,6 +44,38 @@ struct ActionDescriptor: Sendable {
 enum ActionDescriptors {
   static func descriptor(for action: AppAction) -> ActionDescriptor? {
     switch action {
+    case .zoomIn:
+      ActionDescriptor(
+        systemImage: "plus.magnifyingglass", labelKey: "action.zoomIn", hintKey: "action.zoomIn")
+    case .zoomOut:
+      ActionDescriptor(
+        systemImage: "minus.magnifyingglass", labelKey: "action.zoomOut", hintKey: "action.zoomOut")
+    case .orbitLeft:
+      ActionDescriptor(
+        systemImage: "arrow.left", labelKey: "action.orbitLeft", hintKey: "action.orbitLeft")
+    case .orbitRight:
+      ActionDescriptor(
+        systemImage: "arrow.right", labelKey: "action.orbitRight", hintKey: "action.orbitRight")
+    case .orbitUp:
+      ActionDescriptor(
+        systemImage: "arrow.up", labelKey: "action.orbitUp", hintKey: "action.orbitUp")
+    case .orbitDown:
+      ActionDescriptor(
+        systemImage: "arrow.down", labelKey: "action.orbitDown", hintKey: "action.orbitDown")
+    case .expandExplanation:
+      ActionDescriptor(
+        systemImage: "text.bubble", labelKey: "action.explanation",
+        hintKey: "action.explanation.hint")
+    case .collapseExplanation:
+      ActionDescriptor(
+        systemImage: "chevron.down", labelKey: "action.collapse", hintKey: "action.collapse.hint")
+    case .clearDownloads:
+      ActionDescriptor(
+        systemImage: "trash", labelKey: "action.clearDownloads", hintKey: "action.clearDownloads")
+    case .resetProgress:
+      ActionDescriptor(
+        systemImage: "arrow.counterclockwise", labelKey: "action.resetProgress",
+        hintKey: "action.resetProgress")
     case .back:
       ActionDescriptor(
         systemImage: "chevron.backward", labelKey: "action.back", hintKey: "action.back.hint")
@@ -63,7 +95,9 @@ enum ActionDescriptors {
     case .collapseTray:
       ActionDescriptor(
         systemImage: "chevron.down", labelKey: "action.collapse", hintKey: "action.collapse.hint")
-    case .openProcedure: nil
+    case .openProcedure:
+      ActionDescriptor(
+        systemImage: "arrow.clockwise", labelKey: "action.retry", hintKey: "action.retry.hint")
     case .download:
       ActionDescriptor(
         systemImage: "arrow.down.circle", labelKey: "action.download",

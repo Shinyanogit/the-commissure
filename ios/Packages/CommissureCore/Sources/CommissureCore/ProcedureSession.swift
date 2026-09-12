@@ -66,8 +66,8 @@ public struct ProcedureSession: Equatable, Sendable {
       guard let index = procedure.steps.firstIndex(where: { $0.id == stepID }) else { return false }
       return select(index: index)
     case .orbit(let yaw, let pitch):
-      guard capabilities.canOrbit else { return false }
-      cameraAdjustment.yaw += yaw
+      guard capabilities.canOrbit, yaw.isFinite, pitch.isFinite else { return false }
+      cameraAdjustment.yaw = (cameraAdjustment.yaw + yaw).truncatingRemainder(dividingBy: 2 * .pi)
       cameraAdjustment.pitch = min(max(cameraAdjustment.pitch + pitch, -.pi / 2), .pi / 2)
     case .zoom(let scale):
       guard capabilities.canZoom, scale.isFinite, scale > 0 else { return false }

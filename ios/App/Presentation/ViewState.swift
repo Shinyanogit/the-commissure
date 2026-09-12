@@ -31,6 +31,9 @@ struct LibraryCardViewState: Equatable, Identifiable, Sendable {
   let stepCountLabel: String
   let availability: LibraryAvailability
   let availabilityLabel: String
+  var updateBytes: Int? = nil
+  var isUpdating = false
+  var updateFailed = false
 }
 
 struct LibraryViewState: Equatable, Sendable {

@@ -5,19 +5,14 @@ struct ProcedureTheaterView: View {
   let scene: AnyView
   let onAction: (AppAction) -> Void
 
-  @State private var isExplanationExpanded: Bool
-  @State private var isTrayExpanded: Bool
-
   init(
     state: TheaterViewState,
-    scene: AnyView = AnyView(AnatomyFieldPlaceholder()),
+    scene: AnyView = AnyView(Color.black),
     onAction: @escaping (AppAction) -> Void
   ) {
     self.state = state
     self.scene = scene
     self.onAction = onAction
-    _isExplanationExpanded = State(initialValue: state.isExplanationExpanded)
-    _isTrayExpanded = State(initialValue: state.trayDensity == .expanded)
   }
 
   var body: some View {
@@ -26,15 +21,19 @@ struct ProcedureTheaterView: View {
       scene
         .ignoresSafeArea()
       sceneStatusOverlay
+      if state.sceneReadiness == .failed {
+        IconActionButton(.openProcedure(state.procedureID), onAction: onAction)
+          .accessibilityLabel(Text("action.retry"))
+      }
 
       VStack(spacing: 0) {
         topBar
         Spacer(minLength: 0)
 
-        if isExplanationExpanded {
+        if state.isExplanationExpanded {
           ExplanationPanel(state: state) {
             withAnimation(.easeInOut(duration: 0.2)) {
-              isExplanationExpanded = false
+              onAction(.collapseExplanation)
             }
           }
           .padding(.horizontal, DesignTokens.Spacing.edge)
@@ -47,8 +46,8 @@ struct ProcedureTheaterView: View {
 
         BottomStepTray(
           state: state,
-          density: isTrayExpanded ? .expanded : state.trayDensity,
-          onAction: handleAction
+          density: state.trayDensity,
+          onAction: onAction
         )
         .padding(.horizontal, DesignTokens.Spacing.edge)
         .padding(.bottom, DesignTokens.Spacing.compact)
@@ -56,6 +55,13 @@ struct ProcedureTheaterView: View {
     }
     .preferredColorScheme(.dark)
     .accessibilityElement(children: .contain)
+    .background {
+      Group {
+        Button("") { onAction(.nextStep) }.keyboardShortcut(.downArrow, modifiers: [])
+        Button("") { onAction(.previousStep) }.keyboardShortcut(.upArrow, modifiers: [])
+        Button("") { onAction(.back) }.keyboardShortcut(.escape, modifiers: [])
+      }.hidden().accessibilityHidden(true)
+    }
   }
 
   @ViewBuilder
@@ -64,7 +70,7 @@ struct ProcedureTheaterView: View {
     case .preparing:
       sceneStatusBanner(icon: "hourglass", textKey: "theater.scene.preparing")
     case .transitioning:
-      sceneStatusBanner(icon: "arrow.triangle.2.circlepath", textKey: "theater.scene.transitioning")
+      EmptyView()
     case .failed:
       sceneStatusBanner(icon: "exclamationmark.triangle", textKey: "theater.scene.failed")
     case .ready:
@@ -97,7 +103,7 @@ struct ProcedureTheaterView: View {
       Spacer()
       Button {
         withAnimation(.easeInOut(duration: 0.2)) {
-          isExplanationExpanded = true
+          onAction(.expandExplanation)
         }
       } label: {
         Image(systemName: "text.bubble")
@@ -125,6 +131,25 @@ struct ProcedureTheaterView: View {
           .lineLimit(1)
       }
       Spacer(minLength: DesignTokens.Spacing.compact)
+      Menu {
+        Button("language.english") { onAction(.changeLanguage(.english)) }
+        Button("language.japanese") { onAction(.changeLanguage(.japanese)) }
+        Divider()
+        ForEach(
+          [AppAction.zoomIn, .zoomOut, .orbitLeft, .orbitRight, .orbitUp, .orbitDown], id: \.self
+        ) { action in
+          if let descriptor = ActionDescriptors.descriptor(for: action) {
+            Button {
+              onAction(action)
+            } label: {
+              Label(LocalizedStringKey(descriptor.labelKey), systemImage: descriptor.systemImage)
+            }
+          }
+        }
+      } label: {
+        Image(systemName: "ellipsis.circle").frame(width: 44, height: 44)
+      }
+      .accessibilityLabel(Text("action.more"))
       IconActionButton(.resetView, isEnabled: state.canReset, onAction: onAction)
     }
     .padding(.horizontal, DesignTokens.Spacing.edge)
@@ -132,18 +157,6 @@ struct ProcedureTheaterView: View {
     .background(DesignTokens.Color.stageBlack.opacity(DesignTokens.Opacity.stageScrim))
   }
 
-  private func handleAction(_ action: AppAction) {
-    switch action {
-    case .expandTray:
-      withAnimation(.easeInOut(duration: 0.2)) { isTrayExpanded = true }
-    case .collapseTray:
-      withAnimation(.easeInOut(duration: 0.2)) { isTrayExpanded = false }
-    case .back, .resetView, .previousStep, .nextStep, .selectStep(_), .openProcedure(_),
-      .download(_), .cancelDownload(_), .retry(_), .changeLanguage(_), .openColophon,
-      .openSettings:
-      onAction(action)
-    }
-  }
 }
 
 private struct ExplanationPanel: View {
@@ -167,14 +180,14 @@ private struct ExplanationPanel: View {
         .accessibilityLabel(Text("action.collapse"))
         .accessibilityHint(Text("action.collapse.hint"))
       }
-      Text(state.explanation)
-        .font(.body)
-        .foregroundStyle(DesignTokens.Color.textPrimary)
-        .fixedSize(horizontal: false, vertical: true)
-      Text(state.accessibilitySummary)
-        .font(.caption)
-        .foregroundStyle(DesignTokens.Color.textSecondary)
-        .accessibilityHidden(true)
+      ScrollView {
+        Text(.init(state.explanation))
+          .font(.body)
+          .foregroundStyle(DesignTokens.Color.textPrimary)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .fixedSize(horizontal: false, vertical: true)
+      }
+      .frame(maxHeight: 150)
     }
     .padding(DesignTokens.Spacing.regular)
     .background(
@@ -186,37 +199,5 @@ private struct ExplanationPanel: View {
         .stroke(DesignTokens.Color.textPrimary.opacity(0.1), lineWidth: 1)
     }
     .accessibilityElement(children: .combine)
-  }
-}
-
-struct AnatomyFieldPlaceholder: View {
-  var body: some View {
-    GeometryReader { proxy in
-      ZStack {
-        RadialGradient(
-          colors: [DesignTokens.Color.stageSurface.opacity(0.94), DesignTokens.Color.stageBlack],
-          center: .center,
-          startRadius: 20,
-          endRadius: max(proxy.size.width, proxy.size.height) * 0.72
-        )
-        Capsule()
-          .fill(DesignTokens.Color.bone.opacity(0.74))
-          .frame(width: min(proxy.size.width * 0.24, 132), height: proxy.size.height * 0.68)
-          .rotationEffect(.degrees(-7))
-          .overlay {
-            Capsule()
-              .stroke(DesignTokens.Color.cyan.opacity(0.3), lineWidth: 1)
-          }
-        VStack(spacing: DesignTokens.Spacing.compact) {
-          Image(systemName: "view.3d")
-            .font(.system(size: 28, weight: .light))
-            .foregroundStyle(DesignTokens.Color.cyan.opacity(0.72))
-          Text("theater.scene.placeholder")
-            .font(.caption)
-            .foregroundStyle(DesignTokens.Color.textSecondary)
-        }
-        .accessibilityLabel(Text("theater.scene.accessibility"))
-      }
-    }
   }
 }

@@ -82,7 +82,12 @@ final class PresentationProjectionTests: XCTestCase {
 }
 
 private func repositoryContentRoot() -> URL {
-  URL(fileURLWithPath: #filePath)
+  if let root = Bundle.main.resourceURL?.appendingPathComponent("content"),
+    FileManager.default.fileExists(atPath: root.appendingPathComponent("catalog/catalog.json").path)
+  {
+    return root
+  }
+  return URL(fileURLWithPath: #filePath)
     .deletingLastPathComponent()
     .deletingLastPathComponent()
     .deletingLastPathComponent()

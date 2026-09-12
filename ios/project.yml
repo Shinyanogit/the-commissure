@@ -9,6 +9,7 @@ settings:
     SWIFT_STRICT_CONCURRENCY: complete
     ENABLE_USER_SCRIPT_SANDBOXING: YES
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+    ASSETCATALOG_COMPILER_APPICON_NAME: ""
     PRODUCT_BUNDLE_IDENTIFIER: app.thecommissure.ios
     MARKETING_VERSION: 0.1.0
     CURRENT_PROJECT_VERSION: 1
@@ -23,9 +24,15 @@ targets:
     platform: iOS
     sources:
       - App
+      - path: Resources/NativeAssets
+        type: folder
+        buildPhase: resources
       - path: ../content
         type: folder
         buildPhase: resources
+    settings:
+      base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: ""
     dependencies:
       - package: CommissureCore
     info:

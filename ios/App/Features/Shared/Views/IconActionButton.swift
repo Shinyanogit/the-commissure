@@ -30,6 +30,7 @@ struct IconActionButton: View {
     .accessibilityLabel(Text(LocalizedStringKey(descriptor.labelKey)))
     .accessibilityHint(Text(LocalizedStringKey(descriptor.hintKey)))
     .disabled(!isEnabled)
+    .accessibilityIdentifier(descriptor.labelKey)
   }
 
   private var descriptor: ActionDescriptor {
