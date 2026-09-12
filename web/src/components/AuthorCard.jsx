@@ -1,6 +1,6 @@
 import { useTiltCard } from './useTiltCard.js';
 
-export function AuthorCard({ image, name, university, children }) {
+export function AuthorCard({ image, name, university, href, children }) {
     const { cardRef, handleMouseEnter, handleMouseMove, handleMouseLeave } = useTiltCard();
 
     return (
@@ -11,7 +11,7 @@ export function AuthorCard({ image, name, university, children }) {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            <a href="">
+            <a href={href}>
                 <div className="image-shell">
                     <img src={image} alt={name} />
                 </div>

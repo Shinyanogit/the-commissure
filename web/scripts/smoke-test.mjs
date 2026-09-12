@@ -7,11 +7,88 @@ import { basename, join } from "node:path";
 
 const DIST = "dist";
 const PUBLIC = "public";
-const ROUTES = ["/", "/acdf", "/accf", "/pcdf", "/pcf"];
+const SITE_URL = "https://the-commissure.vercel.app";
+const ROUTE_EXPECTATIONS = [
+  {
+    route: "/",
+    filename: "index.html",
+    title: "The Commissure | Interactive Spine Surgery Education",
+  },
+  {
+    route: "/articles",
+    filename: "articles.html",
+    title: "Cervical Spine Surgery Articles | The Commissure",
+  },
+  {
+    route: "/news",
+    filename: "news.html",
+    title: "The Commissure News | The Commissure",
+  },
+  {
+    route: "/news/jsmvr",
+    filename: "news/jsmvr.html",
+    title: "The Commissure Presented at the 25th Annual Meeting of the Japanese Society for Medical VR | The Commissure",
+  },
+  {
+    route: "/acdf",
+    filename: "acdf.html",
+    title: "ACDF Interactive 3D Guide | The Commissure",
+  },
+  {
+    route: "/accf",
+    filename: "accf.html",
+    title: "ACCF Interactive 3D Guide | The Commissure",
+  },
+  {
+    route: "/pcdf",
+    filename: "pcdf.html",
+    title: "PCDF Interactive 3D Guide | The Commissure",
+  },
+  {
+    route: "/pcf",
+    filename: "pcf.html",
+    title: "PCF Interactive 3D Guide | The Commissure",
+  },
+  {
+    route: "/pcl_open",
+    filename: "pcl_open.html",
+    title: "Open-door PCL Interactive 3D Guide | The Commissure",
+  },
+];
 const REQUIRED_RUNTIME_ASSETS = [
   "draco/draco_decoder.js",
   "draco/draco_decoder.wasm",
   "draco/draco_wasm_wrapper.js",
+];
+const REQUIRED_EDITORIAL_UPDATES = [
+  "The Commissure Presented at the 25th Annual Meeting of the Japanese Society for Medical VR",
+  "Search metadata and a sitemap were added for all published procedure guides",
+  "Shinya Yamaguchi's author profile now links to his portfolio",
+  "Procedure pages now show a branded transition while each 3D scene prepares",
+  "Procedure navigation and explanation controls were redesigned for desktop and mobile",
+  "Procedure models now support orbit, zoom, pan, and synchronized reversible step transitions",
+  "https://shinyanogit.github.io/",
+];
+const REQUIRED_AUTHOR_BIOGRAPHY_OPENINGS = [
+  "I am dedicated to eliminating preventable trauma deaths",
+  "My interests lie in diagnostic radiology and medical imaging",
+  "I aspire to become a neurosurgeon-scientist",
+];
+const FORBIDDEN_AUTHOR_BIOGRAPHY_INTRODUCTIONS = [
+  "Hello, my name is Rintaro Imada",
+  "Hello, my name is Shinya Yamaguchi",
+  "Hello, my name is Koki Tokida",
+];
+const REQUIRED_EDITORIAL_UPDATE_CONTROLS = [
+  "editorial-updates-list",
+  "View all updates",
+  "Show latest five",
+];
+const REQUIRED_HOME_SECTION_NAVIGATION = [
+  "/#about",
+  "/#authors",
+  "scrollTo",
+  "prefers-reduced-motion: reduce",
 ];
 const HOST = "127.0.0.1";
 
@@ -62,6 +139,35 @@ if (!existsSync(DIST)) {
     builtJs.length > 0
       ? pass(`built JS bundle (${builtJs.length})`)
       : fail("missing built JS bundle");
+
+    const builtSource = builtJs
+      .map((file) => readFileSync(join(assetsDir, file), "utf8"))
+      .join("\n");
+    for (const update of REQUIRED_EDITORIAL_UPDATES) {
+      builtSource.includes(update)
+        ? pass(`editorial update: ${update}`)
+        : fail(`missing editorial update: ${update}`);
+    }
+    for (const opening of REQUIRED_AUTHOR_BIOGRAPHY_OPENINGS) {
+      builtSource.includes(opening)
+        ? pass(`author biography opening: ${opening}`)
+        : fail(`missing author biography opening: ${opening}`);
+    }
+    for (const introduction of FORBIDDEN_AUTHOR_BIOGRAPHY_INTRODUCTIONS) {
+      !builtSource.includes(introduction)
+        ? pass(`removed redundant author introduction: ${introduction}`)
+        : fail(`redundant author introduction remains: ${introduction}`);
+    }
+    for (const control of REQUIRED_EDITORIAL_UPDATE_CONTROLS) {
+      builtSource.includes(control)
+        ? pass(`editorial update control: ${control}`)
+        : fail(`missing editorial update control: ${control}`);
+    }
+    for (const navigationContract of REQUIRED_HOME_SECTION_NAVIGATION) {
+      builtSource.includes(navigationContract)
+        ? pass(`home section navigation: ${navigationContract}`)
+        : fail(`missing home section navigation: ${navigationContract}`);
+    }
   }
 
   const requiredGlb = readdirSync(PUBLIC)
@@ -83,6 +189,69 @@ if (!existsSync(DIST)) {
       ? pass(asset)
       : fail(`missing runtime asset: ${asset}`);
   }
+
+  for (const { route, filename, title } of ROUTE_EXPECTATIONS) {
+    const path = join(DIST, filename);
+    if (!existsSync(path)) {
+      fail(`missing static route document: ${filename}`);
+      continue;
+    }
+
+    const html = readFileSync(path, "utf8");
+    const canonical = route === "/" ? `${SITE_URL}/` : `${SITE_URL}${route}`;
+    const canonicalCount = (html.match(/rel="canonical"/g) ?? []).length;
+    html.includes(`<title data-seo-managed="true">${title}</title>`)
+      ? pass(`title ${route}`)
+      : fail(`incorrect title for ${route}`);
+    html.includes(`rel="canonical" href="${canonical}"`)
+      ? pass(`canonical ${route}`)
+      : fail(`incorrect canonical for ${route}`);
+    canonicalCount === 1
+      ? pass(`single canonical ${route}`)
+      : fail(`expected one canonical for ${route}, found ${canonicalCount}`);
+    html.includes('name="description"')
+      ? pass(`description ${route}`)
+      : fail(`missing description for ${route}`);
+
+    const structuredDataMatch = html.match(
+      /<script[^>]+id="route-structured-data"[^>]*>([\s\S]*?)<\/script>/,
+    );
+    if (!structuredDataMatch) {
+      fail(`missing structured data for ${route}`);
+    } else {
+      try {
+        const structuredData = JSON.parse(structuredDataMatch[1]);
+        structuredData["@context"] === "https://schema.org"
+          ? pass(`structured data ${route}`)
+          : fail(`incorrect structured data context for ${route}`);
+      } catch (error) {
+        fail(`invalid structured data for ${route}: ${error.message}`);
+      }
+    }
+  }
+
+  const robotsPath = join(DIST, "robots.txt");
+  if (!existsSync(robotsPath)) {
+    fail("missing robots.txt");
+  } else {
+    const robots = readFileSync(robotsPath, "utf8");
+    robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`)
+      ? pass("robots.txt sitemap declaration")
+      : fail("robots.txt does not declare the canonical sitemap");
+  }
+
+  const sitemapPath = join(DIST, "sitemap.xml");
+  if (!existsSync(sitemapPath)) {
+    fail("missing sitemap.xml");
+  } else {
+    const sitemap = readFileSync(sitemapPath, "utf8");
+    for (const { route } of ROUTE_EXPECTATIONS) {
+      const canonical = route === "/" ? `${SITE_URL}/` : `${SITE_URL}${route}`;
+      sitemap.includes(`<loc>${canonical}</loc>`)
+        ? pass(`sitemap ${route}`)
+        : fail(`sitemap missing ${route}`);
+    }
+  }
 }
 
 try {
@@ -94,6 +263,14 @@ try {
   hasSpaFallback
     ? pass("Vercel SPA fallback")
     : fail("missing Vercel SPA fallback");
+  for (const { route, filename } of ROUTE_EXPECTATIONS.filter(({ route }) => route !== "/")) {
+    const hasStaticRewrite = config.rewrites?.some(
+      ({ source, destination }) => source === route && destination === `/${filename}`,
+    );
+    hasStaticRewrite
+      ? pass(`Vercel static rewrite ${route}`)
+      : fail(`missing Vercel static rewrite for ${route}`);
+  }
   config.outputDirectory === DIST
     ? pass("Vercel output directory")
     : fail(`Vercel outputDirectory must be "${DIST}"`);
@@ -125,13 +302,17 @@ if (existsSync(join(DIST, "index.html"))) {
 
   try {
     await waitForPreview(baseURL);
-    for (const route of ROUTES) {
+    for (const { route, title } of ROUTE_EXPECTATIONS) {
       const response = await fetch(`${baseURL}${route}`);
       const body = await response.text();
-      if (response.ok && body.includes('<div id="root"></div>')) {
+      if (
+        response.ok
+        && body.includes('<div id="root"></div>')
+        && body.includes(`<title data-seo-managed="true">${title}</title>`)
+      ) {
         pass(`route ${route}`);
       } else {
-        fail(`route ${route} did not return the SPA shell`);
+        fail(`route ${route} did not return its static route shell`);
       }
     }
   } catch (error) {

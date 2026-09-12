@@ -5,7 +5,7 @@
   "contentRevision": 1,
   "englishSource": {
     "path": "web/src/content/procedureText.js",
-    "sha256": "0125beb9ba3d0f4dfbea0ef3258b8493f6a27231171ef6d74c9fdce23da2dc6b",
+    "sha256": "cd49d3bbaa3a2ff9ec26368509f72bae1036f077f831a77e54a6fcbdcca4cc00",
     "migration": "mechanical-html-to-restricted-markdown",
     "normalizations": [
       {

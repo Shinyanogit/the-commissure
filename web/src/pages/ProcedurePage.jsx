@@ -1,194 +1,239 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 import { useNavigate } from 'react-router-dom';
+import { ProcedureLoadingScreen } from '../components/ProcedureLoadingScreen.jsx';
 import { ProcedureNav } from '../components/ProcedureNav.jsx';
-import { ProcedureFooter } from '../components/ProcedureFooter.jsx';
 import { useBodyClass } from '../components/useBodyClass.js';
 import { procedureText } from '../content/procedureText.js';
 import '../styles/procedure.css';
+
+const LOADER_MINIMUM_DURATION_MS = 500;
+const LOADER_MAXIMUM_DURATION_MS = 1500;
 
 export function ProcedurePage({ page, initScene }) {
     const mountRef = useRef(null);
     const rootRef = useRef(null);
     const shellRef = useRef(null);
-    const cardRef = useRef(null);
-    const cardMotionRef = useRef(null);
-    const dragStateRef = useRef({
-        pointerId: null,
-        startX: 0,
-        startY: 0,
-        startRect: null,
-        startPosition: { x: 0, y: 0 },
-        hasDragged: false,
-    });
-    const suppressClickRef = useRef(false);
-    const cardPositionRef = useRef({ x: 0, y: 0 });
+    const panelMotionRef = useRef(null);
+    const explanationTrackRef = useRef(null);
+    const sceneControllerRef = useRef(null);
+    const swipeRef = useRef({ pointerId: null, startX: 0, startY: 0, lastX: 0, lastY: 0, axis: null });
+    const panelResizeRef = useRef(null);
+    const suppressToggleClickRef = useRef(false);
+    const suppressPanelLinkClickRef = useRef(false);
+    const sceneRetryRef = useRef(null);
+    const loadingStartedAtRef = useRef(Date.now());
+    const loaderReadyTimerRef = useRef(null);
+    const loaderFallbackTimerRef = useRef(null);
     const navigate = useNavigate();
 
     const data = procedureText[page];
-
     const [currentScene, setCurrentScene] = useState(0);
-    const [isExplanationOpen, setIsExplanationOpen] = useState(false);
-    const [cardPosition, setCardPosition] = useState({ x: 0, y: 0 });
-    const [isDraggingCard, setIsDraggingCard] = useState(false);
+    const [isExplanationOpen, setIsExplanationOpen] = useState(true);
+    const [panelSize, setPanelSize] = useState({ width: null, height: null });
+    const [isLoading, setIsLoading] = useState(true);
+    const hasSceneNavigation = data.scenes.length > 1;
+    const panelPositionClasses = 'fixed top-20 right-0 bottom-0 left-auto w-[var(--procedure-panel-width)] max-h-none rounded-l-[1.2rem] rounded-r-none portrait:inset-x-0 portrait:top-auto portrait:bottom-0 portrait:h-[var(--procedure-panel-height)] portrait:w-full portrait:max-h-[42dvh] portrait:rounded-t-[1.2rem] portrait:rounded-b-none';
 
     useBodyClass('procedure-page');
 
+    const hideLoader = useCallback(() => {
+        if (loaderReadyTimerRef.current) {
+            window.clearTimeout(loaderReadyTimerRef.current);
+            loaderReadyTimerRef.current = null;
+        }
+        if (loaderFallbackTimerRef.current) {
+            window.clearTimeout(loaderFallbackTimerRef.current);
+            loaderFallbackTimerRef.current = null;
+        }
+        setIsLoading(false);
+    }, []);
+
+    const handleSceneReady = useCallback(() => {
+        if (loaderReadyTimerRef.current) return;
+
+        const elapsed = Date.now() - loadingStartedAtRef.current;
+        const remaining = Math.max(0, LOADER_MINIMUM_DURATION_MS - elapsed);
+        loaderReadyTimerRef.current = window.setTimeout(hideLoader, remaining);
+    }, [hideLoader]);
+
     useEffect(() => {
-        cardPositionRef.current = cardPosition;
-    }, [cardPosition]);
+        loaderFallbackTimerRef.current = window.setTimeout(
+            hideLoader,
+            LOADER_MAXIMUM_DURATION_MS,
+        );
 
-    const clampCardPosition = (nextPosition, rect = cardRef.current?.getBoundingClientRect()) => {
-        if (!rect || typeof window === 'undefined') {
-            return nextPosition;
-        }
-
-        let nextX = nextPosition.x;
-        let nextY = nextPosition.y;
-
-        const overflowLeft = rect.left;
-        const overflowRight = rect.right - window.innerWidth;
-        const overflowTop = rect.top;
-        const overflowBottom = rect.bottom - window.innerHeight;
-
-        if (overflowLeft < 0) {
-            nextX -= overflowLeft;
-        }
-
-        if (overflowRight > 0) {
-            nextX -= overflowRight;
-        }
-
-        if (overflowTop < 0) {
-            nextY -= overflowTop;
-        }
-
-        if (overflowBottom > 0) {
-            nextY -= overflowBottom;
-        }
-
-        return { x: nextX, y: nextY };
-    };
-
-    const clampCardPositionToViewport = () => {
-        const card = cardRef.current;
-        if (!card || typeof window === 'undefined') return;
-
-        setCardPosition((currentPosition) => {
-            const nextPosition = clampCardPosition(currentPosition, card.getBoundingClientRect());
-            if (nextPosition.x === currentPosition.x && nextPosition.y === currentPosition.y) {
-                return currentPosition;
+        return () => {
+            if (loaderReadyTimerRef.current) {
+                window.clearTimeout(loaderReadyTimerRef.current);
+                loaderReadyTimerRef.current = null;
             }
-
-            return nextPosition;
-        });
-    };
+            if (loaderFallbackTimerRef.current) {
+                window.clearTimeout(loaderFallbackTimerRef.current);
+                loaderFallbackTimerRef.current = null;
+            }
+        };
+    }, [hideLoader]);
 
     useEffect(() => {
         if (!mountRef.current || !rootRef.current) return undefined;
-        return initScene(mountRef.current, rootRef.current, data.scenes.length, currentScene, setCurrentScene);
-    }, [initScene]);
+        return initScene(
+            mountRef.current,
+            rootRef.current,
+            data.scenes.length,
+            currentScene,
+            setCurrentScene,
+            sceneControllerRef,
+            handleSceneReady,
+        );
+    }, [initScene, handleSceneReady]);
 
     useEffect(() => {
         if (!rootRef.current) return undefined;
         const shell = shellRef.current;
-        const cardMotion = cardMotionRef.current;
-        const footer = rootRef.current.querySelector('.procedure-footer');
-
+        const panelMotion = panelMotionRef.current;
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
         if (shell) {
-            tl.fromTo(shell, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.7 });
+            tl.fromTo(shell, { opacity: 0 }, { opacity: 1, duration: 0.5 });
         }
 
-        if (cardMotion) {
-            tl.fromTo(cardMotion, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.65 }, shell ? '-=0.4' : undefined);
-        }
-
-        if (footer) {
-            tl.fromTo(footer, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45 }, cardMotion ? '-=0.3' : undefined);
+        if (panelMotion) {
+            tl.fromTo(panelMotion, { opacity: 0 }, { opacity: 1, duration: 0.45 }, '-=0.25');
         }
 
         return () => tl.kill();
     }, []);
 
     useEffect(() => {
-        if (!rootRef.current) return undefined;
-        const cardMotion = cardMotionRef.current;
-        if (!cardMotion) return undefined;
+        const frameId = window.requestAnimationFrame(() => {
+            window.dispatchEvent(new Event('procedure-layout-change'));
+        });
+        return () => window.cancelAnimationFrame(frameId);
+    }, [isExplanationOpen, panelSize.width, panelSize.height]);
 
-        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-        tl.fromTo(cardMotion, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45 });
-
-        return () => tl.kill();
-    }, [currentScene]);
-
-    useEffect(() => {
-        setIsExplanationOpen(false);
-    }, [currentScene]);
-
-    useEffect(() => {
-        const handleResize = () => {
-            clampCardPositionToViewport();
-        };
-
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('orientationchange', handleResize);
-
-        const card = cardRef.current;
-        const observer = typeof ResizeObserver === 'undefined' || !card
-            ? null
-            : new ResizeObserver(() => {
-                clampCardPositionToViewport();
-            });
-
-        if (observer && card) {
-            observer.observe(card);
-        }
-
-        clampCardPositionToViewport();
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            window.removeEventListener('orientationchange', handleResize);
-
-            if (observer) {
-                observer.disconnect();
-            }
-        };
-    }, [currentScene, isExplanationOpen]);
+    useEffect(() => () => {
+        if (sceneRetryRef.current) window.clearTimeout(sceneRetryRef.current);
+    }, []);
 
     const handleClick = (event) => {
         const link = event.target.closest('a[href^="/"]');
         if (!link || !rootRef.current?.contains(link)) return;
         event.preventDefault();
+        if (suppressPanelLinkClickRef.current) {
+            suppressPanelLinkClickRef.current = false;
+            return;
+        }
         navigate(link.getAttribute('href'));
     };
 
-    const handleCardClickCapture = (event) => {
-        if (!suppressClickRef.current) return;
-        event.preventDefault();
-        event.stopPropagation();
-        suppressClickRef.current = false;
+    const changeScene = (direction) => {
+        const controller = sceneControllerRef.current;
+        if (!controller) return false;
+        const atBoundary = direction > 0
+            ? currentScene >= data.scenes.length - 1
+            : currentScene <= 0;
+        if (atBoundary) return false;
+
+        const attemptChange = () => (
+            direction > 0 ? sceneControllerRef.current?.next() : sceneControllerRef.current?.previous()
+        );
+        if (attemptChange()) return true;
+
+        if (sceneRetryRef.current) window.clearTimeout(sceneRetryRef.current);
+        let attempts = 0;
+        const retry = () => {
+            attempts += 1;
+            if (attemptChange() || attempts >= 50) {
+                sceneRetryRef.current = null;
+                return;
+            }
+            sceneRetryRef.current = window.setTimeout(retry, 100);
+        };
+        sceneRetryRef.current = window.setTimeout(retry, 100);
+        return false;
     };
 
-    const handleCardPointerDown = (event) => {
-        if (
-            event.target.closest('button') ||
-            event.target.closest('a') ||
-            event.target.closest('input') ||
-            event.target.closest('textarea') ||
-            event.target.closest('.procedure-paragraph')
-        ) { return; }
-        if (event.button !== 0 || !cardRef.current) return;
+    const goToPreviousScene = () => changeScene(-1);
 
-        dragStateRef.current = {
+    const goToNextScene = () => changeScene(1);
+
+    const handlePanelResizeStart = (event) => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+        const panel = event.currentTarget.closest('.procedure-hero-card');
+        if (!panel) return;
+
+        const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+        const bounds = panel.getBoundingClientRect();
+        panelResizeRef.current = {
             pointerId: event.pointerId,
             startX: event.clientX,
             startY: event.clientY,
-            startRect: cardRef.current.getBoundingClientRect(),
-            startPosition: cardPositionRef.current,
-            hasDragged: false,
+            startSize: isPortrait ? bounds.height : bounds.width,
+            isPortrait,
+            dragged: false,
+        };
+        suppressToggleClickRef.current = false;
+        event.stopPropagation();
+
+        try {
+            event.currentTarget.setPointerCapture(event.pointerId);
+        } catch {
+            // Pointer capture is best effort.
+        }
+    };
+
+    const handlePanelResizeMove = (event) => {
+        const resize = panelResizeRef.current;
+        if (!resize || resize.pointerId !== event.pointerId) return;
+
+        const delta = resize.isPortrait
+            ? event.clientY - resize.startY
+            : event.clientX - resize.startX;
+        if (!resize.dragged && Math.abs(delta) < 4) return;
+
+        resize.dragged = true;
+        const maximum = resize.isPortrait
+            ? window.innerHeight * 0.42
+            : Math.min(window.innerWidth * 0.55, 640);
+        const minimum = Math.min(resize.isPortrait ? 180 : 280, maximum);
+        const nextSize = Math.min(Math.max(resize.startSize - delta, minimum), maximum);
+        const property = resize.isPortrait ? 'height' : 'width';
+        setPanelSize((current) => ({ ...current, [property]: nextSize }));
+        event.preventDefault();
+        event.stopPropagation();
+    };
+
+    const finishPanelResize = (event) => {
+        const resize = panelResizeRef.current;
+        if (!resize || resize.pointerId !== event.pointerId) return;
+
+        suppressToggleClickRef.current = resize.dragged;
+        panelResizeRef.current = null;
+        event.stopPropagation();
+    };
+
+    const hideExplanation = () => {
+        if (suppressToggleClickRef.current) {
+            suppressToggleClickRef.current = false;
+            return;
+        }
+        setIsExplanationOpen(false);
+    };
+
+    const handlePanelPointerDown = (event) => {
+        if (!hasSceneNavigation || event.target.closest('button')) return;
+        if (event.pointerType === 'touch') return;
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+        swipeRef.current = {
+            pointerId: event.pointerId,
+            startX: event.clientX,
+            startY: event.clientY,
+            lastX: event.clientX,
+            lastY: event.clientY,
+            axis: null,
         };
 
         try {
@@ -198,113 +243,215 @@ export function ProcedurePage({ page, initScene }) {
         }
     };
 
-    const handleCardPointerMove = (event) => {
-        const dragState = dragStateRef.current;
-        if (dragState.pointerId !== event.pointerId || !dragState.startRect) return;
+    const handlePanelPointerMove = (event) => {
+        const swipe = swipeRef.current;
+        if (swipe.pointerId !== event.pointerId || !explanationTrackRef.current) return;
 
-        const deltaX = event.clientX - dragState.startX;
-        const deltaY = event.clientY - dragState.startY;
-        const distance = Math.hypot(deltaX, deltaY);
-
-        if (!dragState.hasDragged) {
-            if (distance < 5) return;
-            dragState.hasDragged = true;
-            setIsDraggingCard(true);
+        const deltaX = event.clientX - swipe.startX;
+        const deltaY = event.clientY - swipe.startY;
+        swipe.lastX = event.clientX;
+        swipe.lastY = event.clientY;
+        if (!swipe.axis) {
+            if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < 8) return;
+            swipe.axis = Math.abs(deltaX) > Math.abs(deltaY) * 1.15 ? 'horizontal' : 'vertical';
         }
+        if (swipe.axis !== 'horizontal') return;
 
+        explanationTrackRef.current.classList.add('dragging');
+        explanationTrackRef.current.style.setProperty('--procedure-swipe-offset', `${deltaX}px`);
         event.preventDefault();
-        event.stopPropagation();
-
-        const proposedPosition = {
-            x: dragState.startPosition.x + deltaX,
-            y: dragState.startPosition.y + deltaY,
-        };
-
-        const nextRect = {
-            left: dragState.startRect.left + deltaX,
-            right: dragState.startRect.right + deltaX,
-            top: dragState.startRect.top + deltaY,
-            bottom: dragState.startRect.bottom + deltaY,
-        };
-
-        setCardPosition(clampCardPosition(proposedPosition, nextRect));
     };
 
-    const finishCardDrag = (event) => {
-        const dragState = dragStateRef.current;
-        if (dragState.pointerId !== event.pointerId) return;
+    const finishPanelSwipe = (pointerId) => {
+        const swipe = swipeRef.current;
+        if (swipe.pointerId !== pointerId) return;
 
-        try {
-            if (cardRef.current?.hasPointerCapture(event.pointerId)) {
-                cardRef.current.releasePointerCapture(event.pointerId);
-            }
-        } catch {
-            // Ignore capture release failures.
+        const deltaX = swipe.lastX - swipe.startX;
+        const deltaY = swipe.lastY - swipe.startY;
+        const isTouch = pointerId === 'touch';
+        const isHorizontalSwipe = swipe.axis === 'horizontal'
+            && Math.abs(deltaX) >= (isTouch ? 18 : 28)
+            && Math.abs(deltaX) > Math.abs(deltaY) * (isTouch ? 0.75 : 1.2);
+        const track = explanationTrackRef.current;
+        swipeRef.current = { pointerId: null, startX: 0, startY: 0, lastX: 0, lastY: 0, axis: null };
+
+        if (!track || !track.classList.contains('dragging')) return;
+        suppressPanelLinkClickRef.current = true;
+        window.setTimeout(() => {
+            suppressPanelLinkClickRef.current = false;
+        }, 120);
+        const frozenTransform = window.getComputedStyle(track).transform;
+        track.style.transform = frozenTransform;
+        track.classList.remove('dragging');
+        track.style.removeProperty('--procedure-swipe-offset');
+
+        if (isHorizontalSwipe) {
+            changeScene(deltaX > 0 ? -1 : 1);
         }
+        window.requestAnimationFrame(() => {
+            track.style.removeProperty('transform');
+        });
+    };
 
-        if (dragState.hasDragged) {
-            event.preventDefault();
-            event.stopPropagation();
-            suppressClickRef.current = true;
-            window.setTimeout(() => {
-                suppressClickRef.current = false;
-            }, 0);
-        }
+    const handlePanelTouchStart = (event) => {
+        if (!hasSceneNavigation || event.target.closest('button')) return;
+        if (event.touches.length !== 1) return;
 
-        dragStateRef.current = {
-            pointerId: null,
-            startX: 0,
-            startY: 0,
-            startRect: null,
-            startPosition: cardPositionRef.current,
-            hasDragged: false,
+        const touch = event.touches[0];
+        swipeRef.current = {
+            pointerId: 'touch',
+            startX: touch.clientX,
+            startY: touch.clientY,
+            lastX: touch.clientX,
+            lastY: touch.clientY,
+            axis: null,
         };
-        setIsDraggingCard(false);
+    };
+
+    const handlePanelTouchMove = (event) => {
+        const swipe = swipeRef.current;
+        if (swipe.pointerId !== 'touch' || event.touches.length !== 1 || !explanationTrackRef.current) return;
+
+        const touch = event.touches[0];
+        const deltaX = touch.clientX - swipe.startX;
+        const deltaY = touch.clientY - swipe.startY;
+        swipe.lastX = touch.clientX;
+        swipe.lastY = touch.clientY;
+
+        if (!swipe.axis) {
+            if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < 6) return;
+            swipe.axis = Math.abs(deltaX) > Math.abs(deltaY) * 0.75 ? 'horizontal' : 'vertical';
+        }
+        if (swipe.axis !== 'horizontal') return;
+
+        explanationTrackRef.current.classList.add('dragging');
+        explanationTrackRef.current.style.setProperty('--procedure-swipe-offset', `${deltaX}px`);
+        event.preventDefault();
     };
 
     return (
-        <div className="procedurePage" ref={rootRef} onClick={handleClick}>
+        <div
+            className={`procedurePage${isExplanationOpen ? '' : ' explanation-stowed'}`}
+            ref={rootRef}
+            onClick={handleClick}
+            aria-busy={isLoading}
+        >
+            {isLoading && <ProcedureLoadingScreen />}
             <div ref={mountRef} className="canvas-mount"></div>
             <div className="procedure-atlas-glow glow-one"></div>
             <div className="procedure-atlas-glow glow-two"></div>
-            <ProcedureNav />
+            <ProcedureNav stowed={!isExplanationOpen} />
             <main ref={shellRef} className="procedure-shell">
-                <section
-                    ref={cardRef}
-                    className="procedure-hero-card"
-                    onPointerDown={handleCardPointerDown}
-                    onPointerMove={handleCardPointerMove}
-                    onPointerUp={finishCardDrag}
-                    onPointerCancel={finishCardDrag}
-                    onClickCapture={handleCardClickCapture}
-                    style={{
-                        transform: `translate3d(${cardPosition.x}px, ${cardPosition.y}px, 0)`,
-                    }}
-                    data-dragging={isDraggingCard ? 'true' : 'false'}
+                <button
+                    type="button"
+                    className={`procedure-explanation-trigger fixed top-1/2 right-3 z-[36] -translate-y-1/2 portrait:top-auto portrait:right-auto portrait:bottom-3 portrait:left-1/2 portrait:-translate-x-1/2 portrait:translate-y-0 ${isExplanationOpen ? '' : 'visible'}`}
+                    onClick={() => setIsExplanationOpen(true)}
+                    aria-expanded="false"
+                    aria-label="Show explanation"
+                    aria-hidden={isExplanationOpen}
+                    tabIndex={isExplanationOpen ? -1 : 0}
                 >
-                    <div ref={cardMotionRef} className="procedure-hero-card-motion">
-                        <div className="procedure-hero-copy">
-                            <span className="procedure-eyebrow">spine surgical atlas</span>
-                            <div className="procedure-title-row">
-                                <h1 className="procedure-title">{data.scenes[currentScene].title}</h1>
+                    <svg className="portrait:hidden" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m15 18-6-6 6-6" />
+                    </svg>
+                    <svg className="hidden portrait:block" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m18 15-6-6-6 6" />
+                    </svg>
+                </button>
+                <aside
+                    className={`procedure-hero-card ${panelPositionClasses} ${isExplanationOpen ? 'open translate-x-0 portrait:translate-y-0' : 'translate-x-full portrait:translate-x-0 portrait:translate-y-full'}`}
+                    style={{
+                        '--procedure-panel-width': panelSize.width ? `${panelSize.width}px` : 'clamp(20rem, 30vw, 28rem)',
+                        '--procedure-panel-height': panelSize.height ? `${panelSize.height}px` : '40dvh',
+                    }}
+                    aria-hidden={!isExplanationOpen}
+                    onPointerDown={handlePanelPointerDown}
+                    onPointerMove={handlePanelPointerMove}
+                    onPointerUp={(event) => finishPanelSwipe(event.pointerId)}
+                    onPointerCancel={(event) => finishPanelSwipe(event.pointerId)}
+                    onTouchStart={handlePanelTouchStart}
+                    onTouchMove={handlePanelTouchMove}
+                    onTouchEnd={() => finishPanelSwipe('touch')}
+                    onTouchCancel={() => finishPanelSwipe('touch')}
+                >
+                    <button
+                        type="button"
+                        className="procedure-toggle absolute top-1/2 left-0 z-[2] -translate-x-1/2 -translate-y-1/2 portrait:top-0 portrait:left-1/2 portrait:-translate-x-1/2 portrait:-translate-y-1/2 portrait:rotate-90"
+                        onPointerDown={handlePanelResizeStart}
+                        onPointerMove={handlePanelResizeMove}
+                        onPointerUp={finishPanelResize}
+                        onPointerCancel={finishPanelResize}
+                        onClick={hideExplanation}
+                        aria-expanded="true"
+                        aria-label="Hide explanation"
+                    >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </button>
+                    <div ref={panelMotionRef} className="procedure-hero-card-motion">
+                        <div className="procedure-explanation-viewport">
+                            <div
+                                ref={explanationTrackRef}
+                                className="procedure-explanation-track"
+                                style={{ '--procedure-track-position': `${currentScene * -100}%` }}
+                            >
+                                {data.scenes.map((scene, index) => (
+                                    <section
+                                        key={scene.title}
+                                        className="procedure-explanation-slide"
+                                        aria-hidden={index !== currentScene}
+                                        inert={index !== currentScene}
+                                    >
+                                        {/*
+                                        <div className="procedure-panel-header">
+                                            <span className="procedure-eyebrow inline-flex max-sm:hidden">spine surgical atlas</span>
+                                        </div>
+                                        */}
+                                        <h1 className="procedure-title">{scene.title}</h1>
+                                        <div
+                                            className="procedure-paragraph open"
+                                            dangerouslySetInnerHTML={{ __html: scene.paragraph }}
+                                        />
+                                    </section>
+                                ))}
+                            </div>
+                        </div>
+                        {hasSceneNavigation && (
+                            <div className="procedure-panel-controls" aria-label="Explanation navigation">
                                 <button
                                     type="button"
-                                    className={`procedure-toggle${isExplanationOpen ? ' active' : ''}`}
-                                    onClick={() => setIsExplanationOpen((value) => !value)}
-                                    aria-expanded={isExplanationOpen}
+                                    onClick={goToPreviousScene}
+                                    disabled={currentScene === 0}
+                                    aria-label="Previous explanation"
                                 >
-                                    {isExplanationOpen ? 'Hide explanation' : 'Show explanation'}
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="m15 18-6-6 6-6" />
+                                    </svg>
+                                </button>
+                                <div className="procedure-panel-indicator" aria-label={`Explanation ${currentScene + 1} of ${data.scenes.length}`}>
+                                    {data.scenes.map((_, index) => (
+                                        <span
+                                            key={index}
+                                            className={`dot${index === currentScene ? ' active' : ''}`}
+                                        />
+                                    ))}
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={goToNextScene}
+                                    disabled={currentScene === data.scenes.length - 1}
+                                    aria-label="Next explanation"
+                                >
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg>
                                 </button>
                             </div>
-                            <div className={`procedure-paragraph${isExplanationOpen ? ' open' : ''}`} dangerouslySetInnerHTML={{ __html: data.scenes[currentScene].paragraph }} />
-                        </div>
+                        )}
                     </div>
-                </section>
+                </aside>
             </main>
-            <ProcedureFooter
-                sceneCount={data.scenes.length}
-                currentScene={currentScene}
-            />
         </div>
     );
 }

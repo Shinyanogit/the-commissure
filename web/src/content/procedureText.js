@@ -330,5 +330,94 @@ export const procedureText = {
         `
       }
     ]
+  },
+  pcl_open: {
+    scenes: [
+      {
+        title: 'Open Door Posterior Cervical Laminoplasty (Open-door PCL)',
+        paragraph:
+        `
+        Posterior cervical laminoplasty (PCL) is a surgical procedure that relieves pressure on the spinal cord by expanding the spinal canal. 
+        There are numerous types of PCL, and this article focuses on one of the most common techniques: <span class="highlight-red">Open-door PCL</span>. 
+        Open-door PCL consists of four major steps: <span class="highlight-red">creation of the hinge trough</span>, <span class="highlight-red">creation of the open-side trough</span>, <span class="highlight-red">insertion of the spacer</span>, and <span class="highlight-red">fixation of the laminar door</span>. 
+        By reconstructing and maintaining the lamina in an expanded position, Open-door PCL provides effective decompression of the spinal cord while preserving cervical range of motion.
+        `
+      },
+      {
+        title: 'Indication for Open-door PCL',
+        paragraph:
+        `
+        Open-door PCL is commonly performed to treat <span class="highlight-red">multilevel</span> cervical disorders in patients with <span class="highlight-red">preserved cervical alignment</span>.
+        Common indications include:
+        <ul>
+            <li><span class="highlight-red">Multilevel spinal stenosis</span></li>
+            <li><span class="highlight-red">Cervical spondylotic myelopathy</span></li>
+            <li><span class="highlight-red">Ossification of the posterior longitudinal ligament (OPLL)</span></li>
+            <li><span class="highlight-red">Congenital cervical spinal stenosis</span></li>
+        </ul>
+        In this 3D model, multilevel cervical disc herniation is depicted. 
+        Open-door PCL may be considered in cases like this when the disc herniation involves multiple levels and cervical alignment is preserved.
+        `
+      },
+      {
+        title: 'Creation of the Hinge Trough',
+        paragraph:
+        `
+        The initial step of Open-door PCL is the creation of the <span class="highlight-red">hinge trough</span>. 
+        As depicted in this 3D model, the trough is created on the left side of the lamina by removing part of the laminar bone. 
+        This trough would later function as the hinge or pivot point of the laminoplasty. 
+        At this stage, it is important to note that the left side of the lamina is <span class="highlight-red">not cut through completely</span>. 
+        Instead, only the superficial portion of the lamina is removed, leaving the deeper cortex intact and maintaining the lamina’s attachment to the lateral mass on the left side.
+        `
+      },
+      {
+        title: 'Creation of the Open-side Trough',
+        paragraph:
+        `
+        Once the hinge trough is established, an <span class="highlight-red">open-side trough</span> is created on the right side of the lamina. 
+        At this stage, it is important to note that the lamina is <span class="highlight-red">cut through in full thickness</span> on the right side. 
+        This completely detaches the lamina from the right lateral mass, leaving the left-sided hinge as the primary structure maintaining the lamina in position.
+        `
+      },
+      {
+        title: 'Spacer Implantation',
+        paragraph:
+        `
+        Using the left hinge trough as the pivot point, the lamina is gently opened towards the left side, thereby expanding the spinal canal. 
+        To maintain the lamina in its open position, a <span class="highlight-red">spacer</span> may be inserted between the lamina and the lateral mass. 
+        Common types of spacers include:
+        <ul>
+            <li><span class="highlight-red">Hydroxyapatite (HA) spacer</span></li>
+            <li><span class="highlight-red">Titanium spacer</span></li>
+            <li><span class="highlight-red">Polyetheretherketone (PEEK) spacer</span></li>
+            <li><span class="highlight-red">Bone graft spacer</span></li>
+        </ul>
+        In this 3D model, a bone graft spacer is inserted in the open-side trough to maintain the lamina in its open position.
+        `
+      },
+      {
+        title: 'Fixation of the Laminar Door',
+        paragraph:
+        `
+        To secure the opened lamina, spacer, and the lateral mass in position, <span class="highlight-red">plates</span> and <span class="highlight-red">screws</span> are inserted. 
+        Because this procedure does not fuse the cervical spine across multiple levels, cervical range of motion is generally better <span class="highlight-red">preserved</span> after the surgery, although some reduction in range of motion may still occur. 
+        After fixation, surgeons typically use intraoperative <span class="highlight-red">radiographic imaging</span> to confirm the correct placement of the plates and screws, and to assess adequate expansion of the spinal canal.
+        `
+      },
+      {
+        title: 'Summary',
+        paragraph:
+        `
+        Some of the key features of Open-door PCL are as follows:
+        <ul>
+            <li>It is performed to <span class="highlight-red">expand the spinal canal</span> and decompress the spinal cord.</li>
+            <li>It is one of the several types of PCL and is effective for treating <span class="highlight-red">multilevel</span> cervical disorders in patients with <span class="highlight-red">preserved cervical alignment</span>.</li>
+            <li>It consists of four major steps: <span class="highlight-red">creation of the hinge trough</span>, <span class="highlight-red">creation of the open-side trough</span>, <span class="highlight-red">implantation of the spacer</span>, and <span class="highlight-red">fixation of the laminar door</span>. </li>
+            <li>It uses <span class="highlight-red">plates</span> and <span class="highlight-red">screws</span> to maintain the lamina in the desired position while <span class="highlight-red">preserving</span> the cervical range of motion.</li>
+        </ul>
+        Due to its ability to decompress the spinal cord without requiring spinal fusion, Open-door PCL remains an important surgical option for the treatment of multilevel cervical disorders.
+        `
+      }
+    ]
   }
 };

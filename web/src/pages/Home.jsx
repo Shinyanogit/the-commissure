@@ -8,9 +8,13 @@ import { Footer } from '../components/Footer.jsx';
 import { HomeNav } from '../components/HomeNav.jsx';
 import { useBodyClass } from '../components/useBodyClass.js';
 import { initHomeScene } from '../scenes/index.js';
+import { NEWS_UPDATES } from '../content/newsData.js';
 import '../styles/home.css';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const INITIAL_EDITORIAL_UPDATE_COUNT = 5;
+const editorialUpdates = NEWS_UPDATES;
 
 export function Home() {
     const pageRef = useRef(null);
@@ -22,6 +26,7 @@ export function Home() {
     const secondaryCtaRef = useRef(null);
     const indicatorRef = useRef(null);
     const sectionsRef = useRef([]);
+    const visibleEditorialUpdates = editorialUpdates.slice(0, INITIAL_EDITORIAL_UPDATE_COUNT);
 
     useBodyClass('home-page');
 
@@ -109,7 +114,7 @@ export function Home() {
             <div ref={(node) => { sectionsRef.current[0] = node; }} className="content article" id="articles">
                 <div className="section-heading">
                     <div className="eyebrow">Featured articles</div>
-                    <div className="title">A modern atlas of cervical surgery.</div>
+                    <div className="title">A modern atlas of cervical surgery</div>
                 </div>
                 <ul className="article-list">
                     <ArticleCard
@@ -146,38 +151,46 @@ export function Home() {
                         During the procedure, surgeons may additionally perform discectomy or osteophytectomy to…
                     </ArticleCard>
                 </ul>
+                <div className="article-view-more-wrap">
+                    <Link to="/articles" className="article-view-more">View more</Link>
+                </div>
             </div>
             <div ref={(node) => { sectionsRef.current[1] = node; }} className="content news">
                 <div className="section-heading">
                     <div className="eyebrow">Latest news</div>
-                    <div className="title">Updates from the editorial team.</div>
+                    <div className="title">Updates from the editorial team</div>
                 </div>
-                <ul className="news-list">
-                    <li>
-                        <span className="header"><a href="">Koki Tokida joined the editorial board</a></span>
-                        <span className="date">Jun 27, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/accf">Article on Anterior Cervical Corpectomy and Fusion (ACCF) is now available</Link></span>
-                        <span className="date">Jun 27, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><a href="">Shinya Yamaguchi joined the editorial board</a></span>
-                        <span className="date">Jun 26, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/pcf">Article on Posterior Cervical Foraminotomy (PCF) is now available</Link></span>
-                        <span className="date">Jun 18, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/acdf">Article on Anterior Cervical Discectomy and Fusion (ACDF) is now available</Link></span>
-                        <span className="date">May 24, 2026</span>
-                    </li>
-                    <li>
-                        <span className="header"><Link to="/pcdf">Article on Posterior Cervical Decompression and Fusion (PCDF) is now available</Link></span>
-                        <span className="date">May 17, 2026</span>
-                    </li>
+                <ul className="news-list" id="editorial-updates-list">
+                    {visibleEditorialUpdates.map((update, index) => (
+                        <li
+                            key={update.label}
+                            className={index >= INITIAL_EDITORIAL_UPDATE_COUNT ? 'news-extra' : undefined}
+                        >
+                            <span className="header">
+                                {update.to ? (
+                                    <Link to={update.to}>{update.label}</Link>
+                                ) : (
+                                    <a
+                                        href={update.href}
+                                        target={update.external ? '_blank' : undefined}
+                                        rel={update.external ? 'noreferrer' : undefined}
+                                    >
+                                        {update.label}
+                                    </a>
+                                )}
+                            </span>
+                            <span className="date">{update.date}</span>
+                        </li>
+                    ))}
                 </ul>
+                <div className="article-view-more-wrap">
+                    <Link to="/news" className="article-view-more" aria-label="View all news updates">
+                        <span aria-hidden="true">View more</span>
+                        <span className="sr-only">View all updates</span>
+                        <span className="sr-only">Show latest five</span>
+                        <span className="sr-only">View more</span>
+                    </Link>
+                </div>
             </div>
             <div ref={(node) => { sectionsRef.current[2] = node; }} className="content about" id="about">
                 <ul className="about-list">
@@ -197,7 +210,7 @@ export function Home() {
             <div ref={(node) => { sectionsRef.current[3] = node; }} className="content authors" id="authors">
                 <div className="section-heading">
                     <div className="eyebrow">Featured authors</div>
-                    <div className="title">The minds shaping the experience.</div>
+                    <div className="title">The minds shaping the experience</div>
                 </div>
                 <ul className="author-list">
                     <AuthorCard
@@ -205,7 +218,6 @@ export function Home() {
                         name="Rintaro Imada"
                         university="Kyoto Prefectural University of Medicine, Kyoto, Japan"
                     >
-                        Hello, my name is Rintaro Imada, and I am a fifth-year medical student from Japan.
                         I am dedicated to eliminating preventable trauma deaths from the modern trauma care system.
                         At The Commissure, I am responsible for designing 3D anatomical models and writing articles on spinal disorders and their surgical treatments. 
                         I hope that my work helps readers gain a deeper understanding of spine surgery.
@@ -214,8 +226,8 @@ export function Home() {
                         image="/shinyayamaguchi.webp"
                         name="Shinya Yamaguchi"
                         university="The University of Tokyo, Tokyo, Japan"
+                        href="https://shinyanogit.github.io/"
                     >
-                        Hello, my name is Shinya Yamaguchi, and I am a sixth-year medical student at the University of Tokyo.
                         My interests lie in diagnostic radiology and medical imaging, and I have carried out imaging research during a research experience at the University of Pennsylvania.
                         At The Commissure, I help bring the project online and share its mission of making accurate, accessible information about spine surgery available to everyone.
                     </AuthorCard>
@@ -224,7 +236,6 @@ export function Home() {
                         name="Koki Tokida"
                         university="Tohoku University, Sendai, Japan"
                     >
-                        Hello, my name is Koki Tokida, and I am a sixth-year medical student at Tohoku University in Japan. 
                         I aspire to become a neurosurgeon-scientist with a special focus on skull base surgery, neurosurgical oncology, and translational research. 
                         I have several years of research experience in brain tumor biology and have observed neurosurgical practice, including a wide range of spinal surgeries, both in Japan and overseas. 
                         At The Commissure, I contribute to developing educational content on spine surgery and anatomy. 
