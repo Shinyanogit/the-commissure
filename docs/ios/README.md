@@ -1,5 +1,12 @@
 # Native iOS Documentation Map
 
+> Latest owner goal and operating boundaries: [App Store pre-submission plan](PRE_SUBMISSION_PLAN.md) (2026-09-12). Local iOS commits only; no push or submission. The separately authorized Vercel support site is documented in that plan.
+
+
+> 2026-09-12 owner update: temporary UI is authorized to unblock native
+> functional implementation. See `IMPLEMENTATION_STATUS.md` for the sequencing override and current evidence.
+> Final visual and release gates remain separate.
+
 These documents are intentionally separated by ownership so one requirement has
 one source of truth:
 
