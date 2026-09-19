@@ -9,6 +9,8 @@ pages are ready for publication on the existing product site. Rights holder,
 screenshots, age-rating answers, privacy answers, and legal/export answers
 remain approval gates.
 
+Planned first public version: `1.0.0` (build `1`).
+
 ## English
 
 App name, 30-character limit:
