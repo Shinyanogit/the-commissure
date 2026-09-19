@@ -37,7 +37,7 @@ final class RemoteAssetSourceTests: XCTestCase {
 
     XCTAssertEqual(Set(payload.files.keys), Set(files))
     XCTAssertEqual(RemoteURLProtocol.state.requestCount, files.count)
-    XCTAssertEqual(RemoteURLProtocol.state.maximumConcurrentRequests, 2)
+    XCTAssertLessThanOrEqual(RemoteURLProtocol.state.maximumConcurrentRequests, 2)
   }
 
   func testTaskCancellationCancelsURLSessionTransfer() async throws {

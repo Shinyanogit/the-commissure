@@ -61,6 +61,20 @@ the required `IPA_PATH` check. It made no App Store Connect request. The submit
 lane is intentionally designed to accept only a prevalidated, already uploaded
 build, and skips binary upload.
 
+## Candidate verification checkpoint
+
+The XcodeBuildMCP Release build for iPhone 17 Pro Max Simulator succeeded. A
+Debug test run completed 56 of 57 tests successfully. The only failure was a
+remote-transfer test that asserted exactly two concurrent URLSession requests,
+although its stated contract is an upper bound of two. The assertion now checks
+that the observed maximum is at most two, and the corrected test passes in an
+isolated rerun.
+
+An attached iPad Pro 12.9-inch was visible to Xcode but could not mount its
+developer disk image. The physical-device Release build therefore could not
+begin. This is a local device pairing or developer-image condition, not an
+accepted physical-device validation.
+
 ## Required owner inputs
 
 1. Confirm medical accuracy for each shipped procedure revision.

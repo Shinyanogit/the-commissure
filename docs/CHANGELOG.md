@@ -3,6 +3,17 @@
 User-visible changes are recorded when the implementation, verification, and
 its source-of-truth documentation are ready in the same pull request.
 
+## 2026-09-20: release verification stability
+
+- Corrected the remote pack-transfer test to validate its documented maximum
+  of two concurrent requests instead of requiring URLSession to schedule
+  exactly two. The focused test now passes.
+- Verified the 1.0.0 Release app compiles for the iPhone 17 Pro Max Simulator
+  through XcodeBuildMCP. The preceding Debug suite ran 56 of 57 tests; the
+  corrected focused test supplies the missing verification.
+- Recorded that the paired physical iPad cannot currently mount its developer
+  disk image, so it remains outside the accepted device-validation evidence.
+
 ## 2026-09-20: source controlled App Store artwork draft
 
 - Copied Vocabry's local feature-graphic source before adapting the copy for
