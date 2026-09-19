@@ -33,14 +33,21 @@ license statement is therefore insufficient for public distribution.
 
 | Evidence | Current finding | What is still required |
 | --- | --- | --- |
-| `blender/Spine Disection.blend`, `blender/spine anatomy.blend`, PCDF source | BlenderKit asset `c7bb1f9e-c59d-4844-abc7-958750fe01a7`, “Full skeleton human”, is recorded in the blend. Its live API record returned `royalty_free` on 2026-09-20. | Save the asset page or purchase/download record and confirm that the recorded license covers this App Store distribution. |
-| ACDF, PCDF, PCF sources and home source | BlenderKit metadata names “Stylized Human Brain” and records asset base ID `31f93934-2350-42d6-9fe9-f6de68b75300`; the embedded asset ID `94c75452-1679-4613-b9e5-8b3c9c6ef14c` did not resolve publicly on 2026-09-20. | Obtain the original BlenderKit library record or creator permission. Do not infer commercial rights from the local `is_free` flag. |
+| `blender/Spine Disection.blend`, `blender/spine anatomy.blend`, PCDF source | BlenderKit asset `c7bb1f9e-c59d-4844-abc7-958750fe01a7`, “Full skeleton human”, is recorded in the blend. Its current search record is `royalty_free`. | Save the asset page or purchase/download record and confirm that the recorded license covers this App Store distribution. |
+| ACDF, PCDF, PCF sources and home source | BlenderKit metadata names “Stylized Human Brain” and records asset ID `94c75452-1679-4613-b9e5-8b3c9c6ef14c`. Its current search record is `royalty_free`. | Save the asset page or purchase/download record and confirm that the recorded license covers this App Store distribution. |
 | Procedure-specific implants and authored transformations | The local source files contain objects without a recoverable BlenderKit asset ID. | Identify whether each object is original, vendor-provided, or separately licensed, and record the source. |
 
 Required attestation: the rights holder has checked every source that reaches a
 bundled GLB, preview, home image, background, or AppIcon, and confirms public
 App Store distribution is allowed. Editorial assets or unknown source material
 must be removed or replaced before approval.
+
+The [BlenderKit licensing FAQ](https://www.blenderkit.com/faq-frequently-asked-questions/)
+states that Royalty-Free assets may be used commercially provided the assets
+themselves are not sold. Its current creator terms explicitly define a project
+as including mobile applications. These terms support integration into this
+educational app, but they do not establish the origin of the locally authored
+or unlabelled components.
 
 ## Approval transition
 

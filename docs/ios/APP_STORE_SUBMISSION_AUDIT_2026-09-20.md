@@ -39,6 +39,11 @@ All four content provenance records have `medicalReview` set to
 correctly reject publishing while these values remain. They require factual
 owner approval. A local implementation agent cannot supply that approval.
 
+Source Blender files were subsequently inspected. Their identifiable BlenderKit
+assets resolve to Royalty-Free records, and the remaining source inventory is
+tracked in `RELEASE_APPROVAL_RECORD.md`. Procedure-specific components without
+a recoverable source record still require owner confirmation.
+
 The store metadata is an unuploaded draft. Local `/support` and `/privacy`
 pages now name a real temporary support contact and are configured for the
 product site's public URLs, but production deployment has not been verified.
