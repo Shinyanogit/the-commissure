@@ -2,10 +2,10 @@
 
 > Current checkpoint: `UI_REDESIGN_2026-09-19.md`. Initial native UI is locally
 > verified, but full Web UI/UX alignment is incomplete and precedes final release
-> preparation. Asset portability and exact-candidate release gates remain open.
+> preparation. Asset portability is verified; exact-candidate release gates remain open.
 
 Status: local release controls implemented, release blocked
-Last audited: 2026-09-12
+Last audited: 2026-09-19 (source and simulator checkpoint; no signed candidate)
 
 This file records observed repository state. It is not a release approval. The
 authoritative release gates remain in [RELEASE_SPEC.md](RELEASE_SPEC.md).
@@ -116,7 +116,7 @@ external TestFlight.
 | Rights review | All four provenance records use `ownerConfirmationRequired` | Owner confirmation for models, text, images, fonts, icons, portraits, and screenshots |
 | Content signing | No production key configuration is stored in Git | Configure protected signing secret and pinned public key |
 | Signed IPA | Development signing and other-app Store profiles exist; a distribution candidate for this bundle ID has not been verified | Produce one signed IPA and package its exact evidence |
-| Version and icon | Project settings remain `0.1.0` build `1`, and no AppIcon app icon set is configured | Set the approved 1.0 version/build and supply the final 1024 px App Store icon before candidate archive |
+| Version and icon | Project settings remain `0.1.0` build `1`; the owner-requested Web favicon is configured as an opaque 1024 px AppIcon | Set the 1.0 version/build and verify the icon in the signed candidate |
 | Physical device | The current physical test attempt failed because the first attempt used the wrong team identifier and the second mixed an Xcode-managed profile with manual signing | Run the unchanged candidate on the required devices after signing is configured |
 | Floor device | No oldest-supported iOS 18 device trace is recorded | Pass the complete performance and resilience suite on that device |
 | Current devices | No candidate-bound current iPhone and iPad reports are recorded | Pass both device reports |

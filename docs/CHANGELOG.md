@@ -3,6 +3,23 @@
 User-visible changes are recorded when the implementation, verification, and
 its source-of-truth documentation are ready in the same pull request.
 
+## 2026-09-20: native reading and interaction checkpoint
+
+- Added an iOS-only explanation copy experiment, preserving shared source text,
+  source-digest fallback, semantic paragraph breaks and existing procedure links.
+- Increased explanation contrast and restored Web-colored emphasis; rendered
+  list items with hanging bullets. Added the branded animation on app launch.
+- Added a lower home information route and Web-derived project/author text.
+- Replaced ambiguous simultaneous SwiftUI drag/pinch handling with touch-count
+  aware UIKit gestures, including screen-space two-finger pan. Visual and
+  interaction regression remains in progress. Pinch screenshots still show
+  rotation, so zoom is not yet accepted despite the automated assertion passing.
+- Matched the Web basic scene tween at one second with cubic in/out easing.
+  Sequential scene choreography still needs a separate parity pass.
+- Passed 47 app tests and 16 Core tests. Eight UI tests passed; the remaining
+  landscape language test passed after a header hit-testing correction.
+- Fetched GitHub; main was already included, with no incoming merge needed.
+
 ## 2026-09-19: native owner review corrections
 
 - Restored Web-derived procedure background and animated loading wordmark;

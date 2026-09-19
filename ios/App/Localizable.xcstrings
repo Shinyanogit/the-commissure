@@ -518,13 +518,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The Commissure is a focused anatomy-learning theater. It presents versioned educational content with a calm, offline-first interface."
+            "value": "We are a group of medical students dedicated to improving the lives of patients suffering from spinal disorders. We created The Commissure to provide accurate, accessible and visually engaging information about spine surgery for healthcare professionals, patients and the general public."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "The Commissureは、解剖学習に集中するためのシアターです。バージョン管理された教育コンテンツを、オフライン優先の落ち着いた画面で提示します。"
+            "value": "私たちは、脊椎疾患をもつ患者さんの生活の改善を目指す医学生のグループです。医療従事者、患者さん、一般の方々に向けて、脊椎外科について正確でわかりやすく、視覚的に理解できる情報を届けるため、The Commissureを制作しました。"
           }
         }
       }
@@ -1137,6 +1137,102 @@
           "stringUnit": {
             "state": "translated",
             "value": "説明パネルのサイズ調整"
+          }
+        }
+      }
+    },
+    "library.about": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About the project"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このプロジェクトについて"
+          }
+        }
+      }
+    },
+    "library.news": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "News"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "お知らせ"
+          }
+        }
+      }
+    },
+    "colophon.authors": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Authors"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "著者"
+          }
+        }
+      }
+    },
+    "colophon.imada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kyoto Prefectural University of Medicine\n3D anatomical models and articles on spinal disorders and surgical treatments."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "京都府立医科大学\n3D解剖モデルと、脊椎疾患・手術治療に関する記事の制作。"
+          }
+        }
+      }
+    },
+    "colophon.yamaguchi": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The University of Tokyo\nDevelopment and publication of the educational platform."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "東京大学\n教育プラットフォームの開発・公開。"
+          }
+        }
+      }
+    },
+    "colophon.tokida": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tohoku University\nEducational content on spine surgery and anatomy."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "東北大学\n脊椎外科と解剖に関する教育コンテンツの制作。"
           }
         }
       }

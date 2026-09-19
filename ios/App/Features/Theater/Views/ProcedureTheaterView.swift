@@ -5,6 +5,7 @@ struct ProcedureTheaterView: View {
   let scene: AnyView
   let onAction: (AppAction) -> Void
   @Environment(\.dynamicTypeSize) private var typeSize
+  @State private var languageMenuPresented = false
   @State private var panelHeight: CGFloat?
   @State private var panelWidth: CGFloat?
   @State private var panelBounds = CGSize.zero
@@ -25,6 +26,7 @@ struct ProcedureTheaterView: View {
       let wide = geometry.size.width > geometry.size.height && geometry.size.width > 600
       VStack(spacing: 0) {
         topBar
+          .zIndex(1)
         ZStack(alignment: wide ? .trailing : .bottom) {
           scene
             .environment(
@@ -52,6 +54,7 @@ struct ProcedureTheaterView: View {
           .accessibilityHidden(true)
         }
         .clipped()
+        .contentShape(Rectangle())
       }
     }
     .background(DesignTokens.Color.stageBlack.ignoresSafeArea())
@@ -151,11 +154,8 @@ struct ProcedureTheaterView: View {
         .accessibilityAddTraits(.isHeader)
       Spacer(minLength: 0)
       IconActionButton(.resetView, isEnabled: state.canReset, onAction: onAction)
-      Menu {
-        Button("language.followSystem") { onAction(.changeLanguage(.followSystem)) }
-        Button("language.english") { onAction(.changeLanguage(.english)) }
-        Button("language.japanese") { onAction(.changeLanguage(.japanese)) }
-
+      Button {
+        languageMenuPresented = true
       } label: {
         Image(systemName: "ellipsis")
           .font(.system(size: 18, weight: .medium))
@@ -165,6 +165,11 @@ struct ProcedureTheaterView: View {
       .foregroundStyle(.white)
       .accessibilityLabel(Text("action.language"))
       .accessibilityIdentifier("theater-more")
+      .confirmationDialog("action.language", isPresented: $languageMenuPresented) {
+        Button("language.followSystem") { onAction(.changeLanguage(.followSystem)) }
+        Button("language.english") { onAction(.changeLanguage(.english)) }
+        Button("language.japanese") { onAction(.changeLanguage(.japanese)) }
+      }
     }
     .padding(.horizontal, 20)
     .padding(.vertical, 6)
@@ -227,6 +232,7 @@ private struct ExplanationPanel: View {
     }
     .frame(height: state.isExplanationExpanded ? nil : 72)
     .clipped()
+    .contentShape(Rectangle())
     .foregroundStyle(.white)
   }
 
@@ -264,10 +270,10 @@ private struct ExplanationPanel: View {
       .accessibilityIdentifier(relative == 0 ? "explanation-toggle" : "explanation-toggle-\(index)")
       if state.isExplanationExpanded {
         ScrollView {
-          Text(.init(explanation))
+          ExplanationBody(source: explanation)
             .font(.body)
             .lineSpacing(5)
-            .foregroundStyle(DesignTokens.Color.textSecondary)
+            .foregroundStyle(Color(red: 244 / 255, green: 247 / 255, blue: 1))
             .frame(maxWidth: .infinity, alignment: .leading)
             .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal, 18)
@@ -278,5 +284,48 @@ private struct ExplanationPanel: View {
       }
     }
     .opacity(valid ? 1 : 0)
+  }
+}
+
+enum ExplanationText {
+  static func styled(_ source: String) -> AttributedString {
+    var text =
+      (try? AttributedString(
+        markdown: source,
+        options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace)))
+      ?? AttributedString(source)
+    let accent = Color(red: 142 / 255, green: 221 / 255, blue: 244 / 255)
+    for run in text.runs {
+      if run.inlinePresentationIntent?.contains(.stronglyEmphasized) == true {
+        text[run.range].foregroundColor = accent
+        text[run.range].font = .body.weight(.semibold)
+      }
+      if run.link != nil { text[run.range].foregroundColor = accent }
+    }
+    return text
+  }
+}
+
+private struct ExplanationBody: View {
+  let source: String
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 7) {
+      ForEach(Array(source.components(separatedBy: "\n").enumerated()), id: \.offset) { _, line in
+        if line.isEmpty {
+          Color.clear.frame(height: 5).accessibilityHidden(true)
+        } else if line.hasPrefix("- ") || line.hasPrefix("• ") {
+          HStack(alignment: .firstTextBaseline, spacing: 9) {
+            Text("•").accessibilityHidden(true)
+            Text(ExplanationText.styled(String(line.dropFirst(2))))
+              .frame(maxWidth: .infinity, alignment: .leading)
+          }
+          .accessibilityElement(children: .combine)
+        } else {
+          Text(ExplanationText.styled(line))
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+      }
+    }
   }
 }

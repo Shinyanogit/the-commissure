@@ -1,0 +1,234 @@
+{
+  "acdf": {
+    "en": {
+      "step.overview.body": {
+        "sourceSHA256": "1f0e95dc81801818d3fd03f2d0decde19486473135de8d17e61560793676c804",
+        "text": "Anterior cervical discectomy and fusion (ACDF) aims to relieve spinal cord compression and stabilize the cervical spine.\n\nIt combines **anterior cervical discectomy**, **interbody cage implantation**, and **anterior cervical fixation**.\n\nUnlike **[posterior cervical decompression and fusion (PCDF)](procedure:pcdf)**, it reaches the cervical vertebrae through a small incision in the front of the neck. This approach is particularly effective for disease affecting the **anterior structures**."
+      },
+      "step.indications.body": {
+        "sourceSHA256": "b7d9b95de90eca153288106b596d7330e5347c7667c3743a91d21a7f10cab351",
+        "text": "ACDF commonly treats disease affecting the **anterior aspect** of the cervical spine:\n• **Cervical radiculopathy** and **myelopathy**\n• **Degenerative disc disease**\n• **Cervical spondylosis** with **ventral** osteophytes\n• **Cervical spinal malalignment**\n\nThis model shows a C4–C5 disc herniation compressing the spinal cord anteriorly, with cervical myelopathy. ACDF may be preferred to a posterior approach in this typical scenario because it allows **direct anterior decompression**."
+      },
+      "step.discectomy.body": {
+        "sourceSHA256": "fff1066ea3bb645a05d6c00b5f3c74b55113ce1144bed17f2d9c4157cdb28e70",
+        "text": "ACDF begins with **discectomy**, removal of the damaged intervertebral disc.\nThe disc is a soft cushion between vertebrae that absorbs shock from movement and mechanical stress.\n\nA herniated disc protrudes and compresses the **spinal cord** or **nearby nerves**. This may cause neck pain, upper-limb weakness, numbness or tingling, and impaired balance or coordination.\n\nRemoving the disc relieves this pressure and often improves symptoms. It also gives direct access to other compressive structures, such as **bone spurs**, for removal."
+      },
+      "step.cage_types.body": {
+        "sourceSHA256": "6c06801304f435c13895e80fb9ff6ad18ff513484b388b3d00ef0f2640836d49",
+        "text": "After discectomy, an **interbody cage** fills the removed disc space.\nMaterials include:\n• Durable **medical-grade plastics**, such as polyetheretherketone (PEEK)\n• **Porous titanium**\n• **Structural bone grafts** (allograft or autograft)\n\nThe material is often chosen **before surgery**. Size is usually determined **during surgery**, by manually measuring and trialing cages after disc removal to find an appropriate replacement."
+      },
+      "step.cage_implantation.body": {
+        "sourceSHA256": "3a824ff5cd2eb86fa0a3e6038cd91ce2d73d1cc340bae4391bb234688343e418",
+        "text": "Once the size of the interbody cage has been determined, it is inserted into the exact space where the disc has been removed.\nThe role of this instrument is to restore the **disc height**, restore the **alignment** of the cervical spine, and to provide a **scaffold for fusion**.\n\nInterbody cages are designed in a way that, over time, new bone grows **through** or **around** the implant, joining the adjacent vertebrae into a single, stable bone.\nIt is also designed to **withstand forces** placed on the neck during everyday activities while the bones heal completely."
+      },
+      "step.anterior_fixation.body": {
+        "sourceSHA256": "0c8269db15061353cd4a461ea762cdc653fca3533c6b515ea5417537b2ae71b3",
+        "text": "The fusion of the vertebral bones may take between **6 and 12 months**, depending on the extent of the surgery, the patient's comorbidities, and other factors.\nUntil the vertebrae have fused into a single solid bone, **cervical plate fixation** may be performed.\n\nDuring this step, a small metal plate, usually made of **titanium**, is attached to the front of the vertebrae with **screws**.\nThe plate acts as an internal brace, keeping the vertebrae and interbody cage in the correct position while the bones heal.\n\nDepending on the extent of the spinal disorder, the plate may span one or more spinal levels.\nIn most cases, the plate and screws are intended to remain in the body **permanently**."
+      },
+      "step.summary.body": {
+        "sourceSHA256": "9e757a308e67539d70fac4dfe829211c84b6281e60b8a8833bbb6bb0d69f31c2",
+        "text": "Some of the key features of ACDF are as follows:\n- It consists of **anterior cervical discectomy**, **interbody cage implantation**, and **anterior cervical fixation**.\n- It is highly effective in treating disorders affecting the **anterior** portion of the spine.\n- It uses **interbody cages** and **bone grafts** to promote fusion between adjacent vertebrae.\n- The plate and screws are typically intended to remain in place **permanently**, even after bone fusion has occurred.\n\nOwing to these advantages, ACDF remains one of the most performed procedures to relieve compression on the spinal cord and nerves while providing long-term stability to the cervical spine."
+      }
+    },
+    "ja": {
+      "step.overview.body": {
+        "sourceSHA256": "f9dd59f4519d491947a940c29dca8596f1b92baed2ecbdacb3bfc1f725b88b33",
+        "text": "前方頸椎椎間板切除固定術（ACDF）は、脊髄の圧迫解除と頸椎の安定化を目的とする手術です。\n\n**前方頸椎椎間板切除**、**椎体間ケージ留置**、**前方頸椎固定**の3つから構成されます。\n\n**[後方頸椎除圧固定術（PCDF）](procedure:pcdf)**と異なり、頸部前面の小切開から頸椎へ到達します。このため、頸椎の**前方構造**に関わる病変に特に有効です。"
+      },
+      "step.indications.body": {
+        "sourceSHA256": "b6a7de645a2c6faa63f58554edc8df0399df06996ae6677fbb18916054dc1fe0",
+        "text": "ACDFは、頸椎の**前方**に関わる病変に用いられます。\n主な適応：\n• **頸椎症性神経根症**・**脊髄症**\n• **椎間板変性症**\n• **腹側**骨棘形成を伴う**頸椎症**\n• **頸椎アライメント不良**\n\nこのモデルは、C4–C5椎間板ヘルニアが脊髄を前方から圧迫し、頸髄症を生じた状態です。前方から直接除圧できるため、後方アプローチよりACDFが選択され得る典型例です。"
+      },
+      "step.discectomy.body": {
+        "sourceSHA256": "f28fc64670621cb1347344c4002ea82c0207cd51f105a7dbaa4fb6c0ef1ee73d",
+        "text": "最初に、損傷した椎間板を除く**椎間板切除**を行います。\n椎間板は椎骨間の柔らかいクッションで、運動や機械的負荷による衝撃を吸収します。\n\n椎間板ヘルニアでは、突出した椎間板が**脊髄**や**近傍の神経**を圧迫します。頸部痛、上肢の筋力低下・しびれ・異常感覚、平衡・協調運動の障害などが生じ得ます。\n\n椎間板の除去で圧迫を解除し、症状の改善を図ります。同時に、**骨棘**など他の圧迫構造へ直接到達して切除できるようになります。"
+      },
+      "step.cage_types.body": {
+        "sourceSHA256": "1cf60527e340b7db5d4555829fa991f14c56e6acd4e53268937ae0b0edc7091c",
+        "text": "椎間板切除後の空間には**椎体間ケージ**を留置します。\n材質の選択肢：\n• PEEK（ポリエーテルエーテルケトン）など、耐久性の高い**医療用プラスチック**\n• **多孔質チタン**\n• **構造的骨移植材**（同種骨・自家骨）\n\n材質は多くの場合**術前**に選びます。サイズは通常**術中**に、椎間板切除後の実測と試験挿入で適切なものを選びます。"
+      },
+      "step.cage_implantation.body": {
+        "sourceSHA256": "658aae153e9f5aecee1772d0b62fb07c1467e0e69d5465738948cc01d0a3e25c",
+        "text": "椎体間ケージのサイズを決定したら、椎間板を除去した正確な位置へ挿入します。\nこの器具の役割は、**椎間高**と頸椎の**アライメント**を回復し、**骨癒合の足場**を提供することです。\n\n椎体間ケージは、時間の経過とともに新生骨がインプラントの**内部**または**周囲**へ成長し、隣接椎骨を一つの安定した骨として連結するよう設計されています。\nまた、骨癒合が完成するまで、日常生活で頸部に加わる**力に耐える**よう設計されています。"
+      },
+      "step.anterior_fixation.body": {
+        "sourceSHA256": "c9893b8e355df2d7af58f886a01465d44090fc58448ea179182c57d7252ed9b0",
+        "text": "椎体の骨癒合には、手術範囲、併存疾患、その他の要因により**6〜12か月**かかることがあります。\n椎骨が一つの強固な骨として癒合するまで、**頸椎プレート固定**を行うことがあります。\n\nこの操作では、通常**チタン**製の小さな金属プレートを**スクリュー**で椎体前面に固定します。\nプレートは内固定具として働き、骨癒合中に椎骨と椎体間ケージを正しい位置に保ちます。\n\n脊椎疾患の範囲に応じて、プレートは1椎間または複数椎間に及ぶことがあります。\n多くの場合、プレートとスクリューは**永久的**に体内へ残すことを前提としています。"
+      },
+      "step.summary.body": {
+        "sourceSHA256": "c3437ee61c19566819b1185bae3cefd21e108718cf4ee2f0103154fa254586bd",
+        "text": "ACDFの主な特徴は以下のとおりです。\n- **前方頸椎椎間板切除**、**椎体間ケージ留置**、**前方頸椎固定**から構成されます。\n- 脊椎の**前方**に影響する疾患の治療に高い有効性を示します。\n- **椎体間ケージ**と**骨移植材**を用いて隣接椎体間の骨癒合を促します。\n- プレートとスクリューは、骨癒合後も通常**永久的**に留置されます。\n\nこれらの利点から、ACDFは脊髄・神経の圧迫を解除しながら頸椎に長期的な安定性を与える手術として広く行われています。"
+      }
+    }
+  },
+  "accf": {
+    "en": {
+      "step.overview.body": {
+        "sourceSHA256": "8f2748781a75d5bed8d13daa9fe81ead35e82140a66a54d49f7206fc4742f522",
+        "text": "Anterior cervical corpectomy and fusion (ACCF) is a surgical procedure that relieves compression on the spinal cord by removing one or more levels of intervertebral discs and the vertebral bodies.\n\nThe procedure consists of three major steps: **anterior cervical discectomy and corpectomy**, **vertebral body reconstruction**, and **anterior cervical fixation**.\n\nBy reconstructing the anterior column, ACCF provides effective decompression and stabilization, making it a valuable surgical technique for treating cervical spinal disorders that extend posteriorly to the vertebral body."
+      },
+      "step.indications.body": {
+        "sourceSHA256": "a0fd40811fc602b209403b608438ce083a761c8f50d4105dc2075a3be75e2891",
+        "text": "ACCF is commonly performed to treat cervical disorders where the pathological lesion is located **behind** the vertebral body and cannot be adequately addressed by discectomy alone.\nCommon indications include:\n- **Cervical spondylotic myelopathy**\n- **Ossification of the posterior longitudinal ligament (OPLL)**\n- **Cervical spinal trauma and vertebral fractures**\n- **Tumors involving the vertebral body**\n\nIn this 3D model, a herniated intervertebral disc is compressing the spinal cord.\nCervical disc herniation may produce a variety of neurological symptoms, including pain, numbness, and, in severe cases, weakness in the upper and lower extremities."
+      },
+      "step.posterior_lesion.body": {
+        "sourceSHA256": "9975f96cc6be86069ad49800ec8ad15b1a5af680d49236a39b9716bd4ebab93a",
+        "text": "This sagittal model shows a cervical disc herniation that may migrate **behind** the vertebral body and extensively compress the spinal cord.\n\nA substantial disc fragment behind the body can be difficult to remove by discectomy alone. ACCF may therefore be preferred over **[ACDF](procedure:acdf)**: removing the vertebral body gives **direct access** to the migrated fragment and allows more complete decompression."
+      },
+      "step.discectomy_corpectomy.body": {
+        "sourceSHA256": "174c91ff8a01839b5401a2e3ff20e557b5a7bacf669b7fea119beb7ec6a701d1",
+        "text": "First, **discectomy** removes the affected disc. Fragments may nevertheless remain **behind** the vertebral body.\n\nA **corpectomy** then removes a large portion of the vertebral body, opening a direct surgical corridor to its **posterior** aspect. This allows complete removal of residual disc fragments and adequate decompression."
+      },
+      "step.reconstruction.body": {
+        "sourceSHA256": "113644a6b2c408d073935c2fb6d6e0ec4220715d1713cb5bb14b711a94bdd9ae",
+        "text": "Once adequate decompression has been confirmed, a **vertebral body replacement** is implanted to restore spinal stability.\nSeveral reconstruction options are available, including:\n- **Cadaveric bone grafts** (allografts)\n- **Iliac crest bone grafts** (autografts)\n- **Expandable vertebral body cages**\n\nIn this 3D model, an expandable cage is inserted to replace the resected vertebral body.\nOnce in place, the cage is expanded to restore the height of the spinal column and achieve a secure fit between the adjacent vertebrae.\n\nMany expandable cages are designed with openings that allow bone to **grow into** and **around** the implant, thereby promoting solid spinal fusion."
+      },
+      "step.anterior_fixation.body": {
+        "sourceSHA256": "b0a54345036777ea5208b04b06770c71edf149d67a2fdad2f1abf0e1aec101ab",
+        "text": "To stabilize the reconstructed spine, **anterior fixation** is performed using **plates** and **screws**.\nThis instrumentation secures the vertebral body replacement, prevents implant migration, and provides immediate **mechanical stability** while spinal fusion occurs.\n\nBecause the fused vertebral segments no longer move independently, cervical range of motion may be reduced, particularly when multiple levels undergo discectomy and corpectomy.\n\nAfter fixation, surgeons typically use **radiographic imaging** to confirm the correct placement of the plate, screws, and vertebral body replacement device."
+      },
+      "step.summary.body": {
+        "sourceSHA256": "7cf58c8ba7dadc455ebd69e91a37c64f4ae7160749144f1f52890e366bbd9a77",
+        "text": "Some of the key features of ACCF are as follows:\n- It is highly effective for treating lesions located **behind** the vertebral body.\n- It consists of three major steps: **discectomy and corpectomy**, **expandable cage implantation**, and **cervical plate fixation**.\n- Several options are available for reconstructing the resected vertebral body, including **allografts**, **autografts**, and **expandable cages**.\n- Fusion may reduce cervical range of motion, particularly when **multiple levels** are involved.\n\nDespite its greater complexity and invasiveness, ACCF remains an effective surgical approach for treating cervical spinal disorders that cannot be adequately managed with discectomy and fusion alone."
+      }
+    },
+    "ja": {
+      "step.overview.body": {
+        "sourceSHA256": "fc4beca26d3b43e97749244c12d33349931d917a92209ed48b2c9ac6df535a1d",
+        "text": "前方頸椎椎体切除固定術（ACCF）は、1椎間以上の椎間板と椎体を切除して脊髄圧迫を解除する手術です。\n\nこの手術は、**前方頸椎椎間板切除・椎体切除**、**椎体再建**、**前方頸椎固定**の3つの主要な操作から構成されます。\n\n前方支柱を再建することで、ACCFは有効な除圧と安定化をもたらし、椎体後方へ及ぶ頸椎疾患の治療に有用です。"
+      },
+      "step.indications.body": {
+        "sourceSHA256": "544b02eea75d015e4d7891374fd6088dd943f632c2c8d3480663b4bb62fabc0a",
+        "text": "ACCFは、病変が椎体の**後方**にあり、椎間板切除だけでは十分に対処できない頸椎疾患に一般的に行われます。\n主な適応には以下があります。\n- **頸椎症性脊髄症**\n- **後縦靱帯骨化症（OPLL）**\n- **頸椎外傷および椎体骨折**\n- **椎体に及ぶ腫瘍**\n\nこの3Dモデルでは、ヘルニアを起こした椎間板が脊髄を圧迫しています。\n頸椎椎間板ヘルニアは、痛み、しびれ、重症例では上下肢の筋力低下など、さまざまな神経症状を生じ得ます。"
+      },
+      "step.posterior_lesion.body": {
+        "sourceSHA256": "89997b24294e7a9dfd61026c148678364ee286df9988c9eea1b87d4fe339bf5f",
+        "text": "この矢状断モデルでは、ヘルニア椎間板が椎体**後方**へ移動し、脊髄を広範に圧迫する状態を示しています。\n\n椎間板片の多くが椎体後方にあると、椎間板切除だけでは除去が困難です。椎体を切除すれば残存片へ**直接到達**し、より完全に除圧できるため、**[ACDF](procedure:acdf)**よりACCFが選択されることがあります。"
+      },
+      "step.discectomy_corpectomy.body": {
+        "sourceSHA256": "a5bc309e8077c0e8c4bcf59c21ea71e824075b8d963649b5e445e0d363d4bab2",
+        "text": "まず**椎間板切除**で罹患椎間板を除去します。ただし、椎体**後方**に椎間板片が残る場合があります。\n\n続いて**椎体切除**で椎体の大部分を除去し、**後方**へ直接到達する手術経路を確保します。残存椎間板片を完全に除去し、十分な除圧を行えます。"
+      },
+      "step.reconstruction.body": {
+        "sourceSHA256": "33a39af33c734af4c9f46c73f6c4936cf38014756b88143ad9452f9de472e371",
+        "text": "十分な除圧を確認した後、脊椎の安定性を回復するために**椎体置換材**を留置します。\n再建方法には以下があります。\n- **献体由来骨移植材**（同種骨）\n- **腸骨移植材**（自家骨）\n- **拡張型椎体ケージ**\n\nこの3Dモデルでは、切除した椎体を置換するために拡張型ケージを挿入します。\n所定の位置に留置した後、ケージを拡張して脊柱高を回復し、隣接椎体間に安定して適合させます。\n\n多くの拡張型ケージには、骨がインプラントの**内部**および**周囲**へ成長できる開口部があり、強固な脊椎癒合を促します。"
+      },
+      "step.anterior_fixation.body": {
+        "sourceSHA256": "f4401bedebcbd94870759cb2e00c8dad81b25b5452917fc19b083b45af27b920",
+        "text": "再建した脊椎を安定化するため、**プレート**と**スクリュー**を用いて**前方固定**を行います。\nこれらの器具は椎体置換材を固定し、インプラントの移動を防ぎ、骨癒合が進む間の即時的な**機械的安定性**を与えます。\n\n癒合した椎体分節は独立して動かなくなるため、特に複数椎間で椎間板切除・椎体切除を行うと頸椎可動域が低下することがあります。\n\n固定後、通常は**画像検査**でプレート、スクリュー、椎体置換デバイスの正しい位置を確認します。"
+      },
+      "step.summary.body": {
+        "sourceSHA256": "bead055e822c489d644933b80f48ec4fa7fef5ce5d050dc4cc19e87e7a1900bb",
+        "text": "ACCFの主な特徴は以下のとおりです。\n- 椎体の**後方**に位置する病変の治療に高い有効性を示します。\n- **椎間板・椎体切除**、**拡張型ケージ留置**、**頸椎プレート固定**の3つの主要な操作から構成されます。\n- 切除した椎体の再建には、**同種骨**、**自家骨**、**拡張型ケージ**などの選択肢があります。\n- 特に**複数椎間**を治療する場合、固定により頸椎可動域が低下することがあります。\n\nACCFは複雑で侵襲性が高いものの、椎間板切除固定術だけでは十分に治療できない頸椎疾患に対する有効な手術です。"
+      }
+    }
+  },
+  "pcdf": {
+    "en": {
+      "step.overview.body": {
+        "sourceSHA256": "9ce571c6e20b969791b8aed118eab61c280a813e82a285ee3dd950fc540ccbfe",
+        "text": "PCDF is a spinal procedure performed to relieve compression of the spinal cord and nerves through a posterior approach.\n\nIt consists of two major components: **posterior cervical laminectomy** and **posterior cervical fixation**.\n\nOwing to its ability to decompress the spinal cord and provide stabilization, PCDF is a powerful surgical technique that allows surgeons to treat complex spinal disorders and improve patients’ quality of life."
+      },
+      "step.indications.body": {
+        "sourceSHA256": "6cda47852fe826c34a5a51f64c9a8c137155905cae086a37372a090251dd5e40",
+        "text": "PCDF is recommended for conditions in which conservative treatment has **failed** to relieve symptoms.\nCommon indications include:\n- **Cervical spondylotic radiculopathy and myelopathy**\n- **Ossification of the posterior longitudinal ligament (OPLL)**\n- **Congenital deformities**\n- **Tumors**\n\nIn this 3D model, a **bony overgrowth** of the C5 lamina is depicted.\nThis lesion can compress the spinal cord and nerves, resulting in a variety of neurological symptoms, including pain, sensory disturbances in the upper extremities, and, in severe cases, paralysis of the extremities."
+      },
+      "step.laminectomy.body": {
+        "sourceSHA256": "c0dad6f3900f57d4067d5becd4b2257272189ff7b6c8c3b6431dee714ef6e6b6",
+        "text": "Posterior cervical laminectomy is a fundamental step in PCDF and is usually performed at an **early stage** of the procedure.\nIn this procedure, the **lamina**, a roof-like bony structure covering the spinal cord, is removed. Once the lamina is removed, the spinal canal is enlarged, allowing the spinal cord to decompress from the offending lesion.\n\nWhile laminectomy exposes the spinal cord, surrounding soft tissues, such as **paraspinal muscles** and **adipose tissues**, continue to provide coverage and structural support over the spinal cord, thereby reducing the risk of direct injury."
+      },
+      "step.post_laminectomy_kyphosis.body": {
+        "sourceSHA256": "fe285fe47fa9be871eaf63e0fe1a0d3e610f5a3d74a84d4945e39fe432b2f50b",
+        "text": "Laminectomy effectively decompresses the spinal cord but risks **post-laminectomy kyphosis**, a major postoperative complication.\n\nDetaching posterior stabilizers, including the **ligamentous complex** and **paraspinal muscles**, can cause loss of normal cervical lordosis and **forward tilting** of the neck.\n\nThis deformity may increase spinal cord tension and **worsen** neurological symptoms."
+      },
+      "step.posterior_fixation.body": {
+        "sourceSHA256": "ca93c852369db49c6b64a3e72b2d177ad76512307b8e2ddb81cb79bd8d73f316",
+        "text": "**Posterior cervical fixation** may reduce the risk of post-laminectomy kyphosis. **Screws** and **rods** along the posterior spine provide **mechanical support**.\n\nScrews anchor in the **lateral masses**, which connect the anterior and posterior spinal columns. Their number depends on disease extent and the levels requiring decompression. Rods link screws across levels to provide rigid fixation and proper alignment.\n\nRigid fixation **restricts segmental motion** and can reduce the neck's **range of motion**. Some motion may remain in disease-free, non-fused segments."
+      },
+      "step.summary.body": {
+        "sourceSHA256": "af80f9917578d72ae6142bdaab46230fd7764540cc6ec0ed29694d78f8bf4ca7",
+        "text": "Some of the key concepts of PCDF are as follows:\n- It involves both **posterior cervical laminectomy** and **posterior cervical fixation**.\n- It is effective in managing compressive disorders that are **refractory** to conservative treatment.\n- It may cause post-operative complications such as **post-laminectomy kyphosis** and **reduced range of motion**.\n\nDespite potential complications, PCDF remains an effective surgical intervention that provides reliable spinal cord decompression and stability against underlying pathology."
+      }
+    },
+    "ja": {
+      "step.overview.body": {
+        "sourceSHA256": "bc55c6bc662b0707aacdb40f833df1ddbd268a48b887dbffe52953bfd3fdc39c",
+        "text": "PCDFは、後方アプローチから脊髄と神経の圧迫を解除する脊椎手術です。\n\n**後方頸椎椎弓切除**と**後方頸椎固定**の2つの主要な要素から構成されます。\n\n脊髄の除圧と安定化を同時に行えるため、PCDFは複雑な脊椎疾患を治療し、患者の生活の質を改善するための有力な手術手技です。"
+      },
+      "step.indications.body": {
+        "sourceSHA256": "5d96b2606d7b2fccae59341f18619b1be7c9f3dd0037eba035d4a5e2027e757c",
+        "text": "PCDFは、保存的治療で症状が改善しない**難治性**の病態に推奨されます。\n主な適応には以下があります。\n- **頸椎症性神経根症および脊髄症**\n- **後縦靱帯骨化症（OPLL）**\n- **先天性変形**\n- **腫瘍**\n\nこの3Dモデルでは、C5椎弓の**骨性過形成**を示しています。\nこの病変は脊髄と神経を圧迫し、痛み、上肢の感覚障害、重症例では四肢麻痺を含むさまざまな神経症状を引き起こし得ます。"
+      },
+      "step.laminectomy.body": {
+        "sourceSHA256": "1c0f36620752dee43a7a6d1f6c25d76988f19a803cc0e4f076d4bb6f8631e063",
+        "text": "後方頸椎椎弓切除はPCDFの基本的な操作で、通常は手術の**早期**に行います。\nこの操作では、脊髄を屋根のように覆う骨構造である**椎弓**を切除します。椎弓を切除すると脊柱管が拡大し、原因病変による脊髄圧迫が解除されます。\n\n椎弓切除により脊髄が露出しても、**傍脊柱筋**や**脂肪組織**など周囲の軟部組織が脊髄を覆って構造的に支持し、直接損傷のリスクを軽減します。"
+      },
+      "step.post_laminectomy_kyphosis.body": {
+        "sourceSHA256": "8885d0ec00e2042f16dd69a87d23a5447c141403364834f79ea08ebce6979582",
+        "text": "椎弓切除は脊髄除圧に有効ですが、重大な術後合併症である**椎弓切除後後弯**のリスクがあります。\n\n**靱帯複合体**や**傍脊柱筋群**などの後方支持組織が剥離されると、正常な頸椎前弯が失われ、頸部が**前方へ傾く**変形が生じます。\n\n脊髄の張力が増し、神経症状が**悪化**する可能性があります。"
+      },
+      "step.posterior_fixation.body": {
+        "sourceSHA256": "9f10958672d49932e75edc6632427dc15e30b1d08ce6511f20a2add6eab9d8a3",
+        "text": "椎弓切除後後弯のリスクを減らすため、**後方頸椎固定**を行うことがあります。脊椎後方に**スクリュー**と**ロッド**を設置し、**機械的支持**を与えます。\n\nスクリューは、前方・後方脊柱をつなぐ**外側塊**へ挿入します。本数は病変範囲と除圧が必要なレベル数に応じて決めます。ロッドで複数椎間を連結し、強固な固定と適切なアライメントを得ます。\n\n強固な固定により**分節運動が制限**され、頸部の**可動域**が低下することがあります。ただし、病変のない非固定椎間では、ある程度の運動が保たれる場合があります。"
+      },
+      "step.summary.body": {
+        "sourceSHA256": "7ca09f14d2204638023ac7c1996a366136dbb1842f2eac4ed84b9a5cc0ad862a",
+        "text": "PCDFの主な要点は以下のとおりです。\n- **後方頸椎椎弓切除**と**後方頸椎固定**の両方を行います。\n- 保存的治療に**抵抗性**の圧迫性疾患に有効です。\n- **椎弓切除後後弯**や**可動域低下**などの術後合併症を生じることがあります。\n\n合併症の可能性はあるものの、PCDFは確実な脊髄除圧と病変に対する安定性をもたらす有効な手術です。"
+      }
+    }
+  },
+  "pcf": {
+    "en": {
+      "step.overview.body": {
+        "sourceSHA256": "1424c1922606a8f9355d8d2e86048bd157b06f058e2c16a7a8ea612befd295ff",
+        "text": "Posterior cervical foraminotomy (PCF) is a surgical procedure that relieves pressure on the spinal cord and nerves by **widening the neural foramen posteriorly**.\n\nA major advantage of PCF is that it allows patients to **preserve range of motion** after the surgery.\n\nDuring the procedure, surgeons may additionally perform **discectomy** or **osteophytectomy** to achieve adequate decompression and symptom relief."
+      },
+      "step.indications.body": {
+        "sourceSHA256": "4d629808b8ea73b3313ddced514f2f4c8b9a6c7d90ac05e449bdabb383543fa8",
+        "text": "PCF is commonly performed to treat conditions that affect spinal nerves as they exit the **neural foramen**.\nExamples of conditions where PCF may be considered are:\n- **Cervical spondylotic radiculopathy**\n- **Lateral cervical disc herniation**\n- **Foraminal stenosis**\n\nIn this 3D model, a C4-C5 intervertebral disc is herniated **laterally**, compressing the spinal nerve as it exits through the neural foramen.\nSuch a condition can cause a variety of symptoms, such as numbness, tingling, and pain in the upper extremity.\n\nIn severe cases of herniation, the intervertebral disc may compress the spinal cord, affecting balance, walking, or sensory deficits of the lower extremities."
+      },
+      "step.laminoforaminotomy.body": {
+        "sourceSHA256": "619d8eb22b196713aab3b8e46be847d1579e1bce3dbb998379c159c6a508df38",
+        "text": "Imaging and anatomical landmarks first identify the exact surgical site.\n\nDuring **laminoforaminotomy**, bone near the neural foramen is carefully removed to make space around the nerve compressed by the disc. This opening may also allow **direct visualization** of the herniated disc."
+      },
+      "step.microdiscectomy.body": {
+        "sourceSHA256": "712363ce144367625136688a307531cadcf35d4baa6e17703dce2702fe92bd9f",
+        "text": "When necessary, surgeons further perform a **discectomy** to ensure that the nerve is fully decompressed.\nTo perform this step safely and accurately, surgeons may use special types of **microscopes** during disc removal, a procedure known as **microdiscectomy**.\n\n**Osteophytectomy** may additionally be considered if there is a clear visualization of the osteophyte."
+      },
+      "step.preserved_motion.body": {
+        "sourceSHA256": "e3fce599c77cd4f22185148556a8d5b4c086805a9433d69c8d9d79ba8e21793a",
+        "text": "PCF can preserve **normal neck motion**. Its minimally invasive approach does not require permanent fusion, unlike **[PCDF](procedure:pcdf)** or **[ACDF](procedure:acdf)**.\n\nIt may not suit disease requiring surgery at **multiple vertebral levels**: multilevel PCF can cause **spinal instability**, potentially worsening symptoms."
+      },
+      "step.summary.body": {
+        "sourceSHA256": "c8cc0fa7cc420649a76ad5f39644c11a74d66d0ea5285519ffbb8767ae09d6fc",
+        "text": "Some of the key features of PCF are as follows:\n- It is a procedure where a small portion of bone is removed from the spine to create more space around the **neural foramen**.\n- Surgeons may additionally perform a **discectomy** and **osteophytectomy** to ensure adequate pressure relief.\n- It **preserves the range of motion** of the cervical spine but may not be suitable for **multilevel disorders**.\n\nDue to its minimally invasive nature, PCF may be considered an alternative to fusion surgeries for selected patients with cervical compression."
+      }
+    },
+    "ja": {
+      "step.overview.body": {
+        "sourceSHA256": "a2920e1ef09081b00ee296025ad1642bf5fa57d5d6b65924ea3931649b13ecc4",
+        "text": "後方頸椎椎間孔拡大術（PCF）は、後方から**神経孔を拡大**して脊髄・神経への圧迫を解除する手術です。\n\nPCFの大きな利点は、術後の**可動域を温存**できることです。\n\n十分な除圧と症状改善のため、手術中に**椎間板切除**や**骨棘切除**を追加することがあります。"
+      },
+      "step.indications.body": {
+        "sourceSHA256": "65101fdb3f7fbd5c41f38fd1115993ca722649c8763afb418d154c2513ecb9c9",
+        "text": "PCFは、脊髄神経が**神経孔**から出る部位に影響する病態の治療で一般的に行われます。\nPCFを検討し得る病態には以下があります。\n- **頸椎症性神経根症**\n- **外側型頸椎椎間板ヘルニア**\n- **椎間孔狭窄**\n\nこの3DモデルではC4–C5椎間板が**外側**へヘルニアを起こし、神経孔から出る脊髄神経を圧迫しています。\nこの病態により、上肢のしびれ、異常感覚、痛みなどが生じることがあります。\n\n重度のヘルニアでは椎間板が脊髄を圧迫し、平衡、歩行、下肢の感覚に障害を来すことがあります。"
+      },
+      "step.laminoforaminotomy.body": {
+        "sourceSHA256": "4f8e31785af10b5ab641068940919b3ab82e51edd285cbbf363bde38be01b18c",
+        "text": "まず画像と解剖学的ランドマークで、正確な手術部位を同定します。\n\n**椎弓・椎間孔拡大**では神経孔近傍の骨を慎重に一部切除し、椎間板に圧迫された神経の周囲を広げます。この開口部からヘルニア椎間板を**直接観察**できる場合もあります。"
+      },
+      "step.microdiscectomy.body": {
+        "sourceSHA256": "8b5737b1cfbfa865f3a2d7848cfccf6ff7f33baa3980df12721e723a381e439c",
+        "text": "必要に応じて、神経を十分に除圧するため**椎間板切除**を追加します。\nこの操作を安全かつ正確に行うため、椎間板切除時に専用の**顕微鏡**を用いることがあり、これを**顕微鏡下椎間板切除**と呼びます。\n\n骨棘を明瞭に確認できる場合は、**骨棘切除**も検討されます。"
+      },
+      "step.preserved_motion.body": {
+        "sourceSHA256": "8cf534165b2a37eb58b3ce180d5998fad634f7a5e34da0a530071ee5b3456b12",
+        "text": "PCFは低侵襲で、**[PCDF](procedure:pcdf)**や**[ACDF](procedure:acdf)**と異なり永久的な固定を必要としないため、術後も**正常な頸部運動**を保てます。\n\nただし、手術が必要な病変が**複数椎間**に及ぶ場合には適さないことがあります。多椎間のPCFは**脊椎不安定性**を招き、症状を悪化させる可能性があります。"
+      },
+      "step.summary.body": {
+        "sourceSHA256": "aceeb0cd965658f49b011470b1d2892b5b48b0bee00819bda7954a03835a2f80",
+        "text": "PCFの主な特徴は以下のとおりです。\n- 脊椎の骨を少量切除し、**神経孔**周囲の空間を拡大する手術です。\n- 十分に圧迫を解除するため、**椎間板切除**や**骨棘切除**を追加することがあります。\n- 頸椎の**可動域を温存**しますが、**多椎間病変**には適さないことがあります。\n\nPCFは低侵襲であるため、頸椎圧迫を有する選択された患者では固定術の代替として検討されます。"
+      }
+    }
+  }
+}

@@ -89,6 +89,8 @@ struct BottomStepTray: View {
       }
       .accessibilityIdentifier("step-list")
       .frame(maxHeight: 150)
+      .clipped()
+      .contentShape(Rectangle())
       .padding(.top, 8)
       .onAppear {
         if state.stepIDs.indices.contains(state.currentStep - 1) {

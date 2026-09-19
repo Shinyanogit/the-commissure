@@ -1,6 +1,7 @@
 import CommissureCore
 import RealityKit
 import SwiftUI
+import UIKit
 
 struct ProcedureSceneView: View {
   let runtime: ProcedureSceneRuntime
@@ -8,8 +9,6 @@ struct ProcedureSceneView: View {
   let onAction: (AppAction) -> Void
   @Environment(\.accessibilityReduceMotion) private var reduceMotion
   @Environment(\.sceneOcclusion) private var sceneOcclusion
-  @State private var dragStarted = false
-  @State private var lastMagnification = 1.0
 
   var body: some View {
     GeometryReader { proxy in
@@ -21,37 +20,12 @@ struct ProcedureSceneView: View {
         runtime.updateViewport(size: proxy.size, occlusion: sceneOcclusion)
         runtime.reduceMotion = reduceMotion
       }
-      .gesture(
-        DragGesture(minimumDistance: 8)
-          .onChanged { value in
-            if !dragStarted {
-              dragStarted = true
-              runtime.consume(
-                .began(
-                  point: GesturePoint(x: value.startLocation.x, y: value.startLocation.y),
-                  touches: 1,
-                  viewport: GestureViewport(width: proxy.size.width, height: proxy.size.height)))
-            }
-            runtime.consume(
-              .moved(point: GesturePoint(x: value.location.x, y: value.location.y), touches: 1))
-          }
-          .onEnded { _ in
-            runtime.consume(.ended)
-            dragStarted = false
-          }
-      )
-      .simultaneousGesture(
-        MagnifyGesture()
-          .onChanged { value in
-            runtime.consume(.pinch(scale: lastMagnification / value.magnification))
-            lastMagnification = value.magnification
-          }
-          .onEnded { _ in
-            lastMagnification = 1
-            dragStarted = false
-            runtime.consume(.ended)
-          }
-      )
+      .overlay {
+        ModelGestureSurface(
+          onIntent: { runtime.onIntent?($0) }, onPan: { runtime.pan(x: $0, y: $1) }
+        )
+        .accessibilityHidden(true)
+      }
       .accessibilityElement(children: .ignore)
       .accessibilityIdentifier(
         runtime.readiness == .ready ? "reality-field-ready" : "reality-field-pending"
@@ -73,4 +47,92 @@ struct ProcedureSceneView: View {
 
 extension EnvironmentValues {
   @Entry var sceneOcclusion = CGSize.zero
+}
+
+private struct ModelGestureSurface: UIViewRepresentable {
+  let onIntent: (ProcedureIntent) -> Void
+  let onPan: (CGFloat, CGFloat) -> Void
+
+  func makeUIView(context: Context) -> UIView {
+    let view = UIView()
+    view.isMultipleTouchEnabled = true
+    let pan = UIPanGestureRecognizer(
+      target: context.coordinator, action: #selector(Coordinator.pan(_:)))
+    pan.maximumNumberOfTouches = 2
+    pan.delegate = context.coordinator
+    let pinch = UIPinchGestureRecognizer(
+      target: context.coordinator, action: #selector(Coordinator.pinch(_:)))
+    pinch.delegate = context.coordinator
+    view.addGestureRecognizer(pan)
+    view.addGestureRecognizer(pinch)
+    return view
+  }
+
+  func updateUIView(_ view: UIView, context: Context) {
+    context.coordinator.onIntent = onIntent
+    context.coordinator.onPan = onPan
+  }
+
+  func makeCoordinator() -> Coordinator { Coordinator(onIntent: onIntent, onPan: onPan) }
+
+  final class Coordinator: NSObject, UIGestureRecognizerDelegate {
+    var onIntent: (ProcedureIntent) -> Void
+    var onPan: (CGFloat, CGFloat) -> Void
+    private var touchCount = 0
+    private var pinching = false
+    private var rejected = false
+    private var hadMultipleTouches = false
+
+    init(onIntent: @escaping (ProcedureIntent) -> Void, onPan: @escaping (CGFloat, CGFloat) -> Void)
+    {
+      self.onIntent = onIntent
+      self.onPan = onPan
+    }
+
+    func gestureRecognizer(
+      _ gestureRecognizer: UIGestureRecognizer,
+      shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+    ) -> Bool {
+      gestureRecognizer.view === otherGestureRecognizer.view
+    }
+
+    @objc func pan(_ gesture: UIPanGestureRecognizer) {
+      guard let view = gesture.view else { return }
+      let delta = gesture.translation(in: view)
+      defer { gesture.setTranslation(.zero, in: view) }
+      if gesture.state == .began {
+        let start = gesture.location(in: view).x - delta.x
+        rejected = start < 24 || start > view.bounds.width - 24
+        touchCount = gesture.numberOfTouches
+        hadMultipleTouches = touchCount > 1
+      }
+      guard gesture.state == .began || gesture.state == .changed else {
+        touchCount = 0
+        rejected = false
+        return
+      }
+      guard !rejected else { return }
+      if gesture.numberOfTouches > 1 { hadMultipleTouches = true }
+      guard touchCount == gesture.numberOfTouches else {
+        touchCount = gesture.numberOfTouches
+        return
+      }
+      if touchCount == 2 { onPan(delta.x, delta.y) }
+      if touchCount == 1 && !pinching && !hadMultipleTouches {
+        onIntent(.orbit(yaw: -Double(delta.x) * 0.008, pitch: -Double(delta.y) * 0.008))
+      }
+    }
+
+    @objc func pinch(_ gesture: UIPinchGestureRecognizer) {
+      switch gesture.state {
+      case .began, .changed:
+        pinching = true
+        onIntent(.zoom(scale: 1 / Double(gesture.scale)))
+        gesture.scale = 1
+      default:
+        pinching = false
+        touchCount = 0
+      }
+    }
+  }
 }

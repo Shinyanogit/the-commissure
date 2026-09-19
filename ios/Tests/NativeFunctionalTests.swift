@@ -45,6 +45,8 @@ final class NativeFunctionalTests: XCTestCase {
         let target = try resolver.resolve(stepID: bundle.procedure.steps[0].id)
         try adapter.present(target, revision: revision, animated: true)
         adapter.advance(by: 0.31)
+        XCTAssertTrue(adapter.isTransitioning)
+        adapter.advance(by: 0.70)
         XCTAssertFalse(adapter.isTransitioning)
         for (partID, part) in target.parts {
           let entity = try XCTUnwrap(entities[partID])

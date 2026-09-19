@@ -9,15 +9,12 @@ procedure state, with runtime EN/JA system-label selection covered by simulator
 UI tests. The scene placeholder and fixture-backed transfer states are not
 release evidence.
 
-The Phase 5A composition is not a release baseline. The owner rejected the
-incremental Phase 5B direction, so Phase 5R requires materially divergent static
-designs, a disposable interaction prototype for Theater/tray/step transitions,
-complete state-matrix coverage, Opus 5's hand-written production visual layer
-from the approved Figma specification, Codex integration/audit, and exact-build
-iPad/iPhone screenshot/accessibility acceptance before the visual shell can be
-called release-ready. Runtime plumbing evidence does not close this gate;
-generated design code is never a production source, and Codex must not become a
-fallback visual author if Opus is unavailable.
+The September 19 owner-directed native redesign and subsequent detailed review
+supersede the earlier Phase 5R authoring/tool requirements. The current visual
+and interaction requirements are recorded in `UI_REDESIGN_2026-09-19.md` and
+derive from the shared design concept plus the owner's explicit Web-parity
+requests. Exact-build phone/tablet visual and accessibility acceptance remain
+release gates. Initial shell tests do not prove those gates complete.
 
 Phase 4 archive status (2026-08-02): the unsigned generic-device archive smoke
 passes for the iOS 18 Swift 6 foundation (`0.1.0` / build `1`, 3.4 MB archive
@@ -35,7 +32,7 @@ Included:
 - Native SwiftUI/RealityKit Library and Procedure Theater.
 - ACDF, ACCF, PCDF, and PCF; 26 canonical reversible steps.
 - Icon-first, MECE interface and Bottom Step Tray.
-- Orbit, pinch, step flick, visible controls, keyboard/pointer, and accessible
+- Orbit, pinch, two-finger pan, explanation paging, visible controls, keyboard/pointer, and accessible
   equivalents.
 - English/Japanese UI and procedure prose with in-app switching.
 - Progress resume, bundled fallback, optional first-use acquisition, verified
@@ -59,7 +56,7 @@ executable logic.
 | F-07 | English/Japanese switch updates active UI/prose in place with no model reload or step reset; key parity is complete. |
 | F-08 | Every screen passes the documented MECE ownership inventory and has no duplicate control/state presentation. |
 | F-09 | Routine actions are icon-first and understandable by position/state; localized labels/hints exist for assistive technology. |
-| F-10 | Reset Progress and Clear Downloads are separate, accurate, and cannot remove bundled fallback. |
+| F-10 | Clear Downloads is accurate and cannot remove bundled fallback. The owner removed the Reset Progress setting on September 19. |
 
 ## 3. Scene correctness gates
 

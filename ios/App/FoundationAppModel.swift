@@ -26,6 +26,7 @@ final class FoundationAppModel {
   private var loadGeneration: UInt64 = 0
   private var activeRemoteModelURL: URL?
   private var activeBundle: ProcedureBundle?
+  private var activeExplanationBodies: [String: String] = [:]
   private var activeSessionController: ProcedureSessionController?
 
   var effectiveLocale: String { preferences.effectiveLocale }
@@ -104,6 +105,8 @@ final class FoundationAppModel {
       } else {
         bundle = try await contentStore.procedure(id: id, locale: locale)
       }
+      let explanationBodies = await NativeExplanationCopy.bodies(
+        procedure: id, locale: locale, strings: bundle.localization.strings)
       guard generation == openGeneration else { return }
       let controller = try ProcedureSessionController(bundle: bundle)
       if let step = preferences.savedStep(for: id, version: bundle.procedure.version) {
@@ -112,6 +115,7 @@ final class FoundationAppModel {
       sceneRuntime?.dispose()
       activeRemoteModelURL = remote?.1
       activeBundle = bundle
+      activeExplanationBodies = explanationBodies
       activeSessionController = controller
       let runtime = ProcedureSceneRuntime(
         bundle: bundle, assets: nativeAssets, controller: controller, installedURL: remote?.1)
@@ -141,6 +145,7 @@ final class FoundationAppModel {
     sceneRuntime = nil
     activeRemoteModelURL = nil
     activeBundle = nil
+    activeExplanationBodies = [:]
     activeSessionController = nil
     failedProcedureID = nil
   }
@@ -185,7 +190,7 @@ final class FoundationAppModel {
       guard let state = try controller.send(intent) else { return }
       let animated: Bool
       switch intent {
-      case .orbit, .zoom: animated = false
+      case .orbit, .zoom, .pan: animated = false
       default: animated = true
       }
       sceneRuntime?.present(state, animated: animated)
@@ -239,8 +244,6 @@ final class FoundationAppModel {
   private func reprojectActiveProcedure() async {
     guard let activeBundle, let controller = activeSessionController else { return }
     let generation = openGeneration
-    isOpeningProcedure = true
-    defer { if generation == openGeneration { isOpeningProcedure = false } }
     let locale = effectiveLocale
     do {
       let remote =
@@ -255,10 +258,14 @@ final class FoundationAppModel {
         localizedBundle = try await contentStore.procedure(
           id: activeBundle.procedure.id, locale: locale)
       }
+      let explanationBodies = await NativeExplanationCopy.bodies(
+        procedure: localizedBundle.procedure.id, locale: locale,
+        strings: localizedBundle.localization.strings)
       guard generation == openGeneration, activeSessionController === controller,
         locale == effectiveLocale
       else { return }
       self.activeBundle = localizedBundle
+      self.activeExplanationBodies = explanationBodies
     } catch {
       Diagnostics.content.error(
         "Procedure locale reprojection failed: \(String(describing: error), privacy: .public)")
@@ -274,7 +281,10 @@ final class FoundationAppModel {
     let selectedStep = procedure.steps[selectedIndex]
     let title = strings[procedure.titleKey] ?? procedure.id
     let stepTitle = strings[selectedStep.titleKey] ?? selectedStep.id
-    let explanation = strings[selectedStep.bodyKey] ?? ""
+    let explanations = procedure.steps.map {
+      activeExplanationBodies[$0.bodyKey] ?? strings[$0.bodyKey] ?? ""
+    }
+    let explanation = explanations[selectedIndex]
     let accessibilitySummary = strings[selectedStep.accessibilitySummaryKey] ?? stepTitle
 
     return TheaterViewState(
@@ -294,7 +304,7 @@ final class FoundationAppModel {
       canGoPrevious: controller.session.capabilities.canGoPrevious,
       canGoNext: controller.session.capabilities.canGoNext,
       canReset: controller.session.isContentReady,
-      stepExplanations: procedure.steps.map { strings[$0.bodyKey] ?? "" }
+      stepExplanations: explanations
     )
   }
 }

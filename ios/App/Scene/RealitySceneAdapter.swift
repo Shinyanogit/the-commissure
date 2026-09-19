@@ -11,6 +11,7 @@ enum SceneAdapterError: Error, Equatable {
 final class RealitySceneAdapter {
   let camera = Entity()
   private var fieldOfView: Float = 60 { didSet { updateProjection() } }
+  private var cameraDistance: Float = 1
   private var viewport = SIMD2<Float>(1, 1)
   private var occlusion = SIMD2<Float>.zero
 
@@ -19,6 +20,14 @@ final class RealitySceneAdapter {
     viewport = SIMD2(width, height)
     occlusion = SIMD2(coveredWidth, coveredHeight)
     updateProjection()
+  }
+
+  func panTranslation(x: Float, y: Float) -> Vector3 {
+    let unitsPerPoint = 2 * cameraDistance * tan(fieldOfView * .pi / 360) / viewport.y
+    let right = camera.orientation.act(SIMD3<Float>(1, 0, 0))
+    let up = camera.orientation.act(SIMD3<Float>(0, 1, 0))
+    let translation = (-right * x + up * y) * unitsPerPoint
+    return Vector3(x: Double(translation.x), y: Double(translation.y), z: Double(translation.z))
   }
 
   private func updateProjection() {
@@ -80,7 +89,8 @@ final class RealitySceneAdapter {
     guard revision >= presentationRevision else { return }
     guard Set(state.parts.keys) == dynamicIDs,
       adjustment.yaw.isFinite, adjustment.pitch.isFinite,
-      adjustment.zoomScale.isFinite, adjustment.zoomScale > 0
+      adjustment.zoomScale.isFinite, adjustment.zoomScale > 0,
+      adjustment.pan.x.isFinite, adjustment.pan.y.isFinite, adjustment.pan.z.isFinite
     else { throw SceneAdapterError.invalidState }
     var targets: [String: Target] = [:]
     var starts: [String: Target] = [:]
@@ -103,6 +113,9 @@ final class RealitySceneAdapter {
         opacity: entity.isEnabled ? (entity.components[OpacityComponent.self]?.opacity ?? 1) : 0,
         visible: entity.isEnabled)
     }
+    cameraDistance =
+      simd_distance(vector(state.camera.position), vector(state.camera.target))
+      * Float(adjustment.zoomScale)
     let cameraTarget = cameraTransform(state.camera, adjustment: adjustment)
     guard cameraTarget.translation.x.isFinite, cameraTarget.rotation.real.isFinite else {
       throw SceneAdapterError.invalidState
@@ -124,8 +137,11 @@ final class RealitySceneAdapter {
   func advance(by delta: Double) {
     guard var value = transition, delta.isFinite, delta > 0 else { return }
     value.elapsed += delta
-    let fraction = Float(min(value.elapsed / 0.3, 1))
-    let eased = fraction * fraction * (3 - 2 * fraction)
+    let fraction = Float(min(value.elapsed / 1.0, 1))
+    // Match the Web scene tween: one second with GSAP power2.inOut easing.
+    let eased = fraction < 0.5
+      ? 4 * fraction * fraction * fraction
+      : 1 - pow(-2 * fraction + 2, 3) / 2
     if fraction >= 1 {
       apply(value.targets)
       camera.transform = value.cameraTarget
@@ -177,12 +193,13 @@ final class RealitySceneAdapter {
   }
 
   private func cameraTransform(_ pose: CameraState, adjustment: CameraAdjustment) -> Transform {
-    let target = vector(pose.target)
+    let target = vector(pose.target) + vector(adjustment.pan)
     let yaw = simd_quatf(angle: Float(adjustment.yaw), axis: SIMD3<Float>(0, 1, 0))
     let pitch = simd_quatf(angle: Float(adjustment.pitch), axis: SIMD3<Float>(1, 0, 0))
     let rotation = yaw * pitch
     let position =
-      target + rotation.act(vector(pose.position) - target) * Float(adjustment.zoomScale)
+      target + rotation.act(vector(pose.position) - vector(pose.target))
+      * Float(adjustment.zoomScale)
     let forward = simd_normalize(target - position)
     let right = simd_normalize(simd_cross(forward, rotation.act(vector(pose.up))))
     let up = simd_normalize(simd_cross(right, forward))

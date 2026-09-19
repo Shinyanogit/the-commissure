@@ -102,6 +102,10 @@ final class ProcedureSceneRuntime {
       coveredWidth: Float(occlusion.width), coveredHeight: Float(occlusion.height))
   }
 
+  func pan(x: CGFloat, y: CGFloat) {
+    onIntent?(.pan(translation: adapter.panTranslation(x: Float(x), y: Float(y))))
+  }
+
   func consume(_ sample: GestureSample) {
     for intent in gestureResolver.consume(sample, capabilities: controller.session.capabilities) {
       onIntent?(intent)

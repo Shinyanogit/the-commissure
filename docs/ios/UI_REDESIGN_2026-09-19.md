@@ -173,3 +173,62 @@ canonical USD layers, byte-identical full exports of all four procedures in a
 separate checkout, and strict ARKit validation. The native bundled resources
 were regenerated. The integrity negative tests also pass. Asset-owner approval
 and signed candidate validation remain separate gates.
+
+## Native reading experiment
+
+At the owner's request, iOS now has a source-bound editorial overlay in
+`ios/App/Content/ExplanationCopy.json`. Shared content and Web code remain
+unchanged. All 52 localized bodies have semantic paragraph breaks; only these
+ten steps per language simplify wording:
+
+- ACDF: overview, indications, discectomy, cage types.
+- ACCF: posterior lesion, discectomy/corpectomy.
+- PCDF: post-laminectomy kyphosis, posterior fixation.
+- PCF: laminoforaminotomy, preserved motion.
+
+The review retains mechanisms, qualifying language, indications, alternatives,
+risks, named anatomy and numerical information. Source digests and all internal
+link destinations have been checked for every body. Shorter length alone is
+not acceptance. The owner must still assess reading quality; no independent
+medical approval is implied. A changed upstream body bypasses its overlay.
+
+Body text now uses opaque near-white; original Markdown emphasis and links use
+the Web accent `#8eddf4`, with semibold emphasis. List markers are laid out as
+bullets with hanging indentation rather than shown as raw Markdown. The same
+branded loader is now requested on cold app launch and procedure entry.
+
+## 2026-09-20 checkpoint
+
+Native scene interpolation now lasts one second with cubic in/out easing,
+matching the Web's basic `power2.inOut` tweens rather than the previous 0.3-second
+smoothstep. Interrupted transitions still start from their current presentation
+and finish at the latest canonical state. Reduce Motion remains immediate.
+This matches basic pacing, not the entire Web timeline: sequential camera,
+resection and implant choreography, including two-second kyphosis motion,
+remains a parity gap.
+
+Model interaction uses touch-count-aware UIKit recognizers for orbit, pinch
+and two-finger pan. The language action opens a native selection dialog. Home
+provides project information and a link to the existing news page. Internal
+procedure links use an explicit four-procedure allowlist.
+
+GitHub check: `git fetch origin` succeeded on September 20. `origin/main` at
+`af7e263` is already an ancestor of this branch, with no incoming commits.
+No merge was needed. Web source is identical to `origin/main`; no push occurred.
+
+Verification: all 52 localized bodies pass source digest, coverage, emphasis,
+link and number checks; all 16 Core tests pass. The earlier isolated simulator
+run failed to launch its test applications and is not passing evidence.
+`checkpoint-review.xcresult` passed 47 app tests and eight of nine UI tests on
+Commissure QA iPhone (iOS 26.2). The landscape language test failed. Bounding
+scene hit testing and raising the header's stacking order fixed that reproduction;
+`header-hit-review.xcresult` then passed the complete rotation/disclosure/step/
+language/reopen test. A full suite on the final header change and current iPad
+candidate has not been rerun.
+
+Visual review is stricter than the test pass count: `pinch-before` and `pinch-out`
+attachments still show unwanted rotation. The pinch UI test checks step stability
+and panel resizing, not camera scale/orientation, so it does not certify zoom.
+This is an unresolved interaction issue, possibly including test touch placement
+relative to the overlay; its cause is not established. Two-finger pan also awaits
+visual confirmation. Do not describe this checkpoint as complete Web parity.

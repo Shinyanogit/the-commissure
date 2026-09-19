@@ -19,6 +19,12 @@ struct ColophonView: View {
             .font(.body)
             .foregroundStyle(DesignTokens.Color.textPrimary)
             .fixedSize(horizontal: false, vertical: true)
+          Text("colophon.authors")
+            .font(.title3.weight(.semibold))
+            .foregroundStyle(.white)
+          author("Rintaro Imada", detail: "colophon.imada")
+          author("Shinya Yamaguchi", detail: "colophon.yamaguchi")
+          author("Koki Tokida", detail: "colophon.tokida")
           Text("colophon.disclaimer")
             .font(.footnote)
             .foregroundStyle(DesignTokens.Color.textSecondary)
@@ -30,4 +36,12 @@ struct ColophonView: View {
     }
     .preferredColorScheme(.dark)
   }
+  private func author(_ name: String, detail: LocalizedStringKey) -> some View {
+    VStack(alignment: .leading, spacing: 6) {
+      Text(name).font(.headline).foregroundStyle(.white)
+      Text(detail).font(.body).foregroundStyle(DesignTokens.Color.textSecondary)
+    }
+    .fixedSize(horizontal: false, vertical: true)
+  }
+
 }

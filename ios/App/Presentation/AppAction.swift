@@ -18,3 +18,15 @@ enum AppAction: Hashable, Sendable {
   case openColophon
   case openSettings
 }
+
+extension AppAction {
+  static func procedureLink(_ url: URL) -> AppAction? {
+    switch url.absoluteString {
+    case "procedure:acdf": .openProcedure("acdf")
+    case "procedure:accf": .openProcedure("accf")
+    case "procedure:pcdf": .openProcedure("pcdf")
+    case "procedure:pcf": .openProcedure("pcf")
+    default: nil
+    }
+  }
+}

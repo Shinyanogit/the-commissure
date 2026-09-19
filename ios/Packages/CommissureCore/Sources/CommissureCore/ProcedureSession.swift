@@ -4,6 +4,7 @@ public struct CameraAdjustment: Equatable, Sendable {
   public var yaw: Double
   public var pitch: Double
   public var zoomScale: Double
+  public var pan = Vector3(x: 0, y: 0, z: 0)
 
   public static let identity = CameraAdjustment(yaw: 0, pitch: 0, zoomScale: 1)
 }
@@ -14,6 +15,7 @@ public enum ProcedureIntent: Equatable, Sendable {
   case selectStep(String)
   case orbit(yaw: Double, pitch: Double)
   case zoom(scale: Double)
+  case pan(translation: Vector3)
   case resetView
 }
 
@@ -72,6 +74,13 @@ public struct ProcedureSession: Equatable, Sendable {
     case .zoom(let scale):
       guard capabilities.canZoom, scale.isFinite, scale > 0 else { return false }
       cameraAdjustment.zoomScale = min(max(cameraAdjustment.zoomScale * scale, 0.5), 3)
+    case .pan(let translation):
+      guard isContentReady else { return false }
+      let next = Vector3(
+        x: cameraAdjustment.pan.x + translation.x,
+        y: cameraAdjustment.pan.y + translation.y, z: cameraAdjustment.pan.z + translation.z)
+      guard next.x.isFinite, next.y.isFinite, next.z.isFinite else { return false }
+      cameraAdjustment.pan = next
     case .resetView:
       guard isContentReady else { return false }
       cameraAdjustment = .identity

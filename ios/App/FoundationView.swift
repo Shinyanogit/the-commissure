@@ -8,7 +8,8 @@ struct FoundationView: View {
   @State private var loadingStarted = Date.distantPast
 
   private var loadingRequested: Bool {
-    model.isOpeningProcedure || model.sceneRuntime?.readiness == .preparing
+    model.state == .idle || model.state == .loading
+      || model.isOpeningProcedure || model.sceneRuntime?.readiness == .preparing
   }
 
   init(model: FoundationAppModel) {
@@ -30,6 +31,14 @@ struct FoundationView: View {
                   .id(runtime.id)
                 }
               }), onAction: dispatch
+          )
+          .environment(
+            \.openURL,
+            OpenURLAction { url in
+              guard let action = AppAction.procedureLink(url) else { return .discarded }
+              dispatch(action)
+              return .handled
+            }
           )
           .toolbar(.hidden, for: .navigationBar)
         } else {

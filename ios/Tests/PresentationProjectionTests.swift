@@ -1,9 +1,45 @@
 import Observation
+import SwiftUI
 import XCTest
 
 @testable import TheCommissure
 
 final class PresentationProjectionTests: XCTestCase {
+  func testNativeCopyFallsBackWhenMedicalSourceChanges() throws {
+    XCTAssertEqual(
+      NativeExplanationCopy.entries.values.reduce(0) { $0 + $1.values.reduce(0) { $0 + $1.count } },
+      52)
+    let source = "Updated medical explanation"
+    XCTAssertEqual(
+      NativeExplanationCopy.text(
+        procedure: "acdf", locale: "en", key: "step.overview.body", source: source), source)
+  }
+
+  @MainActor
+  func testExplanationStylingKeepsMedicalTextAndLinkTargets() throws {
+    let text = ExplanationText.styled("Normal **key term** and [ACDF](procedure:acdf)")
+    XCTAssertEqual(String(text.characters), "Normal key term and ACDF")
+    let emphasized = try XCTUnwrap(
+      text.runs.first { $0.inlinePresentationIntent?.contains(.stronglyEmphasized) == true })
+    XCTAssertEqual(
+      emphasized.foregroundColor, Color(red: 142 / 255, green: 221 / 255, blue: 244 / 255))
+    XCTAssertTrue(text.runs.contains { $0.link?.absoluteString == "procedure:acdf" })
+  }
+
+  @MainActor
+  func testExplanationLinksOnlyOpenBundledProcedures() throws {
+    for id in ["acdf", "accf", "pcdf", "pcf"] {
+      XCTAssertEqual(
+        AppAction.procedureLink(try XCTUnwrap(URL(string: "procedure:\(id)"))), .openProcedure(id))
+    }
+    for value in [
+      "procedure:pcl_open", "procedure:acdf?step=2", "procedure://acdf", "https://example.com",
+      "file:///tmp/acdf",
+    ] {
+      XCTAssertNil(AppAction.procedureLink(try XCTUnwrap(URL(string: value))))
+    }
+  }
+
   @MainActor
   func testOpeningProcedureProjectsTheaterAndIntentUpdates() async throws {
     let defaults = isolatedDefaults()

@@ -31,6 +31,12 @@ struct LibraryView: View {
               unavailableState
             } else {
               cards(width: geometry.size.width)
+              ViewThatFits(in: .horizontal) {
+                HStack(spacing: 24) { informationLinks }
+                VStack(alignment: .leading, spacing: 8) { informationLinks }
+              }
+              .font(.subheadline)
+              .foregroundStyle(DesignTokens.Color.textSecondary)
 
             }
           }
@@ -44,6 +50,18 @@ struct LibraryView: View {
       }
     }
     .preferredColorScheme(.dark)
+  }
+
+  @ViewBuilder
+  private var informationLinks: some View {
+    Button("library.about") { onAction(.openColophon) }
+      .buttonStyle(.plain)
+      .frame(minHeight: 44)
+      .accessibilityIdentifier("library-about")
+    Link(destination: URL(string: "https://the-commissure.vercel.app/news")!) {
+      Label("library.news", systemImage: "arrow.up.right")
+    }
+    .frame(minHeight: 44)
   }
 
   private var header: some View {

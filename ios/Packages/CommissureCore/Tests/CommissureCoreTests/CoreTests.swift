@@ -103,6 +103,18 @@ final class CoreTests: XCTestCase {
     XCTAssertNil(session.pendingStepID)
   }
 
+  func testPanRequiresReadyContentRejectsInvalidInputAndResets() {
+    var session = ProcedureSession(procedure: makeFixture().procedure)
+    XCTAssertFalse(session.send(.pan(translation: .init(x: 1, y: 0, z: 0))))
+    session.setContentReady(true)
+    XCTAssertTrue(session.send(.pan(translation: .init(x: 0.1, y: -0.2, z: 0.3))))
+    let adjustment = session.cameraAdjustment
+    XCTAssertFalse(session.send(.pan(translation: .init(x: .infinity, y: 0, z: 0))))
+    XCTAssertEqual(session.cameraAdjustment, adjustment)
+    XCTAssertTrue(session.send(.resetView))
+    XCTAssertEqual(session.cameraAdjustment, .identity)
+  }
+
   func testReframeResetsCameraAndPreserveKeepsIt() {
     var session = ProcedureSession(procedure: makeFixture().procedure, contentReady: true)
     XCTAssertTrue(session.send(.orbit(yaw: 0.5, pitch: 0.2)))
