@@ -166,3 +166,10 @@ panel. The final regression adds actual pinch gestures and landscape resizing;
 its results are not yet claimed. The loader now uses the Web minimum 500 ms
 presentation and 1.1-second alternating reveal, while remaining visible until
 native content is ready rather than hiding an unfinished load at a timeout.
+
+Asset portability repair: `canonicalization-test.log`, `cross-checkout.log`,
+and `portable-assets.log` in the same evidence directory prove path-independent
+canonical USD layers, byte-identical full exports of all four procedures in a
+separate checkout, and strict ARKit validation. The native bundled resources
+were regenerated. The integrity negative tests also pass. Asset-owner approval
+and signed candidate validation remain separate gates.

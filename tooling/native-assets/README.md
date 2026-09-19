@@ -40,9 +40,10 @@ inventory in its manifest, replaces runtime substring styling with
 explicit semantic bindings and native materials, applies the declared
 decimation policy, flattens the composed layer into canonical order, exports
 USDZ, and runs strict ARKit validation. ZIP timestamps are normalized, so the
-same pinned input, manifest, toolchain and checkout path produce byte-identical
-output. Cross-checkout reproducibility remains blocked: flattened USD metadata
-currently embeds an absolute source path. See the session handoff before release. Generated
+same pinned input, manifest and toolchain produce byte-identical output.
+Flattening disables source-file comments so absolute checkout paths are not
+embedded in the layer. All four production exports matched byte-for-byte in
+a separate checkout on September 19. Generated
 assets and reports are kept under `tooling/native-assets/output/` and are not
 committed.
 
@@ -89,3 +90,19 @@ USDZ report are rejected. The 2026-09-12 output is 26,353,196 bytes (25.13 MiB):
 all individual 8 MB targets and the 35 MB combined hard limit pass, while the
 20 MB combined target does not. Asset rights, medical visual review, App
 Thinning, and ACCF/PCF device performance remain release gates.
+
+
+## Checkout portability regression
+
+After building all four reference exports, run:
+
+```sh
+blender --background --factory-startup --python tooling/native-assets/test_canonicalization.py
+python3 tooling/native-assets/test_reproducibility.py
+python3 tooling/native-assets/test_integrity.py
+```
+
+The first check compares canonical USD layers at different absolute paths. The
+second copies all source inputs into a separate temporary checkout, regenerates
+all four production archives, and compares exact bytes against the references.
+The final check rejects corrupt archives and scene bindings absent from them.

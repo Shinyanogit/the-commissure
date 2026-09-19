@@ -125,7 +125,7 @@ def canonicalize_layer(path: Path) -> None:
         if not prim.IsPseudoRoot():
             properties = sorted(prop.GetName() for prop in prim.GetProperties())
             prim.SetPropertyOrder(properties)
-    flattened = stage.Flatten()
+    flattened = stage.Flatten(addSourceFileComment=False)
     if not flattened.Export(str(path)):
         raise RuntimeError(f"unable to export canonical USD layer: {path}")
 
@@ -334,8 +334,9 @@ def main() -> None:
     print("COMMISSURE_EXPORT=" + json.dumps(report, separators=(",", ":")))
 
 
-try:
-    main()
-except Exception:
-    traceback.print_exc()
-    sys.exit(1)
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception:
+        traceback.print_exc()
+        sys.exit(1)
