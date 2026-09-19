@@ -5,7 +5,7 @@
 > preparation. Asset portability is verified; exact-candidate release gates remain open.
 
 Status: local release controls implemented, release blocked
-Last audited: 2026-09-19 (source and simulator checkpoint; no signed candidate)
+Last audited: 2026-09-20 (source, unsigned Release archive, and Fastlane checkpoint; no signed candidate)
 
 This file records observed repository state. It is not a release approval. The
 authoritative release gates remain in [RELEASE_SPEC.md](RELEASE_SPEC.md).
@@ -115,8 +115,8 @@ external TestFlight.
 | Medical review | All four provenance records use `inheritedWebsiteSource` | Owner-approved medical review per shipped revision |
 | Rights review | All four provenance records use `ownerConfirmationRequired` | Owner confirmation for models, text, images, fonts, icons, portraits, and screenshots |
 | Content signing | No production key configuration is stored in Git | Configure protected signing secret and pinned public key |
-| Signed IPA | Development signing and other-app Store profiles exist; a distribution candidate for this bundle ID has not been verified | Produce one signed IPA and package its exact evidence |
-| Version and icon | Project settings remain `0.1.0` build `1`; the owner-requested Web favicon is configured as an opaque 1024 px AppIcon | Set the 1.0 version/build and verify the icon in the signed candidate |
+| Signed IPA | A Release arm64 archive builds, but `CODE_SIGNING_ALLOWED=NO` leaves its app unsigned. Only an Apple Development identity is installed; no distribution identity, app-specific distribution profile, IPA, or provisioning evidence exists | Produce one signed IPA and package its exact evidence |
+| Version and icon | Project settings remain `0.1.0` build `1`; the owner-requested Web favicon is configured as an opaque 1024 px AppIcon and compiles successfully | Set the 1.0 version/build and verify the icon in the signed candidate |
 | Physical device | The current physical test attempt failed because the first attempt used the wrong team identifier and the second mixed an Xcode-managed profile with manual signing | Run the unchanged candidate on the required devices after signing is configured |
 | Floor device | No oldest-supported iOS 18 device trace is recorded | Pass the complete performance and resilience suite on that device |
 | Current devices | No candidate-bound current iPhone and iPad reports are recorded | Pass both device reports |
@@ -124,7 +124,7 @@ external TestFlight.
 | Visual and accessibility acceptance | No exact-candidate owner visual approval or complete accessibility report is recorded | Record both without changing the candidate |
 | Privacy | Source manifest exists; signed-archive aggregate report has not been reviewed | Audit the archive report, linked SDKs, network behavior, and App Privacy answers |
 | App Review scans | Neither required exact-stage scan is recorded | Run before external TestFlight and on the final candidate |
-| Store materials | Final URLs, metadata, screenshots, age rating, content-rights answer, and reviewer notes are not recorded | Complete and bind them to the candidate |
+| Store materials | Local EN/JA draft exists, but no metadata upload tree, public support/privacy URL, final screenshots, age rating, copyright, contact, export answer, or candidate-bound reviewer notes exists | Complete and bind them to the candidate |
 | TestFlight | No internal or external candidate result is recorded | Upload through protected environments and retain results |
 
 No blocker above may be converted to a pass by an empty file, a CI success from
@@ -157,8 +157,8 @@ replace either required scan of a signed candidate.
 
 ### Fail
 
-- No AppIcon app icon set is configured.
-- Marketing version remains `0.1.0` and no signed App Store candidate exists.
+- The 1024 px opaque AppIcon is present and the asset compiler accepts it, but the
+  marketing version remains `0.1.0` and no signed App Store candidate exists.
 - Medical and rights review remain unresolved for every procedure.
 - Floor-device, current-device, visual, accessibility, and App Thinning gates
   lack candidate-bound evidence.
@@ -179,3 +179,33 @@ As of 2026-09-12:
 - `PrivacyInfo.xcprivacy` passes `plutil -lint`.
 - `ios/fastlane/Fastfile` passes Ruby syntax validation.
 - The Fastlane dependency graph is locked in `ios/Gemfile.lock`.
+
+## 2026-09-20 App Store submission audit
+
+The `app-store-review` source audit found a native SwiftUI and RealityKit app
+with iPhone and iPad support, iOS 18 minimum deployment, arm64 Release output,
+a launch screen, an AppIcon, no account or payment flow, and a privacy manifest
+that declares no collected data or tracking. The source exposes only the
+declared UserDefaults and low-storage required-reason APIs. This is a source
+and unsigned-archive finding, not a candidate scan.
+
+`xcodebuild archive` succeeded with code signing deliberately disabled. The
+archive reports version `0.1.0` build `1`, no signing identity, and no team;
+its app is not signed. The installed keychain has one Apple Development
+identity and no Apple Distribution identity. No IPA or release-evidence JSON
+exists. The release and content control tests pass 13 cases, including
+fail-closed medical, rights, evidence, and artifact tamper checks.
+
+The project Fastlane environment is now executable through Homebrew Ruby 4.0.1
+and Bundler 4.0.3. It lists all seven local lanes. A deliberately incomplete
+`ios submit` invocation stopped at `IPA_PATH`, before any App Store Connect
+request. No upload, metadata sync, TestFlight distribution, submission, push,
+or deployment occurred.
+
+The current submission blockers remain factual gates: approval of the four
+medical procedure revisions, confirmation of rights for every shipped asset,
+distribution signing, a public privacy policy and support contact, final store
+answers and materials, exact-candidate device and accessibility evidence,
+internal and external TestFlight evidence, and a signed release-candidate scan.
+The current native pinch behavior also remains visually unaccepted in the UI
+checkpoint. These records cannot be manufactured from local checks.

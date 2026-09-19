@@ -3,6 +3,16 @@
 User-visible changes are recorded when the implementation, verification, and
 its source-of-truth documentation are ready in the same pull request.
 
+## 2026-09-20: App Store submission audit
+
+- Restored the locked Fastlane environment with Homebrew Ruby and verified that
+  all local lanes load. The submit lane stops before network access when no IPA
+  path is supplied.
+- Recorded an unsigned arm64 Release archive and the current App Store review
+  findings. Distribution signing, factual approvals, public URLs, candidate
+  materials, physical-device evidence, TestFlight, and the final candidate scan
+  remain release blockers.
+
 ## 2026-09-20: native reading and interaction checkpoint
 
 - Added an iOS-only explanation copy experiment, preserving shared source text,
