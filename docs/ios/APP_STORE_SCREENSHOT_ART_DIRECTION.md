@@ -1,60 +1,83 @@
 # App Store Screenshot Art Direction
 
-Status: ready for Figma Make composition after final screenshot approval
+Status: production composition pending final candidate captures
 Last updated: 2026-09-20
 
-## Goal
+## Governing principle
 
-Create one connected App Store key visual for The Commissure. It must divide cleanly into four equal portrait screenshots, in the same spirit as the Vocabry listing reference.
+The App Store media is a series of four independent product images. A viewer
+must understand each image on its own. Shared palette, lighting, margins, and
+typography make the series coherent. No element may require the neighbouring
+image to be visible in order to work.
 
-The source images are real native-app captures. Keep the shipped user interface, model, procedure names, icons, and text unchanged. Figma Make may add only the quiet framing, crop, and shared visual rhythm needed to compose the sequence.
+Native screenshots are visual source material, not four equal cards and not a
+single unmodified strip. Every screenshot crop must reveal a different product
+moment.
 
-## Source package
+## Reference implementation
 
-The Figma input files are staged locally at `ios/app-store-materials/figma-input`:
+The Vocabry App Store panorama was not generated from a Figma Make prompt. Its
+source is a fixed React canvas in
+`英単語帳アプリ/store_assets/feature_graphic_src/src/AppPanorama.tsx`, rendered
+with Puppeteer and split with Sharp in `capture_4split.mjs`. Its wide master
+contains a restrained unifying V motif, but each resulting screenshot has an
+independent role: brand introduction, primary product surface, feature moment,
+and second product surface.
 
-| File | Use |
-| --- | --- |
-| `01-library.png` | First panel. Actual Library with the Web blue spine image. |
-| `02-acdf-overview.png` | Second panel. ACDF model and overview panel. |
-| `03-acdf-explanation.png` | Third panel. ACDF explanation with cyan keywords. |
-| `04-acdf-next-step.png` | Fourth panel. Next reversible procedure step. |
-| `app-icon.png` | Existing native AppIcon based on the Web favicon. |
-| `wordmark.png` | Shipped The Commissure wordmark. |
-| `home-spine.jpg` | Reference for the shipped blue spine used inside the native Library only. |
+The Commissure follows that production method without copying Vocabry's visual
+language: a source-controlled fixed canvas, reviewable local rendering, then
+deterministic slices. Figma Make may be used for exploration only. It is not a
+source of final App Store composition.
 
-The input captures are simulator evidence only. Recapture them from the exact release build after visual approval before App Store Connect upload.
+## The Commissure four-image story
 
-## Required composition
+| Image | Role | Primary visual | Screenshot material |
+| --- | --- | --- | --- |
+| 1 | Brand and scope | App icon, wordmark, and dark blue spine field | None or a small Library detail only |
+| 2 | Direct anatomy | Warm cervical 3D anatomy on the dark stage | A large ACDF overview crop |
+| 3 | Teaching clarity | Cyan keyword emphasis with readable translucent panel | A large explanation-panel crop |
+| 4 | Procedural depth | A clearly distinct anatomy angle or procedure state | A final-candidate capture different from images 2 and 3 |
 
-- Create one flat `5280 × 2868 px` composition. It comprises four adjacent `1320 × 2868 px` zones, matching the supplied iPhone captures exactly. Add nonexporting vertical guides at 1320, 2640, and 3960 px.
-- Do not create device frames or phone mockups. Place each supplied native screenshot at full size within its corresponding zone. Keep the system status bar and visible app controls.
-- Panel 1 leads with the blue spine Library scene. Panels 2 through 4 move into the same ACDF learning session: model overview, explanation, then next step.
-- Use a continuous near-black background behind all four panels. Let a restrained cyan and teal field continue subtly across panel boundaries. Keep `home-spine.jpg` inside panel 1 only. Do not stretch, mirror, tile, or use it as the wide composition background. Do not place a large headline, feature claim, badge, or decorative copy over the screenshots.
-- Preserve the 7:2:1 balance from `docs/DESIGN_CONCEPT.md`: dark stage first, warm anatomy second, cyan or teal only for active emphasis.
-- The result should feel like a calm clinical editorial spread, not a game, advertisement, operating-room photograph, or AI render.
+The first image can be almost entirely branding. The next three do not need to
+show a complete phone screen. Their source regions may be cropped, enlarged,
+rotated slightly, or masked only if the app pixels remain legible and truthful.
 
-## Figma Make prompt
+## Design contract
 
-```text
-Create one flat 5280 by 2868 pixel App Store key visual for an educational iOS app called The Commissure. Use the supplied app screenshots as immutable source content. Divide the wide composition into four adjacent 1320 by 2868 pixel zones. Add nonexporting vertical crop guides at x=1320, x=2640, and x=3960. The result must be ready to split into four independent App Store screenshots without resizing or reflowing any native UI.
+- Derive all colors and materials from `docs/DESIGN_CONCEPT.md`, The Sterile
+  Field: near-black stage first, warm anatomy second, cyan or teal as the
+  restrained active accent.
+- Use the shipped blue spine only as a quiet Library texture in image 1. Never
+  stretch, mirror, or repeat it across the series.
+- Use broad negative space. The anatomy or explanation crop must have one clear
+  focal point per image.
+- Do not add generated anatomy, devices, people, patients, blood, hospital
+  imagery, fake controls, or non-existent product UI.
+- Any additional headline must be an exact visible product phrase or confirmed
+  metadata claim. Do not add AI, diagnosis, medical-advice, accuracy, or
+  outcome claims.
+- Avoid device frames unless they reveal a device-specific interaction that the
+  native screenshot itself cannot show.
 
-Art direction: The Sterile Field. Use a near-black surgical theater background, a restrained cyan and teal field that flows subtly across the four artboards, and warm bone-colored anatomy as the visual focal point. Maintain a 7:2:1 ratio: seven parts dark quiet stage, two parts warm anatomy, one part cyan or teal active accent. The tone is calm, precise, clinical, and editorial.
+## Production workflow
 
-Panel one uses 01-library.png and must visibly retain the native Library, the blue spine hero image, all four procedure cards, and the actual app wordmark. The supplied home-spine.jpg is reference for this first panel only. Do not stretch, mirror, tile, or continue it across the wide composition. Panel two uses 02-acdf-overview.png and centers the ACDF model with its native translucent overview panel. Panel three uses 03-acdf-explanation.png and keeps the cyan keyword emphasis and readable explanation panel. Panel four uses 04-acdf-next-step.png and shows the following procedure step, conveying a reversible learning sequence.
+1. Capture final approved English and Japanese native states for iPhone and
+   iPad. Include a genuinely different step or view for image 4.
+2. Build fixed composition source under `ios/app-store-materials/source`.
+3. Render a review master for each device and locale.
+4. Inspect each individual crop at its native App Store size before splitting.
+5. Export individual PNGs in the current Apple-accepted dimensions and confirm
+   no alpha channel is present.
 
-Use only the supplied screenshots, app icon, wordmark, and blue spine asset. Do not generate anatomy, devices, surgical scenes, extra controls, or text. Do not alter visible UI copy, procedure names, model geometry, colors, or the relative layout inside the supplied screenshots. Do not add claims such as AI, medical advice, diagnosis, clinical accuracy, or outcomes. No people, patients, blood, instruments, hospital imagery, gradients that reduce readability, device frames, or phone mockups. The screenshots themselves must remain the dominant readable content.
-```
+For the current iPhone 17 Pro Max source captures, each output is
+`1320 × 2868 px`. The final iPad set will use its own fixed source and layout,
+not a resized phone composition.
 
-## Export handoff
+## Rejected approaches
 
-Export the flat key visual as a PNG, then split it at the three crop guides into four 1320 by 2868 pixel PNGs without rounded corners or borders. Keep English and Japanese as separate localized sets. Confirm that every visible product claim and UI state exists in the approved release build.
-
-## Review checklist
-
-- The blue spine is the shipped Web-derived asset, never generated anatomy.
-- All four procedure cards remain legible in the Library capture.
-- The 3D model and explanation panels remain readable at native size.
-- No copy or feature appears that is absent from the app.
-- Each locale uses screenshots captured from that locale.
-- The final export is based on the signed release candidate, not this simulator evidence set.
+- Figma Make output that treats the result as a responsive Web page, a phone
+  mockup, a row of cards, or an undifferentiated single image.
+- Four equal unedited full-screen captures joined side by side.
+- A visual gesture, line, or logo that dominates every crop and prevents an
+  individual screenshot from standing alone.
+- Reusing the same ACDF overview state for multiple feature images.
