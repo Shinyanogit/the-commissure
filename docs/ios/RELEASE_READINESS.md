@@ -115,7 +115,7 @@ external TestFlight.
 | Medical review | All four provenance records use `inheritedWebsiteSource` | Owner-approved medical review per shipped revision |
 | Rights review | All four provenance records use `ownerConfirmationRequired` | Owner confirmation for models, text, images, fonts, icons, portraits, and screenshots |
 | Content signing | No production key configuration is stored in Git | Configure protected signing secret and pinned public key |
-| Signed IPA | A Release arm64 archive builds, but `CODE_SIGNING_ALLOWED=NO` leaves its app unsigned. Only an Apple Development identity is installed; no distribution identity, app-specific distribution profile, IPA, or provisioning evidence exists | Produce one signed IPA and package its exact evidence |
+| Signed IPA | A Development-signed arm64 archive succeeds under Team `8WSQBQX6C5` with the existing wildcard profile. No Apple Distribution identity, app-specific distribution profile, IPA, or provisioning evidence exists | Produce one signed IPA and package its exact evidence |
 | Version and icon | Project settings are `1.0.0` build `1`; the owner-requested Web favicon is configured as an opaque 1024 px AppIcon and compiles successfully | Verify the version and icon in the signed candidate |
 | Physical device | The current physical test attempt failed because the first attempt used the wrong team identifier and the second mixed an Xcode-managed profile with manual signing | Run the unchanged candidate on the required devices after signing is configured |
 | Floor device | No oldest-supported iOS 18 device trace is recorded | Pass the complete performance and resilience suite on that device |
