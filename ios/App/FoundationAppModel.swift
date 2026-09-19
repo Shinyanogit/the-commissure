@@ -21,6 +21,7 @@ final class FoundationAppModel {
   private let nativeAssets: NativeAssetStore
   private var openGeneration: UInt64 = 0
   private(set) var failedProcedureID: String?
+  private(set) var isOpeningProcedure = false
 
   private var loadGeneration: UInt64 = 0
   private var activeRemoteModelURL: URL?
@@ -91,6 +92,8 @@ final class FoundationAppModel {
   func openProcedure(id: String, useBundled: Bool = false) async {
     openGeneration &+= 1
     let generation = openGeneration
+    isOpeningProcedure = true
+    defer { if generation == openGeneration { isOpeningProcedure = false } }
     let locale = effectiveLocale
     failedProcedureID = nil
     do {
@@ -133,6 +136,7 @@ final class FoundationAppModel {
 
   func closeProcedure() {
     openGeneration &+= 1
+    isOpeningProcedure = false
     sceneRuntime?.dispose()
     sceneRuntime = nil
     activeRemoteModelURL = nil
@@ -235,6 +239,8 @@ final class FoundationAppModel {
   private func reprojectActiveProcedure() async {
     guard let activeBundle, let controller = activeSessionController else { return }
     let generation = openGeneration
+    isOpeningProcedure = true
+    defer { if generation == openGeneration { isOpeningProcedure = false } }
     let locale = effectiveLocale
     do {
       let remote =
@@ -287,7 +293,8 @@ final class FoundationAppModel {
       isExplanationExpanded: preferences.explanationExpanded,
       canGoPrevious: controller.session.capabilities.canGoPrevious,
       canGoNext: controller.session.capabilities.canGoNext,
-      canReset: controller.session.isContentReady
+      canReset: controller.session.isContentReady,
+      stepExplanations: procedure.steps.map { strings[$0.bodyKey] ?? "" }
     )
   }
 }

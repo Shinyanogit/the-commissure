@@ -3,6 +3,19 @@
 User-visible changes are recorded when the implementation, verification, and
 its source-of-truth documentation are ready in the same pull request.
 
+## 2026-09-19: native owner review corrections
+
+- Restored Web-derived procedure background and animated loading wordmark;
+  reused the existing favicon as the native AppIcon.
+- Added adjacent explanation paging with clipping, integrated previous/next
+  controls into a translucent resizable panel, and adjusted camera projection
+  to center the model in the uncovered area.
+- Corrected drag direction and removed model-surface vertical step navigation.
+- Removed unsolicited home captions, information shortcut, progress-reset
+  setting and rotation/zoom menu actions as requested.
+- Focused phone/tablet interaction tests and 44 app tests pass. Broader visual,
+  pinch, regression and release verification continue; see the UI review record.
+
 ## 2026-09-19: native UI redesign
 
 - Rebuilt native Library and Theater from the shared concept, then aligned with

@@ -141,16 +141,16 @@ final class CoreTests: XCTestCase {
     XCTAssertEqual(
       resolver.consume(
         .moved(point: .init(x: 190, y: 252), touches: 1), capabilities: capabilities),
-      [.orbit(yaw: -0.48, pitch: 0.016)]
+      [.orbit(yaw: 0.48, pitch: -0.016)]
     )
     XCTAssertEqual(
       resolver.consume(
         .moved(point: .init(x: 120, y: 252), touches: 1), capabilities: capabilities),
-      [.orbit(yaw: -0.56, pitch: 0)]
+      [.orbit(yaw: 0.56, pitch: 0)]
     )
   }
 
-  func testVerticalFlickAndPinchMapToExistingIntents() {
+  func testVerticalDragRotatesWithoutChangingStepsAndPinchZooms() {
     var resolver = GestureIntentResolver()
     let capabilities = ProcedureCapabilities(
       canGoPrevious: true,
@@ -164,13 +164,13 @@ final class CoreTests: XCTestCase {
     )
     XCTAssertEqual(
       resolver.consume(
-        .moved(point: .init(x: 105, y: 108), touches: 1), capabilities: capabilities),
+        .moved(point: .init(x: 105, y: 107), touches: 1), capabilities: capabilities),
       []
     )
     XCTAssertEqual(
       resolver.consume(
         .moved(point: .init(x: 105, y: 150), touches: 1), capabilities: capabilities),
-      [.nextStep]
+      [.orbit(yaw: 0, pitch: -43 * 0.008)]
     )
     XCTAssertEqual(
       resolver.consume(.pinch(scale: 1.2), capabilities: capabilities), [.zoom(scale: 1.2)])

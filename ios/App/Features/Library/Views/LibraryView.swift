@@ -31,13 +31,7 @@ struct LibraryView: View {
               unavailableState
             } else {
               cards(width: geometry.size.width)
-              if state.cards.allSatisfy({
-                $0.availability == .bundled || $0.availability == .cached
-              }) {
-                Label("library.status.bundled", systemImage: "checkmark.circle")
-                  .font(.footnote)
-                  .foregroundStyle(DesignTokens.Color.textSecondary)
-              }
+
             }
           }
           .frame(maxWidth: 1000)
@@ -72,7 +66,6 @@ struct LibraryView: View {
         .accessibilityLabel(Text("action.language"))
         .accessibilityIdentifier("library-language")
         IconActionButton(.openSettings, onAction: onAction)
-        IconActionButton(.openColophon, onAction: onAction)
       }
       .foregroundStyle(.white)
 
@@ -213,19 +206,9 @@ private struct LibraryCardView: View {
           .accessibilityHidden(true)
       }
       VStack(alignment: .leading, spacing: 7) {
-        let titleLayout =
-          typeSize.isAccessibilitySize
-          ? AnyLayout(VStackLayout(alignment: .leading, spacing: 6))
-          : AnyLayout(HStackLayout(alignment: .firstTextBaseline))
-        titleLayout {
-          Text(state.id.uppercased())
-            .font(.title2.weight(.semibold))
-            .tracking(0.5)
-          if !typeSize.isAccessibilitySize { Spacer(minLength: 4) }
-          Text(state.stepCountLabel)
-            .font(.caption)
-            .foregroundStyle(DesignTokens.Color.textSecondary)
-        }
+        Text(state.id.uppercased())
+          .font(.title2.weight(.semibold))
+          .tracking(0.5)
         Text(state.title)
           .font(.subheadline)
           .foregroundStyle(DesignTokens.Color.textSecondary)

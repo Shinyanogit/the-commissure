@@ -441,8 +441,8 @@ schemas, cache/download invariants, localization keys, or gesture resolution.
   versions are sourced from Xcode build settings in the generated Info.plist.
 - The Phase 4 repair rejects nested noncanonical scene paths and asset-version
   drift, resolves RealityKit bindings by complete hierarchy rather than leaf
-  name, cancels a one-finger drag on a second touch, maps vertical flicks to
-  steps and horizontal claims to orbit, rejects unsafe pack IDs, and reprojects
+  name, cancels a one-finger drag on a second touch, originally mapped vertical flicks to
+  steps (superseded by the September 19 owner review: both axes now orbit), rejects unsafe pack IDs, and reprojects
   the active library when the language changes. Fresh simulator execution remains
   environment-limited after worker startup (`NSMachErrorDomain -308`); this does
   not change the compile/archive or prior successful runtime evidence.

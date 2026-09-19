@@ -1124,6 +1124,22 @@
           }
         }
       }
+    },
+    "theater.resize": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resize explanation"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "説明パネルのサイズ調整"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

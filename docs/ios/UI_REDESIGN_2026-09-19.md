@@ -127,3 +127,42 @@ This is a locally verified UI implementation, not owner visual acceptance or an
 App Store release. Physical-device performance, medical-content review, existing
 asset-portability findings, signing and release gates remain separate. There was
 no push, upload or deployment.
+
+## Owner review corrections in progress
+
+The owner explicitly requested preservation of the Web interaction details:
+continuous adjacent explanation pages clipped inside the panel, a translucent
+panel containing previous/next controls, draggable panel size, camera framing
+that follows the panel, the Web procedure background, and its 1.1-second
+alternating logo reveal. These requirements override earlier generic statements
+that timing and layout differences were acceptable. The black-background report
+concerned the scene backdrop, not the back surface of the model; the speculative
+extra lighting was removed.
+
+The working implementation uses three neighboring explanation pages and a
+0.5-second snap before dispatching the next scene, and a reverse-depth camera
+projection that shifts the subject to the center of the uncovered viewport.
+Vertical and horizontal drags on the model orbit rather than advance steps.
+The Web favicon is reused for AppIcon. Home card step counts, the bundled-status
+caption, the top-right information action, settings progress reset, and orbit /
+zoom menu entries were removed at the owner's request. The language menu remains.
+
+Verification is still in progress. Earlier 50-test results describe the initial
+redesign, not this candidate. `panel-fixes.xcresult` had failures in resize,
+iPad navigation/locale and a stale caption assertion. A later carousel test
+exposed duplicate offscreen accessibility identifiers, which have been corrected.
+The Web browser runtime and native UI bridge both failed initialization, so
+current Web comparison is source-based, not a successful live interaction audit.
+Remaining work includes final phone/tablet visual and interaction regression,
+pinch and two-finger pan, home information access, internal links, signed device
+verification and the release gates. This checkpoint is not App Store readiness.
+
+Focused evidence after those fixes: `carousel-check2.xcresult` passed the iPhone
+swipe/resize/model separation test. `ipad-carousel.xcresult` passed the same test
+on iPad plus all 44 app tests, including a projection test that verifies the
+uncovered screen center in both orientations without moving the camera pose.
+Screenshots confirm the Web blue-green backdrop and the single translucent
+panel. The final regression adds actual pinch gestures and landscape resizing;
+its results are not yet claimed. The loader now uses the Web minimum 500 ms
+presentation and 1.1-second alternating reveal, while remaining visible until
+native content is ready rather than hiding an unfinished load at a timeout.

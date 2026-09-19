@@ -2,7 +2,6 @@ import SwiftUI
 
 struct SettingsView: View {
   @State private var confirmsClear = false
-  @State private var confirmsReset = false
   var language: AppLanguage = .followSystem
   var canClearDownloads = true
   let onAction: (AppAction) -> Void
@@ -23,18 +22,6 @@ struct SettingsView: View {
           }
           .tint(.white)
           .accessibilityIdentifier("settings-language")
-        }
-        .listRowBackground(DesignTokens.Color.stageSurface)
-
-        Section {
-          Button("action.resetProgress", role: .destructive) { confirmsReset = true }
-            .confirmationDialog(
-              "action.resetProgress.detail", isPresented: $confirmsReset, titleVisibility: .visible
-            ) {
-              Button("action.resetProgress", role: .destructive) { onAction(.resetProgress) }
-            }
-        } footer: {
-          Text("action.resetProgress.detail")
         }
         .listRowBackground(DesignTokens.Color.stageSurface)
 

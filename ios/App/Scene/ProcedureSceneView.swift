@@ -7,15 +7,18 @@ struct ProcedureSceneView: View {
   let summary: String
   let onAction: (AppAction) -> Void
   @Environment(\.accessibilityReduceMotion) private var reduceMotion
+  @Environment(\.sceneOcclusion) private var sceneOcclusion
   @State private var dragStarted = false
   @State private var lastMagnification = 1.0
 
   var body: some View {
     GeometryReader { proxy in
       RealityView { content in
+        runtime.updateViewport(size: proxy.size, occlusion: sceneOcclusion)
         runtime.reduceMotion = reduceMotion
         await runtime.load(into: &content)
       } update: { _ in
+        runtime.updateViewport(size: proxy.size, occlusion: sceneOcclusion)
         runtime.reduceMotion = reduceMotion
       }
       .gesture(
@@ -66,4 +69,8 @@ struct ProcedureSceneView: View {
       .accessibilityAction(named: Text("action.orbitRight")) { onAction(.orbitRight) }
     }
   }
+}
+
+extension EnvironmentValues {
+  @Entry var sceneOcclusion = CGSize.zero
 }

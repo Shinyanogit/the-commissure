@@ -21,3 +21,11 @@ The image is bundled so the Library works offline without a second 3D runtime.
 Source GLB SHA-256: `a45671a1604c5922d3bdaa182fd917ceea67acca348756533c7106a6b3e3e84b`
 Home scene SHA-256: `12806400e36b8a881fd27792fb80e1335558b2988ec8ae01e1d75fcfc5f5107f`
 Wordmark SHA-256: `126d377e8a57b551f3118e728bd945d2c1d8d8ecf67a82b78da291d524e4da71`
+
+## Procedure background and AppIcon (2026-09-19)
+
+`procedure-background.imageset/background.png` is a PNG conversion of the
+unchanged Web `background.webp`, displayed with aspect fill behind RealityView.
+`AppIcon.appiconset/AppIcon.png` uses the Web `favicon.png` mark, composited on
+black, centered in a square and resized to 1024 pixels. No new logo was drawn.
+The original raster resolution limits sharpness; no AI reconstruction was used.

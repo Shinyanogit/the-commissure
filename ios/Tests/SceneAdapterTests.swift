@@ -6,6 +6,23 @@ import XCTest
 
 @MainActor
 final class SceneAdapterTests: XCTestCase {
+  func testPanelFramingCentersTheUncoveredViewportWithoutMovingCamera() throws {
+    let adapter = RealitySceneAdapter()
+    adapter.updateViewport(width: 400, height: 800, coveredWidth: 0, coveredHeight: 300)
+    let portrait = try XCTUnwrap(adapter.camera.components[ProjectiveTransformCameraComponent.self])
+      .transform
+    let projected = portrait * SIMD4<Float>(0, 0, -2, 1)
+    let screenY = (1 - projected.y / projected.w) * 800 / 2
+    XCTAssertEqual(screenY, 250, accuracy: 0.001)
+    adapter.updateViewport(width: 1000, height: 700, coveredWidth: 360, coveredHeight: 0)
+    let landscape = try XCTUnwrap(
+      adapter.camera.components[ProjectiveTransformCameraComponent.self]
+    ).transform
+    let point = landscape * SIMD4<Float>(0, 0, -2, 1)
+    XCTAssertEqual((1 + point.x / point.w) * 1000 / 2, 320, accuracy: 0.001)
+    XCTAssertEqual(adapter.camera.position, .zero)
+  }
+
   func testBindRequiresTheCompleteEntityHierarchy() throws {
     let root = Entity()
     root.name = "root"

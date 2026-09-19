@@ -96,6 +96,12 @@ final class ProcedureSceneRuntime {
     }
   }
 
+  func updateViewport(size: CGSize, occlusion: CGSize) {
+    adapter.updateViewport(
+      width: Float(size.width), height: Float(size.height),
+      coveredWidth: Float(occlusion.width), coveredHeight: Float(occlusion.height))
+  }
+
   func consume(_ sample: GestureSample) {
     for intent in gestureResolver.consume(sample, capabilities: controller.session.capabilities) {
       onIntent?(intent)

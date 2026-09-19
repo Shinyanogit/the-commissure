@@ -9,7 +9,30 @@ enum SceneAdapterError: Error, Equatable {
 
 @MainActor
 final class RealitySceneAdapter {
-  let camera = PerspectiveCamera()
+  let camera = Entity()
+  private var fieldOfView: Float = 60 { didSet { updateProjection() } }
+  private var viewport = SIMD2<Float>(1, 1)
+  private var occlusion = SIMD2<Float>.zero
+
+  func updateViewport(width: Float, height: Float, coveredWidth: Float, coveredHeight: Float) {
+    guard width > 0, height > 0 else { return }
+    viewport = SIMD2(width, height)
+    occlusion = SIMD2(coveredWidth, coveredHeight)
+    updateProjection()
+  }
+
+  private func updateProjection() {
+    let y = 1 / tan(fieldOfView * .pi / 360)
+    let x = y * viewport.y / viewport.x
+    // Reverse-depth perspective with the same off-axis framing as the Web camera.
+    let projection = simd_float4x4(
+      columns: (
+        SIMD4(x, 0, 0, 0), SIMD4(0, y, 0, 0),
+        SIMD4(occlusion.x / viewport.x, -occlusion.y / viewport.y, 0, -1),
+        SIMD4(0, 0, 0.01, 0)
+      ))
+    camera.components.set(ProjectiveTransformCameraComponent(projectionMatrix: projection))
+  }
   private var entitiesByPartID: [String: Entity] = [:]
   private var baselines: [String: Transform] = [:]
   private var dynamicIDs: Set<String> = []
@@ -88,13 +111,13 @@ final class RealitySceneAdapter {
     if animated {
       transition = Transition(
         starts: starts, targets: targets, cameraStart: camera.transform, cameraTarget: cameraTarget,
-        fieldOfViewStart: camera.camera.fieldOfViewInDegrees,
+        fieldOfViewStart: fieldOfView,
         fieldOfViewTarget: Float(state.camera.fieldOfView))
     } else {
       transition = nil
       apply(targets)
       camera.transform = cameraTarget
-      camera.camera.fieldOfViewInDegrees = Float(state.camera.fieldOfView)
+      fieldOfView = Float(state.camera.fieldOfView)
     }
   }
 
@@ -106,7 +129,7 @@ final class RealitySceneAdapter {
     if fraction >= 1 {
       apply(value.targets)
       camera.transform = value.cameraTarget
-      camera.camera.fieldOfViewInDegrees = value.fieldOfViewTarget
+      fieldOfView = value.fieldOfViewTarget
       transition = nil
       return
     }
@@ -118,7 +141,7 @@ final class RealitySceneAdapter {
       entity.isEnabled = start.visible || target.visible
     }
     camera.transform = interpolate(value.cameraStart, value.cameraTarget, eased)
-    camera.camera.fieldOfViewInDegrees =
+    fieldOfView =
       value.fieldOfViewStart
       + (value.fieldOfViewTarget - value.fieldOfViewStart) * eased
     transition = value

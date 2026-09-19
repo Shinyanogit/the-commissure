@@ -49,10 +49,7 @@ struct BottomStepTray: View {
       }
       .padding(10)
     }
-    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 24))
-    .overlay {
-      RoundedRectangle(cornerRadius: 24).stroke(.white.opacity(0.12), lineWidth: 0.5)
-    }
+
   }
 
   private var stepSelection: some View {
