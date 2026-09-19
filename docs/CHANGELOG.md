@@ -3,6 +3,20 @@
 User-visible changes are recorded when the implementation, verification, and
 its source-of-truth documentation are ready in the same pull request.
 
+## 2026-09-20: source controlled App Store artwork draft
+
+- Copied Vocabry's local feature-graphic source before adapting the copy for
+  The Commissure. The original Vocabry project was not modified.
+- Added a fixed 5280 by 2868 composition source and deterministic iPhone
+  capture script. It produces four standalone 1320 by 2868 PNG candidates from
+  a review master using only existing app captures, the shipped icon, wordmark,
+  and blue spine artwork.
+- Revised the first draft after visual review so the three product screens are
+  complete native screens and the dark stage uses continuous ambient light and
+  a restrained cyan guide across the candidate series.
+- `npm run build` and `npm run capture:iphone` pass. The generated images are
+  local review artifacts, not approved App Store uploads.
+
 ## 2026-09-20: App Store support and gesture correction
 
 - Added native-app support and privacy routes to the existing The Commissure

@@ -25,28 +25,34 @@ independent role: brand introduction, primary product surface, feature moment,
 and second product surface.
 
 The Commissure follows that production method without copying Vocabry's visual
-language: a source-controlled fixed canvas, reviewable local rendering, then
-deterministic slices. Figma Make may be used for exploration only. It is not a
-source of final App Store composition.
+language. A copy of the Vocabry source was made first, then adapted under
+`ios/app-store-materials/source`. Its active canvas is
+`src/AppPanorama.tsx`; `npm run capture:iphone` renders the review master and
+deterministically exports four `1320 × 2868 px` images. Figma Make may be used
+for exploration only. It is not a source of final App Store composition.
 
 ## The Commissure four-image story
 
 | Image | Role | Primary visual | Screenshot material |
 | --- | --- | --- | --- |
 | 1 | Brand and scope | App icon, wordmark, and dark blue spine field | None or a small Library detail only |
-| 2 | Direct anatomy | Warm cervical 3D anatomy on the dark stage | A large ACDF overview crop |
-| 3 | Teaching clarity | Cyan keyword emphasis with readable translucent panel | A large explanation-panel crop |
-| 4 | Procedural depth | A clearly distinct anatomy angle or procedure state | A final-candidate capture different from images 2 and 3 |
+| 2 | Direct anatomy | Warm cervical 3D anatomy on the dark stage | Complete ACDF overview screen |
+| 3 | Teaching clarity | Cyan keyword emphasis with readable translucent panel | Complete explanation screen |
+| 4 | Procedural depth | A clearly distinct anatomy angle or procedure state | Complete following-step screen |
 
-The first image can be almost entirely branding. The next three do not need to
-show a complete phone screen. Their source regions may be cropped, enlarged,
-rotated slightly, or masked only if the app pixels remain legible and truthful.
+The first image can be almost entirely branding. Images two through four must
+keep a complete, truthful native screen as their dominant visual. A very small
+rotation is allowed only when it does not crop or compromise legibility.
 
 ## Design contract
 
 - Derive all colors and materials from `docs/DESIGN_CONCEPT.md`, The Sterile
   Field: near-black stage first, warm anatomy second, cyan or teal as the
   restrained active accent.
+- Treat all four exports as one continuous dark stage when viewed side by side:
+  background tone, ambient light, and a restrained cyan guide may cross export
+  boundaries without introducing visible panel seams. Each export must still
+  work alone.
 - Use the shipped blue spine only as a quiet Library texture in image 1. Never
   stretch, mirror, or repeat it across the series.
 - Use broad negative space. The anatomy or explanation crop must have one clear

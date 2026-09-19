@@ -1,0 +1,174 @@
+:root {
+  background: #020909;
+  color: #f5f4ef;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 5280px;
+  min-height: 2868px;
+}
+
+.artboard {
+  position: relative;
+  display: flex;
+  width: 5280px;
+  height: 2868px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 7% 45%, rgba(0, 195, 202, 0.18), transparent 24%),
+    radial-gradient(ellipse at 48% 37%, rgba(0, 178, 187, 0.13), transparent 27%),
+    radial-gradient(ellipse at 91% 54%, rgba(0, 127, 140, 0.18), transparent 29%),
+    linear-gradient(118deg, #020a0c 0%, #041418 44%, #020c0f 100%);
+}
+
+.artboard::before {
+  position: absolute;
+  z-index: 4;
+  top: 1955px;
+  left: -80px;
+  width: 5440px;
+  height: 8px;
+  background: #66f6f2;
+  box-shadow: 0 0 24px rgba(58, 243, 239, 0.95), 0 0 92px rgba(31, 215, 223, 0.65);
+  content: "";
+  opacity: 0.76;
+  transform: rotate(-0.45deg);
+}
+
+.panel {
+  position: relative;
+  z-index: 1;
+  width: 1320px;
+  height: 2868px;
+  overflow: hidden;
+}
+
+.panelBrand {
+  background: linear-gradient(90deg, rgba(1, 8, 9, 0.5), rgba(1, 8, 9, 0.06));
+}
+
+.brandSpine {
+  position: absolute;
+  top: 205px;
+  left: -234px;
+  width: 1810px;
+  height: 2415px;
+  opacity: 0.58;
+  object-fit: cover;
+}
+
+.brandShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(1, 7, 8, 0.22), rgba(1, 7, 8, 0.78) 76%);
+}
+
+.brandContent {
+  position: absolute;
+  z-index: 2;
+  top: 390px;
+  left: 142px;
+  width: 1040px;
+}
+
+.appIcon {
+  width: 330px;
+  height: 330px;
+  border-radius: 72px;
+  box-shadow: 0 44px 125px rgba(0, 235, 238, 0.2);
+}
+
+.wordmark {
+  width: 930px;
+  height: auto;
+  margin-top: 92px;
+}
+
+.eyebrow,
+.panelLabel,
+.teachingCaption {
+  margin: 0;
+  color: #72f2f1;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.eyebrow {
+  margin-top: 108px;
+}
+
+.tagline {
+  margin: 62px 0 0;
+  color: rgba(245, 244, 239, 0.9);
+  font-size: 64px;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+  line-height: 1.35;
+}
+
+.panelLabel {
+  position: absolute;
+  z-index: 3;
+  top: 188px;
+  left: 112px;
+}
+
+.screenDevice {
+  position: absolute;
+  z-index: 2;
+  top: 338px;
+  left: 99px;
+  width: 1122px;
+  height: 2438px;
+  overflow: hidden;
+  border: 16px solid #020708;
+  border-radius: 82px;
+  box-shadow: 0 62px 156px rgba(0, 0, 0, 0.62), 0 0 96px rgba(0, 224, 228, 0.14);
+}
+
+.screenDevice img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.panelAnatomy {
+  background: linear-gradient(90deg, rgba(2, 13, 16, 0.08), rgba(2, 13, 16, 0.28));
+}
+
+.panelTeaching {
+  background: linear-gradient(90deg, rgba(2, 13, 16, 0.28), rgba(2, 13, 16, 0.08));
+}
+
+.panelDepth {
+  background: linear-gradient(90deg, rgba(2, 13, 16, 0.08), rgba(2, 13, 16, 0.44));
+}
+
+.overviewDevice {
+  transform: rotate(-2deg);
+}
+
+.explanationCrop {
+  transform: rotate(1deg);
+}
+
+.nextStepCrop {
+  transform: rotate(3deg);
+}
+
+.teachingCaption {
+  position: absolute;
+  z-index: 3;
+  right: 100px;
+  bottom: 88px;
+  color: rgba(141, 239, 240, 0.76);
+  font-size: 29px;
+}
