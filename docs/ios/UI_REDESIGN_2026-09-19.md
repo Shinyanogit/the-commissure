@@ -12,6 +12,35 @@ native asset.
 The design source of truth remains `../DESIGN_CONCEPT.md`. This file records
 implementation and evidence; it does not introduce a separate design concept.
 
+## Web alignment audit (2026-09-19)
+
+The initial native composition and functional test run are complete. Full Web
+UI/UX alignment is NOT complete. The previous user-facing completion wording
+was too broad; the owner asked explicitly whether alignment was finished.
+The source behavior in `web/README.md` and `web/src/pages/ProcedurePage.jsx`
+proves the remaining differences below. Passing native tests is not parity
+acceptance. Close these before resuming final App Store candidate preparation.
+
+| Behavior | Current native state | Remaining work |
+| --- | --- | --- |
+| Home branding | Actual blue spine render and wordmark reused | Compare editorial hierarchy and procedure discovery with live Web |
+| Procedure field | Separate scene viewport and teaching panel | Match edge-docked glass panel, full-screen field and panel-driven framing |
+| Explanation navigation | Arrow actions and titled picker | Implement horizontal tracking carousel, snap/cancel, and scene timing |
+| Panel resizing | Fixed computed size | Add drag resizing with bounded dimensions and accessible alternatives |
+| Panel stow | Heading and step tray remain visible | Match collapse/reopen behavior and coordinated chrome hiding |
+| Model manipulation | Orbit and pinch; no two-finger pan | Match simultaneous two-finger zoom and screen-space pan |
+| Navigation | Back, abbreviation, reset and overflow menu | Align procedure logo/menu and direct procedure switching |
+| Scene transitions | Absolute-state interpolation | Verify authored forward/reverse choreography against all Web steps |
+| Cross-procedure text links | Markdown links rendered | Verify native routing and gesture interaction |
+| Loading | Native progress banner | Match branded preparation and resilient failure/retry behavior |
+
+The current concept's independent composition details and Web interaction
+behavior must be reconciled explicitly. Preserve native accessibility, offline
+operation and validated content; do not claim matching behavior from shared
+colors alone. The browser plugin failed to initialize in this audit because
+its runtime references a missing `browser-service.mjs`; this is a tool setup
+failure, not evidence that Web interaction verification passed.
+
 ## Implemented composition
 
 Library uses the actual Web blue spine render as its deepest background, the

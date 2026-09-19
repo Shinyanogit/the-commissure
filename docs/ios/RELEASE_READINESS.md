@@ -1,9 +1,8 @@
 # iOS Release Readiness
 
-> Current checkpoint: see `SESSION_HANDOFF_2026-09-12.md`. The temporary UI
-> was rejected and must first reproduce the Web UI. Asset portability QC failed;
-> app QC is incomplete. This is not an App Store-ready candidate.
-
+> Current checkpoint: `UI_REDESIGN_2026-09-19.md`. Initial native UI is locally
+> verified, but full Web UI/UX alignment is incomplete and precedes final release
+> preparation. Asset portability and exact-candidate release gates remain open.
 
 Status: local release controls implemented, release blocked
 Last audited: 2026-09-12
