@@ -1,12 +1,13 @@
 # App Store Metadata Draft
 
 Status: local draft only, blocked from sync or submission
-Last updated: 2026-09-12
+Last updated: 2026-09-20
 
 This draft describes only the four procedures and behavior present in the native
-app. It has not been uploaded to App Store Connect. Final support/privacy URLs,
-rights holder, screenshots, age-rating answers, privacy answers, and legal/export
-answers remain approval gates.
+app. It has not been uploaded to App Store Connect. The support and privacy
+pages are ready for publication on the existing product site. Rights holder,
+screenshots, age-rating answers, privacy answers, and legal/export answers
+remain approval gates.
 
 ## English
 
@@ -96,6 +97,18 @@ regulated-medical-device status declaration in supported regions. The intended
 position is educational software, but the account holder must confirm the legal
 answer in App Store Connect. See [Declare regulated medical device status](https://developer.apple.com/help/app-store-connect/manage-app-information/declare-regulated-medical-device-status).
 
+## Public URLs and support contact
+
+- Support URL: `https://the-commissure.vercel.app/support`
+- Privacy Policy URL: `https://the-commissure.vercel.app/privacy`
+- Marketing URL: `https://the-commissure.vercel.app/`
+- Support contact: `vocabryreview@gmail.com`, temporarily shared with Vocabry
+  at the owner’s direction on 2026-09-20. Replace it across the two Web pages
+  and this document when the dedicated mailbox is available.
+
+These URLs must be checked on production after the accompanying Web commit is
+deployed. They are not yet entered in App Store Connect.
+
 ## Reviewer notes draft
 
 > The Commissure is an educational native SwiftUI and RealityKit app. It does not provide patient-specific advice and does not replace supervised surgical training. No login or demo account is required, and the four procedures are bundled for an offline reviewer path.
@@ -111,9 +124,9 @@ labels, visible control names, and actual remote-content configuration.
 
 | Field | Current draft state |
 |---|---|
-| Support URL | Unconfirmed, do not upload a placeholder |
-| Privacy Policy URL | Unconfirmed, do not upload a placeholder |
-| Marketing URL | Optional and unconfirmed |
+| Support URL | Ready locally at `/support`; production verification is pending deployment |
+| Privacy Policy URL | Ready locally at `/privacy`; production verification is pending deployment |
+| Marketing URL | `https://the-commissure.vercel.app/` after production verification |
 | Copyright | Rights holder and exact wording unconfirmed |
 | Content rights | All four procedure rights records still require owner confirmation |
 | App Privacy | Source scan suggests no collected data or tracking; final signed-binary and network audit required |
@@ -122,6 +135,6 @@ labels, visible control names, and actual remote-content configuration.
 | App icon | Final AppIcon set is absent |
 | Contact | App Review contact details are owner-controlled and unconfirmed |
 
-No `fastlane/metadata` upload tree is generated until these fields are complete,
-because a syntactically complete directory with invented URLs or rights data
-would create a false release signal.
+The Fastlane metadata tree remains withheld until the factual rights and legal
+fields are complete. The published URLs and contact address are no longer a
+blocker once production verification succeeds.

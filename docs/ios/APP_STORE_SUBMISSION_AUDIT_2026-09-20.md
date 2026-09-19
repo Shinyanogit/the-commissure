@@ -39,13 +39,15 @@ All four content provenance records have `medicalReview` set to
 correctly reject publishing while these values remain. They require factual
 owner approval. A local implementation agent cannot supply that approval.
 
-The store metadata is an unuploaded draft. It lacks public support and privacy
-URLs, a confirmed copyright holder, review contact, age-rating and regulated
-medical-device answers, export-compliance answer, exact-build screenshots, and
-candidate-bound reviewer notes. No internal or external TestFlight candidate,
+The store metadata is an unuploaded draft. Local `/support` and `/privacy`
+pages now name a real temporary support contact and are configured for the
+product site's public URLs, but production deployment has not been verified.
+The draft still lacks a confirmed copyright holder, review contact, age-rating
+and regulated-medical-device answers, export-compliance answer, exact-build
+screenshots, and candidate-bound reviewer notes. No internal or external TestFlight candidate,
 physical-device reports, App Thinning report, final accessibility acceptance,
-or final App Store review scan exists. The native pinch interaction has also
-not passed visual acceptance.
+or final App Store review scan exists. The native pinch implementation was
+corrected after this audit and still needs exact-candidate visual acceptance.
 
 ## Fastlane safety check
 
@@ -59,7 +61,8 @@ build, and skips binary upload.
 1. Confirm medical accuracy for each shipped procedure revision.
 2. Confirm rights for each model, illustration, text, font, icon, and store
    screenshot.
-3. Provide or confirm a support contact and public privacy-policy URL.
+3. Deploy and production-verify the configured support contact and public
+   privacy-policy URL.
 4. Confirm the App Store legal answers, including age rating,
    regulated-medical-device status, export compliance, copyright, and review
    contact.

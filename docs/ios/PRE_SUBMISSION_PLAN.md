@@ -1,7 +1,8 @@
 # App Store申請直前までの作業計画
 
-更新: 2026-09-19。初期iOS案は実装済みだが、WebのUI/UXへの整合は未完了。
-差分は `UI_REDESIGN_2026-09-19.md` を参照。Web整合を優先してから審査準備へ戻る。
+更新: 2026-09-20。ユーザー指示により、App Store申請までを現在の到達点とする。
+UIの最新状態は `UI_REDESIGN_2026-09-19.md`、実際の審査準備状況は
+`RELEASE_READINESS.md` と `APP_STORE_SUBMISSION_AUDIT_2026-09-20.md` を参照。
 以下の9月12日の進捗・停止条件は当時の履歴であり、現在の完了証拠ではない。
 
 ## 到達点
@@ -14,13 +15,14 @@ UIは暫定でもデザインコンセプトとWebの思想を守り、後の手
 
 ## 守る境界
 
-- 作業は `codex/ios-functional-completion` 内。Webソースは変更しない。
-- ローカルコミットを小さな確認済み単位で残す。push、PR作成、公開、
-  デプロイ、App Storeへの申請は行わない。
-- 最新の追加指示により、独立した共通サポートサイトのVercel新設・公開は許可。
-  既存CVサイトとThe Commissure Web本体は変更しない。
-- Fastlane lane / CI workflow を作成しても実行許可とは解釈しない。
-  TestFlightやメタデータの外部アップロードは現在未実行。
+- 作業は `codex/ios-functional-completion` 内。小さな確認済み単位で
+  ローカルコミットを残す。
+- 2026-09-20のユーザー指示により、既存The Commissure Webへ本アプリ専用の
+  `/support` と `/privacy` を追加する。既存の手術画面・記事内容・3D runtimeは
+  変更しない。
+- FastlaneによるTestFlightとApp Store申請はユーザーから実行指示済みである。
+  ただしApple契約の同意、アカウント所有確認、医学的妥当性、第三者素材の利用権は
+  事実を確認してから入力する。存在しない承認や資格情報を作らない。
 - Apple契約への同意、会費支払い、新規秘密鍵・APIアクセスの作成など、
   本人操作が必要な箇所は具体的な必要事項を示す。既存の設定を先に確認する。
 - 週間使用量の**残量が100%へリセットされたことを検知したら即停止**する。
@@ -35,7 +37,7 @@ UIは暫定でもデザインコンセプトとWebの思想を守り、後の手
 | 3 | Apple既存登録・署名の確認 | 開発用証明書と4件のprofileを発見。App Store配布権限・本アプリのprofileは未確認 |
 | 4 | 実機と障害系検証 | 初回実機buildはteam指定の問題で失敗。正しい証明書OUを使って再評価する。floor iOS18端末・長時間性能試験は未実施 |
 | 5 | 審査用コンテンツ | 英日metadata草案あり。医学的妥当性・資産権利のowner確認は4術式とも未完 |
-| 6 | プライバシー／サポート | privacy manifestあり。独立した共通サポートサイトをVercelに用意しCVにリンク。既存Webを変更せず、まず原稿を整備する |
+| 6 | プライバシー／サポート | privacy manifestあり。既存The Commissure Webに `/support` と `/privacy` を実装済み。production deployとURL確認が残る |
 | 7 | 最終候補 | 最終UI・アイコン、実画面の英日iPhone/iPad画像、署名済みIPA、App Thinning、accessibility、privacy reportを揃える |
 | 8 | 申請直前確認 | 正確な候補IPAと証跡を結び付けてapp-store-reviewを実施。Fastlaneから申請できる設定を検証し、実申請前で止める |
 
@@ -52,7 +54,8 @@ UIは暫定でもデザインコンセプトとWebの思想を守り、後の手
 App Store配布にはApple Developer Program、App Store Connectのアプリ記録、
 Bundle IDと配布用署名設定が必要。公開のprivacy policyとsupport URLも揃える。
 新しいサービスへの登録が常に必要という意味ではなく、既存アカウント・
-既存の公開領域を調査した後、Webアプリに影響しない方法を決める。
+既存の公開領域を調査した後、既存The Commissure Web上の専用ページを
+公開URLとして使う。
 
 一次資料（2026-09-12参照）:
 - [Apple Developer Program](https://developer.apple.com/programs/)
@@ -66,11 +69,10 @@ Bundle IDと配布用署名設定が必要。公開のprivacy policyとsupport U
 
 ## サポートサイト方針の追記
 
-既存 `https://shinyanogit.github.io/` はCV用途として維持する。独立した
-共通アプリサポートサイトからプロフィールとしてリンクし、Vocabryと
-The Commissureそれぞれのサポート・プライバシーURLを用意する。
-CVであることだけで審査却下とは断定しないが、Support URLにはアプリについて
-連絡できる実際の連絡先が必要。
+既存 `https://shinyanogit.github.io/` はCV用途として維持する。The Commissureは
+既存の製品サイト `https://the-commissure.vercel.app` に `/support` と `/privacy` を
+設け、各ページに実際の連絡先を載せる。2026-09-20時点では、所有者の指示で
+`vocabryreview@gmail.com` を暫定的に使用する。
 [Apple: Support URL要件](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information/)
 
 ローカルに有効期限内のwildcard開発profileと既存2アプリのStore profileを確認。

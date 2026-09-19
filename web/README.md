@@ -9,7 +9,8 @@ npm run build
 npm test
 ```
 
-Routes: `/`, `/articles`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
+Routes: `/`, `/articles`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, `/pcl_open`,
+`/support`, and `/privacy`.
 
 - `src/pages/` owns React route pages.
 - `src/components/` owns shared Web chrome.
@@ -76,8 +77,17 @@ Routes: `/`, `/articles`, `/acdf`, `/accf`, `/pcdf`, `/pcf`, and `/pcl_open`.
   remains available while the panel is stowed. Closing the menu, choosing a
   procedure link, or stowing the panel always clears the menu's open state, so
   its hidden surface remains transparent and non-interactive when restored.
-- Procedure routes do not render the global footer. The footer is reserved for
-  the home route.
+- Procedure routes do not render the global footer. Editorial and legal routes
+  use the shared footer.
+
+## Support and privacy
+
+- `/support` provides an App Store support contact and issue-reporting guidance.
+- `/privacy` describes the current native app's device-local preferences and
+  absence of account, analytics, advertising, tracking, and personal-data
+  collection. It does not make claims about future releases.
+- Both routes are public, have their own static SEO document and Vercel rewrite,
+  and are linked from the shared footer.
 
 ## Search discovery contract
 

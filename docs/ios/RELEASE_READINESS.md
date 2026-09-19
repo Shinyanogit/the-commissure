@@ -1,8 +1,8 @@
 # iOS Release Readiness
 
-> Current checkpoint: `UI_REDESIGN_2026-09-19.md`. Initial native UI is locally
-> verified, but full Web UI/UX alignment is incomplete and precedes final release
-> preparation. Asset portability is verified; exact-candidate release gates remain open.
+> Current checkpoint: `UI_REDESIGN_2026-09-19.md`. The native UI is locally
+> verified and release preparation has resumed. Asset portability is verified;
+> exact-candidate release gates remain open.
 
 Status: local release controls implemented, release blocked
 Last audited: 2026-09-20 (source, unsigned Release archive, and Fastlane checkpoint; no signed candidate)
@@ -124,7 +124,7 @@ external TestFlight.
 | Visual and accessibility acceptance | No exact-candidate owner visual approval or complete accessibility report is recorded | Record both without changing the candidate |
 | Privacy | Source manifest exists; signed-archive aggregate report has not been reviewed | Audit the archive report, linked SDKs, network behavior, and App Privacy answers |
 | App Review scans | Neither required exact-stage scan is recorded | Run before external TestFlight and on the final candidate |
-| Store materials | Local EN/JA draft exists, but no metadata upload tree, public support/privacy URL, final screenshots, age rating, copyright, contact, export answer, or candidate-bound reviewer notes exists | Complete and bind them to the candidate |
+| Store materials | Local EN/JA draft and local `/support` and `/privacy` pages exist, but there is no metadata upload tree, production URL verification, final screenshots, age rating, copyright, export answer, or candidate-bound reviewer notes | Complete and bind them to the candidate |
 | TestFlight | No internal or external candidate result is recorded | Upload through protected environments and retain results |
 
 No blocker above may be converted to a pass by an empty file, a CI success from
@@ -150,7 +150,7 @@ replace either required scan of a signed candidate.
 
 ### Warning
 
-- Privacy nutrition labels, public privacy/support URLs, accessibility behavior,
+- Privacy nutrition labels, production privacy/support URL verification, accessibility behavior,
   final screenshots, and metadata require exact-candidate evidence.
 - The signed archive privacy report and embedded dependency behavior have not
   been audited.
@@ -204,8 +204,9 @@ or deployment occurred.
 
 The current submission blockers remain factual gates: approval of the four
 medical procedure revisions, confirmation of rights for every shipped asset,
-distribution signing, a public privacy policy and support contact, final store
-answers and materials, exact-candidate device and accessibility evidence,
+distribution signing, production verification of the public privacy policy and
+support contact, final store answers and materials, exact-candidate device and accessibility evidence,
 internal and external TestFlight evidence, and a signed release-candidate scan.
-The current native pinch behavior also remains visually unaccepted in the UI
-checkpoint. These records cannot be manufactured from local checks.
+The latest local build separates one-finger orbit from two-finger pan and pinch
+recognition. Its exact candidate still needs visual acceptance on iPhone and
+iPad hardware. These records cannot be manufactured from local checks.

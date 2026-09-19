@@ -11,6 +11,8 @@ export function Footer() {
                 <li><Link to="/news">News</Link></li>
                 <li><Link to="/#about">About us</Link></li>
                 <li><Link to="/#authors">Authors</Link></li>
+                <li><Link to="/support">Support</Link></li>
+                <li><Link to="/privacy">Privacy</Link></li>
             </ul>
             <div className="copyright">© 2026 The Commissure</div>
         </footer>

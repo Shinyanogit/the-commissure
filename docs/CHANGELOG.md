@@ -3,6 +3,16 @@
 User-visible changes are recorded when the implementation, verification, and
 its source-of-truth documentation are ready in the same pull request.
 
+## 2026-09-20: App Store support and gesture correction
+
+- Added native-app support and privacy routes to the existing The Commissure
+  Web site, with static SEO documents, Vercel direct-route handling, sitemap
+  entries, footer links, and a temporary support mailbox approved by the owner.
+- Split one-finger orbit from two-finger pan and pinch recognition in the native
+  3D field so a pinch cannot take the one-finger orbit path.
+- Added a factual approval dossier that traces the current medical content and
+  BlenderKit source evidence before release-gate status can be approved.
+
 ## 2026-09-20: App Store submission audit
 
 - Restored the locked Fastlane environment with Homebrew Ruby and verified that

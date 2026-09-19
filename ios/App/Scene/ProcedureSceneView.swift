@@ -56,13 +56,19 @@ private struct ModelGestureSurface: UIViewRepresentable {
   func makeUIView(context: Context) -> UIView {
     let view = UIView()
     view.isMultipleTouchEnabled = true
+    let orbit = UIPanGestureRecognizer(
+      target: context.coordinator, action: #selector(Coordinator.orbit(_:)))
+    orbit.maximumNumberOfTouches = 1
+    orbit.delegate = context.coordinator
     let pan = UIPanGestureRecognizer(
       target: context.coordinator, action: #selector(Coordinator.pan(_:)))
+    pan.minimumNumberOfTouches = 2
     pan.maximumNumberOfTouches = 2
     pan.delegate = context.coordinator
     let pinch = UIPinchGestureRecognizer(
       target: context.coordinator, action: #selector(Coordinator.pinch(_:)))
     pinch.delegate = context.coordinator
+    view.addGestureRecognizer(orbit)
     view.addGestureRecognizer(pan)
     view.addGestureRecognizer(pinch)
     return view
@@ -78,11 +84,7 @@ private struct ModelGestureSurface: UIViewRepresentable {
   final class Coordinator: NSObject, UIGestureRecognizerDelegate {
     var onIntent: (ProcedureIntent) -> Void
     var onPan: (CGFloat, CGFloat) -> Void
-    private var touchCount = 0
-    private var pinching = false
-    private var rejected = false
-    private var hadMultipleTouches = false
-
+    private var rejectedPanGestures = Set<ObjectIdentifier>()
     init(onIntent: @escaping (ProcedureIntent) -> Void, onPan: @escaping (CGFloat, CGFloat) -> Void)
     {
       self.onIntent = onIntent
@@ -93,46 +95,58 @@ private struct ModelGestureSurface: UIViewRepresentable {
       _ gestureRecognizer: UIGestureRecognizer,
       shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
     ) -> Bool {
-      gestureRecognizer.view === otherGestureRecognizer.view
+      guard gestureRecognizer.view === otherGestureRecognizer.view else { return false }
+      if let pan = gestureRecognizer as? UIPanGestureRecognizer,
+        pan.maximumNumberOfTouches == 1
+      {
+        return false
+      }
+      if let pan = otherGestureRecognizer as? UIPanGestureRecognizer,
+        pan.maximumNumberOfTouches == 1
+      {
+        return false
+      }
+      return true
     }
 
     @objc func pan(_ gesture: UIPanGestureRecognizer) {
-      guard let view = gesture.view else { return }
+      guard accepts(gesture), let view = gesture.view else { return }
       let delta = gesture.translation(in: view)
       defer { gesture.setTranslation(.zero, in: view) }
-      if gesture.state == .began {
-        let start = gesture.location(in: view).x - delta.x
-        rejected = start < 24 || start > view.bounds.width - 24
-        touchCount = gesture.numberOfTouches
-        hadMultipleTouches = touchCount > 1
-      }
-      guard gesture.state == .began || gesture.state == .changed else {
-        touchCount = 0
-        rejected = false
-        return
-      }
-      guard !rejected else { return }
-      if gesture.numberOfTouches > 1 { hadMultipleTouches = true }
-      guard touchCount == gesture.numberOfTouches else {
-        touchCount = gesture.numberOfTouches
-        return
-      }
-      if touchCount == 2 { onPan(delta.x, delta.y) }
-      if touchCount == 1 && !pinching && !hadMultipleTouches {
-        onIntent(.orbit(yaw: -Double(delta.x) * 0.008, pitch: -Double(delta.y) * 0.008))
-      }
+      onPan(delta.x, delta.y)
+    }
+
+    @objc func orbit(_ gesture: UIPanGestureRecognizer) {
+      guard accepts(gesture), let view = gesture.view else { return }
+      let delta = gesture.translation(in: view)
+      defer { gesture.setTranslation(.zero, in: view) }
+      onIntent(.orbit(yaw: -Double(delta.x) * 0.008, pitch: -Double(delta.y) * 0.008))
     }
 
     @objc func pinch(_ gesture: UIPinchGestureRecognizer) {
       switch gesture.state {
       case .began, .changed:
-        pinching = true
         onIntent(.zoom(scale: 1 / Double(gesture.scale)))
         gesture.scale = 1
       default:
-        pinching = false
-        touchCount = 0
+        break
       }
+    }
+
+    private func accepts(_ gesture: UIPanGestureRecognizer) -> Bool {
+      guard let view = gesture.view else { return false }
+      let identifier = ObjectIdentifier(gesture)
+      guard gesture.state == .began || gesture.state == .changed else {
+        rejectedPanGestures.remove(identifier)
+        return false
+      }
+      if gesture.state == .began {
+        let start = gesture.location(in: view).x - gesture.translation(in: view).x
+        if start < 24 || start > view.bounds.width - 24 {
+          rejectedPanGestures.insert(identifier)
+        }
+      }
+      return !rejectedPanGestures.contains(identifier)
     }
   }
 }
