@@ -28,6 +28,7 @@ final class FoundationAppModel {
   private var activeSessionController: ProcedureSessionController?
 
   var effectiveLocale: String { preferences.effectiveLocale }
+  var language: AppLanguage { preferences.language }
 
   private func localized(_ key: String) -> String {
     let appBundle = Bundle(for: FoundationAppModel.self)

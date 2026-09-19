@@ -3,6 +3,18 @@
 User-visible changes are recorded when the implementation, verification, and
 its source-of-truth documentation are ready in the same pull request.
 
+## 2026-09-19: native UI redesign
+
+- Rebuilt native Library and Theater from the shared concept, then aligned with
+  Web branding. Reused the actual blue spine home render and existing wordmark.
+- Added adaptive portrait/landscape teaching layout and readable step selection
+  while preserving the active RealityKit scene and existing content boundaries.
+- Made settings scrollable with a visible language selection. Fixed locale
+  propagation into sheets and immediate Observation updates for disclosure.
+- Passed 43 app tests and seven UI tests on both iPhone and iPad simulators,
+  plus 15 Core tests. Visual evidence and limitations are recorded in
+  `ios/UI_REDESIGN_2026-09-19.md`. No Web change or external publication.
+
 ## 2026-09-12 — local iOS WIP checkpoint
 
 - Added native conversion and integrity checks for all four native

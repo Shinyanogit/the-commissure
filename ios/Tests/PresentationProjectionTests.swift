@@ -1,3 +1,4 @@
+import Observation
 import XCTest
 
 @testable import TheCommissure
@@ -70,6 +71,40 @@ final class PresentationProjectionTests: XCTestCase {
       model.libraryViewState.cards.first?.availabilityLabel,
       "このデバイスで利用可能"
     )
+  }
+
+  @MainActor
+  func testDisclosureActionsInvalidatePresentationAndPersist() async throws {
+    let defaults = isolatedDefaults()
+    defer { defaults.removePersistentDomain(forName: defaultsSuiteName) }
+    let preferences = AppPreferences(defaults: defaults)
+    let model = FoundationAppModel(
+      contentStore: ContentStore(contentRoot: repositoryContentRoot()), preferences: preferences)
+    await model.openProcedure(id: "acdf")
+
+    let trayChanged = expectation(description: "Tray action invalidates the observed projection")
+    withObservationTracking {
+      _ = model.theaterViewState
+    } onChange: {
+      trayChanged.fulfill()
+    }
+    model.send(.expandTray)
+    await fulfillment(of: [trayChanged], timeout: 1)
+    XCTAssertEqual(model.theaterViewState?.trayDensity, .expanded)
+
+    let explanationChanged = expectation(
+      description: "Explanation action invalidates the projection")
+    withObservationTracking {
+      _ = model.theaterViewState
+    } onChange: {
+      explanationChanged.fulfill()
+    }
+    model.send(.collapseExplanation)
+    await fulfillment(of: [explanationChanged], timeout: 1)
+    XCTAssertEqual(model.theaterViewState?.isExplanationExpanded, false)
+    let restored = AppPreferences(defaults: defaults)
+    XCTAssertTrue(restored.trayExpanded)
+    XCTAssertFalse(restored.explanationExpanded)
   }
 
   private var defaultsSuiteName: String { "PresentationProjectionTests-\(name)" }

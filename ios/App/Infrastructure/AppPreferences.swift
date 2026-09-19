@@ -23,6 +23,8 @@ final class AppPreferences {
 
   init(defaults: UserDefaults = .standard) {
     self.defaults = defaults
+    trayExpanded = defaults.bool(forKey: "trayExpanded")
+    explanationExpanded = defaults.object(forKey: "explanationExpanded") as? Bool ?? true
     language = defaults.string(forKey: Self.languageKey).flatMap(AppLanguage.init) ?? .followSystem
   }
 
@@ -32,13 +34,11 @@ final class AppPreferences {
   }
 
   var trayExpanded: Bool {
-    get { defaults.bool(forKey: "trayExpanded") }
-    set { defaults.set(newValue, forKey: "trayExpanded") }
+    didSet { defaults.set(trayExpanded, forKey: "trayExpanded") }
   }
 
   var explanationExpanded: Bool {
-    get { defaults.object(forKey: "explanationExpanded") as? Bool ?? true }
-    set { defaults.set(newValue, forKey: "explanationExpanded") }
+    didSet { defaults.set(explanationExpanded, forKey: "explanationExpanded") }
   }
 
   func savedStep(for id: String, version: String) -> String? {

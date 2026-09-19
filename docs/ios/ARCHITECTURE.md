@@ -463,3 +463,16 @@ tokens and view components while preserving these action/state boundaries and
 functional tests. Any necessary state addition is made in the projection first.
 The runtime RealityView surface is injected into the Theater; a layout change
 must not recreate its session or reload the model.
+
+## September 19 presentation revision
+
+`ProcedureTheaterView` uses `AnyLayout` to place the same runtime-backed scene
+above or beside the explanation. The active scene is not recreated when the
+teaching panel expands, the step picker opens, or orientation changes. The
+explanation ScrollView alone changes identity on a new step to reset its offset.
+
+Disclosure preferences are stored observable properties with UserDefaults
+persistence in `didSet`. Computed defaults accessors do not notify Observation
+consumers and must not be used for live presentation state. Locale is injected
+outside the sheet modifiers in `FoundationView`, including secondary sheets.
+See `UI_REDESIGN_2026-09-19.md` for verification.

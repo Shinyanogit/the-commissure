@@ -1,5 +1,9 @@
 # Native functional completion
 
+> 2026-09-19 presentation update: see [native UI redesign](UI_REDESIGN_2026-09-19.md).
+> Its owner-directed sequence supersedes the earlier Web-first UI direction below.
+> The September 12 engineering evidence below remains a historical checkpoint.
+
 > Session paused at the owner's request near 2% weekly remaining. First next
 > task: reproduce the Web UI faithfully, then refine for iPhone/iPad. The
 > temporary UI is explicitly rejected as the design baseline. See

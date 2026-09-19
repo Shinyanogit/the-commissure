@@ -28,12 +28,10 @@ struct FoundationView: View {
           .toolbar(.hidden, for: .navigationBar)
         } else {
           LibraryView(state: model.libraryViewState, onAction: dispatch)
-            .navigationTitle("app.title")
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .navigationBar)
         }
       }
     }
-    .environment(\.locale, Locale(identifier: model.effectiveLocale))
     .sheet(isPresented: $isColophonPresented) {
       ColophonView { action in
         if case .back = action {
@@ -43,11 +41,13 @@ struct FoundationView: View {
     }
     .sheet(isPresented: $isSettingsPresented) {
       SettingsView(
+        language: model.language,
         canClearDownloads: model.sceneRuntime == nil
           && model.delivery?.updating.isEmpty != false
           && model.delivery?.isClearingDownloads != true,
         onAction: settingsDispatch)
     }
+    .environment(\.locale, Locale(identifier: model.effectiveLocale))
     .task { await model.loadBundledContent() }
   }
 

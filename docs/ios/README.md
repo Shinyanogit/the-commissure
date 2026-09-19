@@ -1,13 +1,9 @@
 # Native iOS Documentation Map
 
-> Start here next session: [2026-09-12 WIP handoff](SESSION_HANDOFF_2026-09-12.md). Web UI reproduction comes first; engineering and release gates remain open.
-
-> Latest owner goal and operating boundaries: [App Store pre-submission plan](PRE_SUBMISSION_PLAN.md) (2026-09-12). Local iOS commits only; no push or submission. The separately authorized Vercel support site is documented in that plan.
-
-
-> 2026-09-12 owner update: temporary UI is authorized to unblock native
-> functional implementation. See `IMPLEMENTATION_STATUS.md` for the sequencing override and current evidence.
-> Final visual and release gates remain separate.
+> Current UI direction and evidence: [2026-09-19 native redesign](UI_REDESIGN_2026-09-19.md).
+> Compose native UI first, then align with the Web visual language. The blue
+> home spine background is required. Earlier Web-reproduction-first sequencing
+> is superseded. Engineering and release gates remain independent.
 
 These documents are intentionally separated by ownership so one requirement has
 one source of truth:
@@ -42,14 +38,7 @@ The Web move preserved source blobs with `git mv`, and Vercel now builds from
 `content/`; conversion and validation code belongs in `tooling/`. See the Phase 1
 evidence and next gate in [`ROADMAP.md`](ROADMAP.md).
 
-Phase 5A adds the native presentation shell under the same boundary. Its views
-consume Codex-owned `ViewState` projections and do not perform content, file,
-network, or RealityKit lookup. The shell is a machine-gated implementation
-checkpoint, not final visual, medical-copy, or App Store acceptance. The owner
-has rejected the shell's visual composition as a release baseline, so Phase 5R
-restarts composition in Claude Design/Figma before Opus 5 writes replacement
-SwiftUI. A human-selected static direction and disposable interaction prototype
-are required before production visual implementation. The existing native
-contracts and Web/content boundary remain intact.
-
-The next UI implementation starts from [the Web parity map](WEB_UI_PARITY_PLAN.md), including panel-driven camera framing.
+The presentation consumes immutable `ViewState` projections and sends `AppAction`
+values. Views do not perform content, file, network, or RealityKit lookup.
+The September 19 composition replaces the temporary shell and retains the
+functional runtime. See the current redesign record for verification and limits.
