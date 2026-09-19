@@ -1,8 +1,9 @@
 # Native iOS Documentation Map
 
 > Current UI direction and evidence: [2026-09-19 native redesign](UI_REDESIGN_2026-09-19.md).
-> Initial native composition is implemented; full Web UI/UX alignment remains
-> incomplete. The difference audit is in that record. The blue
+> Initial native composition is implemented. Intentional platform differences
+> are accepted; equivalent learning capabilities still need the recorded gap
+> audit. Web code remains unchanged. The blue
 > home spine background is required. Earlier Web-reproduction-first sequencing
 > is superseded. Engineering and release gates remain independent.
 

@@ -12,6 +12,22 @@ native asset.
 The design source of truth remains `../DESIGN_CONCEPT.md`. This file records
 implementation and evidence; it does not introduce a separate design concept.
 
+## Owner clarification: platform differences are acceptable
+
+The owner confirmed that intentional differences for phone, iPad and desktop
+are acceptable. Web alignment means coherent branding and equivalent learning
+capabilities, not identical layout or blindly reproducing browser mechanics.
+Web source must remain untouched. Compare each difference by learner outcome,
+record the native rationale, and verify it in the applicable device layout.
+
+The adaptive one/two-column Library, native settings form, readable titled step
+picker, and portrait/landscape teaching layout are deliberate native choices.
+Two-finger panning, internal-link routing, and interaction completeness were not
+implemented in the initial redesign and must not be retroactively described as
+intentional design decisions. Audit and address real gaps while preserving
+justified native ergonomics. This clarification supersedes any implication in
+the matrix below that every Web layout or timing detail must be copied exactly.
+
 ## Web alignment audit (2026-09-19)
 
 The initial native composition and functional test run are complete. Full Web
