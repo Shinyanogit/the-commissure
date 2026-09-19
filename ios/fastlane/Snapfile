@@ -1,4 +1,4 @@
-project(File.expand_path("../TheCommissure.xcodeproj", __dir__))
+project("TheCommissure.xcodeproj")
 scheme("TheCommissure")
 languages(["en-US", "ja"])
 clear_previous_screenshots(true)

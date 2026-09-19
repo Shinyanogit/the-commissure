@@ -12,6 +12,10 @@ its source-of-truth documentation are ready in the same pull request.
   3D field so a pinch cannot take the one-finger orbit path.
 - Added a factual approval dossier that traces the current medical content and
   BlenderKit source evidence before release-gate status can be approved.
+- Added a Fastlane Snapshot-backed, localized four-screen capture path for
+  App Store screenshots and corrected its project-path resolution.
+- Added a Figma Make art-direction handoff for four connected App Store
+  screenshots that uses only shipped native screens and visual assets.
 
 ## 2026-09-20: App Store submission audit
 

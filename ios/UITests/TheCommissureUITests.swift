@@ -34,6 +34,31 @@ final class TheCommissureUITests: XCTestCase {
     XCTAssertFalse(app.staticTexts["このデバイスで利用可能"].exists)
     XCTAssertFalse(app.staticTexts["7ステップ"].exists)
   }
+
+  func testAppStoreScreenshots() {
+    let app = XCUIApplication()
+    setupSnapshot(app)
+    XCUIDevice.shared.orientation = .portrait
+    app.launch()
+
+    XCTAssertTrue(app.buttons["procedure-acdf"].waitForExistence(timeout: 10))
+    snapshot("01-library", timeWaitingForIdle: 1)
+
+    app.buttons["procedure-acdf"].tap()
+    let scene = app.otherElements["reality-field-ready"]
+    XCTAssertTrue(scene.waitForExistence(timeout: 20))
+    snapshot("02-acdf-overview", timeWaitingForIdle: 1)
+
+    if !app.scrollViews["step-explanation"].exists {
+      app.buttons["explanation-toggle"].tap()
+    }
+    XCTAssertTrue(app.scrollViews["step-explanation"].waitForExistence(timeout: 5))
+    snapshot("03-acdf-explanation", timeWaitingForIdle: 1)
+
+    app.buttons["action.next"].tap()
+    XCTAssertTrue(scene.waitForExistence(timeout: 5))
+    snapshot("04-acdf-next-step", timeWaitingForIdle: 1)
+  }
 }
 
 extension TheCommissureUITests {

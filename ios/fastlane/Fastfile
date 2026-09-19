@@ -3,8 +3,13 @@ require "json"
 
 default_platform(:ios)
 
-REPOSITORY_ROOT = File.expand_path("../..", __dir__)
-PROJECT_PATH = File.join(REPOSITORY_ROOT, "ios", "TheCommissure.xcodeproj")
+IOS_ROOT = if ENV["IOS_PROJECT_ROOT"]
+  File.expand_path(ENV.fetch("IOS_PROJECT_ROOT"))
+else
+  File.expand_path("..", Dir.pwd)
+end
+REPOSITORY_ROOT = File.expand_path("..", IOS_ROOT)
+PROJECT_PATH = File.join(IOS_ROOT, "TheCommissure.xcodeproj")
 
 def required_env!(name)
   value = ENV[name]
@@ -72,17 +77,20 @@ platform :ios do
 
   desc "Capture localized screenshots from release fixtures"
   lane :screenshots do
+    languages = ENV.fetch("SCREENSHOT_LANGUAGES", "en-US,ja").split(",").map(&:strip)
+    devices = ENV.fetch(
+      "SCREENSHOT_DEVICES",
+      "iPhone 17 Pro Max|iPad Pro 13-inch (M5)"
+    ).split("|").map(&:strip)
     capture_ios_screenshots(
-      project: PROJECT_PATH,
       scheme: ENV.fetch("SCREENSHOT_SCHEME", "TheCommissure"),
-      languages: ["en-US", "ja"],
-      devices: [
-        ENV.fetch("SCREENSHOT_IPHONE", "iPhone 17 Pro Max"),
-        ENV.fetch("SCREENSHOT_IPAD", "iPad Pro 13-inch (M5)")
-      ],
+      languages: languages,
+      devices: devices,
       output_directory: File.expand_path(required_env!("SCREENSHOTS_OUTPUT_DIRECTORY")),
       clean: true,
-      erase_simulator: true
+      erase_simulator: true,
+      number_of_retries: 0,
+      only_testing: ["TheCommissureUITests/TheCommissureUITests/testAppStoreScreenshots"]
     )
   end
 

@@ -44,3 +44,10 @@ Remote updates are optional. To enable them in a signed build, supply explicit
 Info.plist `ContentCatalogBaseURL`, base64 Ed25519 `ContentCatalogPublicKey` and
 `ContentCatalogAllowedHosts` values. With no configuration, no catalog request
 is made and all four bundled procedures remain available offline.
+
+Run Fastlane from this directory. `IOS_PROJECT_ROOT` can override the current
+directory when a CI runner invokes a lane from elsewhere.
+
+`SCREENSHOT_LANGUAGES` and `SCREENSHOT_DEVICES` accept comma-separated locales
+and pipe-separated Simulator names. Use one device at a time if the local
+CoreSimulator service cannot launch multiple UI-test runners.
