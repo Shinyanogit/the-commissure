@@ -57,6 +57,15 @@ physical-device reports, App Thinning report, final accessibility acceptance,
 or final App Store review scan exists. The native pinch implementation was
 corrected after this audit and still needs exact-candidate visual acceptance.
 
+The later App Store Connect checkpoint saved the English product-page text,
+Support URL, Marketing URL, Privacy Policy URL, Medical and Education
+categories, a 16+ age-rating result, and a not-regulated-medical-device
+declaration. App Privacy is prepared as Data Not Collected and awaits only the
+account holder's final legal attestation. The Vercel production support and
+privacy routes were verified with HTTPS 200. These updates do not close the
+rights, screenshot, copyright, review-contact, candidate-evidence, or
+TestFlight gates.
+
 ## Fastlane safety check
 
 Running `bundle exec fastlane ios submit` with no environment inputs stopped at

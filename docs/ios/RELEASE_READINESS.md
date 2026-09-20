@@ -230,3 +230,10 @@ warning is the existing unused `try?` result in `ContentDelivery.swift`.
 An App Manager App Store Connect API key was created for the Fastlane workflow.
 Its private key and environment file are Git-ignored and permission-restricted.
 A read-only Spaceship request verified that the key can access this app record.
+
+The Web support and privacy routes were deployed to the existing Vercel
+production project and both returned HTTPS 200. Their URLs are saved in App
+Store Connect. The record also has Medical and Education categories, the
+16+ age-rating result from a frequent medical-information answer, and a
+not-regulated-medical-device declaration. App Privacy has a Data Not Collected
+draft and awaits the account holder's final publish attestation.

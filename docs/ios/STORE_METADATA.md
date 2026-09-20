@@ -1,6 +1,6 @@
 # App Store Metadata Draft
 
-Status: English descriptive metadata and reviewer notes are saved in App Store Connect. Final legal fields, URLs, screenshots, and a build upload remain blocked.
+Status: English descriptive metadata, public URLs, category, age rating, medical-device declaration, and an App Privacy draft are saved in App Store Connect. Final legal attestation, screenshots, copyright, review contact, and a build upload remain blocked.
 Last updated: 2026-09-20
 
 This draft describes only the four procedures and behavior present in the native
@@ -109,8 +109,22 @@ answer in App Store Connect. See [Declare regulated medical device status](https
   at the owner’s direction on 2026-09-20. Replace it across the two Web pages
   and this document when the dedicated mailbox is available.
 
-These URLs must be checked on production after the accompanying Web commit is
-deployed. They are not yet entered in App Store Connect.
+The URLs were deployed and returned HTTPS 200 on 2026-09-20. The Support URL,
+Marketing URL, and Privacy Policy URL are now saved in App Store Connect.
+
+## App Store Connect choices saved on 2026-09-20
+
+- Subtitle: `Cervical Procedure Atlas`
+- Primary category: Medical
+- Secondary category: Education
+- Age rating: 16+ in 173 countries or regions, with the expected regional
+  variations. The questionnaire marks Medical or Treatment Information as
+  Frequent and every unrelated feature or content type as absent.
+- Regulated medical device: No. The app is a fixed educational atlas and does
+  not diagnose, prevent, monitor, or treat a condition.
+- App Privacy: Data Not Collected, based on the native source and privacy
+  manifest audit. The final App Store Connect publish confirmation remains
+  pending the account holder's legal attestation.
 
 ## Reviewer notes draft
 
