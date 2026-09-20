@@ -110,3 +110,27 @@ approval remains open.
 After those inputs, the remaining candidate work is signing, physical-device
 validation, TestFlight, exact screenshots and metadata, release-evidence
 validation, and the final Fastlane submission.
+
+## Replacement candidate scan
+
+The replacement signed IPA was scanned after the target added
+`ITSAppUsesNonExemptEncryption=false`. Its SHA-256 is
+`d520c07864c5bb10d52a7a3bf85dcf821a5cb8d1ce490b3a11e711443b360aeb`.
+It contains one arm64 application bundle, supports iPhone and iPad, has a
+minimum OS of 18.0, passes strict code-signature verification, and has no
+embedded third-party frameworks. Its Info.plist and Privacy Manifest both pass
+`plutil -lint`; the payload reports `get-task-allow=false` and the expected
+distribution team `8WSQBQX6C5`.
+
+The scan found no source use of WebKit, StoreKit payment APIs, advertising or
+tracking APIs, private-selector invocation, hard-coded IPv4 endpoints, or
+privacy permission-description keys. The public Support, Privacy, and marketing
+URLs each returned HTTPS 200. These technical checks close no factual content,
+physical-device, TestFlight, or legal-attestation gate. The IPA has not been
+uploaded.
+
+App Store Connect was also inspected after this scan. It currently records
+Education as the primary category, no secondary category, no third-party
+content, and no regulated medical device. The App Privacy final publication,
+copyright, App Review phone, candidate-bound device evidence, and protected
+release-evidence package remain open.
