@@ -44,8 +44,8 @@ generation and never overwrites an old pack.
 
 The builder requires all four procedure provenance records to contain
 `medicalReview.status = ownerApproved`, `rightsReview.status = ownerApproved`,
-and `releaseGate = false` for both records. Current content correctly fails this
-gate.
+and `releaseGate = false` for both records. The current approved catalog meets
+this provenance requirement.
 
 Commands:
 
@@ -112,7 +112,7 @@ external TestFlight.
 
 | Gate | Observed state | Required closure |
 |---|---|---|
-| Medical review | All four provenance records use `inheritedWebsiteSource` | Owner-approved medical review per shipped revision |
+| Medical review | Owner approval is recorded for all four shipped revisions | Bind the approval to the final candidate evidence |
 | Rights review | Owner approval is recorded for all four provenance records | Keep source-trace evidence with the exact candidate and do not add unreviewed assets |
 | Content signing | No production key configuration is stored in Git | Configure protected signing secret and pinned public key |
 | Signed IPA | A distribution-signed arm64 IPA was exported with the app-specific App Store profile. The artifact was inspected locally and intentionally left outside the repository. | Bind one retained candidate IPA to the release-evidence package before TestFlight. |
@@ -124,7 +124,7 @@ external TestFlight.
 | Visual and accessibility acceptance | No exact-candidate owner visual approval or complete accessibility report is recorded | Record both without changing the candidate |
 | Privacy | Source manifest exists; signed-archive aggregate report has not been reviewed | Audit the archive report, linked SDKs, network behavior, and App Privacy answers |
 | App Review scans | Neither required exact-stage scan is recorded | Run before external TestFlight and on the final candidate |
-| Store materials | Local EN/JA draft and local `/support` and `/privacy` pages exist, but there is no metadata upload tree, production URL verification, final screenshots, age rating, copyright, export answer, or candidate-bound reviewer notes | Complete and bind them to the candidate |
+| Store materials | Product-page text, screenshots, URLs, age rating, copyright, review contact, price, availability, and published App Privacy are saved in App Store Connect | Bind the exact candidate and retain final verification evidence |
 | TestFlight | No internal or external candidate result is recorded | Upload through protected environments and retain results |
 
 No blocker above may be converted to a pass by an empty file, a CI success from
