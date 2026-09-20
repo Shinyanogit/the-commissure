@@ -1,6 +1,6 @@
 # App Store Metadata Draft
 
-Status: English descriptive metadata, public URLs, category, age rating, medical-device declaration, review-email contact, and iPhone and iPad screenshots are saved in App Store Connect. Final legal attestation, copyright, review phone, and a build upload remain blocked.
+Status: English descriptive metadata, public URLs, category, age rating, medical-device declaration, review-email contact, and iPhone and iPad screenshots are saved in App Store Connect. The target declares exempt-only encryption use. Final legal attestation, copyright, review phone, and a build upload remain blocked.
 Last updated: 2026-09-20
 
 This draft describes only the four procedures and behavior present in the native
@@ -151,7 +151,7 @@ labels, visible control names, and actual remote-content configuration.
 | Copyright | Rights holder and exact wording unconfirmed |
 | Content rights | All four procedure rights records still require owner confirmation |
 | App Privacy | Source scan suggests no collected data or tracking; final signed-binary and network audit required |
-| Export compliance | Ed25519 verification and system transport are present; answer requires final binary/legal review |
+| Export compliance | `ITSAppUsesNonExemptEncryption` is `false` in the target Info.plist. A new signed IPA must carry this declaration before upload. |
 | Screenshots | Four iPhone and four iPad images uploaded; exact candidate visual acceptance remains open |
 | App icon | Final AppIcon set is absent |
 | Contact | First name, last name, and temporary review email are saved; phone number is required |
@@ -168,13 +168,11 @@ accesses third-party content, and I have the necessary rights.” The shipped
 models, explanatory text, artwork, font, icon, and store screenshots have not
 yet received the owner confirmation required to make that representation.
 
-The App Encryption Documentation panel requires an `App Uses Non-Exempt
-Encryption` Boolean in the app Info.plist or export documentation before the
-build can be cleared for review. The current source uses Apple CryptoKit for
-SHA-256 integrity checks and Curve25519 signature verification and uses system
-URLSession transport. The classification is an export-compliance decision, so
-the project intentionally does not set the Boolean until the account holder
-confirms the answer.
+The target Info.plist now declares `ITSAppUsesNonExemptEncryption` as `false`.
+The source uses Apple CryptoKit only for SHA-256 integrity checks and
+Curve25519 signature verification, plus system `URLSession` transport. A new
+signed IPA is required so App Store Connect receives this declaration and does
+not request export documentation for non-exempt encryption.
 
 App Privacy remains at the final App Store Connect publication dialog. Its
 Publish button represents that the account holder agrees the disclosures are

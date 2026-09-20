@@ -270,3 +270,11 @@ The return-path UI test now waits until the visible back control is present and
 hittable after restoring portrait orientation. This fixes an automation race in
 the test itself. It does not modify the shipped app target or the current signed
 IPA.
+
+## 2026-09-20 encryption declaration refresh
+
+With owner authorization, the target Info.plist declares
+`ITSAppUsesNonExemptEncryption` as `false`. The source uses Apple CryptoKit for
+SHA-256 integrity checks and Curve25519 signature verification, together with
+system `URLSession` transport. The prior IPA predates this declaration and must
+not be uploaded. A new signed IPA will be inspected before any upload attempt.
