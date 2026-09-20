@@ -1,6 +1,6 @@
 # App Store Screenshot Art Direction
 
-Status: production composition pending final candidate captures
+Status: iPhone and iPad App Store media uploaded
 Last updated: 2026-09-20
 
 ## Governing principle
@@ -31,6 +31,11 @@ language. A copy of the Vocabry source was made first, then adapted under
 deterministically exports four `1242 × 2688 px` iPhone 6.5-inch images. Figma
 Make may be used for exploration only. It is not a source of final App Store
 composition.
+
+The iPad source is a separate route, `src/AppIpad.tsx`. Its four independent
+artboards use real iPad captures inside the same near-black and restrained-cyan
+system. `npm run capture:ipad` exports four `2064 × 2752 px` iPad 13-inch
+images, without resizing the phone composition.
 
 ## The Commissure four-image story
 
@@ -80,8 +85,8 @@ The approved current iPhone source states were recaptured on 2026-09-20 with
 the fixed screenshot UI test on a dedicated iPhone 11 Pro Max simulator. All
 four English sources are `1242 × 2688 px`, RGB, and have no alpha channel.
 The deterministic artwork exporter normalizes its master to the same App Store
-dimensions before splitting. The final iPad set will use its own fixed source
-and layout, not a resized phone composition.
+dimensions before splitting. The final iPad set uses its own fixed source and
+layout, not a resized phone composition.
 
 ## Captured iPad source states
 
@@ -93,9 +98,18 @@ overview, ACDF explanation, and the following ACDF step. Both capture tests
 completed with zero failures after the Fastlane child process was given the
 Homebrew Ruby and bundled Gem executable paths.
 
-These are truthful native source captures, not final artwork. Create the iPad
-composition independently from the phone artwork before uploading the final
-screenshots.
+These are truthful native source captures. They are embedded in the independent
+iPad composition under `src/AppIpad.tsx`; the generated files were validated as
+RGB PNGs with no alpha channel.
+
+## App Store Connect upload record
+
+On 2026-09-20, the English (U.S.) App Store Connect record received four
+iPhone 6.5-inch screenshots and four iPad 13-inch screenshots. Each device
+set is in the deliberate order: Library, interactive anatomy, explanation, and
+following step. App Store Connect reports `4 of 10 Screenshots` for both device
+families. The files can be regenerated from this source and are intentionally
+ignored by Git.
 
 ## Rejected approaches
 

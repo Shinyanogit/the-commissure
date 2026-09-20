@@ -5,7 +5,7 @@
 > exact-candidate release gates remain open.
 
 Status: local release controls implemented, release blocked
-Last audited: 2026-09-20 (source, signed IPA, App Store Connect record, and Fastlane checkpoint; no uploaded candidate)
+Last audited: 2026-09-20 (source, signed IPA, App Store Connect record, Fastlane checkpoint, and uploaded store media; no uploaded build candidate)
 
 This file records observed repository state. It is not a release approval. The
 authoritative release gates remain in [RELEASE_SPEC.md](RELEASE_SPEC.md).
@@ -237,3 +237,10 @@ Store Connect. The record also has Medical and Education categories, the
 16+ age-rating result from a frequent medical-information answer, and a
 not-regulated-medical-device declaration. App Privacy has a Data Not Collected
 draft and awaits the account holder's final publish attestation.
+
+The English (U.S.) product page now has four ordered iPhone 6.5-inch media
+files and four ordered iPad 13-inch media files. Both sets were generated from
+the source-controlled artwork project, validated at Apple's accepted native
+dimensions without alpha channels, and uploaded as truthful representations of
+the shipped native UI. No IPA has been uploaded, no TestFlight build exists,
+and no review request has been made.

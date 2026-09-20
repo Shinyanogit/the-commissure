@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "capture:iphone": "node capture_4split.mjs"
+    "capture:iphone": "node capture_4split.mjs",
+    "capture:ipad": "node capture_ipad.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
