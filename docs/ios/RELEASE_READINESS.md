@@ -315,3 +315,10 @@ mainland is explicitly unavailable, and automatic availability for future App
 Store countries or regions is disabled. This release configuration is saved;
 it does not close the App Privacy, candidate evidence, TestFlight, or
 submission gates.
+
+## 2026-09-20 App Privacy publication
+
+The App Privacy record is published in App Store Connect. It identifies the
+public privacy policy URL and states that the app does not collect data. The
+release still requires candidate-bound privacy review, medical approval,
+device evidence, TestFlight evidence, and App Store submission.

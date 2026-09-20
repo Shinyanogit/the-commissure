@@ -143,3 +143,10 @@ country. The app is available in 174 countries or regions. China mainland is
 set to Not Available, and automatic distribution to future storefronts is
 disabled. No build upload, TestFlight distribution, or App Review submission
 occurred at this checkpoint.
+
+## App Privacy publication
+
+The account holder published the App Privacy disclosure in App Store Connect on
+2026-09-20. The published product-page statement is Data Not Collected and
+links to the public privacy policy. This is a completed store field, not a
+substitute for candidate-bound binary and network evidence.

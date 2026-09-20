@@ -188,3 +188,10 @@ will be updated if data practices change.
 - Future App Store countries or regions: automatic availability is disabled, so
   a newly added storefront cannot become available without an explicit change.
 - All other currently selected storefronts remain available on app release.
+
+## App Privacy publication, 2026-09-20
+
+App Privacy is published in App Store Connect with the public privacy policy
+URL and the disclosure that the app does not collect data. The page confirmed
+publication by the account holder. Future binary or data-practice changes must
+be reviewed against this disclosure before release.
