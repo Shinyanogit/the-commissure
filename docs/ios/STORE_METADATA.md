@@ -180,3 +180,11 @@ App Privacy remains at the final App Store Connect publication dialog. Its
 Publish button represents that the account holder agrees the disclosures are
 accurate, comply with the App Store Review Guidelines and applicable law, and
 will be updated if data practices change.
+
+## Pricing and availability checkpoint, 2026-09-20
+
+- Price: Free, with the United States as the base country.
+- Availability: 174 countries or regions. China mainland is excluded.
+- Future App Store countries or regions: automatic availability is disabled, so
+  a newly added storefront cannot become available without an explicit change.
+- All other currently selected storefronts remain available on app release.

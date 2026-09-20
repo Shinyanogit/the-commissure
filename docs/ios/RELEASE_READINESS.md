@@ -306,3 +306,12 @@ The full simulator suite executed all 57 tests after this source change. The
 ignored first automation drag, so the test retries that input once before
 asserting the visible resize. Its focused rerun passed. This changes only the
 test synchronization, not the app target.
+
+## 2026-09-20 pricing and availability checkpoint
+
+App Store Connect now records the app as free with the United States as the
+base country. Distribution is selected for 174 countries or regions. China
+mainland is explicitly unavailable, and automatic availability for future App
+Store countries or regions is disabled. This release configuration is saved;
+it does not close the App Privacy, candidate evidence, TestFlight, or
+submission gates.

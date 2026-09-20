@@ -135,3 +135,11 @@ destination and has Developer Mode enabled. It runs iPadOS 26.6.2, while the
 installed Xcode is 26.2. `devicectl` cannot mount a Developer Disk Image and
 reports `ddiServicesAvailable=false`, so installation, launch, and device-bound
 validation cannot begin on this Mac until Xcode has the matching device support.
+
+## Pricing and availability checkpoint
+
+App Store Connect records a free price with the United States as the base
+country. The app is available in 174 countries or regions. China mainland is
+set to Not Available, and automatic distribution to future storefronts is
+disabled. No build upload, TestFlight distribution, or App Review submission
+occurred at this checkpoint.
