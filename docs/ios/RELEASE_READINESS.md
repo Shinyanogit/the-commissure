@@ -258,3 +258,15 @@ identity with the app-specific Store provisioning profile. The existing
 This refresh does not close any release gate. In particular, no build has been
 uploaded to App Store Connect, and the candidate still lacks the required owner
 attestations, device validation, and TestFlight evidence.
+
+## 2026-09-20 release test refresh
+
+The full Fastlane `ios test` lane passed 57 tests with zero failures on the
+iPhone 17 Pro simulator. The suite includes all 47 unit tests and 10 UI tests,
+including App Store screenshot capture, gesture separation, zoom, panel resize,
+Japanese localization, and the procedure return path after orientation changes.
+
+The return-path UI test now waits until the visible back control is present and
+hittable after restoring portrait orientation. This fixes an automation race in
+the test itself. It does not modify the shipped app target or the current signed
+IPA.

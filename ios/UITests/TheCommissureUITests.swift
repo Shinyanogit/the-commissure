@@ -130,7 +130,10 @@ extension TheCommissureUITests {
     XCTAssertTrue(app.otherElements["reality-field-ready"].exists)
     capture("theater-japanese")
     XCUIDevice.shared.orientation = .portrait
-    app.buttons["action.back"].tap()
+    let back = app.buttons["action.back"]
+    XCTAssertTrue(back.waitForExistence(timeout: 5))
+    XCTAssertTrue(back.isHittable)
+    back.tap()
     XCTAssertTrue(app.buttons["procedure-pcf"].waitForExistence(timeout: 5))
     capture("library-japanese")
   }
