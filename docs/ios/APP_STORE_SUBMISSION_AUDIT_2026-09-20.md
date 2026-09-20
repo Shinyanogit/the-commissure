@@ -158,3 +158,12 @@ explanatory text, and educational notice for ACDF, ACCF, PCDF, and PCF. The
 four provenance records now declare the required owner-approved medical-review
 state and the catalog hashes were regenerated. This closes the content status
 gate but requires a fresh candidate IPA and candidate-bound evidence.
+
+## Medical-approved candidate refresh
+
+A new signed IPA was exported after the medical approval and catalog update.
+The artifact is `TheCommissure.ipa`, SHA-256
+`40f622954e9d2abd7e02bd284fc254ec868dbaec8326da51c62a19e820daa803`, version
+`1.0.0` build `1`, bundle identifier `app.thecommissure.ios`, and Team
+`8WSQBQX6C5`. Strict code-signature verification passed. The artifact has not
+been uploaded to App Store Connect.

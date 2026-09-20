@@ -331,3 +331,14 @@ revisions. Each provenance record now declares `medicalReview.ownerApproved`
 with its release gate closed. The catalog provenance hashes were regenerated,
 and `node tooling/content/validate-content.mjs` passed for all four procedures
 and 26 steps. A new signed IPA is required because this catalog changed.
+
+## 2026-09-20 medical-approved candidate refresh
+
+Fastlane exported a fresh distribution-signed IPA after the medical-content
+approval. It is stored outside the repository at
+`/tmp/the-commissure-app-store-ipa-20260920-medical/TheCommissure.ipa` and has
+SHA-256 `40f622954e9d2abd7e02bd284fc254ec868dbaec8326da51c62a19e820daa803`
+with 16,726,482 bytes. Inspection confirms bundle identifier
+`app.thecommissure.ios`, version `1.0.0`, build `1`, Team `8WSQBQX6C5`, and an
+Apple Distribution signature. The embedded provenance records mark both
+medical and rights reviews as owner-approved. It has not been uploaded.
