@@ -32,7 +32,9 @@ audit. It reports `1.0.0` build `1`, bundle identifier `app.thecommissure.ios`,
 Team `8WSQBQX6C5`, an Apple Distribution signature, and the app-specific
 `iOS Team Store Provisioning Profile: app.thecommissure.ios`. The IPA remains
 outside the repository and has not been uploaded. A retained release-evidence
-package and App Store Connect API key configuration are still absent.
+package is still absent. An App Manager API key has been created and its
+downloaded secret is stored only in a Git-ignored local file; read-only API
+authentication against this app record has succeeded.
 
 All four content provenance records have `medicalReview` set to
 `inheritedWebsiteSource` and `rightsReview` set to
@@ -93,8 +95,8 @@ approval remains open.
 4. Confirm the App Store legal answers, including age rating,
    regulated-medical-device status, export compliance, copyright, and review
    contact.
-5. Create or provide an App Store Connect API key for the Fastlane upload
-   workflow, or complete the remaining upload fields in the browser.
+5. Complete the remaining upload fields in the browser or through Fastlane,
+   using the already verified local App Store Connect API configuration.
 
 After those inputs, the remaining candidate work is signing, physical-device
 validation, TestFlight, exact screenshots and metadata, release-evidence

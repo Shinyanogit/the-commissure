@@ -226,3 +226,7 @@ was set to `app-store`. The inspected artifact had identifier
 `iOS Team Store Provisioning Profile: app.thecommissure.ios`, and an
 `Apple Distribution: Shinya Yamaguchi (8WSQBQX6C5)` signature. The only build
 warning is the existing unused `try?` result in `ContentDelivery.swift`.
+
+An App Manager App Store Connect API key was created for the Fastlane workflow.
+Its private key and environment file are Git-ignored and permission-restricted.
+A read-only Spaceship request verified that the key can access this app record.
