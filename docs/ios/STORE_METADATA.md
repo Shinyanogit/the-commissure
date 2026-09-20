@@ -1,6 +1,6 @@
 # App Store Metadata Draft
 
-Status: English descriptive metadata, public URLs, category, age rating, medical-device declaration, and an App Privacy draft are saved in App Store Connect. Final legal attestation, screenshots, copyright, review contact, and a build upload remain blocked.
+Status: English descriptive metadata, public URLs, category, age rating, medical-device declaration, review-email contact, and iPhone and iPad screenshots are saved in App Store Connect. Final legal attestation, copyright, review phone, and a build upload remain blocked.
 Last updated: 2026-09-20
 
 This draft describes only the four procedures and behavior present in the native
@@ -125,6 +125,10 @@ Marketing URL, and Privacy Policy URL are now saved in App Store Connect.
 - App Privacy: Data Not Collected, based on the native source and privacy
   manifest audit. The final App Store Connect publish confirmation remains
   pending the account holder's legal attestation.
+- Screenshots: Four iPhone 6.5-inch and four iPad 13-inch PNGs are uploaded in
+  the order Library, interactive anatomy, explanation, and following step.
+- Review contact: First and last name plus the owner-approved temporary review
+  email are saved. The phone number remains unprovided.
 
 ## Reviewer notes draft
 
@@ -141,16 +145,16 @@ labels, visible control names, and actual remote-content configuration.
 
 | Field | Current draft state |
 |---|---|
-| Support URL | Ready locally at `/support`; production verification is pending deployment |
-| Privacy Policy URL | Ready locally at `/privacy`; production verification is pending deployment |
-| Marketing URL | `https://the-commissure.vercel.app/` after production verification |
+| Support URL | Saved and verified at `https://the-commissure.vercel.app/support` |
+| Privacy Policy URL | Saved and verified at `https://the-commissure.vercel.app/privacy` |
+| Marketing URL | Saved as `https://the-commissure.vercel.app/` |
 | Copyright | Rights holder and exact wording unconfirmed |
 | Content rights | All four procedure rights records still require owner confirmation |
 | App Privacy | Source scan suggests no collected data or tracking; final signed-binary and network audit required |
 | Export compliance | Ed25519 verification and system transport are present; answer requires final binary/legal review |
-| Screenshots | Must be captured from the exact approved release build after visual acceptance |
+| Screenshots | Four iPhone and four iPad images uploaded; exact candidate visual acceptance remains open |
 | App icon | Final AppIcon set is absent |
-| Contact | App Review contact details are owner-controlled and unconfirmed |
+| Contact | First name, last name, and temporary review email are saved; phone number is required |
 
 The Fastlane metadata tree remains withheld until the factual rights and legal
 fields are complete. The published URLs and contact address are no longer a
