@@ -3,6 +3,15 @@
 User-visible changes are recorded when the implementation, verification, and
 its source-of-truth documentation are ready in the same pull request.
 
+## 2026-09-20: localized iPad capture readiness
+
+- Captured English and Japanese four-screen iPad Pro 13-inch source sets with
+  Fastlane Snapshot. Each image is an RGB `2064 × 2752 px` native capture and
+  the screenshot UI test passed in both locales.
+- Fixed the local Fastlane invocation environment by exposing Homebrew Ruby and
+  the Bundler executable directory to `xcpretty`. This fixes the prior
+  child-process Ruby mismatch without changing the locked Fastlane version.
+
 ## 2026-09-20: release verification stability
 
 - Corrected the remote pack-transfer test to validate its documented maximum

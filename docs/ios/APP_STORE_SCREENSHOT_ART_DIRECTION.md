@@ -81,10 +81,11 @@ not a resized phone composition.
 
 ## Captured iPad source states
 
-Fastlane successfully captured the English iPad Pro 13-inch (M5) source states
-on 2026-09-20. The four PNG files are `2064 × 2752 px`, RGB, and stored locally
-under `ios/app-store-materials/figma-input/ipad/en-US/`. They cover Library,
-ACDF overview, ACDF explanation, and the following ACDF step. The capture test
+Fastlane successfully captured English and Japanese iPad Pro 13-inch (M5)
+source states on 2026-09-20. Each locale has four `2064 × 2752 px` RGB PNGs
+under `ios/app-store-materials/figma-input/ipad/en-US/` and
+`ios/app-store-materials/figma-input/ipad/ja/`. They cover Library, ACDF
+overview, ACDF explanation, and the following ACDF step. Both capture tests
 completed with zero failures after the Fastlane child process was given the
 Homebrew Ruby and bundled Gem executable paths.
 
