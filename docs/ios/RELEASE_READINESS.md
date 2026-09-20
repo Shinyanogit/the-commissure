@@ -361,3 +361,11 @@ The submitted build is the final distribution IPA at
 `/tmp/the-commissure-app-store-ipa-20260920-final/TheCommissure.ipa`, with
 SHA-256 `ba32decf15a2e457ecb68a966d992f6ab78500ff846606b0d7aa5496b3278294`.
 No external TestFlight tester or group was selected.
+
+## 2026-09-20 App icon verification
+
+The Xcode project assigns `AppIcon` through
+`ASSETCATALOG_COMPILER_APPICON_NAME`. The source asset is the opaque 1024 px
+`ios/App/Assets.xcassets/AppIcon.appiconset/AppIcon.png`, which contains the
+white The Commissure logo on black. App Store Connect also displayed that icon
+for submitted build `1.0.0` build `1`.
