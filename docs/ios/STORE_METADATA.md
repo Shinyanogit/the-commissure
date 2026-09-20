@@ -151,7 +151,7 @@ labels, visible control names, and actual remote-content configuration.
 | Copyright | Rights holder and exact wording unconfirmed |
 | Content rights | Saved in App Store Connect as no third-party content. This remains a legal representation that must stay accurate for the shipped build. |
 | App Privacy | Source scan suggests no collected data or tracking; final signed-binary and network audit required |
-| Export compliance | `ITSAppUsesNonExemptEncryption` is `false` in the target Info.plist. A new signed IPA must carry this declaration before upload. |
+| Export compliance | `ITSAppUsesNonExemptEncryption` is `false` in the target Info.plist and the current signed IPA. |
 | Screenshots | Four iPhone and four iPad images uploaded; exact candidate visual acceptance remains open |
 | App icon | Final AppIcon set is absent |
 | Contact | First name, last name, and temporary review email are saved; phone number is required |
