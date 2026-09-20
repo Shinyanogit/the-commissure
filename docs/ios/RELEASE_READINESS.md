@@ -342,3 +342,10 @@ with 16,726,482 bytes. Inspection confirms bundle identifier
 `app.thecommissure.ios`, version `1.0.0`, build `1`, Team `8WSQBQX6C5`, and an
 Apple Distribution signature. The embedded provenance records mark both
 medical and rights reviews as owner-approved. It has not been uploaded.
+
+## 2026-09-20 TestFlight upload
+
+Fastlane uploaded the final candidate IPA to App Store Connect without external
+tester distribution. App Store Connect accepted version `1.0.0` build `1` at
+11:25 JST and reports its status as Processing. The build must finish Apple
+processing before it can be attached to the App Store version.

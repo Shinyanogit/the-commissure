@@ -167,3 +167,9 @@ The artifact is `TheCommissure.ipa`, SHA-256
 `1.0.0` build `1`, bundle identifier `app.thecommissure.ios`, and Team
 `8WSQBQX6C5`. Strict code-signature verification passed. The artifact has not
 been uploaded to App Store Connect.
+
+## TestFlight upload
+
+Fastlane uploaded version `1.0.0` build `1` to App Store Connect on
+2026-09-20. Apple accepted the transfer and listed the build as Processing at
+11:25 JST. No external TestFlight tester or group was selected.
