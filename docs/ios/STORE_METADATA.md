@@ -1,13 +1,14 @@
 # App Store Metadata Draft
 
-Status: local draft only, blocked from sync or submission
+Status: English descriptive metadata and reviewer notes are saved in App Store Connect. Final legal fields, URLs, screenshots, and a build upload remain blocked.
 Last updated: 2026-09-20
 
 This draft describes only the four procedures and behavior present in the native
-app. It has not been uploaded to App Store Connect. The support and privacy
-pages are ready for publication on the existing product site. Rights holder,
-screenshots, age-rating answers, privacy answers, and legal/export answers
-remain approval gates.
+app. On 2026-09-20, the English promotional text, description, keywords, and
+reviewer notes were saved in App Store Connect for version 1.0. The support and
+privacy pages are ready for publication on the existing product site. Rights
+holder, screenshots, age-rating answers, privacy answers, and legal/export
+answers remain approval gates.
 
 Planned first public version: `1.0.0` (build `1`).
 

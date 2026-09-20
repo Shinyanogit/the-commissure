@@ -1,6 +1,6 @@
 # App Store submission audit, 2026-09-20
 
-Status: submission blocked by factual and candidate-bound release gates. A signed IPA and App Store Connect record now exist, but no build has been uploaded.
+Status: submission blocked by factual and candidate-bound release gates. A signed IPA and App Store Connect record now exist, and English descriptive metadata is saved, but no build has been uploaded.
 
 This audit used the local `app-store-review` checklist, the Fastlane contract,
 the Release archive, source inspection, and the release-control test suite. It

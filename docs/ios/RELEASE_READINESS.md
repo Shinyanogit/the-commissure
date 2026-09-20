@@ -215,8 +215,9 @@ iPad hardware. These records cannot be manufactured from local checks.
 
 The App Store Connect iOS record for `The Commissure` now exists with bundle
 identifier `app.thecommissure.ios`, English (U.S.) as its primary locale, and
-SKU `thecommissure-ios`. It remains in Prepare for Submission and contains no
-uploaded screenshots, metadata, build, or review request.
+SKU `thecommissure-ios`. It remains in Prepare for Submission with the English
+promotional text, description, keywords, and reviewer notes saved. It contains
+no uploaded screenshots, build, or review request.
 
 Fastlane 2.239.0 successfully archived and exported a Release IPA after the
 target received Team `8WSQBQX6C5` and the Fastlane-compatible export method
