@@ -148,8 +148,8 @@ labels, visible control names, and actual remote-content configuration.
 | Support URL | Saved and verified at `https://the-commissure.vercel.app/support` |
 | Privacy Policy URL | Saved and verified at `https://the-commissure.vercel.app/privacy` |
 | Marketing URL | Saved as `https://the-commissure.vercel.app/` |
-| Copyright | Rights holder and exact wording unconfirmed |
-| Content rights | Saved in App Store Connect as no third-party content. This remains a legal representation that must stay accurate for the shipped build. |
+| Copyright | Saved as `© 2026 Shinya Yamaguchi` |
+| Content rights | Saved in App Store Connect as no third-party content. Owner approval is recorded for the shipped assets. |
 | App Privacy | Source scan suggests no collected data or tracking; final signed-binary and network audit required |
 | Export compliance | `ITSAppUsesNonExemptEncryption` is `false` in the target Info.plist and the current signed IPA. |
 | Screenshots | Four iPhone and four iPad images uploaded; exact candidate visual acceptance remains open |
@@ -166,6 +166,9 @@ App Store Connect currently records that the app does not contain, show, or
 access third-party content. This must continue to match the ownership and
 provenance of all shipped models, explanatory text, artwork, fonts, icons, and
 store screenshots.
+
+Copyright is saved for version 1.0 as `© 2026 Shinya Yamaguchi`, matching the
+existing Vocabry public product attribution.
 
 The target Info.plist now declares `ITSAppUsesNonExemptEncryption` as `false`.
 The source uses Apple CryptoKit only for SHA-256 integrity checks and

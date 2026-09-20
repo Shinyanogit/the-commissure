@@ -113,7 +113,7 @@ external TestFlight.
 | Gate | Observed state | Required closure |
 |---|---|---|
 | Medical review | All four provenance records use `inheritedWebsiteSource` | Owner-approved medical review per shipped revision |
-| Rights review | All four provenance records use `ownerConfirmationRequired` | Owner confirmation for models, text, images, fonts, icons, portraits, and screenshots |
+| Rights review | Owner approval is recorded for all four provenance records | Keep source-trace evidence with the exact candidate and do not add unreviewed assets |
 | Content signing | No production key configuration is stored in Git | Configure protected signing secret and pinned public key |
 | Signed IPA | A distribution-signed arm64 IPA was exported with the app-specific App Store profile. The artifact was inspected locally and intentionally left outside the repository. | Bind one retained candidate IPA to the release-evidence package before TestFlight. |
 | Version and icon | Project settings are `1.0.0` build `1`; the owner-requested Web favicon is configured as an opaque 1024 px AppIcon and compiles successfully | Verify the version and icon in the signed candidate |

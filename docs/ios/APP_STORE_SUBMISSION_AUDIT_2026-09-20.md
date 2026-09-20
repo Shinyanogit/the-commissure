@@ -36,11 +36,11 @@ package is still absent. An App Manager API key has been created and its
 downloaded secret is stored only in a Git-ignored local file; read-only API
 authentication against this app record has succeeded.
 
-All four content provenance records have `medicalReview` set to
-`inheritedWebsiteSource` and `rightsReview` set to
-`ownerConfirmationRequired`, with both release gates true. The release controls
-correctly reject publishing while these values remain. They require factual
-owner approval. A local implementation agent cannot supply that approval.
+All four content provenance records retain `medicalReview` as
+`inheritedWebsiteSource`, which remains release-blocking. The owner confirmed
+rights for public App Store distribution on 2026-09-20, so all four
+`rightsReview` records are now `ownerApproved` with their release gates closed.
+The source-trace record is retained for future updates.
 
 Source Blender files were subsequently inspected. Their identifiable BlenderKit
 assets resolve to Royalty-Free records, and the remaining source inventory is
@@ -97,15 +97,10 @@ approval remains open.
 ## Required owner inputs
 
 1. Confirm medical accuracy for each shipped procedure revision.
-2. Confirm rights for each model, illustration, text, font, icon, and store
-   screenshot.
-3. Deploy and production-verify the configured support contact and public
-   privacy-policy URL.
-4. Confirm the App Store legal answers, including age rating,
-   regulated-medical-device status, export compliance, copyright, and review
+2. Confirm the final App Privacy publication and provide the App Review phone
    contact.
-5. Complete the remaining upload fields in the browser or through Fastlane,
-   using the already verified local App Store Connect API configuration.
+3. Complete physical-device validation once matching Xcode device support is
+   available.
 
 After those inputs, the remaining candidate work is signing, physical-device
 validation, TestFlight, exact screenshots and metadata, release-evidence
@@ -131,9 +126,10 @@ uploaded.
 
 App Store Connect was also inspected after this scan. It currently records
 Education as the primary category, no secondary category, no third-party
-content, and no regulated medical device. The App Privacy final publication,
-copyright, App Review phone, candidate-bound device evidence, and protected
-release-evidence package remain open.
+content, and no regulated medical device. Copyright for version 1.0 is saved as
+`© 2026 Shinya Yamaguchi`. The App Privacy final publication, App Review phone,
+candidate-bound device evidence, and protected release-evidence package remain
+open.
 
 The paired physical iPad Pro 12.9-inch (5th generation) is visible as an iOS
 destination and has Developer Mode enabled. It runs iPadOS 26.6.2, while the
