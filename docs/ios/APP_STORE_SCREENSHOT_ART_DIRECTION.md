@@ -79,6 +79,19 @@ For the current iPhone 17 Pro Max source captures, each output is
 `1320 × 2868 px`. The final iPad set will use its own fixed source and layout,
 not a resized phone composition.
 
+## Captured iPad source states
+
+Fastlane successfully captured the English iPad Pro 13-inch (M5) source states
+on 2026-09-20. The four PNG files are `2064 × 2752 px`, RGB, and stored locally
+under `ios/app-store-materials/figma-input/ipad/en-US/`. They cover Library,
+ACDF overview, ACDF explanation, and the following ACDF step. The capture test
+completed with zero failures after the Fastlane child process was given the
+Homebrew Ruby and bundled Gem executable paths.
+
+These are truthful native source captures, not final artwork. Create the iPad
+composition independently from the phone artwork before uploading the final
+screenshots.
+
 ## Rejected approaches
 
 - Figma Make output that treats the result as a responsive Web page, a phone

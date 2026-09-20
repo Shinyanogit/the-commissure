@@ -75,6 +75,12 @@ developer disk image. The physical-device Release build therefore could not
 begin. This is a local device pairing or developer-image condition, not an
 accepted physical-device validation.
 
+Fastlane Snapshot subsequently captured four English iPad Pro 13-inch (M5)
+Simulator images at `2064 × 2752 px` with `testAppStoreScreenshots` passing.
+The first attempt exposed a Ruby path mismatch in the `xcpretty` child process;
+the capture succeeded after exporting the Homebrew Ruby and bundled Gem bin
+paths. Japanese iPad capture and final artwork approval remain open.
+
 ## Required owner inputs
 
 1. Confirm medical accuracy for each shipped procedure revision.
