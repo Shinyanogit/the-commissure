@@ -1,10 +1,9 @@
 # App Store submission audit, 2026-09-20
 
-Status: submission blocked by factual and candidate-bound release gates. A signed IPA and App Store Connect record now exist, and English descriptive metadata is saved, but no build has been uploaded.
+Status: submitted to App Review. The historical local-gate findings below remain an audit trail; the final candidate was uploaded, Apple processing completed, and the version was submitted through App Store Connect.
 
 This audit used the local `app-store-review` checklist, the Fastlane contract,
-the Release archive, source inspection, and the release-control test suite. It
-does not claim App Store Connect access or submission.
+the Release archive, source inspection, and the release-control test suite. The final App Store Connect submission is recorded at the end of this document.
 
 ## Verified locally
 
@@ -173,3 +172,13 @@ been uploaded to App Store Connect.
 Fastlane uploaded version `1.0.0` build `1` to App Store Connect on
 2026-09-20. Apple accepted the transfer and listed the build as Processing at
 11:25 JST. No external TestFlight tester or group was selected.
+
+## App Review submission
+
+Apple completed processing for version `1.0.0` build `1`. The build was attached
+to iOS App Version `1.0` and submitted through App Store Connect on 2026-09-20
+at 11:32 JST. Submission ID: `b0ad28f8-1cd3-4298-826c-1bfd424b7c5d`. The
+current App Store Connect status is `Waiting for Review`.
+
+No external TestFlight tester or group was selected. App Store Connect is now
+the authoritative record for review progress.

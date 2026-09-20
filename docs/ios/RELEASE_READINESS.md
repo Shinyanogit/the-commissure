@@ -349,3 +349,15 @@ Fastlane uploaded the final candidate IPA to App Store Connect without external
 tester distribution. App Store Connect accepted version `1.0.0` build `1` at
 11:25 JST and reports its status as Processing. The build must finish Apple
 processing before it can be attached to the App Store version.
+
+## 2026-09-20 App Review submission
+
+Apple completed processing for the final candidate, version `1.0.0` build `1`.
+The build was attached to iOS App Version `1.0` and submitted through App Store
+Connect at 11:32 JST. Submission ID: `b0ad28f8-1cd3-4298-826c-1bfd424b7c5d`.
+App Store Connect reports `Waiting for Review`.
+
+The submitted build is the final distribution IPA at
+`/tmp/the-commissure-app-store-ipa-20260920-final/TheCommissure.ipa`, with
+SHA-256 `ba32decf15a2e457ecb68a966d992f6ab78500ff846606b0d7aa5496b3278294`.
+No external TestFlight tester or group was selected.
