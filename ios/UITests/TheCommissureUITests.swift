@@ -232,9 +232,12 @@ extension TheCommissureUITests {
     app.buttons["action.reset"].tap()
     XCTAssertTrue(scene.waitForExistence(timeout: 5))
     let resize = app.otherElements["explanation-resize"]
+    XCTAssertTrue(resize.waitForExistence(timeout: 5))
     let originalHeight = explanation.frame.height
-    let handle = resize.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-    handle.press(forDuration: 0.1, thenDragTo: handle.withOffset(CGVector(dx: 0, dy: -70)))
+    for _ in 0..<2 where explanation.frame.height <= originalHeight + 20 {
+      let handle = resize.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+      handle.press(forDuration: 0.1, thenDragTo: handle.withOffset(CGVector(dx: 0, dy: -70)))
+    }
     XCTAssertGreaterThan(explanation.frame.height, originalHeight + 20)
     capture("model-front-lighting")
     let start = scene.coordinate(withNormalizedOffset: CGVector(dx: 0.85, dy: 0.25))

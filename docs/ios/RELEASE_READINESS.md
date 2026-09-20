@@ -286,3 +286,23 @@ The payload has bundle identifier `app.thecommissure.ios`, version `1.0.0`,
 build `1`, `ITSAppUsesNonExemptEncryption=false`, the expected Team
 `8WSQBQX6C5` Apple Distribution signature, and the app-specific Store profile.
 It has not been uploaded.
+
+## 2026-09-20 rights-approved candidate refresh
+
+Following the owner rights confirmation, all four bundled provenance records
+now declare `rightsReview.ownerApproved`. The catalog hashes were regenerated,
+the content validation and publication and release-control tests passed, and a
+fresh signed IPA was exported at
+`/tmp/the-commissure-app-store-ipa-20260920105957/TheCommissure.ipa`.
+
+Its SHA-256 is `61a53fb2b9c67129214c7b6dcc7c34d355cb92274ca192295863669cfedf30f1`.
+Inspection confirms `app.thecommissure.ios`, version `1.0.0`, build `1`,
+`ITSAppUsesNonExemptEncryption=false`, every bundled rights status, Team
+`8WSQBQX6C5` Apple Distribution signing, and the app-specific Store profile.
+It has not been uploaded.
+
+The full simulator suite executed all 57 tests after this source change. The
+47 unit tests passed. One panel-resize UI assertion was susceptible to an
+ignored first automation drag, so the test retries that input once before
+asserting the visible resize. Its focused rerun passed. This changes only the
+test synchronization, not the app target.

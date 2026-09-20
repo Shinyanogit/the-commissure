@@ -97,8 +97,7 @@ approval remains open.
 ## Required owner inputs
 
 1. Confirm medical accuracy for each shipped procedure revision.
-2. Confirm the final App Privacy publication and provide the App Review phone
-   contact.
+2. Confirm the final App Privacy publication.
 3. Complete physical-device validation once matching Xcode device support is
    available.
 
@@ -127,9 +126,9 @@ uploaded.
 App Store Connect was also inspected after this scan. It currently records
 Education as the primary category, no secondary category, no third-party
 content, and no regulated medical device. Copyright for version 1.0 is saved as
-`© 2026 Shinya Yamaguchi`. The App Privacy final publication, App Review phone,
-candidate-bound device evidence, and protected release-evidence package remain
-open.
+`© 2026 Shinya Yamaguchi`. The App Review contact has a name, phone, and email.
+The App Privacy final publication, candidate-bound device evidence, and
+protected release-evidence package remain open.
 
 The paired physical iPad Pro 12.9-inch (5th generation) is visible as an iOS
 destination and has Developer Mode enabled. It runs iPadOS 26.6.2, while the

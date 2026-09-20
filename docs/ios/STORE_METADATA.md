@@ -154,7 +154,7 @@ labels, visible control names, and actual remote-content configuration.
 | Export compliance | `ITSAppUsesNonExemptEncryption` is `false` in the target Info.plist and the current signed IPA. |
 | Screenshots | Four iPhone and four iPad images uploaded; exact candidate visual acceptance remains open |
 | App icon | Final AppIcon set is absent |
-| Contact | First name, last name, and temporary review email are saved; phone number is required |
+| Contact | First name, last name, the temporary review email, and `+81 70 4291 7287` are saved |
 
 The Fastlane metadata tree remains withheld until the factual rights and legal
 fields are complete. The published URLs and contact address are no longer a
