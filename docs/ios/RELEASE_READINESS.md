@@ -244,3 +244,17 @@ the source-controlled artwork project, validated at Apple's accepted native
 dimensions without alpha channels, and uploaded as truthful representations of
 the shipped native UI. No IPA has been uploaded, no TestFlight build exists,
 and no review request has been made.
+
+## 2026-09-20 current IPA refresh
+
+Fastlane rebuilt the candidate after the media checkpoint and exported
+`TheCommissure.ipa` outside the repository. Its SHA-256 is
+`8321777e8bc7e9236591b2131e8e157f8aa7522c7c1d2603497bf7d9594ea7b3`.
+The inspected payload identifies itself as `app.thecommissure.ios`, version
+`1.0.0`, build `1`, and is signed by the Team `8WSQBQX6C5` Apple Distribution
+identity with the app-specific Store provisioning profile. The existing
+`ContentDelivery.swift` unused `try?` warning remains the only build warning.
+
+This refresh does not close any release gate. In particular, no build has been
+uploaded to App Store Connect, and the candidate still lacks the required owner
+attestations, device validation, and TestFlight evidence.
