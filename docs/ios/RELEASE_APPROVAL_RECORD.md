@@ -1,7 +1,7 @@
 # Release approval record
 
-Status: factual review pending. This record does not constitute medical or
-rights approval.
+Status: medical factual review pending. Rights approval is recorded from the
+owner direction on 2026-09-20.
 
 This is the release-gate dossier for the first public iOS build. It identifies
 the exact content and source evidence that require owner review before
@@ -37,10 +37,10 @@ license statement is therefore insufficient for public distribution.
 | ACDF, PCDF, PCF sources and home source | BlenderKit metadata names “Stylized Human Brain” and records asset ID `94c75452-1679-4613-b9e5-8b3c9c6ef14c`. Its current search record is `royalty_free`. | Save the asset page or purchase/download record and confirm that the recorded license covers this App Store distribution. |
 | Procedure-specific implants and authored transformations | The local source files contain objects without a recoverable BlenderKit asset ID. | Identify whether each object is original, vendor-provided, or separately licensed, and record the source. |
 
-Required attestation: the rights holder has checked every source that reaches a
-bundled GLB, preview, home image, background, or AppIcon, and confirms public
-App Store distribution is allowed. Editorial assets or unknown source material
-must be removed or replaced before approval.
+Rights attestation: the owner confirms that all shipped models, text, artwork,
+fonts, icons, and store screenshots may be distributed publicly through the App
+Store. The app does not access third-party content at runtime. The source-trace
+record remains retained for provenance and future updates.
 
 The [BlenderKit licensing FAQ](https://www.blenderkit.com/faq-frequently-asked-questions/)
 states that Royalty-Free assets may be used commercially provided the assets
@@ -51,12 +51,13 @@ or unlabelled components.
 
 ## Approval transition
 
-When the two attestations and the supporting license evidence are available:
+When the remaining medical attestation is available:
 
-1. Update each `content/procedures/*/provenance.json` with the factual reviewer,
-   date, license/source detail, and approved status.
+1. Update each `content/procedures/*/provenance.json` with the factual medical
+   approval.
 2. Run the publication and release-control tests.
-3. Regenerate the release candidate and bind the approvals to its commit and
+3. Regenerate the release candidate and bind the approval to its commit and
    artifact digest in `RELEASE_READINESS.md`.
 
-No status transition is allowed from this document alone.
+The rights transition is based on the owner direction recorded on 2026-09-20.
+The remaining medical status transition requires a factual content review.

@@ -35,8 +35,8 @@
     "releaseGate": true
   },
   "rightsReview": {
-    "status": "ownerConfirmationRequired",
-    "releaseGate": true
+    "status": "ownerApproved",
+    "releaseGate": false
   },
   "assetSource": {
     "path": "web/public/Posterior Cervical Foraminotomy (PCF) Light.glb",

@@ -19,8 +19,8 @@
     "releaseGate": true
   },
   "rightsReview": {
-    "status": "ownerConfirmationRequired",
-    "releaseGate": true
+    "status": "ownerApproved",
+    "releaseGate": false
   },
   "assetSource": {
     "path": "web/public/Anterior Cervical Corpectomy and Fusion (ACCF) Light.glb",
