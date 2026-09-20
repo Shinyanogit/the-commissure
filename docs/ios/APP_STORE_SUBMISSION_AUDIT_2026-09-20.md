@@ -134,3 +134,9 @@ Education as the primary category, no secondary category, no third-party
 content, and no regulated medical device. The App Privacy final publication,
 copyright, App Review phone, candidate-bound device evidence, and protected
 release-evidence package remain open.
+
+The paired physical iPad Pro 12.9-inch (5th generation) is visible as an iOS
+destination and has Developer Mode enabled. It runs iPadOS 26.6.2, while the
+installed Xcode is 26.2. `devicectl` cannot mount a Developer Disk Image and
+reports `ddiServicesAvailable=false`, so installation, launch, and device-bound
+validation cannot begin on this Mac until Xcode has the matching device support.
