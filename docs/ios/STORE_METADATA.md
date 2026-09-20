@@ -171,8 +171,8 @@ yet received the owner confirmation required to make that representation.
 The target Info.plist now declares `ITSAppUsesNonExemptEncryption` as `false`.
 The source uses Apple CryptoKit only for SHA-256 integrity checks and
 Curve25519 signature verification, plus system `URLSession` transport. A new
-signed IPA is required so App Store Connect receives this declaration and does
-not request export documentation for non-exempt encryption.
+signed IPA now carries this declaration. It is ready for an App Store Connect
+upload and should not require export documentation for non-exempt encryption.
 
 App Privacy remains at the final App Store Connect publication dialog. Its
 Publish button represents that the account holder agrees the disclosures are

@@ -277,4 +277,12 @@ With owner authorization, the target Info.plist declares
 `ITSAppUsesNonExemptEncryption` as `false`. The source uses Apple CryptoKit for
 SHA-256 integrity checks and Curve25519 signature verification, together with
 system `URLSession` transport. The prior IPA predates this declaration and must
-not be uploaded. A new signed IPA will be inspected before any upload attempt.
+not be uploaded.
+
+Fastlane exported and the project inspected the replacement IPA at
+`/tmp/the-commissure-app-store-ipa-20260920102945/TheCommissure.ipa`. Its
+SHA-256 is `d520c07864c5bb10d52a7a3bf85dcf821a5cb8d1ce490b3a11e711443b360aeb`.
+The payload has bundle identifier `app.thecommissure.ios`, version `1.0.0`,
+build `1`, `ITSAppUsesNonExemptEncryption=false`, the expected Team
+`8WSQBQX6C5` Apple Distribution signature, and the app-specific Store profile.
+It has not been uploaded.
