@@ -28,8 +28,9 @@ The Commissure follows that production method without copying Vocabry's visual
 language. A copy of the Vocabry source was made first, then adapted under
 `ios/app-store-materials/source`. Its active canvas is
 `src/AppPanorama.tsx`; `npm run capture:iphone` renders the review master and
-deterministically exports four `1320 × 2868 px` images. Figma Make may be used
-for exploration only. It is not a source of final App Store composition.
+deterministically exports four `1242 × 2688 px` iPhone 6.5-inch images. Figma
+Make may be used for exploration only. It is not a source of final App Store
+composition.
 
 ## The Commissure four-image story
 
@@ -75,9 +76,12 @@ rotation is allowed only when it does not crop or compromise legibility.
 5. Export individual PNGs in the current Apple-accepted dimensions and confirm
    no alpha channel is present.
 
-For the current iPhone 17 Pro Max source captures, each output is
-`1320 × 2868 px`. The final iPad set will use its own fixed source and layout,
-not a resized phone composition.
+The approved current iPhone source states were recaptured on 2026-09-20 with
+the fixed screenshot UI test on a dedicated iPhone 11 Pro Max simulator. All
+four English sources are `1242 × 2688 px`, RGB, and have no alpha channel.
+The deterministic artwork exporter normalizes its master to the same App Store
+dimensions before splitting. The final iPad set will use its own fixed source
+and layout, not a resized phone composition.
 
 ## Captured iPad source states
 

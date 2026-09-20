@@ -8,10 +8,12 @@ import sharp from 'sharp';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Four iPhone 17 Pro Max portrait screenshots.
+// Four wide-master panels scaled to Apple's iPhone 6.5-inch portrait output.
 const FULL_WIDTH = 5280;
 const FULL_HEIGHT = 2868;
-const SPLIT_WIDTH = 1320;
+const OUTPUT_FULL_WIDTH = 4968;
+const OUTPUT_FULL_HEIGHT = 2688;
+const SPLIT_WIDTH = 1242;
 const NUM_SPLITS = 4;
 
 async function waitForServer(url, maxAttempts = 30) {
@@ -100,22 +102,24 @@ async function capture() {
 
     await browser.close();
 
-    // Split into 4 images using sharp
+    // Normalize the master into the Apple 6.5-inch portrait dimensions before
+    // splitting so every output is 1242 by 2688 px.
     console.log(`Splitting into ${NUM_SPLITS} screenshots...`);
 
     const screenshotsDir = generatedDir;
 
     for (let i = 0; i < NUM_SPLITS; i++) {
-      const outputFile = path.join(screenshotsDir, `iphone_17_pro_max_0${i + 1}.png`);
+      const outputFile = path.join(screenshotsDir, `iphone_65_0${i + 1}.png`);
       await sharp(fullImagePath)
+        .resize(OUTPUT_FULL_WIDTH, OUTPUT_FULL_HEIGHT)
         .extract({
           left: i * SPLIT_WIDTH,
           top: 0,
           width: SPLIT_WIDTH,
-          height: FULL_HEIGHT
+          height: OUTPUT_FULL_HEIGHT
         })
         .toFile(outputFile);
-      console.log(`Created iphone_17_pro_max_0${i + 1}.png`);
+      console.log(`Created iphone_65_0${i + 1}.png`);
     }
 
     console.log('Done! Screenshots saved to:', screenshotsDir);
