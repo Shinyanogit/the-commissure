@@ -1,6 +1,6 @@
 # App Store submission audit, 2026-09-20
 
-Status: submission blocked by factual and candidate-bound release gates.
+Status: submission blocked by factual and candidate-bound release gates. A signed IPA and App Store Connect record now exist, but no build has been uploaded.
 
 This audit used the local `app-store-review` checklist, the Fastlane contract,
 the Release archive, source inspection, and the release-control test suite. It
@@ -27,11 +27,12 @@ does not claim App Store Connect access or submission.
 
 ## Submission cannot proceed
 
-The archive is not signed. It reports version `0.1.0` build `1`, an empty
-signing identity, and no team. The local keychain currently exposes only one
-Apple Development identity. There is no Apple Distribution identity, app
-specific distribution provisioning profile, IPA, release-evidence JSON, or
-App Store Connect API key configuration for this project.
+A distribution-signed IPA was successfully exported after this initial source
+audit. It reports `1.0.0` build `1`, bundle identifier `app.thecommissure.ios`,
+Team `8WSQBQX6C5`, an Apple Distribution signature, and the app-specific
+`iOS Team Store Provisioning Profile: app.thecommissure.ios`. The IPA remains
+outside the repository and has not been uploaded. A retained release-evidence
+package and App Store Connect API key configuration are still absent.
 
 All four content provenance records have `medicalReview` set to
 `inheritedWebsiteSource` and `rightsReview` set to
@@ -92,8 +93,8 @@ approval remains open.
 4. Confirm the App Store legal answers, including age rating,
    regulated-medical-device status, export compliance, copyright, and review
    contact.
-5. Make Apple Distribution signing and an App Store Connect API key available
-   for this bundle identifier.
+5. Create or provide an App Store Connect API key for the Fastlane upload
+   workflow, or complete the remaining upload fields in the browser.
 
 After those inputs, the remaining candidate work is signing, physical-device
 validation, TestFlight, exact screenshots and metadata, release-evidence

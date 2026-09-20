@@ -5,7 +5,7 @@
 > exact-candidate release gates remain open.
 
 Status: local release controls implemented, release blocked
-Last audited: 2026-09-20 (source, unsigned Release archive, and Fastlane checkpoint; no signed candidate)
+Last audited: 2026-09-20 (source, signed IPA, App Store Connect record, and Fastlane checkpoint; no uploaded candidate)
 
 This file records observed repository state. It is not a release approval. The
 authoritative release gates remain in [RELEASE_SPEC.md](RELEASE_SPEC.md).
@@ -115,7 +115,7 @@ external TestFlight.
 | Medical review | All four provenance records use `inheritedWebsiteSource` | Owner-approved medical review per shipped revision |
 | Rights review | All four provenance records use `ownerConfirmationRequired` | Owner confirmation for models, text, images, fonts, icons, portraits, and screenshots |
 | Content signing | No production key configuration is stored in Git | Configure protected signing secret and pinned public key |
-| Signed IPA | A Development-signed arm64 archive succeeds under Team `8WSQBQX6C5` with the existing wildcard profile. No Apple Distribution identity, app-specific distribution profile, IPA, or provisioning evidence exists | Produce one signed IPA and package its exact evidence |
+| Signed IPA | A distribution-signed arm64 IPA was exported with the app-specific App Store profile. The artifact was inspected locally and intentionally left outside the repository. | Bind one retained candidate IPA to the release-evidence package before TestFlight. |
 | Version and icon | Project settings are `1.0.0` build `1`; the owner-requested Web favicon is configured as an opaque 1024 px AppIcon and compiles successfully | Verify the version and icon in the signed candidate |
 | Physical device | The current physical test attempt failed because the first attempt used the wrong team identifier and the second mixed an Xcode-managed profile with manual signing | Run the unchanged candidate on the required devices after signing is configured |
 | Floor device | No oldest-supported iOS 18 device trace is recorded | Pass the complete performance and resilience suite on that device |
@@ -210,3 +210,18 @@ internal and external TestFlight evidence, and a signed release-candidate scan.
 The latest local build separates one-finger orbit from two-finger pan and pinch
 recognition. Its exact candidate still needs visual acceptance on iPhone and
 iPad hardware. These records cannot be manufactured from local checks.
+
+## 2026-09-20 signed IPA checkpoint
+
+The App Store Connect iOS record for `The Commissure` now exists with bundle
+identifier `app.thecommissure.ios`, English (U.S.) as its primary locale, and
+SKU `thecommissure-ios`. It remains in Prepare for Submission and contains no
+uploaded screenshots, metadata, build, or review request.
+
+Fastlane 2.239.0 successfully archived and exported a Release IPA after the
+target received Team `8WSQBQX6C5` and the Fastlane-compatible export method
+was set to `app-store`. The inspected artifact had identifier
+`app.thecommissure.ios`, version `1.0.0` build `1`, an embedded
+`iOS Team Store Provisioning Profile: app.thecommissure.ios`, and an
+`Apple Distribution: Shinya Yamaguchi (8WSQBQX6C5)` signature. The only build
+warning is the existing unused `try?` result in `ContentDelivery.swift`.
