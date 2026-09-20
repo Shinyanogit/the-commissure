@@ -80,8 +80,8 @@ Keywords:
 
 ## Category and age rating draft
 
-- Primary category candidate: Medical
-- Secondary category candidate: Education
+- Primary category: Education
+- Secondary category: None
 - Medical or Treatment Information candidate answer: Frequent, because the
   entire app explains operative procedures rather than containing an isolated
   medical reference
@@ -115,8 +115,8 @@ Marketing URL, and Privacy Policy URL are now saved in App Store Connect.
 ## App Store Connect choices saved on 2026-09-20
 
 - Subtitle: `Cervical Procedure Atlas`
-- Primary category: Medical
-- Secondary category: Education
+- Primary category: Education
+- Secondary category: None
 - Age rating: 16+ in 173 countries or regions, with the expected regional
   variations. The questionnaire marks Medical or Treatment Information as
   Frequent and every unrelated feature or content type as absent.
@@ -149,7 +149,7 @@ labels, visible control names, and actual remote-content configuration.
 | Privacy Policy URL | Saved and verified at `https://the-commissure.vercel.app/privacy` |
 | Marketing URL | Saved as `https://the-commissure.vercel.app/` |
 | Copyright | Rights holder and exact wording unconfirmed |
-| Content rights | All four procedure rights records still require owner confirmation |
+| Content rights | Saved in App Store Connect as no third-party content. This remains a legal representation that must stay accurate for the shipped build. |
 | App Privacy | Source scan suggests no collected data or tracking; final signed-binary and network audit required |
 | Export compliance | `ITSAppUsesNonExemptEncryption` is `false` in the target Info.plist. A new signed IPA must carry this declaration before upload. |
 | Screenshots | Four iPhone and four iPad images uploaded; exact candidate visual acceptance remains open |
@@ -162,11 +162,10 @@ blocker once production verification succeeds.
 
 ## Pending attestations recorded from App Store Connect
 
-The Content Rights dialog asks whether the app contains, shows, or accesses
-third-party content. Its affirmative choice reads: “Yes, it contains, shows, or
-accesses third-party content, and I have the necessary rights.” The shipped
-models, explanatory text, artwork, font, icon, and store screenshots have not
-yet received the owner confirmation required to make that representation.
+App Store Connect currently records that the app does not contain, show, or
+access third-party content. This must continue to match the ownership and
+provenance of all shipped models, explanatory text, artwork, fonts, icons, and
+store screenshots.
 
 The target Info.plist now declares `ITSAppUsesNonExemptEncryption` as `false`.
 The source uses Apple CryptoKit only for SHA-256 integrity checks and
