@@ -150,3 +150,11 @@ The account holder published the App Privacy disclosure in App Store Connect on
 2026-09-20. The published product-page statement is Data Not Collected and
 links to the public privacy policy. This is a completed store field, not a
 substitute for candidate-bound binary and network evidence.
+
+## Medical-content approval
+
+The owner confirmed the accuracy of the current procedure names, steps,
+explanatory text, and educational notice for ACDF, ACCF, PCDF, and PCF. The
+four provenance records now declare the required owner-approved medical-review
+state and the catalog hashes were regenerated. This closes the content status
+gate but requires a fresh candidate IPA and candidate-bound evidence.

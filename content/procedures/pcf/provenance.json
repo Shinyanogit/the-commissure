@@ -31,8 +31,8 @@
     "reviewedAt": "2026-08-02"
   },
   "medicalReview": {
-    "status": "inheritedWebsiteSource",
-    "releaseGate": true
+    "status": "ownerApproved",
+    "releaseGate": false
   },
   "rightsReview": {
     "status": "ownerApproved",

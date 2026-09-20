@@ -322,3 +322,12 @@ The App Privacy record is published in App Store Connect. It identifies the
 public privacy policy URL and states that the app does not collect data. The
 release still requires candidate-bound privacy review, medical approval,
 device evidence, TestFlight evidence, and App Store submission.
+
+## 2026-09-20 medical-content approval
+
+The owner confirmed that the names, steps, explanatory text, and educational
+notice are accurate for ACDF, ACCF, PCDF, and PCF in the exact current content
+revisions. Each provenance record now declares `medicalReview.ownerApproved`
+with its release gate closed. The catalog provenance hashes were regenerated,
+and `node tooling/content/validate-content.mjs` passed for all four procedures
+and 26 steps. A new signed IPA is required because this catalog changed.

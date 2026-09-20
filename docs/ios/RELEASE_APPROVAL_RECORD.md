@@ -1,7 +1,6 @@
 # Release approval record
 
-Status: medical factual review pending. Rights approval is recorded from the
-owner direction on 2026-09-20.
+Status: owner approvals recorded for the first public release on 2026-09-20.
 
 This is the release-gate dossier for the first public iOS build. It identifies
 the exact content and source evidence that require owner review before
@@ -22,9 +21,9 @@ procedure under `content/procedures/`.
 | PCDF | `d8d57774af3e59cdbfccf2636f6b4ab3f8934e0c48c542086684935cc3eedff9` |
 | PCF | `f292255dafe7646ce48014f71555f05587ea0f0791a2dc9e4ff75d2fbd0ae403` |
 
-Required attestation: a medically qualified owner has reviewed the procedure
-names, steps, explanatory text, and educational disclaimer for these exact
-content revisions and approves the first public release as educational content.
+Owner attestation: on 2026-09-20, the owner confirmed that the procedure names,
+steps, explanatory text, and educational disclaimer for these exact content
+revisions are accurate for the first public release as educational content.
 
 ## Third-party model trace
 
@@ -51,13 +50,8 @@ or unlabelled components.
 
 ## Approval transition
 
-When the remaining medical attestation is available:
-
-1. Update each `content/procedures/*/provenance.json` with the factual medical
-   approval.
-2. Run the publication and release-control tests.
-3. Regenerate the release candidate and bind the approval to its commit and
-   artifact digest in `RELEASE_READINESS.md`.
-
-The rights transition is based on the owner direction recorded on 2026-09-20.
-The remaining medical status transition requires a factual content review.
+The owner supplied the factual medical approval on 2026-09-20. All four
+provenance records now use `medicalReview.status = ownerApproved` with
+`releaseGate = false`. The content catalog hashes were regenerated and the
+content validator passed. A new signed candidate must be generated and bound to
+this approved catalog before TestFlight.
