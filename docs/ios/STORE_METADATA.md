@@ -159,3 +159,24 @@ labels, visible control names, and actual remote-content configuration.
 The Fastlane metadata tree remains withheld until the factual rights and legal
 fields are complete. The published URLs and contact address are no longer a
 blocker once production verification succeeds.
+
+## Pending attestations recorded from App Store Connect
+
+The Content Rights dialog asks whether the app contains, shows, or accesses
+third-party content. Its affirmative choice reads: “Yes, it contains, shows, or
+accesses third-party content, and I have the necessary rights.” The shipped
+models, explanatory text, artwork, font, icon, and store screenshots have not
+yet received the owner confirmation required to make that representation.
+
+The App Encryption Documentation panel requires an `App Uses Non-Exempt
+Encryption` Boolean in the app Info.plist or export documentation before the
+build can be cleared for review. The current source uses Apple CryptoKit for
+SHA-256 integrity checks and Curve25519 signature verification and uses system
+URLSession transport. The classification is an export-compliance decision, so
+the project intentionally does not set the Boolean until the account holder
+confirms the answer.
+
+App Privacy remains at the final App Store Connect publication dialog. Its
+Publish button represents that the account holder agrees the disclosures are
+accurate, comply with the App Store Review Guidelines and applicable law, and
+will be updated if data practices change.
