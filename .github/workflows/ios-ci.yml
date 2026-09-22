@@ -35,6 +35,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Install content validation dependencies
+        run: npm ci --prefix tooling/content
       - name: Validate content and fail-closed delivery gates
         run: |
           node tooling/content/validate-content.mjs
