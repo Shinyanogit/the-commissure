@@ -385,3 +385,8 @@ content dependencies. Migration preserves reviews only when procedure, scene,
 both localizations, and all non-review provenance fields are unchanged; changes
 reset reviews to their unapproved defaults. Regression tests cover unchanged
 content, changed content, changed asset provenance, and absent prior reviews.
+
+Hosted CI also installed Blender 5.2.1 against an exporter requiring 5.2.0.
+It now selects Xcode 26.2 and downloads the official Blender 5.2.0 arm64 image
+with its published SHA-256 verification. The content tooling lockfile updates
+fast-uri to 3.1.8; npm audit reports zero vulnerabilities.

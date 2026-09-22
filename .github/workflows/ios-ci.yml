@@ -30,8 +30,10 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Report Xcode
-        run: xcodebuild -version
+      - name: Select pinned Xcode
+        run: |
+          sudo xcode-select -s /Applications/Xcode_26.2.app/Contents/Developer
+          xcodebuild -version
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -44,9 +46,13 @@ jobs:
           npm test --prefix tooling/content-publish
           npm test --prefix tooling/release
       - name: Install native asset converter
-        env:
-          HOMEBREW_NO_AUTO_UPDATE: "1"
-        run: brew install --cask blender
+        run: |
+          curl -fsSL --retry 3 https://download.blender.org/release/Blender5.2/blender-5.2.0-macos-arm64.dmg -o "$RUNNER_TEMP/blender.dmg"
+          echo "ed4d8390166dec5ea0a2813a03db6221f206ce016442be7f59f41d760972568a  $RUNNER_TEMP/blender.dmg" | shasum -a 256 -c -
+          hdiutil attach "$RUNNER_TEMP/blender.dmg" -nobrowse -mountpoint "$RUNNER_TEMP/blender-mount"
+          ditto "$RUNNER_TEMP/blender-mount/Blender.app" "$RUNNER_TEMP/Blender.app"
+          hdiutil detach "$RUNNER_TEMP/blender-mount"
+          echo "$RUNNER_TEMP/Blender.app/Contents/MacOS" >> "$GITHUB_PATH"
       - name: Build verified native assets
         run: |
           tooling/native-assets/build-all.sh
