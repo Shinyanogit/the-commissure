@@ -139,7 +139,8 @@ final class RealitySceneAdapter {
     value.elapsed += delta
     let fraction = Float(min(value.elapsed / 1.0, 1))
     // Match the Web scene tween: one second with GSAP power2.inOut easing.
-    let eased = fraction < 0.5
+    let eased =
+      fraction < 0.5
       ? 4 * fraction * fraction * fraction
       : 1 - pow(-2 * fraction + 2, 3) / 2
     if fraction >= 1 {
