@@ -1,7 +1,7 @@
 # iOS App Store Roadmap
 
-Status: Phase 5B visual refinement next; Phase 5A merged as `fece5e8`
-Repository baseline: `main` through PR #56 (`fece5e8`); each phase uses a dedicated branch.
+Status: App Review Guideline 4.2.2 remediation active (2026-09-22). The first gate is to establish exactly what shipped in App Store build 1.0 (1) before deciding whether to request reconsideration or rebuild.
+Repository baseline: `main`; the historical phase record below is retained. Each remediation phase uses a dedicated branch/PR.
 This is an engineering order, not a calendar estimate.
 
 ## 1. Objective and priority
@@ -63,6 +63,357 @@ Every phase closes in this order:
 
 Shinya alone operates compact. When a compact checkpoint is chosen, documentation
 and the phase commit must already be durable before Codex asks for compact.
+
+## 3A. Priority override — App Store Guideline 4.2.2 remediation (active 2026-09-22)
+
+Apple rejected App Store version 1.0 (1) under Guideline 4.2.2 (Minimum
+Functionality), stating that the reviewed app did not sufficiently differ from
+a Web browsing experience. This track temporarily overrides the old
+"Phase 5B visual refinement next" sequence. The release blocker is no longer
+visual polish; it is proving and shipping meaningful native 3D functionality
+in the production target.
+
+The current repository documents a stronger intended 1.0 than the production
+wiring visibly proves: the release specification describes interactive
+RealityKit anatomy, offline content, local progress, haptics, and accessibility,
+while the current production path still instantiates
+`AnatomyFieldPlaceholder()`, leaves `sceneReadiness` at `.preparing`, and
+keeps the proven RealityKit implementation under `ios/Spikes/NativeAssetSpike`.
+The remediation therefore starts with a provenance audit rather than assuming
+that the reviewed binary and `main` were identical.
+
+### R0 — establish the truth about submitted build 1.0 (1)
+
+Goal: determine what the reviewer actually received before changing code or
+arguing with App Review.
+
+Work, in order:
+
+1. Record the immutable review facts: marketing version/build, upload/submission
+   date, review date/device, and the exact App Store Connect build selected for
+   review. Do not commit submission IDs, account identifiers, or private Apple
+   metadata to this public repository.
+2. Install the exact submitted/TestFlight build on a physical iPhone or iPad if
+   it remains available. Record a short screen capture of Library -> procedure
+   -> scene -> step navigation with Wi-Fi/cellular enabled, then repeat the
+   relevant procedure launch in Airplane Mode.
+3. Answer these binary questions from the submitted build itself:
+   - Does the Procedure Theater display real interactive anatomy or the
+     `AnatomyFieldPlaceholder` shell?
+   - Can the user orbit and pinch the actual model?
+   - Do previous/next/direct-step actions visibly change anatomical state?
+   - Does at least one complete procedure reopen and remain useful offline?
+   - Is progress restored after leaving/reopening a procedure?
+4. Locate the local Xcode Organizer archive or CI artifact used for the upload,
+   when available, and inspect the packaged `.app` rather than source intent:
+   - final `CFBundleShortVersionString` and `CFBundleVersion`;
+   - packaged USDZ/Reality assets and their byte sizes;
+   - bundled `content/` procedure files;
+   - app executable/resource inventory;
+   - archive creation time and any recorded source/CI revision.
+5. Build current `main` locally with the same Release configuration and compare
+   the user-visible procedure path and packaged resource inventory against the
+   submitted archive/TestFlight build.
+6. Save the result as a short evidence note in the PR or release log:
+   `submitted-build == current-production-shell`,
+   `submitted-build contains production RealityKit integration`, or
+   `provenance unresolved`.
+
+Decision gate:
+
+- **If the submitted build already contains real production RealityKit 3D and
+  the reviewer path can reproduce it:** pause code remediation, prepare a
+  concise App Review reply requesting reconsideration, provide exact reviewer
+  steps, and only then decide whether an App Review Board appeal is warranted.
+- **If the submitted build matches the current placeholder/shell behavior:**
+  do not lead with a formal appeal. Proceed directly through R1-R6 and resubmit
+  a materially stronger build.
+- **If provenance cannot be proven:** fail closed and treat the submitted build
+  as insufficient. Proceed through R1-R6 rather than asserting functionality
+  that cannot be demonstrated from the reviewed binary.
+
+R0 exit criteria:
+
+- One of the three provenance outcomes above is explicitly recorded.
+- A physical-device capture exists for the submitted/TestFlight build when the
+  build remains installable.
+- The team knows whether a reviewer can see real 3D anatomy without relying on
+  design docs, spike targets, or source-code claims.
+- No implementation work starts on the assumption that docs equal shipped
+  behavior.
+
+### R1 — freeze the 4.2.2 compliance target
+
+Goal: define the smallest product that is clearly an iOS learning tool rather
+than a repackaged Web experience.
+
+Required native-value contract:
+
+- The production App target uses SwiftUI + RealityKit; no `WKWebView` renders
+  the educational experience.
+- Real anatomical models are rendered in the Procedure Theater.
+- Orbit and pinch manipulate the model directly.
+- Procedure navigation changes the actual anatomical state, not only prose.
+- Forward, reverse, and direct step selection converge to the same canonical
+  scene state.
+- At least one complete procedure is available from a fresh install without a
+  network request; the release goal remains all four procedures.
+- The app remains educationally useful in Airplane Mode after install.
+- Leaving and reopening a procedure restores local step progress.
+- English/Japanese switching does not reload the model or reset the step.
+- Every gesture has a visible/accessibility-equivalent action.
+- The reviewer can discover the above within roughly one minute without an
+  account, hidden debug gesture, or external documentation.
+
+Explicit non-goals for this remediation:
+
+- Do not add quizzes, accounts, push notifications, AR, social features, or a
+  backend merely to appear more "app-like".
+- Do not change the Web product unless shared content/schema work requires it.
+- Do not claim that faster loading alone satisfies Guideline 4.2.2. Local 3D
+  assets and caching are supporting evidence for offline/responsive use, not
+  the sole native-value argument.
+- Do not ship placeholder/coming-soon primary procedure cards in the App Store
+  build.
+
+R1 exit criteria:
+
+- The checklist above is represented by executable tests or manual release
+  gates.
+- Reviewer Notes can point to each native behavior by an exact tap/gesture path.
+- The product scope is frozen before production RealityKit integration begins.
+
+### R2 — promote the proven RealityKit spike into the production architecture
+
+Goal: replace the production scene placeholder with a real scene implementation
+without creating a second competing state model.
+
+Codex work:
+
+1. Audit `ios/Spikes/NativeAssetSpike` and identify reusable concepts versus
+   disposable spike-only code. Preserve the spike's proven loading, semantic
+   binding, canonical-state, orbit, pinch, and performance lessons; do not
+   import the spike target wholesale.
+2. Add a production `RealityView` scene owned under `ios/App/Scene/**`.
+   It must load the selected procedure's packaged native model, bind exact
+   semantic entities, and report preparing/ready/transitioning/failed state to
+   presentation.
+3. Connect `ProcedureSessionController` / canonical `SceneState` to
+   `RealitySceneAdapter`. The production app must have one source of truth for
+   the selected step and resolved anatomical state.
+4. Wire the scene into `FoundationView -> ProcedureTheaterView`; remove the
+   default placeholder from the shipping path. Keeping a preview-only
+   placeholder is acceptable only when it cannot be reached in Release.
+5. Promote the required USDZ/native assets from the spike/tooling pipeline into
+   the production resource pipeline with deterministic semantic IDs and
+   provenance. Verify final archive contents rather than assuming Xcode copied
+   them.
+6. Implement scene lifecycle ownership: one live heavy procedure model at a
+   time, deterministic release on exit, no duplicate parsing during rapid
+   navigation, and latest-target behavior while loading.
+7. Keep file/hash/network work off the main actor; only RealityKit presentation
+   remains main-actor-owned.
+
+R2 tests:
+
+- A production-target test proves a real model is loaded and expected entity
+  paths bind uniquely.
+- Sequential and direct navigation produce equal resolved states.
+- `1 -> 6 -> 3 -> 7 -> 1` returns to the exact clean step-1 state for ACDF.
+- Fifty forward/back cycles show zero transform/visibility/opacity drift.
+- Input issued before scene readiness resolves to the latest valid target.
+- The Release build contains the expected native model assets and no production
+  code path instantiates the placeholder.
+
+R2 exit criteria:
+
+- ACDF in the real App target renders interactive anatomy on a physical device.
+- Orbit, pinch, previous, next, and direct step selection all operate on the
+  production model.
+- Scene readiness becomes `.ready` from actual loader state.
+- The production app can no longer be truthfully described as a text/content
+  shell with a placeholder scene.
+
+### R3 — complete the ACDF native vertical slice
+
+Goal: make one procedure end-to-end complete before expanding to all four.
+
+Work:
+
+- Fresh launch -> Library -> ACDF -> real 3D scene without a network dependency.
+- Seven canonical reversible ACDF states.
+- Explanation text and 3D state stay synchronized during rapid/interrupted input.
+- Orbit, pinch, reset, previous/next, and direct selection share the established
+  intent/state pipeline.
+- Save selected step locally when leaving ACDF and restore it on reopen.
+- Runtime language switch updates UI/prose in place without scene reload or
+  progress reset.
+- Add subtle native haptic acknowledgement for committed step/reset/error events
+  if the implementation remains semantically useful with haptics disabled.
+- VoiceOver/Dynamic Type/Reduce Motion retain complete navigation and teaching
+  access.
+- Airplane Mode relaunch remains fully useful.
+
+R3 physical-device evidence:
+
+- screen recording of step 1 -> later step -> reverse -> direct jump;
+- orbit and pinch on real anatomy;
+- quit/reopen with restored step;
+- English <-> Japanese switch without model reload;
+- Airplane Mode launch and full ACDF walkthrough;
+- memory/FPS/input latency sanity against the established hard gates.
+
+R3 exit criteria:
+
+- ACDF alone satisfies the frozen R1 native-value contract.
+- No fixture-backed transfer/progress/scene state is presented as production
+  behavior.
+- No blocker/high issue remains in an independent code + visual QC pass.
+
+### R4 — extend the same production path to ACCF, PCDF, and PCF
+
+Goal: ship one coherent native product, not one polished procedure plus three
+content shells.
+
+Work:
+
+- Export/package production native assets for ACCF, PCDF, and PCF using the same
+  semantic-ID/provenance rules.
+- Bind all procedure parts and all 26 canonical steps through the same
+  `ProcedureSession -> SceneState -> RealitySceneAdapter` path.
+- Reuse the same gestures, progress persistence, locale behavior, accessibility,
+  and lifecycle ownership; procedure-specific branching belongs in validated
+  data, not SwiftUI.
+- Resolve known source inconsistencies during conversion rather than adding
+  renderer-specific hacks.
+- Remove any App Store-visible procedure card that cannot pass the complete
+  native path. The preferred 1.0 remediation outcome is all four procedures.
+
+R4 exit criteria:
+
+- All four procedures render real interactive anatomy in the production target.
+- All 26 steps pass direct/sequential equality and entity-binding validation.
+- Every App Store-visible card opens a complete experience.
+- PCDF remains the worst-case memory/FPS/thermal gate and passes on required
+  physical hardware.
+
+### R5 — make the Web-to-native difference measurable and reviewer-visible
+
+Goal: turn the legitimate loading/caching advantage into demonstrable product
+behavior rather than a policy argument.
+
+Work:
+
+- Ensure the release bundles the agreed offline baseline and does not await a
+  catalog request before first usefulness.
+- Verify repeated procedure opens reuse packaged/verified local assets rather
+  than re-downloading heavy 3D resources.
+- Persist local step progress and user language preference.
+- Expose calm, accurate offline/error states; no generic indefinite spinner.
+- Keep adaptive iPhone/iPad portrait/landscape layouts and native
+  accessibility controls.
+- Measure cold launch/procedure-open/first-frame behavior on physical devices;
+  record numbers in release evidence, not marketing claims.
+- Verify that the app remains useful with networking disabled before launch,
+  not merely after a successful online session.
+
+R5 exit criteria:
+
+- Airplane Mode is a first-class supported test case.
+- Returning to a procedure avoids a repeat network fetch of bundled/cached
+  models.
+- Reviewer Notes can accurately state why local native assets matter:
+  immediate/repeatable offline 3D learning, not simply "the app is faster than
+  Safari".
+
+### R6 — App Review package, response, and resubmission
+
+Goal: make the native value impossible to miss during the next review.
+
+Before upload:
+
+1. Run all functional, content, accessibility, physical-device, archive, and
+   App Store review gates on the exact signed candidate.
+2. Inspect the final `.xcarchive` / exported app for:
+   - correct 1.0.x marketing/build version;
+   - bundled native 3D assets;
+   - expected bilingual content;
+   - no placeholder scene in the production path;
+   - no accidental `WKWebView` dependency used for the core experience;
+   - privacy/support metadata consistent with the binary.
+3. Capture evidence from the exact candidate:
+   - Library -> ACDF -> real 3D;
+   - orbit/pinch;
+   - forward/reverse/direct step changes with visible anatomy change;
+   - local progress resume;
+   - in-place language switch;
+   - Airplane Mode reopen/use.
+4. Update screenshots/App Preview so at least one asset clearly shows the real
+   interactive 3D Procedure Theater rather than a content/library shell.
+
+Reviewer Notes must state, concretely:
+
+- the app is an independent SwiftUI/RealityKit implementation and does not embed
+  the website;
+- no login is required;
+- exact taps to open a bundled procedure;
+- exact gestures/buttons to orbit, zoom, reverse, and directly select steps;
+- that anatomical state changes with the selected procedure step;
+- that bundled content works in Airplane Mode;
+- that local progress resumes on reopen;
+- where the language/accessibility controls are;
+- that remote content, if enabled, is data/media only and cannot execute code.
+
+Communication rule:
+
+- If R0 proved that the rejected build already contained all of this, use the
+  evidence first in a respectful reconsideration request and escalate to formal
+  appeal only if necessary.
+- If R0 proved that the rejected build was the placeholder shell, reply briefly
+  that the app has been materially revised, submit the new build, and focus the
+  review conversation on the new native functionality rather than arguing that
+  the old build should have passed.
+- Never tell App Review that functionality existed in the rejected binary unless
+  R0 demonstrated it on that exact build.
+
+R6 exit criteria:
+
+- The exact uploaded build is the exact tested build.
+- Reviewer Notes contain a reproducible <1-minute path to the native 3D value.
+- App Store Connect screenshots/preview match shipped behavior.
+- App review scan has zero blocker/high finding.
+- The resubmitted build contains no primary placeholder or incomplete procedure.
+
+### Codex execution contract for this remediation
+
+After Shinya initiates Codex, Codex should continue autonomously through the
+next unblocked remediation gate and interrupt only for the existing user-touch
+gates. Engineering work should be split into reviewable branches/PRs with
+durable evidence.
+
+Recommended PR sequence:
+
+1. `audit/app-store-1.0-build-provenance` — R0 evidence only; no speculative
+   feature changes.
+2. `feat/ios-production-realitykit-acdf` — R1/R2 production RealityKit wiring
+   and ACDF integration.
+3. `feat/ios-acdf-native-vertical-slice` — R3 persistence/offline/accessibility
+   completion.
+4. `feat/ios-all-procedures-native` — R4 remaining procedure integration and
+   performance hardening.
+5. `release/ios-app-review-4.2.2` — R5/R6 final release evidence, metadata,
+   screenshots, reviewer notes, signed candidate validation.
+
+For every PR, Codex must:
+
+- state the App Review risk being closed;
+- list source-of-truth files changed;
+- run relevant unit/UI/content tests and archive/resource checks;
+- include physical-device evidence whenever the exit criterion requires it;
+- run an independent machine QC pass after the diff is frozen;
+- update ROADMAP/RELEASE_SPEC/architecture docs when behavior actually changes;
+- avoid unrelated Web redesign or feature inflation;
+- stop rather than silently weakening a fail-closed release gate.
 
 ## 4. Phase 0 — concept and specification freeze (complete)
 
@@ -289,6 +640,11 @@ Exit evidence:
 
 ## 9. Phase 5 — visual system and native shell (Claude Design → Opus 5)
 
+2026-09-22 priority override: Phase 5B visual-only refinement is paused until the
+App Review remediation track above has connected real RealityKit anatomy to the
+production target. Visual polish may proceed only when it directly supports the
+R1-R6 exit criteria.
+
 The visual handoff is frozen in [`CLAUDE_DESIGN_BRIEF.md`](CLAUDE_DESIGN_BRIEF.md).
 Claude Design project: `The Commissure — Sterile Field iOS` (`dfa74f8d-774a-4b68-b35e-ee6ba5700e3d`).
 Synced brief path: `brief/CLAUDE_DESIGN_BRIEF.md`. The project stores static
@@ -356,6 +712,9 @@ pending the next editorial/design pass. Phase 5B will refine visual hierarchy
 and copy against screenshots before Phase 6 RealityKit integration.
 
 ## 10. Phase 6 — ACDF vertical slice
+
+2026-09-22 status: this historical phase is now executed through remediation
+R2-R3 above; those stricter App Review gates control ordering and completion.
 
 Integrate Library → availability/download → ACDF theater → seven reversible
 steps → locale change → progress resume → offline cached reopen.
