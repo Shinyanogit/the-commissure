@@ -1,3 +1,5 @@
+import { isDeepStrictEqual } from "node:util";
+import { preserveReviews } from "./preserve-reviews.mjs";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
@@ -174,7 +176,7 @@ for (const procedureId of Object.keys(metadata)) {
     assetSha256: sha256(assetBytes),
     entities: sourceEntities
   });
-  const provenance = {
+  let provenance = {
     schemaVersion: 1,
     id: `${procedureId}_provenance`,
     procedureId,
@@ -209,6 +211,22 @@ for (const procedureId of Object.keys(metadata)) {
     license: "Repository-controlled educational asset",
     authors: ["The Commissure contributors"]
   };
+
+  const generatedContent = [
+    [`content/procedures/${procedureId}/procedure.json`, procedure],
+    [`content/ios-scenes/${procedureId}.json`, scenes[procedureId]],
+    [`content/procedures/${procedureId}/en.json`, english],
+    [`content/procedures/${procedureId}/ja.json`, japaneseLocale]
+  ];
+  async function readExisting(path) {
+    try { return JSON.parse(await readFile(resolve(repositoryRoot, path), "utf8")); }
+    catch (error) { if (error.code === "ENOENT") return null; throw error; }
+  }
+  const previous = await readExisting(`content/procedures/${procedureId}/provenance.json`);
+  const contentUnchanged = (await Promise.all(generatedContent.map(async ([path, value]) =>
+    isDeepStrictEqual(await readExisting(path), value)
+  ))).every(Boolean);
+  provenance = preserveReviews(provenance, previous, contentUnchanged);
 
   const files = [
     ["procedure", `content/procedures/${procedureId}/procedure.json`, procedure],

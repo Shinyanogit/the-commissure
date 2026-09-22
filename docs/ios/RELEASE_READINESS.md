@@ -377,3 +377,11 @@ exact-build physical-device evidence remain open. The roadmap now distinguishes
 the submitted iOS branch from the older main shell and treats existing native
 functionality as verification work, not an unconditional rewrite. September 20
 review status above is historical, not a current approval claim.
+
+The integration PR exposed two clean-checkout CI defects: iOS CI omitted the
+content validator dependency installation, and migration regenerated previously
+approved provenance with unapproved defaults. CI now installs the pinned
+content dependencies. Migration preserves reviews only when procedure, scene,
+both localizations, and all non-review provenance fields are unchanged; changes
+reset reviews to their unapproved defaults. Regression tests cover unchanged
+content, changed content, changed asset provenance, and absent prior reviews.
