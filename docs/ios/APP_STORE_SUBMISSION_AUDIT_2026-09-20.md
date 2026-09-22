@@ -1,6 +1,6 @@
 # App Store submission audit, 2026-09-20
 
-Status: submitted to App Review. The historical local-gate findings below remain an audit trail; the final candidate was uploaded, Apple processing completed, and the version was submitted through App Store Connect.
+Status: App Review rejected version 1.0 (1) under Guideline 4.2.2 on 2026-09-21; reconsideration of the same submitted build is the current next action. The historical local-gate findings below remain an audit trail.
 
 This audit used the local `app-store-review` checklist, the Fastlane contract,
 the Release archive, source inspection, and the release-control test suite. The final App Store Connect submission is recorded at the end of this document.
@@ -182,3 +182,29 @@ current App Store Connect status is `Waiting for Review`.
 
 No external TestFlight tester or group was selected. App Store Connect is now
 the authoritative record for review progress.
+
+
+## 2026-09-22 Guideline 4.2.2 rejection and response strategy
+
+App Review rejected version 1.0 (1) under Guideline 4.2.2 (Minimum
+Functionality), characterizing the app as insufficiently different from a Web
+browsing experience.
+
+That characterization does not match the submitted product behavior recorded by
+the owner and represented by the submitted release source. The same reviewed
+build provides a native SwiftUI/RealityKit procedure theater with real 3D
+anatomy, direct orbit/zoom manipulation, reversible and direct procedural
+navigation with visible anatomical state changes, local progress restoration,
+English/Japanese switching, and bundled offline use.
+
+The immediate response is therefore **reconsideration of the same build**. No
+replacement binary or speculative feature work is planned before App Review
+re-checks the submitted app or identifies a specific functionality gap. The
+reply should provide a short reproduction path into ACDF and ask App Review to
+state the concrete deficiency if it maintains the 4.2.2 finding.
+
+A new screen recording is not required for the initial reconsideration request.
+It may be produced later if App Review specifically requests supporting evidence
+or if a formal App Review Board appeal becomes necessary. Private review
+correspondence and account-specific metadata remain in App Store Connect rather
+than this public repository.

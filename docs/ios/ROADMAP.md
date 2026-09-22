@@ -1,6 +1,6 @@
 # iOS App Store Roadmap
 
-Status: App Review 4.2.2 evidence and response preparation (2026-09-22).
+Status: App Review 4.2.2 reconsideration first (2026-09-22).
 The submitted release was built from `codex/ios-functional-completion`; the
 older `main` production shell is not the submitted source baseline. Native
 UI direction follows `UI_REDESIGN_2026-09-19.md`. Historical phases below
@@ -89,21 +89,28 @@ PR #84's description of a shipping `AnatomyFieldPlaceholder` with permanently
 preparing readiness describes the older main tree, not this candidate source.
 
 Evidence limits: source/reflog records establish the build context; they do not
-prove every interaction on Apple's installed binary. The retained IPA path and
-hash are recorded, but artifact availability must be checked before claiming a
-new binary inspection. No embedded Git revision has been verified. Record the
-exact TestFlight build and capture its real-device behavior when available.
+independently replay Apple's installed binary. The retained IPA path and hash
+are recorded, but artifact availability must be checked before claiming a new
+binary inspection. No embedded Git revision has been verified.
 
-Remaining verification:
+The owner confirms that the submitted 1.0 (1) build exposes the intended native
+learning path in ordinary use: real RealityKit anatomy, direct model
+manipulation, reversible/direct procedural navigation with visible anatomical
+state changes, local progress restoration, bilingual switching, and bundled
+offline use. Treat this as the product owner's observation of the submitted
+build, distinct from an independently retained device-evidence package.
 
-1. Read the actual rejection and confirm the selected build and review device.
-2. Inspect the retained submitted archive/IPA if available, including executable,
-   native model assets, content, versions, and resource hashes.
-3. On the same TestFlight build, capture Library to procedure, orbit, pinch,
-   forward/reverse/direct steps, progress restoration, and language switching.
-4. Repeat procedure launch and navigation offline from a fresh installation.
-5. Record source provenance separately from observed device behavior. Missing
-   evidence remains unknown; it is not proof that a placeholder was shipped.
+Remaining verification is intentionally lightweight:
+
+1. Preserve the actual App Review rejection and selected build in App Store
+   Connect; do not duplicate private review metadata in this public repository.
+2. Inspect the retained submitted archive/IPA only if it is readily available
+   or if Apple disputes the implementation details.
+3. A new screen recording is optional evidence, not a prerequisite for the first
+   reconsideration request. Produce one only if App Review asks for it or if a
+   later formal appeal would materially benefit from it.
+4. Do not block the response on redundant re-testing of functionality that is
+   already plainly present in the submitted build.
 
 ### R1. Preserve the native-value contract
 
@@ -142,33 +149,47 @@ that locale changes preserve the step/model. Inspect adaptive iPhone/iPad
 layouts and accessibility controls. Record measurements as evidence rather
 than unsupported marketing claims.
 
-### R6. Choose reconsideration or a corrected build from evidence
+### R6. Reconsideration first; change code only after a concrete App Review need
 
-If the exact reviewed build demonstrates the intended interactive experience,
-prepare a concise reconsideration request with tap/gesture instructions and
-an accurate device recording. Native frameworks alone do not establish
-Guideline 4.2.2 compliance; explain the useful learning interactions.
+The first response to the 4.2.2 rejection is a reconsideration request for the
+same submitted build, not a new binary. State plainly that the reviewed app is
+an independent SwiftUI/RealityKit implementation rather than a Web wrapper,
+link collection, or Internet content aggregator, then give a short reviewer
+path such as Library -> ACDF -> manipulate the model -> advance/reverse/directly
+select steps.
 
-If a reproducible defect or discoverability problem prevents that experience,
-fix it, verify the changed behavior, and submit a new build with matching media
-and reviewer notes. If evidence is unavailable, resolve that gap or validate a
-new candidate; do not assert either a working or placeholder reviewed binary.
+The response should identify the existing user-visible functionality:
+real local 3D anatomy, orbit/zoom, step-specific anatomical state changes,
+reverse/direct navigation, local progress restoration, English/Japanese
+switching, and bundled offline use. Ask App Review to re-review the submitted
+build. If the 4.2.2 finding is maintained, ask which specific aspect of the
+current functionality is considered insufficient so that the team can address
+that point directly.
 
-Reviewer notes should identify the bundled procedure, orbit/zoom controls,
-visible anatomy changes across steps, reverse/direct navigation, offline use,
-progress restoration, and language/accessibility controls. Only claim behavior
-observed in the candidate. Keep correspondence and private review metadata out
-of new public documentation. Sending Apple correspondence requires the owner's
-explicit instruction.
+Do not make a new screen recording a prerequisite for this first response.
+Recording or additional artifact inspection is optional supporting evidence if
+Apple requests it or if later escalation would benefit from it.
+
+Do not preemptively add features, redesign the app, or submit a replacement
+build merely to answer the current rejection. If App Review identifies a
+specific reproducible defect or concrete minimum-functionality gap, fix that
+demonstrated issue and validate a new candidate. If App Review instead confirms
+that it reviewed the interactive functionality and still maintains the finding,
+then evaluate a formal App Review Board appeal using the clarified rationale.
+
+Keep correspondence and private review metadata out of new public
+documentation. Sending Apple correspondence requires the owner's explicit
+instruction.
 
 ### Execution and completion
 
-Integrate the release branch before assessing missing production functionality.
-Use focused PRs for evidence and any demonstrated repairs. Update the relevant
-architecture/specification only when behavior changes. Reuse applicable test
-evidence and run checks for new changes; do not repeat an entire release test
-cycle for a documentation correction. Record open device/evidence gaps honestly.
-An integration merge does not mean Apple approved the app or release gates passed.
+The release branch is already integrated into main. Hold implementation changes
+while the first reconsideration request is pending. Use focused PRs only for
+demonstrated repairs or newly required evidence after App Review responds.
+Update architecture/specification only when behavior changes. Reuse applicable
+test evidence and do not repeat an entire release cycle merely to support a
+documentation correction. An integration merge does not mean Apple approved
+the app or release gates passed.
 
 ## 4. Phase 0 — concept and specification freeze (complete)
 
