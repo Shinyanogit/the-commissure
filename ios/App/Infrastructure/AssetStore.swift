@@ -19,7 +19,7 @@ actor AssetStore {
   private let safetyReserve: Int64
   private var inFlight: [PackKey: Task<InstalledPack, Error>] = [:]
   private var activePackKey: PackKey?
-  private var slotWaiters: [(key: PackKey, continuation: CheckedContinuation<Void, Never>)] = []
+  private var slotWaiters: [SlotWaiter] = []
 
   init(
     rootURL: URL,
@@ -55,6 +55,7 @@ actor AssetStore {
 
   func cancel(_ key: PackKey) {
     inFlight[key]?.cancel()
+    cancelSlotWaiters(for: key)
   }
 
   func cachedPack(for pack: ManifestPack) -> InstalledPack? {
@@ -103,7 +104,7 @@ actor AssetStore {
   }
 
   private func fetchAndInstallSerially(_ pack: ManifestPack) async throws -> InstalledPack {
-    await acquirePackSlot(for: pack.key)
+    try await acquirePackSlot(for: pack.key)
     defer { releasePackSlot() }
     try Task.checkCancellation()
     if let cached = cachedPack(for: pack) { return cached }
@@ -167,7 +168,12 @@ actor AssetStore {
         withIntermediateDirectories: true
       )
       if fileManager.fileExists(atPath: final.path) {
-        try fileManager.removeItem(at: staging)
+        _ = try fileManager.replaceItemAt(
+          final,
+          withItemAt: staging,
+          backupItemName: nil,
+          options: []
+        )
       } else {
         try fileManager.moveItem(at: staging, to: final)
       }
@@ -185,14 +191,21 @@ actor AssetStore {
     }
   }
 
-  private func acquirePackSlot(for key: PackKey) async {
+  private func acquirePackSlot(for key: PackKey) async throws {
+    try Task.checkCancellation()
     guard activePackKey != nil else {
       activePackKey = key
       return
     }
-    await withCheckedContinuation { continuation in
-      slotWaiters.append((key, continuation))
+    let waiterID = UUID()
+    try await withTaskCancellationHandler {
+      try await withCheckedThrowingContinuation { continuation in
+        slotWaiters.append(SlotWaiter(id: waiterID, key: key, continuation: continuation))
+      }
+    } onCancel: {
+      Task { await self.cancelSlotWaiter(waiterID) }
     }
+    try Task.checkCancellation()
   }
 
   private func releasePackSlot() {
@@ -202,7 +215,21 @@ actor AssetStore {
     }
     let next = slotWaiters.removeFirst()
     activePackKey = next.key
-    next.continuation.resume()
+    next.continuation.resume(returning: ())
+  }
+
+  private func cancelSlotWaiter(_ id: UUID) {
+    guard let index = slotWaiters.firstIndex(where: { $0.id == id }) else { return }
+    let waiter = slotWaiters.remove(at: index)
+    waiter.continuation.resume(throwing: CancellationError())
+  }
+
+  private func cancelSlotWaiters(for key: PackKey) {
+    let cancelled = slotWaiters.filter { $0.key == key }
+    slotWaiters.removeAll { $0.key == key }
+    for waiter in cancelled {
+      waiter.continuation.resume(throwing: CancellationError())
+    }
   }
 
   private func value(of task: Task<InstalledPack, Error>) async throws -> InstalledPack {
@@ -326,28 +353,8 @@ private struct InstallMarker: Codable {
   let installedAt: Date
 }
 
-struct RemoteStaticAssetSource: AssetSource {
-  let baseURL: URL
-  let session: URLSession
-
-  func fetch(_ pack: ManifestPack) async throws -> PackPayload {
-    var files: [String: Data] = [:]
-    for expected in pack.files {
-      try Task.checkCancellation()
-      let url = baseURL.appending(path: expected.path)
-      let (data, response) = try await session.data(from: url)
-      guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
-        throw AssetFailure.offline
-      }
-      files[expected.path] = data
-    }
-    return PackPayload(files: files)
-  }
-
-  static func backgroundSession(identifier: String) -> URLSession {
-    let configuration = URLSessionConfiguration.background(withIdentifier: identifier)
-    configuration.allowsConstrainedNetworkAccess = false
-    configuration.waitsForConnectivity = true
-    return URLSession(configuration: configuration)
-  }
+private struct SlotWaiter {
+  let id: UUID
+  let key: PackKey
+  let continuation: CheckedContinuation<Void, Error>
 }

@@ -9,6 +9,13 @@ procedure state, with runtime EN/JA system-label selection covered by simulator
 UI tests. The scene placeholder and fixture-backed transfer states are not
 release evidence.
 
+The September 19 owner-directed native redesign and subsequent detailed review
+supersede the earlier Phase 5R authoring/tool requirements. The current visual
+and interaction requirements are recorded in `UI_REDESIGN_2026-09-19.md` and
+derive from the shared design concept plus the owner's explicit Web-parity
+requests. Exact-build phone/tablet visual and accessibility acceptance remain
+release gates. Initial shell tests do not prove those gates complete.
+
 Phase 4 archive status (2026-08-02): the unsigned generic-device archive smoke
 passes for the iOS 18 Swift 6 foundation (`0.1.0` / build `1`, 3.4 MB archive
 before native models and signing). The repair covers the first independent-QC
@@ -25,7 +32,7 @@ Included:
 - Native SwiftUI/RealityKit Library and Procedure Theater.
 - ACDF, ACCF, PCDF, and PCF; 26 canonical reversible steps.
 - Icon-first, MECE interface and Bottom Step Tray.
-- Orbit, pinch, step flick, visible controls, keyboard/pointer, and accessible
+- Orbit, pinch, two-finger pan, explanation paging, visible controls, keyboard/pointer, and accessible
   equivalents.
 - English/Japanese UI and procedure prose with in-app switching.
 - Progress resume, bundled fallback, optional first-use acquisition, verified
@@ -49,7 +56,7 @@ executable logic.
 | F-07 | English/Japanese switch updates active UI/prose in place with no model reload or step reset; key parity is complete. |
 | F-08 | Every screen passes the documented MECE ownership inventory and has no duplicate control/state presentation. |
 | F-09 | Routine actions are icon-first and understandable by position/state; localized labels/hints exist for assistive technology. |
-| F-10 | Reset Progress and Clear Downloads are separate, accurate, and cannot remove bundled fallback. |
+| F-10 | Clear Downloads is accurate and cannot remove bundled fallback. The owner removed the Reset Progress setting on September 19. |
 
 ## 3. Scene correctness gates
 
@@ -255,3 +262,29 @@ The release is done only when:
 - Archive, metadata, screenshots, URLs, and remote/bundled manifests validate.
 - Fastlane completes submission and App Store Connect shows **Submitted for
   Review**.
+
+## 13. Implemented release interfaces
+
+The runnable Phase 8 and Phase 9 interfaces, required environment configuration,
+evidence schema, and currently open gates are recorded in
+[RELEASE_READINESS.md](RELEASE_READINESS.md).
+
+The production content manifest v1 is signed as exact bytes with Ed25519. Its
+detached `manifest.sig` is 64 raw bytes, while the app pins a 32-byte raw public
+key. Each manifest entry requires the fixed data-only roles `procedure`, `scene`,
+`localization-en`, `localization-ja`, `provenance`, `model`, and
+`pack-metadata`. A signed retention inventory preserves prior immutable packs so
+a new higher manifest generation can safely select a prior pack for rollback.
+
+The `beta`, `release_candidate`, and `submit` Fastlane lanes consume an existing
+signed IPA. They do not rebuild source. Every upload is preceded by local
+candidate validation that binds the IPA, content manifest, gate reports, commit,
+and tag by hash. `submit` selects the already uploaded build and skips binary
+upload.
+
+### Clean asset generation in CI
+
+Both iOS CI and content publication rebuild the ignored native asset folder on
+macOS before packaging. The converter rejects Blender or Apple USD toolchain
+drift. The hosted runner has not yet executed this branch; local generation and
+unsigned archive results are the available evidence.

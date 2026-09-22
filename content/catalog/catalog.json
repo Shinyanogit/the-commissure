@@ -46,8 +46,8 @@
         {
           "role": "provenance",
           "path": "content/procedures/acdf/provenance.json",
-          "sha256": "b0df920563c0940c38b7ed556a54ef99dffad8a682f362978410e74945a2acba",
-          "bytes": 967
+          "sha256": "aea64ec0c641550737d2122a48662dde15e93c191701eae58925513ee3012ec6",
+          "bytes": 948
         }
       ],
       "provenanceId": "acdf_provenance"
@@ -95,8 +95,8 @@
         {
           "role": "provenance",
           "path": "content/procedures/accf/provenance.json",
-          "sha256": "bdb0eaa152fe1584e4c62ab2a2464aa4d9b685c8fd7343ec10713ffd501f4ec8",
-          "bytes": 967
+          "sha256": "10af2601634ed69642ddf9c805d73c11c46cf61f2438a991a3b379c088cc88c1",
+          "bytes": 948
         }
       ],
       "provenanceId": "accf_provenance"
@@ -144,8 +144,8 @@
         {
           "role": "provenance",
           "path": "content/procedures/pcdf/provenance.json",
-          "sha256": "536cd5f3bc43e3d29ca9fd25ef0c6704cea2039a7fa5907af7144b080b7c4cf4",
-          "bytes": 971
+          "sha256": "3d96d667133c91feeea92f1fc28132d3665b9336b270d67b5ba755f57a4df86a",
+          "bytes": 952
         }
       ],
       "provenanceId": "pcdf_provenance"
@@ -193,8 +193,8 @@
         {
           "role": "provenance",
           "path": "content/procedures/pcf/provenance.json",
-          "sha256": "d8eb6bf7218c3b54ba1af924bb7f83d50a5a835f4749ff622e7d0292907a9935",
-          "bytes": 1478
+          "sha256": "6115810ae86d6a8bdcc974d937370d001e1c6606883120875e07cdd7439c91fe",
+          "bytes": 1459
         }
       ],
       "provenanceId": "pcf_provenance"

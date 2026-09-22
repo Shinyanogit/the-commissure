@@ -11,6 +11,8 @@ The canonical production origin is `https://the-commissure.vercel.app`.
 | --- | --- |
 | `/` | Site and mission landing page |
 | `/articles` | Collection of all procedure guides |
+| `/support` | App Store support and contact page |
+| `/privacy` | Native-app privacy policy |
 | `/pcdf` | PCDF interactive guide |
 | `/acdf` | ACDF interactive guide |
 | `/pcf` | PCF interactive guide |
@@ -48,7 +50,7 @@ npm run build
 npm test
 ```
 
-The smoke test verifies all seven static entry documents, unique titles and
+The smoke test verifies all registered static entry documents, unique titles and
 canonicals, parseable JSON-LD, route rewrites, the complete sitemap, and the
 robots declaration. Browser review must also confirm that metadata changes
 when navigating between the home, article index, and procedure routes.

@@ -1,6 +1,11 @@
 # Native iOS Product Specification
 
 Status: implementation contract
+
+> 2026-09-19 UI amendment: compose native UI first, then align with Web.
+> The Library must reuse the blue spine home background. Portrait teaching
+> content sits below the model; landscape content sits alongside it.
+> See `UI_REDESIGN_2026-09-19.md` and the shared design concept.
 Target: The Commissure 1.0 for iOS and iPadOS 18 or later
 Last updated: 2026-07-28
 

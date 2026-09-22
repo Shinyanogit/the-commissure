@@ -23,7 +23,42 @@ final class AppPreferences {
 
   init(defaults: UserDefaults = .standard) {
     self.defaults = defaults
+    trayExpanded = defaults.bool(forKey: "trayExpanded")
+    explanationExpanded = defaults.object(forKey: "explanationExpanded") as? Bool ?? true
     language = defaults.string(forKey: Self.languageKey).flatMap(AppLanguage.init) ?? .followSystem
+  }
+
+  private struct Progress: Codable {
+    let version: String
+    let stepID: String
+  }
+
+  var trayExpanded: Bool {
+    didSet { defaults.set(trayExpanded, forKey: "trayExpanded") }
+  }
+
+  var explanationExpanded: Bool {
+    didSet { defaults.set(explanationExpanded, forKey: "explanationExpanded") }
+  }
+
+  func savedStep(for id: String, version: String) -> String? {
+    guard let data = defaults.data(forKey: "progress.\(id)"),
+      let progress = try? JSONDecoder().decode(Progress.self, from: data),
+      progress.version == version
+    else { return nil }
+    return progress.stepID
+  }
+
+  func saveStep(_ stepID: String, procedureID: String, version: String) {
+    if let data = try? JSONEncoder().encode(Progress(version: version, stepID: stepID)) {
+      defaults.set(data, forKey: "progress.\(procedureID)")
+    }
+  }
+
+  func resetProgress() {
+    for key in defaults.dictionaryRepresentation().keys where key.hasPrefix("progress.") {
+      defaults.removeObject(forKey: key)
+    }
   }
 
   var effectiveLocale: String {

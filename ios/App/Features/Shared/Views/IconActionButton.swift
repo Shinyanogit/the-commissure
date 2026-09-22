@@ -25,11 +25,19 @@ struct IconActionButton: View {
         .contentShape(Rectangle())
     }
     .buttonStyle(.plain)
-    .foregroundStyle(isEnabled ? DesignTokens.Color.textPrimary : DesignTokens.Color.textSecondary)
-    .background(DesignTokens.Color.stageSurface.opacity(0.72), in: Circle())
+    .foregroundStyle(
+      isEnabled
+        ? (action == .nextStep ? DesignTokens.Color.stageBlack : DesignTokens.Color.textPrimary)
+        : DesignTokens.Color.textSecondary.opacity(0.45)
+    )
+    .background(
+      action == .nextStep && isEnabled
+        ? DesignTokens.Color.cyan : DesignTokens.Color.stageSurface.opacity(0.72), in: Circle()
+    )
     .accessibilityLabel(Text(LocalizedStringKey(descriptor.labelKey)))
     .accessibilityHint(Text(LocalizedStringKey(descriptor.hintKey)))
     .disabled(!isEnabled)
+    .accessibilityIdentifier(descriptor.labelKey)
   }
 
   private var descriptor: ActionDescriptor {

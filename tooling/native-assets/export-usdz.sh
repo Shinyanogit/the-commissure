@@ -8,7 +8,7 @@ fi
 
 procedure_id=$1
 case "$procedure_id" in
-  acdf|pcdf) ;;
+  acdf|accf|pcdf|pcf) ;;
   *)
     echo "unsupported procedure: $procedure_id" >&2
     exit 64
@@ -21,6 +21,8 @@ manifest="$script_dir/manifests/$procedure_id.json"
 output_dir="$script_dir/output/$procedure_id"
 output_usdz="$output_dir/model.usdz"
 report="$output_dir/export-report.json"
+
+python3 "$script_dir/generate_manifests.py" --repo-root "$repo_root"
 
 blender_version=$(blender --version | sed -n '1s/^Blender //p')
 blender_build_hash=$(blender --version | sed -n 's/^[[:space:]]*build hash: //p')

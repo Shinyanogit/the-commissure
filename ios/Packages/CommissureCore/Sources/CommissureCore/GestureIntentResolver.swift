@@ -32,9 +32,6 @@ public struct GestureIntentResolver: Sendable {
   public struct Configuration: Equatable, Sendable {
     public var edgeExclusion: Double = 24
     public var deadband: Double = 8
-    public var ambiguityDistance: Double = 16
-    public var swipeThreshold: Double = 44
-    public var axisLockRatio: Double = 1.35
     public var orbitScale: Double = 0.008
 
     public init() {}
@@ -55,7 +52,6 @@ public struct GestureIntentResolver: Sendable {
   private enum Claim: Equatable, Sendable {
     case undecided
     case orbit
-    case step
   }
 
   private let configuration: Configuration
@@ -107,15 +103,7 @@ public struct GestureIntentResolver: Sendable {
       let distance = max(abs(dx), abs(dy))
       var resolvedClaim = claim
       if claim == .undecided, distance >= configuration.deadband {
-        let horizontal = abs(dx) >= abs(dy) * configuration.axisLockRatio
-        let vertical = abs(dy) >= abs(dx) * configuration.axisLockRatio
-        if horizontal {
-          resolvedClaim = .orbit
-        } else if vertical {
-          resolvedClaim = .step
-        } else if distance >= configuration.ambiguityDistance {
-          resolvedClaim = abs(dx) >= abs(dy) ? .orbit : .step
-        }
+        resolvedClaim = .orbit
       }
 
       switch resolvedClaim {
@@ -142,31 +130,11 @@ public struct GestureIntentResolver: Sendable {
         )
         return [
           .orbit(
-            yaw: (point.x - previous.x) * configuration.orbitScale,
-            pitch: (point.y - previous.y) * configuration.orbitScale
+            yaw: -(point.x - previous.x) * configuration.orbitScale,
+            pitch: -(point.y - previous.y) * configuration.orbitScale
           )
         ]
-      case .step:
-        guard !emittedStep, abs(dy) >= configuration.swipeThreshold else {
-          tracking = .active(
-            origin: origin,
-            previous: point,
-            touches: touches,
-            claim: .step,
-            emittedStep: emittedStep
-          )
-          return []
-        }
-        tracking = .active(
-          origin: origin,
-          previous: point,
-          touches: touches,
-          claim: .step,
-          emittedStep: true
-        )
-        if dy > 0, capabilities.canGoNext { return [.nextStep] }
-        if dy < 0, capabilities.canGoPrevious { return [.previousStep] }
-        return []
+
       }
     case .pinch(let scale):
       guard capabilities.canZoom, scale.isFinite, scale > 0 else { return [] }

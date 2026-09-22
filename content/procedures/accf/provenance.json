@@ -15,12 +15,12 @@
     "reviewedAt": "2026-08-02"
   },
   "medicalReview": {
-    "status": "inheritedWebsiteSource",
-    "releaseGate": true
+    "status": "ownerApproved",
+    "releaseGate": false
   },
   "rightsReview": {
-    "status": "ownerConfirmationRequired",
-    "releaseGate": true
+    "status": "ownerApproved",
+    "releaseGate": false
   },
   "assetSource": {
     "path": "web/public/Anterior Cervical Corpectomy and Fusion (ACCF) Light.glb",

@@ -2,6 +2,19 @@ import assert from "node:assert/strict";
 
 import { loadRepository, validateDataset } from "./validate-content.mjs";
 
+const { preserveReviews } = await import("./preserve-reviews.mjs");
+const generatedReview = { contentRevision: 1, assetSource: { sha256: "original" },
+  medicalReview: { status: "inheritedWebsiteSource", releaseGate: true },
+  rightsReview: { status: "ownerConfirmationRequired", releaseGate: true } };
+const approvedReview = { ...generatedReview,
+  medicalReview: { status: "ownerApproved", releaseGate: false },
+  rightsReview: { status: "ownerApproved", releaseGate: false } };
+assert.deepEqual(preserveReviews(generatedReview, approvedReview, true), approvedReview);
+assert.deepEqual(preserveReviews(generatedReview, approvedReview, false), generatedReview);
+assert.deepEqual(preserveReviews(generatedReview, { ...approvedReview,
+  assetSource: { sha256: "different" } }, true), generatedReview);
+assert.deepEqual(preserveReviews(generatedReview, null, true), generatedReview);
+
 const baseline = await loadRepository();
 assert.deepEqual(await validateDataset(structuredClone(baseline)), []);
 
@@ -105,7 +118,9 @@ const cases = [
     name: "release-gate bypass",
     expected: "unconfirmed rights must remain release-blocking",
     mutate(dataset) {
-      dataset.procedures.acdf.provenance.rightsReview.releaseGate = false;
+      dataset.procedures.acdf.provenance.rightsReview = {
+        status: "ownerConfirmationRequired", releaseGate: false
+      };
     }
   },
   {

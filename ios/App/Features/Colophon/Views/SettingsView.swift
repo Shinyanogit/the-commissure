@@ -1,57 +1,58 @@
 import SwiftUI
 
 struct SettingsView: View {
+  @State private var confirmsClear = false
+  var language: AppLanguage = .followSystem
+  var canClearDownloads = true
   let onAction: (AppAction) -> Void
 
   var body: some View {
-    ZStack {
-      DesignTokens.Color.stageBlack.ignoresSafeArea()
-      VStack(alignment: .leading, spacing: DesignTokens.Spacing.spacious) {
-        HStack {
-          IconActionButton(.back, onAction: onAction)
-          Text("action.settings")
-            .font(.title2.weight(.semibold))
-            .foregroundStyle(DesignTokens.Color.textPrimary)
-          Spacer()
-        }
-
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.compact) {
-          Text("action.language")
-            .font(.headline)
-            .foregroundStyle(DesignTokens.Color.textPrimary)
-          Menu {
-            Button {
-              onAction(.changeLanguage(.followSystem))
-            } label: {
-              Text("language.followSystem")
-            }
-            Button {
-              onAction(.changeLanguage(.english))
-            } label: {
-              Text("language.english")
-            }
-            Button {
-              onAction(.changeLanguage(.japanese))
-            } label: {
-              Text("language.japanese")
-            }
-          } label: {
-            Label("action.language", systemImage: "globe")
-              .foregroundStyle(DesignTokens.Color.textPrimary)
-              .padding(.horizontal, DesignTokens.Spacing.regular)
-              .frame(minHeight: 44)
-              .background(
-                DesignTokens.Color.stageSurface,
-                in: RoundedRectangle(cornerRadius: DesignTokens.Radius.control)
-              )
+    NavigationStack {
+      Form {
+        Section {
+          Picker(
+            "action.language",
+            selection: Binding(
+              get: { language }, set: { onAction(.changeLanguage($0)) }
+            )
+          ) {
+            Text("language.followSystem").tag(AppLanguage.followSystem)
+            Text("language.english").tag(AppLanguage.english)
+            Text("language.japanese").tag(AppLanguage.japanese)
           }
-          .accessibilityHint(Text("action.language.hint"))
+          .tint(.white)
+          .accessibilityIdentifier("settings-language")
         }
+        .listRowBackground(DesignTokens.Color.stageSurface)
 
-        Spacer()
+        Section {
+          Button("action.clearDownloads", role: .destructive) { confirmsClear = true }
+            .disabled(!canClearDownloads)
+            .confirmationDialog(
+              "action.clearDownloads.detail", isPresented: $confirmsClear, titleVisibility: .visible
+            ) {
+              Button("action.clearDownloads", role: .destructive) { onAction(.clearDownloads) }
+            }
+        } footer: {
+          Text("action.clearDownloads.detail")
+        }
+        .listRowBackground(DesignTokens.Color.stageSurface)
       }
-      .padding(.horizontal, DesignTokens.Spacing.edge)
-      .padding(.vertical, DesignTokens.Spacing.regular)
+      .scrollContentBackground(.hidden)
+      .background(DesignTokens.Color.stageBlack)
+      .navigationTitle("action.settings")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .confirmationAction) {
+          Button {
+            onAction(.back)
+          } label: {
+            Image(systemName: "xmark")
+          }
+          .accessibilityLabel(Text("action.close"))
+          .accessibilityIdentifier("action.close")
+        }
+      }
     }
     .preferredColorScheme(.dark)
   }

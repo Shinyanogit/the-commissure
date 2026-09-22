@@ -20,6 +20,16 @@ const ROUTE_EXPECTATIONS = [
     title: "Cervical Spine Surgery Articles | The Commissure",
   },
   {
+    route: "/support",
+    filename: "support.html",
+    title: "Support | The Commissure",
+  },
+  {
+    route: "/privacy",
+    filename: "privacy.html",
+    title: "Privacy Policy | The Commissure",
+  },
+  {
     route: "/news",
     filename: "news.html",
     title: "The Commissure News | The Commissure",

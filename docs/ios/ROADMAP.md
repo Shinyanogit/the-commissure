@@ -1,8 +1,10 @@
 # iOS App Store Roadmap
 
-Status: Phase 5B visual refinement next; Phase 5A merged as `fece5e8`
-Repository baseline: `main` through PR #56 (`fece5e8`); each phase uses a dedicated branch.
-This is an engineering order, not a calendar estimate.
+Status: App Review 4.2.2 evidence and response preparation (2026-09-22).
+The submitted release was built from `codex/ios-functional-completion`; the
+older `main` production shell is not the submitted source baseline. Native
+UI direction follows `UI_REDESIGN_2026-09-19.md`. Historical phases below
+are retained as history, not instructions to repeat completed implementation.
 
 ## 1. Objective and priority
 
@@ -63,6 +65,110 @@ Every phase closes in this order:
 
 Shinya alone operates compact. When a compact checkpoint is chosen, documentation
 and the phase commit must already be durable before Codex asks for compact.
+
+## 3A. App Review 4.2.2 response and evidence
+
+This section incorporates PR #84 after comparison with the submitted release
+branch. PR #84 records a Guideline 4.2.2 rejection. The Apple rejection text,
+review device, and current review status still require direct verification;
+the source audit alone does not establish why Apple rejected the app.
+
+### R0. Establish submitted-build provenance and observed behavior
+
+The September 20 upload record identifies version `1.0.0` build `1`, attached
+to store version `1.0`. Git history and the release record associate the final
+candidate with `8792522` on `codex/ios-functional-completion`. Changes from
+`7605fef` through `8792522` are documentation only. `origin/main` at `af7e263`
+does not contain this production implementation. See
+[the submission audit](APP_STORE_SUBMISSION_AUDIT_2026-09-20.md).
+
+The candidate source connects `FoundationView` to `ProcedureSceneView`, creates
+`ProcedureSceneRuntime` in `FoundationAppModel`, and projects actual runtime
+readiness. `RealitySceneAdapter` applies canonical scene states. Therefore
+PR #84's description of a shipping `AnatomyFieldPlaceholder` with permanently
+preparing readiness describes the older main tree, not this candidate source.
+
+Evidence limits: source/reflog records establish the build context; they do not
+prove every interaction on Apple's installed binary. The retained IPA path and
+hash are recorded, but artifact availability must be checked before claiming a
+new binary inspection. No embedded Git revision has been verified. Record the
+exact TestFlight build and capture its real-device behavior when available.
+
+Remaining verification:
+
+1. Read the actual rejection and confirm the selected build and review device.
+2. Inspect the retained submitted archive/IPA if available, including executable,
+   native model assets, content, versions, and resource hashes.
+3. On the same TestFlight build, capture Library to procedure, orbit, pinch,
+   forward/reverse/direct steps, progress restoration, and language switching.
+4. Repeat procedure launch and navigation offline from a fresh installation.
+5. Record source provenance separately from observed device behavior. Missing
+   evidence remains unknown; it is not proof that a placeholder was shipped.
+
+### R1. Preserve the native-value contract
+
+Keep native SwiftUI/RealityKit anatomy, canonical reversible steps, bundled
+learning content, progress persistence, in-place English/Japanese switching,
+and accessible controls as the product contract. Reviewers should find the
+native learning path within about one minute without an account.
+
+Do not add quizzes, accounts, AR, social features, or a backend merely to make
+the app appear more native. Speed alone is not the native-value argument.
+Offline interactive anatomy and meaningful step-specific changes must be shown.
+
+### R2 through R4. Verify existing implementation, repair demonstrated gaps
+
+The original PR proposed promoting the spike, implementing ACDF, and extending
+to the other procedures. Those are not unconditional implementation tasks:
+production runtime, model loading, persistence, localization, and all four
+procedure paths already exist on the release branch.
+
+Validate them against the submitted build and fix only demonstrated defects.
+Retain direct/sequential state equality, interrupted navigation, clean return
+to the first step, exact entity binding, lifecycle ownership, and no drift as
+acceptance criteria. PCDF remains the demanding physical-device performance
+case. Source implementation and prior simulator results do not replace missing
+physical-device or accessibility acceptance.
+
+If the reviewed binary is shown to have missing assets or a broken production
+path, repair that concrete problem and produce a new versioned candidate.
+Do not rebuild working architecture just because old main lacked it.
+
+### R5. Make native learning behavior visible to the reviewer
+
+Measure first useful scene and repeated opens on device. Verify that bundled
+procedures remain useful without network access, that progress resumes, and
+that locale changes preserve the step/model. Inspect adaptive iPhone/iPad
+layouts and accessibility controls. Record measurements as evidence rather
+than unsupported marketing claims.
+
+### R6. Choose reconsideration or a corrected build from evidence
+
+If the exact reviewed build demonstrates the intended interactive experience,
+prepare a concise reconsideration request with tap/gesture instructions and
+an accurate device recording. Native frameworks alone do not establish
+Guideline 4.2.2 compliance; explain the useful learning interactions.
+
+If a reproducible defect or discoverability problem prevents that experience,
+fix it, verify the changed behavior, and submit a new build with matching media
+and reviewer notes. If evidence is unavailable, resolve that gap or validate a
+new candidate; do not assert either a working or placeholder reviewed binary.
+
+Reviewer notes should identify the bundled procedure, orbit/zoom controls,
+visible anatomy changes across steps, reverse/direct navigation, offline use,
+progress restoration, and language/accessibility controls. Only claim behavior
+observed in the candidate. Keep correspondence and private review metadata out
+of new public documentation. Sending Apple correspondence requires the owner's
+explicit instruction.
+
+### Execution and completion
+
+Integrate the release branch before assessing missing production functionality.
+Use focused PRs for evidence and any demonstrated repairs. Update the relevant
+architecture/specification only when behavior changes. Reuse applicable test
+evidence and run checks for new changes; do not repeat an entire release test
+cycle for a documentation correction. Record open device/evidence gaps honestly.
+An integration merge does not mean Apple approved the app or release gates passed.
 
 ## 4. Phase 0 — concept and specification freeze (complete)
 
@@ -294,7 +400,7 @@ Claude Design project: `The Commissure — Sterile Field iOS` (`dfa74f8d-774a-4b
 Synced brief path: `brief/CLAUDE_DESIGN_BRIEF.md`. The project stores static
 references only; SwiftUI source remains in GitHub.
 
-Sequence:
+Original sequence:
 
 1. Codex freezes design tokens, fixture `ViewState`, accessibility contracts,
    icon semantics, and MECE ownership for each screen in the brief.
@@ -302,6 +408,9 @@ Sequence:
 3. Codex checks dependency direction, removes embedded logic, connects intents,
    and runs previews/tests.
 4. Screenshot comparison and device review decide acceptance.
+
+That sequence is now superseded by the Phase 5R reset below. No new SwiftUI
+visual implementation starts until a static composition is selected.
 
 Deliverables:
 
@@ -352,8 +461,70 @@ tests, including explicit app-preference Japanese String Catalog coverage). The
 existing Web/content boundary audits also pass. This is not final visual
 acceptance: the scene is still a preparing placeholder, download states are
 fixture-backed, and Japanese medical copy remains the existing content source
-pending the next editorial/design pass. Phase 5B will refine visual hierarchy
-and copy against screenshots before Phase 6 RealityKit integration.
+pending a new editorial/design pass. The later incremental Phase 5B branch was
+not accepted as the visual direction; its physical install/test evidence is
+kept separately as plumbing evidence. Phase 5R replaces it with a greenfield
+composition workflow before Phase 6 RealityKit integration.
+
+### Phase 5R greenfield UI/UX reset (in progress 2026-08-02)
+
+Phase 5R is a deliberate composition reset, not a domain rewrite. The product
+owner's visual rejection and the fresh Fable review both found that the earlier
+shell was implemented before any divergent static composition had been chosen.
+The native visual layer therefore returns to design exploration while
+`CommissureCore`, content, cache, localization, gestures, and RealityKit seams
+remain Codex-owned contracts. The product owner's explicit implementation split
+is authoritative: Opus 5 writes the approved production visual layer in the
+allowlist; Codex integrates it and owns all underlying logic. If Opus is not
+available, visual implementation pauses rather than falling back to Codex
+composition work.
+
+Current checkpoint: 5R0 and 5R1A are complete in commit `c697874` on this
+docs-only branch. Fable/GPT Pro reconciliation, the v2 brief, fixture contract,
+provenance template, and branch boundary are committed. No static candidate or
+interaction prototype exists yet; the next subphase is 5R1B.
+
+| Subphase | Scope | Exit criteria | Gate |
+|---|---|---|---|
+| **5R0 — salvage and supersession** | Record the reset decision, keep the prior UI branch unmerged, and re-land non-visual device-test/Markdown work independently | Decision record, coupled docs, and branch boundaries committed; Web/content untouched | Shinya acknowledges the reset scope |
+| **5R1A — brief lock** | Reconcile the reset brief with the fixed concept, screen ownership, real-content provenance, and fixture contract | 7:2:1, icon semantics, MECE, tray ownership, and no-generated-code rules are explicit | Fable/GPT Pro challenge is recorded |
+| **5R1B — divergent static concepts** | Claude Design/Figma plus a design-specialist model creates at least 3 materially different Theater compositions and 1–2 Library compositions using real anatomy stills | Every frame names viewport, fixture, tokens, locale, and tray density; no generated code; rejected shell is not reused as a candidate | Shinya selects a direction to prototype |
+| **5R1C — interaction prototype** | Build a disposable Figma/ProtoPie-scale prototype for Theater, compact/expanded/minimal tray, and forward/back/direct step transitions | Interaction evidence validates ownership and state transitions; no production SwiftUI or medical-content invention | Shinya approves the interaction direction |
+| **5R2 — state-matrix design** | Extend the selected direction across every real availability, transfer, scene, locale, accessibility, and orientation fixture | 100% fixture-to-frame coverage; worst states shown beside hero states; MECE and 7:2:1 checklist passes; same AppAction path is specified for gesture and accessible alternatives | Shinya approves the implementation-ready matrix |
+| **5R3A — disposable visual interpretation** | Opus 5 may create a throwaway SwiftUI/reference interpretation to expose translation ambiguities | Reference is disposable, allowlisted, and never treated as production source | Codex accepts or returns the spec for clarification |
+| **5R3B — production visual implementation** | Opus 5 hand-writes the approved SwiftUI visual layer in the allowlist; Codex integrates intents and underlying logic without redesigning it | Reference parity, fixture reachability, accessibility, physical iPad/iPhone screenshots, and fresh QC pass | Exact-build device visual acceptance |
+
+### Phase 5R workflow rules
+
+- Static frames, an annotated state matrix, and a small interaction prototype
+  are the design evidence. Figma Dev Mode output, Claude Design exports, and
+  model-generated SwiftUI are never copied into production code.
+- Theater is designed first on a 13-inch iPad landscape viewport, then Library,
+  iPhone portrait, iPad portrait, EN/JA, Dynamic Type, VoiceOver, Reduce Motion,
+  and failure/offline states. Real shipped anatomy stills are mandatory; a
+  placeholder capsule cannot prove anatomy-first composition or 7:2:1.
+- The new visual branch is separate from `feat/ios-phase5b-visual-refinement`:
+  `feat/ios-phase5r1-design-exploration` holds static candidates and the
+  disposable prototype, followed by one implementation branch after the
+  direction gate. Each subphase updates the coupled docs, runs independent QC,
+  and commits in English before the next subphase.
+- Existing `ViewState` fixtures are extended, not replaced. Tray/explanation
+  state must round-trip through the model; a view-local copy cannot become the
+  source of truth.
+
+### Phase 5R first deliverables
+
+- [`design/DESIGN_RESET_DECISION.md`](design/DESIGN_RESET_DECISION.md)
+- [`design/FIXTURE_MATRIX.md`](design/FIXTURE_MATRIX.md)
+- [`design/ANATOMY_STILL_PROVENANCE.md`](design/ANATOMY_STILL_PROVENANCE.md)
+- `CLAUDE_DESIGN_BRIEF.md` v2 with the reset workflow and no-generated-code rule
+- A provenance manifest for 3–5 real ACDF/PCDF anatomy stills
+- 3+ annotated Theater compositions and 1–2 annotated Library compositions,
+  followed by an interaction prototype for tray density and step transitions
+
+Phase 5R does not add onboarding, a generic tab bar, light-mode theming,
+unshipped features, remote UI code, or recurring backend cost. Phase 6 begins
+only after the selected visual direction has passed the physical iPad gate.
 
 ## 10. Phase 6 — ACDF vertical slice
 

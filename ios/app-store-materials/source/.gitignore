@@ -1,0 +1,19 @@
+node_modules/
+build/
+generated/
+src/assets/*
+!src/assets/commissure-*
+
+# Retained locally as the unmodified Vocabry reference copy. The active
+# Commissure entry point does not depend on these legacy variants.
+capture.mjs
+capture_landscape.mjs
+capture_vertical.mjs
+screenshot.js
+src/App.tsx
+src/AppLandscape.tsx
+src/AppVertical.tsx
+src/App_no_todai.tsx
+src/Attributions.md
+src/components/
+src/styles/

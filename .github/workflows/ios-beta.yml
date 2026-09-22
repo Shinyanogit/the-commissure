@@ -1,0 +1,129 @@
+name: iOS Beta
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Actions run containing the signed release-candidate artifact
+        required: true
+        type: string
+      artifact_name:
+        description: Artifact containing IPA, release evidence, content site, and gate reports
+        required: true
+        default: release-candidate
+        type: string
+      release_stage:
+        description: TestFlight audience
+        required: true
+        default: internal-testflight
+        type: choice
+        options:
+          - internal-testflight
+          - external-testflight
+      ipa_path:
+        description: IPA path inside the downloaded artifact
+        required: true
+        default: TheCommissure.ipa
+        type: string
+      evidence_path:
+        description: Evidence JSON path inside the downloaded artifact
+        required: true
+        default: release-evidence.json
+        type: string
+
+concurrency:
+  group: ios-beta-${{ inputs.release_stage }}
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    runs-on: macos-26
+    timeout-minutes: 45
+    environment: ios-${{ inputs.release_stage }}
+    permissions:
+      actions: read
+      contents: read
+    env:
+      APP_STORE_BUNDLE_ID: app.thecommissure.ios
+      APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+      APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      APP_STORE_CONNECT_API_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+      TESTFLIGHT_CHANGELOG: ${{ inputs.release_stage == 'external-testflight' && vars.TESTFLIGHT_EXTERNAL_CHANGELOG || vars.TESTFLIGHT_INTERNAL_CHANGELOG }}
+      TESTFLIGHT_EXTERNAL_GROUPS: ${{ vars.TESTFLIGHT_EXTERNAL_GROUPS }}
+      RELEASE_STAGE: ${{ inputs.release_stage }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Require release tag on main
+        run: |
+          test "$GITHUB_REF_TYPE" = "tag" || { echo "Run this workflow from an iOS release tag" >&2; exit 1; }
+          [[ "$GITHUB_REF_NAME" =~ ^ios-v[0-9]+\.[0-9]+\.[0-9]+-[1-9][0-9]*$ ]] || { echo "Invalid iOS release tag: $GITHUB_REF_NAME" >&2; exit 1; }
+          git fetch origin main --depth=1
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/main || { echo "Release tag commit is not on main" >&2; exit 1; }
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+          working-directory: ios
+
+      - name: Test release gate implementation
+        working-directory: tooling/release
+        run: npm test
+
+      - name: Download signed release candidate
+        uses: actions/download-artifact@v7
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: ${{ runner.temp }}/release-candidate
+          run-id: ${{ inputs.source_run_id }}
+          github-token: ${{ github.token }}
+
+      - name: Resolve artifact paths
+        env:
+          INPUT_IPA_PATH: ${{ inputs.ipa_path }}
+          INPUT_EVIDENCE_PATH: ${{ inputs.evidence_path }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+
+          candidate = (Path(os.environ["RUNNER_TEMP"]) / "release-candidate").resolve(strict=True)
+          resolved = {}
+          for key, input_name in (("IPA_PATH", "INPUT_IPA_PATH"), ("RELEASE_EVIDENCE_PATH", "INPUT_EVIDENCE_PATH")):
+              path = (candidate / os.environ[input_name]).resolve(strict=True)
+              path.relative_to(candidate)
+              if not path.is_file():
+                  raise SystemExit(f"Release artifact is not a regular file: {path}")
+              resolved[key] = path
+          import json
+          with resolved["RELEASE_EVIDENCE_PATH"].open(encoding="utf-8") as source:
+              evidence = json.load(source)
+          if evidence.get("tag") != os.environ["GITHUB_REF_NAME"]:
+              raise SystemExit("Release evidence tag does not match the workflow tag")
+          if evidence.get("stage") != os.environ["RELEASE_STAGE"]:
+              raise SystemExit("Release evidence stage does not match the requested TestFlight stage")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as output:
+              for key, path in resolved.items():
+                  output.write(f"{key}={path}\n")
+          PY
+
+      - name: Require protected App Store Connect configuration
+        run: |
+          test -n "$APP_STORE_CONNECT_KEY_ID" || { echo "Missing protected secret APP_STORE_CONNECT_KEY_ID" >&2; exit 1; }
+          test -n "$APP_STORE_CONNECT_ISSUER_ID" || { echo "Missing protected secret APP_STORE_CONNECT_ISSUER_ID" >&2; exit 1; }
+          test -n "$APP_STORE_CONNECT_API_KEY_BASE64" || { echo "Missing protected secret APP_STORE_CONNECT_API_KEY_BASE64" >&2; exit 1; }
+          test -n "$TESTFLIGHT_CHANGELOG" || { echo "Missing protected TestFlight changelog variable" >&2; exit 1; }
+          if test "$RELEASE_STAGE" = "external-testflight"; then
+            test -n "$TESTFLIGHT_EXTERNAL_GROUPS" || { echo "Missing protected variable TESTFLIGHT_EXTERNAL_GROUPS" >&2; exit 1; }
+          fi
+
+      - name: Validate exact signed candidate and upload to TestFlight
+        working-directory: ios
+        run: bundle exec fastlane beta

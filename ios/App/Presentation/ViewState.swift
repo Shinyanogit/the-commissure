@@ -31,6 +31,9 @@ struct LibraryCardViewState: Equatable, Identifiable, Sendable {
   let stepCountLabel: String
   let availability: LibraryAvailability
   let availabilityLabel: String
+  var updateBytes: Int? = nil
+  var isUpdating = false
+  var updateFailed = false
 }
 
 struct LibraryViewState: Equatable, Sendable {
@@ -60,6 +63,7 @@ struct TheaterViewState: Equatable, Sendable {
   let canGoPrevious: Bool
   let canGoNext: Bool
   let canReset: Bool
+  var stepExplanations: [String] = []
 }
 
 struct DownloadViewState: Equatable, Sendable {

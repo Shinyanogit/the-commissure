@@ -2,10 +2,21 @@
 
 Status: approved design contract for Web, iOS, and App Store materials
 Concept name: **The Sterile Field**
-Last updated: 2026-07-28
+Last updated: 2026-09-19
 
 This is the visual and interaction source of truth. Product specifications may
 add detail, but they must not silently redefine this document.
+
+## Current owner direction (2026-09-19)
+
+Compose the native UI from this concept and functional requirements first,
+without importing existing UI detail specifications. After the initial native
+composition, align its visual language with the current Web experience.
+This replaces the earlier Web-reproduction-first sequence.
+
+The Web home page's blue spine is required on the native Library's deepest
+background layer. Use a static render of the existing GLB with the Web material,
+not generated anatomy. The existing Web wordmark may be reused unchanged.
 
 ## 1. One-sentence concept
 
@@ -59,12 +70,15 @@ edge instead adapts to the current task.
 - Brand mark, one-line purpose, and the available procedures.
 - Cards show procedure name, one still image, availability, and download size
   only when a network download is required.
-- No auto-playing 3D hero. The first meaningful choice must appear immediately.
+- Use the required bundled blue spine still behind the content. No auto-playing
+  3D hero. The first meaningful choice must appear immediately.
 - About and settings are secondary toolbar actions, not peers of the procedures.
 
 ### Procedure Theater
 
-- Full-bleed 3D field.
+- A large, unobscured 3D field. In portrait the teaching panel sits below it;
+  in landscape it sits alongside it. Layout changes preserve the active scene
+  and session. No anatomical teaching content is covered by the explanation.
 - A compact top bar provides icon-first Library/back and reset actions around a
   single procedure identity.
 - A single explanation panel shows only the active step. It may collapse to

@@ -3,91 +3,151 @@ import SwiftUI
 struct LibraryView: View {
   let state: LibraryViewState
   let onAction: (AppAction) -> Void
+  @State private var pendingUpdate: String?
+
+  @Environment(\.dynamicTypeSize) private var typeSize
 
   var body: some View {
-    ZStack {
-      DesignTokens.Color.stageBlack.ignoresSafeArea()
-
-      ScrollView {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.spacious) {
-          header
-
-          if state.isLoading {
-            loadingState
-          } else if state.cards.isEmpty {
-            unavailableState
-          } else {
-            cards
-          }
+    GeometryReader { geometry in
+      ZStack {
+        DesignTokens.Color.stageBlack.ignoresSafeArea()
+        GeometryReader { background in
+          Image("home-spine")
+            .resizable()
+            .scaledToFill()
+            .frame(width: background.size.width, height: background.size.height)
+            .clipped()
+            .overlay(Color.black.opacity(0.42))
         }
-        .padding(.horizontal, DesignTokens.Spacing.edge)
-        .padding(.vertical, DesignTokens.Spacing.regular)
+        .ignoresSafeArea()
+        .accessibilityHidden(true)
+
+        ScrollView {
+          VStack(alignment: .leading, spacing: 28) {
+            header
+            if state.isLoading {
+              loadingState
+            } else if state.cards.isEmpty {
+              unavailableState
+            } else {
+              cards(width: geometry.size.width)
+              ViewThatFits(in: .horizontal) {
+                HStack(spacing: 24) { informationLinks }
+                VStack(alignment: .leading, spacing: 8) { informationLinks }
+              }
+              .font(.subheadline)
+              .foregroundStyle(DesignTokens.Color.textSecondary)
+
+            }
+          }
+          .frame(maxWidth: 1000)
+          .padding(.horizontal, geometry.size.width > 700 ? 40 : 24)
+          .padding(.top, 12)
+          .padding(.bottom, 28)
+          .frame(maxWidth: .infinity)
+        }
+        .scrollIndicators(.hidden)
       }
-      .scrollIndicators(.hidden)
     }
     .preferredColorScheme(.dark)
   }
 
+  @ViewBuilder
+  private var informationLinks: some View {
+    Button("library.about") { onAction(.openColophon) }
+      .buttonStyle(.plain)
+      .frame(minHeight: 44)
+      .accessibilityIdentifier("library-about")
+    Link(destination: URL(string: "https://the-commissure.vercel.app/news")!) {
+      Label("library.news", systemImage: "arrow.up.right")
+    }
+    .frame(minHeight: 44)
+  }
+
   private var header: some View {
-    HStack(alignment: .top, spacing: DesignTokens.Spacing.regular) {
-      Image(systemName: "waveform.path.ecg")
-        .foregroundStyle(DesignTokens.Color.cyan)
-        .accessibilityHidden(true)
-      Text("library.subtitle")
-        .font(.headline)
-        .foregroundStyle(DesignTokens.Color.textPrimary)
-        .fixedSize(horizontal: false, vertical: true)
-
-      Spacer(minLength: DesignTokens.Spacing.compact)
-
-      Menu {
-        Button {
-          onAction(.changeLanguage(.followSystem))
-        } label: {
-          Text("language.followSystem")
+    VStack(alignment: .leading, spacing: 18) {
+      HStack {
+        if !typeSize.isAccessibilitySize {
+          Text("library.eyebrow")
+            .font(.caption.weight(.medium))
+            .tracking(2)
+            .foregroundStyle(DesignTokens.Color.textSecondary)
         }
-        Button {
-          onAction(.changeLanguage(.english))
+        Spacer()
+        Menu {
+          Button("language.followSystem") { onAction(.changeLanguage(.followSystem)) }
+          Button("language.english") { onAction(.changeLanguage(.english)) }
+          Button("language.japanese") { onAction(.changeLanguage(.japanese)) }
         } label: {
-          Text("language.english")
+          Image(systemName: "globe").font(.system(size: 20)).frame(width: 44, height: 44)
         }
-        Button {
-          onAction(.changeLanguage(.japanese))
-        } label: {
-          Text("language.japanese")
-        }
-        Divider()
-        Button {
-          onAction(.openColophon)
-        } label: {
-          Text("action.about")
-        }
-        Button {
-          onAction(.openSettings)
-        } label: {
-          Text("action.settings")
-        }
-      } label: {
-        Image(systemName: "ellipsis.circle")
-          .font(.system(size: 20, weight: .semibold))
-          .frame(width: 44, height: 44)
-          .foregroundStyle(DesignTokens.Color.textPrimary)
-          .background(DesignTokens.Color.stageSurface.opacity(0.72), in: Circle())
+        .accessibilityLabel(Text("action.language"))
+        .accessibilityIdentifier("library-language")
+        IconActionButton(.openSettings, onAction: onAction)
       }
-      .accessibilityLabel(Text("action.more"))
-      .accessibilityHint(Text("action.more.hint"))
+      .foregroundStyle(.white)
+
+      Image("wordmark")
+        .resizable()
+        .scaledToFit()
+        .frame(maxWidth: 270, alignment: .leading)
+        .accessibilityLabel("The Commissure")
+        .accessibilityAddTraits(.isHeader)
+      Text(typeSize.isAccessibilitySize ? "library.eyebrow" : "library.introduction")
+        .font(.subheadline)
+        .foregroundStyle(DesignTokens.Color.textSecondary)
+        .fixedSize(horizontal: false, vertical: true)
     }
   }
 
-  private var cards: some View {
-    LazyVStack(spacing: DesignTokens.Spacing.regular) {
+  private func cards(width: CGFloat) -> some View {
+    LazyVGrid(
+      columns: Array(
+        repeating: GridItem(.flexible(), spacing: 16),
+        count: width >= 760 && !typeSize.isAccessibilitySize ? 2 : 1),
+      spacing: 16
+    ) {
       ForEach(state.cards) { card in
-        Button {
-          onAction(primaryAction(for: card))
-        } label: {
-          LibraryCardView(state: card)
+        VStack(spacing: 0) {
+          Button {
+            onAction(primaryAction(for: card))
+          } label: {
+            LibraryCardView(state: card)
+          }
+          .buttonStyle(.plain)
+          .accessibilityIdentifier("procedure-\(card.id)")
+          if card.isUpdating {
+            HStack {
+              ProgressView().tint(DesignTokens.Color.cyan)
+              Spacer()
+              IconActionButton(.cancelDownload(card.id), onAction: onAction)
+            }.padding(.horizontal)
+          } else if let bytes = card.updateBytes {
+            Button {
+              pendingUpdate = card.id
+            } label: {
+              Label(
+                "\(String(localized: "content.update")) · \(ByteCountFormatter.string(fromByteCount: Int64(bytes), countStyle: .file))",
+                systemImage: card.updateFailed ? "arrow.clockwise" : "arrow.down.circle"
+              )
+              .font(.caption)
+              .foregroundStyle(DesignTokens.Color.cyan)
+              .frame(maxWidth: .infinity, minHeight: 44, alignment: .trailing)
+            }
+          }
         }
-        .buttonStyle(.plain)
+        .confirmationDialog(
+          "content.update",
+          isPresented: Binding(
+            get: { pendingUpdate == card.id },
+            set: { if !$0 { pendingUpdate = nil } }), titleVisibility: .visible
+        ) {
+          Button("action.download") {
+            onAction(.download(card.id))
+            pendingUpdate = nil
+          }
+        }
+
       }
     }
   }
@@ -99,9 +159,7 @@ struct LibraryView: View {
       Text("library.loading")
         .font(.headline)
         .foregroundStyle(DesignTokens.Color.textPrimary)
-      Text("library.loading.detail")
-        .font(.subheadline)
-        .foregroundStyle(DesignTokens.Color.textSecondary)
+
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(DesignTokens.Spacing.spacious)
@@ -121,10 +179,7 @@ struct LibraryView: View {
       Text("content.unavailable")
         .font(.headline)
         .foregroundStyle(DesignTokens.Color.textPrimary)
-      Text("library.loading.detail")
-        .font(.subheadline)
-        .foregroundStyle(DesignTokens.Color.textSecondary)
-        .fixedSize(horizontal: false, vertical: true)
+
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(DesignTokens.Spacing.spacious)
@@ -155,82 +210,49 @@ struct LibraryView: View {
 
 private struct LibraryCardView: View {
   let state: LibraryCardViewState
+  @Environment(\.dynamicTypeSize) private var typeSize
 
   var body: some View {
-    VStack(alignment: .leading, spacing: DesignTokens.Spacing.regular) {
-      HStack(alignment: .top, spacing: DesignTokens.Spacing.regular) {
-        Image(systemName: "figure.stand")
-          .font(.system(size: 24, weight: .medium))
-          .foregroundStyle(DesignTokens.Color.bone)
-          .frame(width: 52, height: 52)
-          .background(
-            DesignTokens.Color.teal.opacity(0.42),
-            in: RoundedRectangle(cornerRadius: DesignTokens.Radius.control)
-          )
+    HStack(alignment: .center, spacing: 16) {
+      if !typeSize.isAccessibilitySize {
+        Image(state.id)
+          .resizable()
+          .scaledToFill()
+          .frame(width: 64, height: 88)
+          .clipped()
+          .clipShape(RoundedRectangle(cornerRadius: 10))
           .accessibilityHidden(true)
-
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.compact) {
-          Text(state.title)
-            .font(.headline)
-            .foregroundStyle(DesignTokens.Color.textPrimary)
-            .multilineTextAlignment(.leading)
-          Text(state.summary)
-            .font(.subheadline)
-            .foregroundStyle(DesignTokens.Color.textSecondary)
-            .multilineTextAlignment(.leading)
+      }
+      VStack(alignment: .leading, spacing: 7) {
+        Text(state.id.uppercased())
+          .font(.title2.weight(.semibold))
+          .tracking(0.5)
+        Text(state.title)
+          .font(.subheadline)
+          .foregroundStyle(DesignTokens.Color.textSecondary)
+          .fixedSize(horizontal: false, vertical: true)
+        if state.availability != .bundled && state.availability != .cached {
+          Text(state.availabilityLabel)
+            .font(.caption)
         }
-
-        Spacer(minLength: 0)
-        Image(systemName: "chevron.right")
-          .font(.system(size: 13, weight: .semibold))
-          .foregroundStyle(DesignTokens.Color.textSecondary)
-          .accessibilityHidden(true)
       }
-
-      HStack(spacing: DesignTokens.Spacing.compact) {
-        Image(systemName: availabilityIcon)
-          .font(.system(size: 13, weight: .semibold))
-          .foregroundStyle(availabilityTint)
-          .accessibilityHidden(true)
-        Text(state.availabilityLabel)
-          .font(.caption.weight(.medium))
-          .foregroundStyle(DesignTokens.Color.textPrimary)
-        Spacer()
-        Text(state.stepCountLabel)
-          .font(.caption)
-          .foregroundStyle(DesignTokens.Color.textSecondary)
-      }
+      Image(systemName: "arrow.up.right")
+        .font(.system(size: 13, weight: .medium))
+        .foregroundStyle(DesignTokens.Color.textSecondary)
+        .accessibilityHidden(true)
     }
-    .padding(DesignTokens.Spacing.regular)
+    .foregroundStyle(.white)
+    .multilineTextAlignment(.leading)
+    .padding(18)
+    .frame(maxWidth: .infinity, minHeight: 126, alignment: .leading)
     .background(
-      DesignTokens.Color.stageSurface.opacity(0.86),
-      in: RoundedRectangle(cornerRadius: DesignTokens.Radius.card)
+      DesignTokens.Color.stageSurface.opacity(0.91), in: RoundedRectangle(cornerRadius: 18)
     )
     .overlay {
-      RoundedRectangle(cornerRadius: DesignTokens.Radius.card)
-        .stroke(DesignTokens.Color.textPrimary.opacity(0.08), lineWidth: 1)
+      RoundedRectangle(cornerRadius: 18)
+        .stroke(.white.opacity(0.12), lineWidth: 0.5)
     }
     .accessibilityElement(children: .combine)
     .accessibilityHint(Text("library.card.hint"))
-  }
-
-  private var availabilityIcon: String {
-    switch state.availability {
-    case .bundled: "checkmark.circle.fill"
-    case .cached: "arrow.clockwise.circle.fill"
-    case .availableToDownload: "arrow.down.circle"
-    case .downloading: "arrow.down.circle"
-    case .verifying: "checkmark.seal"
-    case .unavailableOffline: "wifi.slash"
-    case .failed: "exclamationmark.triangle"
-    }
-  }
-
-  private var availabilityTint: SwiftUI.Color {
-    switch state.availability {
-    case .bundled, .cached: DesignTokens.Color.cyan
-    case .availableToDownload, .downloading, .verifying: DesignTokens.Color.bone
-    case .unavailableOffline, .failed: DesignTokens.Color.textSecondary
-    }
   }
 }

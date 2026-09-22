@@ -1,16 +1,22 @@
 # Native iOS Architecture
 
+> 2026-09-12 owner update: temporary UI is authorized to unblock native
+> functional implementation. See `IMPLEMENTATION_STATUS.md` for the sequencing override and current evidence.
+> Final visual and release gates remain separate.
+
 Status: implementation contract
 Stack: Swift 6.2, SwiftUI, RealityKit, structured concurrency
 Minimum deployment: iOS/iPadOS 18
 
 Phase 5A implementation status (2026-08-02, merged in PR #56 as `fece5e8`): the
 tracked Xcode project and local pure-Foundation package implement the ownership
-graph below. The SwiftUI shell
-now consumes immutable presentation projections for Library, Theater, Bottom
-Step Tray, Colophon, and Settings. The scene slot and transfer states remain
-explicit placeholders until Phase 5B/6; domain, RealityKit, and I/O ownership
-remain outside the visual allowlist.
+graph below. The SwiftUI shell consumes immutable presentation projections for
+Library, Theater, Bottom Step Tray, Colophon, and Settings. The shell is
+plumbing evidence, not an accepted visual composition. Phase 5R now restarts
+composition in Claude Design/Figma before Opus 5 writes replacement SwiftUI;
+Opus remains the visual author after the direction gate, while domain,
+RealityKit, and I/O ownership remain outside the visual allowlist and with
+Codex.
 
 ## 1. Architecture goals
 
@@ -398,6 +404,19 @@ directly in a SwiftUI body. The visible theater uses `.preparing` until the Phas
 6 RealityKit adapter binds the verified scene; the placeholder is not release
 evidence.
 
+### Phase 5R visual reset boundary
+
+The approved visual source is still `docs/DESIGN_CONCEPT.md`, but the Phase 5A
+view composition is not a source of truth. Divergent static frames, a disposable
+interaction prototype for Theater/tray/step transitions, and an annotated
+fixture matrix must be accepted before replacement views are written. The
+visual allowlist remains `DesignSystem`, feature views, and preview fixtures;
+those files may consume Codex-owned projections but may not import file/network
+APIs, search RealityKit entities, or create a second state source with view-local
+copies of `ViewState`. Gesture and accessibility alternatives must dispatch the
+same semantic intent path. The reset does not alter `CommissureCore`, content
+schemas, cache/download invariants, localization keys, or gesture resolution.
+
 ## 12. Phase 4 executable evidence
 
 - `CommissureCore` contains only Foundation imports and owns decoded content,
@@ -422,8 +441,38 @@ evidence.
   versions are sourced from Xcode build settings in the generated Info.plist.
 - The Phase 4 repair rejects nested noncanonical scene paths and asset-version
   drift, resolves RealityKit bindings by complete hierarchy rather than leaf
-  name, cancels a one-finger drag on a second touch, maps vertical flicks to
-  steps and horizontal claims to orbit, rejects unsafe pack IDs, and reprojects
+  name, cancels a one-finger drag on a second touch, originally mapped vertical flicks to
+  steps (superseded by the September 19 owner review: both axes now orbit), rejects unsafe pack IDs, and reprojects
   the active library when the language changes. Fresh simulator execution remains
   environment-limited after worker startup (`NSMachErrorDomain -308`); this does
   not change the compile/archive or prior successful runtime evidence.
+
+## Functional integration and future UI revision
+
+The temporary shell consumes immutable `LibraryViewState` / `TheaterViewState`
+and sends `AppAction` values. `FoundationAppModel` owns projection and session
+lifetime. `ProcedureSceneRuntime` owns model loading, gesture dispatch and frame
+updates; `RealitySceneAdapter` owns exact bindings, immutable archive baselines,
+absolute target composition, opacity and interruptible interpolation.
+`NativeAssetStore` verifies native manifests and model hashes off MainActor.
+`AppPreferences` owns version-compatible progress and disclosure preferences.
+
+Views must not copy presentation fields into local state. Temporary UI choices
+do not redefine domain contracts. Later visual revisions replace layouts,
+tokens and view components while preserving these action/state boundaries and
+functional tests. Any necessary state addition is made in the projection first.
+The runtime RealityView surface is injected into the Theater; a layout change
+must not recreate its session or reload the model.
+
+## September 19 presentation revision
+
+`ProcedureTheaterView` uses `AnyLayout` to place the same runtime-backed scene
+above or beside the explanation. The active scene is not recreated when the
+teaching panel expands, the step picker opens, or orientation changes. The
+explanation ScrollView alone changes identity on a new step to reset its offset.
+
+Disclosure preferences are stored observable properties with UserDefaults
+persistence in `didSet`. Computed defaults accessors do not notify Observation
+consumers and must not be used for live presentation state. Locale is injected
+outside the sheet modifiers in `FoundationView`, including secondary sheets.
+See `UI_REDESIGN_2026-09-19.md` for verification.

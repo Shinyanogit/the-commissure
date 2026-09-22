@@ -18,7 +18,8 @@ public struct SceneStateResolver: Sendable {
   private let statesByStepID: [String: SceneState]
 
   public init(procedure: ProcedureDefinition, scene: SceneDefinition) throws {
-    guard procedure.id == scene.procedureId,
+    guard !procedure.steps.isEmpty, procedure.schemaVersion == 1, scene.schemaVersion == 1,
+      procedure.id == scene.procedureId,
       procedure.asset.id == scene.assetId,
       procedure.asset.version == scene.assetVersion
     else {
@@ -84,6 +85,9 @@ public struct SceneStateResolver: Sendable {
       guard Self.isValid(state) else { throw SceneResolutionError.invalidState(label) }
     }
     for step in scene.steps {
+      guard step.entrance.count <= 32,
+        step.entrance.allSatisfy({ $0.duration.isFinite && $0.duration > 0 && $0.duration <= 10 })
+      else { throw SceneResolutionError.invalidState(step.id) }
       if let final = step.entrance.last?.target, final != step.state {
         throw SceneResolutionError.divergentFinalEntrance(step.id)
       }
