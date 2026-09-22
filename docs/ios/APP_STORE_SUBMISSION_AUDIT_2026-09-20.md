@@ -1,6 +1,6 @@
 # App Store submission audit, 2026-09-20
 
-Status: submitted to App Review. The historical local-gate findings below remain an audit trail; the final candidate was uploaded, Apple processing completed, and the version was submitted through App Store Connect.
+Status: App Review rejected version 1.0 (1) under Guideline 4.2.2 on 2026-09-21; reconsideration of the same submitted build is the current next action. The historical local-gate findings below remain an audit trail.
 
 This audit used the local `app-store-review` checklist, the Fastlane contract,
 the Release archive, source inspection, and the release-control test suite. The final App Store Connect submission is recorded at the end of this document.
