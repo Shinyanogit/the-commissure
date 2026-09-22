@@ -369,3 +369,11 @@ The Xcode project assigns `AppIcon` through
 `ios/App/Assets.xcassets/AppIcon.appiconset/AppIcon.png`, which contains the
 white The Commissure logo on black. App Store Connect also displayed that icon
 for submitted build `1.0.0` build `1`.
+
+## 2026-09-22 integration and review follow-up
+
+PR #84 reports a 4.2.2 rejection. Direct Apple review-message verification and
+exact-build physical-device evidence remain open. The roadmap now distinguishes
+the submitted iOS branch from the older main shell and treats existing native
+functionality as verification work, not an unconditional rewrite. September 20
+review status above is historical, not a current approval claim.

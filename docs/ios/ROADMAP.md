@@ -1,17 +1,10 @@
 # iOS App Store Roadmap
 
-> Latest owner direction: reproduce the Web UI first; the temporary native UI is not accepted. See [the WIP handoff](SESSION_HANDOFF_2026-09-12.md).
-
-> 2026-09-12 owner update: temporary UI is authorized to unblock native
-> functional implementation. See `IMPLEMENTATION_STATUS.md` for the sequencing override and current evidence.
-> Final visual and release gates remain separate.
-
-Status: Phase 5R greenfield UI/UX reset in progress on
-`docs/ios-phase5r-design-reset`; Phase 5A merged as `fece5e8`. The prior
-`feat/ios-phase5b-visual-refinement` branch is retained as plumbing evidence,
-not a visual baseline.
-Repository baseline: `main` through PR #56 (`fece5e8`); each phase uses a dedicated branch.
-This is an engineering order, not a calendar estimate.
+Status: App Review 4.2.2 evidence and response preparation (2026-09-22).
+The submitted release was built from `codex/ios-functional-completion`; the
+older `main` production shell is not the submitted source baseline. Native
+UI direction follows `UI_REDESIGN_2026-09-19.md`. Historical phases below
+are retained as history, not instructions to repeat completed implementation.
 
 ## 1. Objective and priority
 
@@ -72,6 +65,110 @@ Every phase closes in this order:
 
 Shinya alone operates compact. When a compact checkpoint is chosen, documentation
 and the phase commit must already be durable before Codex asks for compact.
+
+## 3A. App Review 4.2.2 response and evidence
+
+This section incorporates PR #84 after comparison with the submitted release
+branch. PR #84 records a Guideline 4.2.2 rejection. The Apple rejection text,
+review device, and current review status still require direct verification;
+the source audit alone does not establish why Apple rejected the app.
+
+### R0. Establish submitted-build provenance and observed behavior
+
+The September 20 upload record identifies version `1.0.0` build `1`, attached
+to store version `1.0`. Git history and the release record associate the final
+candidate with `8792522` on `codex/ios-functional-completion`. Changes from
+`7605fef` through `8792522` are documentation only. `origin/main` at `af7e263`
+does not contain this production implementation. See
+[the submission audit](APP_STORE_SUBMISSION_AUDIT_2026-09-20.md).
+
+The candidate source connects `FoundationView` to `ProcedureSceneView`, creates
+`ProcedureSceneRuntime` in `FoundationAppModel`, and projects actual runtime
+readiness. `RealitySceneAdapter` applies canonical scene states. Therefore
+PR #84's description of a shipping `AnatomyFieldPlaceholder` with permanently
+preparing readiness describes the older main tree, not this candidate source.
+
+Evidence limits: source/reflog records establish the build context; they do not
+prove every interaction on Apple's installed binary. The retained IPA path and
+hash are recorded, but artifact availability must be checked before claiming a
+new binary inspection. No embedded Git revision has been verified. Record the
+exact TestFlight build and capture its real-device behavior when available.
+
+Remaining verification:
+
+1. Read the actual rejection and confirm the selected build and review device.
+2. Inspect the retained submitted archive/IPA if available, including executable,
+   native model assets, content, versions, and resource hashes.
+3. On the same TestFlight build, capture Library to procedure, orbit, pinch,
+   forward/reverse/direct steps, progress restoration, and language switching.
+4. Repeat procedure launch and navigation offline from a fresh installation.
+5. Record source provenance separately from observed device behavior. Missing
+   evidence remains unknown; it is not proof that a placeholder was shipped.
+
+### R1. Preserve the native-value contract
+
+Keep native SwiftUI/RealityKit anatomy, canonical reversible steps, bundled
+learning content, progress persistence, in-place English/Japanese switching,
+and accessible controls as the product contract. Reviewers should find the
+native learning path within about one minute without an account.
+
+Do not add quizzes, accounts, AR, social features, or a backend merely to make
+the app appear more native. Speed alone is not the native-value argument.
+Offline interactive anatomy and meaningful step-specific changes must be shown.
+
+### R2 through R4. Verify existing implementation, repair demonstrated gaps
+
+The original PR proposed promoting the spike, implementing ACDF, and extending
+to the other procedures. Those are not unconditional implementation tasks:
+production runtime, model loading, persistence, localization, and all four
+procedure paths already exist on the release branch.
+
+Validate them against the submitted build and fix only demonstrated defects.
+Retain direct/sequential state equality, interrupted navigation, clean return
+to the first step, exact entity binding, lifecycle ownership, and no drift as
+acceptance criteria. PCDF remains the demanding physical-device performance
+case. Source implementation and prior simulator results do not replace missing
+physical-device or accessibility acceptance.
+
+If the reviewed binary is shown to have missing assets or a broken production
+path, repair that concrete problem and produce a new versioned candidate.
+Do not rebuild working architecture just because old main lacked it.
+
+### R5. Make native learning behavior visible to the reviewer
+
+Measure first useful scene and repeated opens on device. Verify that bundled
+procedures remain useful without network access, that progress resumes, and
+that locale changes preserve the step/model. Inspect adaptive iPhone/iPad
+layouts and accessibility controls. Record measurements as evidence rather
+than unsupported marketing claims.
+
+### R6. Choose reconsideration or a corrected build from evidence
+
+If the exact reviewed build demonstrates the intended interactive experience,
+prepare a concise reconsideration request with tap/gesture instructions and
+an accurate device recording. Native frameworks alone do not establish
+Guideline 4.2.2 compliance; explain the useful learning interactions.
+
+If a reproducible defect or discoverability problem prevents that experience,
+fix it, verify the changed behavior, and submit a new build with matching media
+and reviewer notes. If evidence is unavailable, resolve that gap or validate a
+new candidate; do not assert either a working or placeholder reviewed binary.
+
+Reviewer notes should identify the bundled procedure, orbit/zoom controls,
+visible anatomy changes across steps, reverse/direct navigation, offline use,
+progress restoration, and language/accessibility controls. Only claim behavior
+observed in the candidate. Keep correspondence and private review metadata out
+of new public documentation. Sending Apple correspondence requires the owner's
+explicit instruction.
+
+### Execution and completion
+
+Integrate the release branch before assessing missing production functionality.
+Use focused PRs for evidence and any demonstrated repairs. Update the relevant
+architecture/specification only when behavior changes. Reuse applicable test
+evidence and run checks for new changes; do not repeat an entire release test
+cycle for a documentation correction. Record open device/evidence gaps honestly.
+An integration merge does not mean Apple approved the app or release gates passed.
 
 ## 4. Phase 0 — concept and specification freeze (complete)
 

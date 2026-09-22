@@ -1,5 +1,9 @@
 # Native iOS Documentation Map
 
+> Current priority: [App Review 4.2.2 evidence and response](ROADMAP.md#3a-app-review-422-response-and-evidence).
+> The submitted source came from the iOS completion branch; older main is not
+> the submitted production baseline.
+
 > Current UI direction and evidence: [2026-09-19 native redesign](UI_REDESIGN_2026-09-19.md).
 > Initial native composition is implemented. Intentional platform differences
 > are accepted; equivalent learning capabilities still need the recorded gap
