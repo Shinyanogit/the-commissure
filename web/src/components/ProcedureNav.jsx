@@ -32,6 +32,7 @@ function ProcedureNavComponent({ stowed = false }) {
                 <li><Link to="/pcdf" onClick={closeMenu}>Posterior Cervical Discectomy and Fusion (PCDF)</Link></li>
                 <li><Link to="/pcf" onClick={closeMenu}>Posterior Cervical Foraminotomy (PCF)</Link></li>
                 <li><Link to="/pcl_open" onClick={closeMenu}>Open Door Posterior Cervical Laminectomy (Open-door PCL)</Link></li>
+                <li><Link to="/pcl_double" onClick={closeMenu}>Double Door Posterior Cervical Laminectomy (Double-door PCL)</Link></li>
                 <li className="subtitle">Anterior Surgery</li>
                 <li><Link to="/acdf" onClick={closeMenu}>Anterior Cervical Discectomy and Fusion (ACDF)</Link></li>
                 <li><Link to="/accf" onClick={closeMenu}>Anterior Cervical Corpectomy and Fusion (ACCF)</Link></li>

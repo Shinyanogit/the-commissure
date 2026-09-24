@@ -8,6 +8,7 @@ import { NewsPage } from './pages/NewsPage.jsx';
 import { NewsArticlePage } from './pages/NewsArticlePage.jsx';
 import { Pcdf } from './pages/Pcdf.jsx';
 import { Pcf } from './pages/Pcf.jsx';
+import { Pcl_double } from './pages/Pcl_double.jsx';
 import { Pcl_open } from './pages/Pcl_open.jsx';
 import { PrivacyPage, SupportPage } from './pages/LegalPage.jsx';
 import { Seo } from './components/Seo.jsx';
@@ -61,6 +62,7 @@ export function App() {
                 <Route path="/accf" element={<Accf />} />
                 <Route path="/pcdf" element={<Pcdf />} />
                 <Route path="/pcf" element={<Pcf />} />
+                <Route path="/pcl_double" element={<Pcl_double />} />
                 <Route path="/pcl_open" element={<Pcl_open />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="/support" element={<SupportPage />} />
